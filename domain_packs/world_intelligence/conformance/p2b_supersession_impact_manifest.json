@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "path": "scripts/p2b_supersession_impact.py",
+      "sha256": "14c91c6954b9b29262e2337561254527b03904157a21f3dafcdd8f67e2eaf1da"
+    },
+    {
+      "path": "domain_packs/world_intelligence/conformance/p2b_supersession_impact_expected.json",
+      "sha256": "5e5b35eca7b791c0bec74a947ca761fb2b12973528be77e008e3aa6d7f22efb7"
+    },
+    {
+      "path": "domain_packs/tests/test_world_intelligence_p2b_supersession_impact.py",
+      "sha256": "0638cc7e9ff3753477c3be9f1956e77d59b551683ac75dad13f8ffec26c4feee"
+    }
+  ],
+  "brief": {
+    "brief_digest": "sha256:25d8232c9bfa27050bdcb160fb75f06c2df505d526256532450abae2ee1d428d",
+    "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c"
+  },
+  "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
+  "contract": "ace.world-intelligence.p2b-supersession-impact-manifest/v1alpha1",
+  "eligible_relations": [
+    "context",
+    "contradicts",
+    "derived_from",
+    "supersedes",
+    "supports"
+  ],
+  "frozen_prior_packet_identities": {
+    "reused_activation": "world_intelligence 0.4.0 (WI-CR-003)",
+    "unchanged_by_this_packet": true,
+    "wi_cr_002_brief_id": "brief:7adb24b596cac21d7aa4e5476bc8733c",
+    "wi_cr_003_brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
+    "wi_cr_005_brief_id": "brief:8fb3173069eca502652b1c9c004c92e6"
+  },
+  "impact_policy": "lineage_dependency_closure/v1alpha1",
+  "open_contract_requests": [],
+  "package_version": "0.7.0",
+  "packet": "P2B-SI1",
+  "satisfied_contract_requests": [
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-004",
+    "WI-CR-005"
+  ],
+  "supersessions": {
+    "supersession:correction_114_over_report_1088": {
+      "impacted_count": 11,
+      "projection_digest": "sha256:f3723de8e9ac5c4390c5c46137f3765e0c544596da10249eef8a83c7ddaf161f",
+      "projection_id": "supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e",
+      "unaffected_count": 16
+    },
+    "supersession:order_47_over_bulletin_214": {
+      "impacted_count": 7,
+      "projection_digest": "sha256:61e8fb0eae42019e7344e97210638a54a842a916a76a3c3c421cb3ab18470b4a",
+      "projection_id": "supersession_impact_projection:61e8fb0eae42019e7344e97210638a54",
+      "unaffected_count": 20
+    }
+  }
+}

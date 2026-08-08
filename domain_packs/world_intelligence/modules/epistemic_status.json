@@ -1,0 +1,88 @@
+{
+  "contract": "ace.intelligence.epistemic-status/v1alpha1",
+  "module_id": "world_epistemic_status",
+  "status_sets": [
+    {
+      "status_set_id": "world_reality_status",
+      "display_name": "World Reality Brief epistemic statuses",
+      "brief_template_ids": ["reality_change_brief"],
+      "require_status_for_every_claim": true,
+      "statuses": [
+        {
+          "status_id": "admitted_record",
+          "display_name": "Admitted record",
+          "definition": "Directly established by admitted public records or measurements that ACE holds as exact persisted Observations.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 1
+        },
+        {
+          "status_id": "attributed_claim",
+          "display_name": "Attributed claim",
+          "definition": "Asserted by exactly one named source record; the attribution is part of the statement and is not upgraded to an established record.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 1,
+          "max_support_count": 1
+        },
+        {
+          "status_id": "corroborated",
+          "display_name": "Corroborated",
+          "definition": "Supported by at least two admitted Observation records. ACE enforces support cardinality and resource kind only; this label does NOT assert that the supporting records come from independent source families, which remains unproven until WI-CR-003 provides a public source-independence predicate.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 2
+        },
+        {
+          "status_id": "disputed",
+          "display_name": "Disputed",
+          "definition": "Materially contradicted across admitted material; requires at least two supports drawn from admitted records or detected shifts, and an explicit uncertainty statement.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": ["observation", "shift"],
+          "min_support_count": 2,
+          "requires_uncertainty": true
+        },
+        {
+          "status_id": "ace_inference",
+          "display_name": "ACE inference",
+          "definition": "An explicitly labelled ACE interpretation linked to the exact frozen resources it was derived from.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": [
+            "case",
+            "entity_snapshot",
+            "observation",
+            "shift",
+            "signal"
+          ],
+          "min_support_count": 1,
+          "requires_uncertainty": true
+        },
+        {
+          "status_id": "unknown",
+          "display_name": "Unknown",
+          "definition": "Not resolved by the admitted evidence; stated as an open question against the exact resources that fail to settle it.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": [
+            "case",
+            "entity_snapshot",
+            "observation",
+            "shift",
+            "signal"
+          ],
+          "min_support_count": 1,
+          "requires_uncertainty": true
+        },
+        {
+          "status_id": "scenario",
+          "display_name": "Scenario",
+          "definition": "A conditional future state built only from derived resources, requiring at least two supports spanning at least two distinct resource kinds plus an explicit uncertainty statement.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": ["entity_snapshot", "shift", "signal"],
+          "min_support_count": 2,
+          "min_distinct_support_kinds": 2,
+          "requires_uncertainty": true
+        }
+      ]
+    }
+  ]
+}

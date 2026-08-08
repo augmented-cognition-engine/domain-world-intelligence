@@ -1,0 +1,148 @@
+{
+  "activation_revision": {
+    "activation_id": "domain_activation:913a70890319486c36df02ce684ae931",
+    "activation_key": "world_intelligence",
+    "contract": "ace.intelligence.activation-revision-reference/v1alpha1",
+    "product_id": "product:world-intelligence-showcase",
+    "revision": 1,
+    "revision_digest": "sha256:76da9a63ef6388afd79434693bfa7a5e666a843082bbf9c370a0d650a06ccad5",
+    "revision_id": "activation_revision:76da9a63ef6388afd79434693bfa7a5e"
+  },
+  "claim_corroboration_has_signal": false,
+  "claim_corroboration_resource_set": {
+    "admission_digest": "sha256:3d151217b47a3e6182c7a218f047f23d2490beff41e71f2deecdab93d9c6ed7b",
+    "admission_id": "resource_set_admission:8ab29e2440d68523e35aae01abbfb7c4",
+    "contains_signal": false,
+    "resource_count": 5
+  },
+  "contract": "ace.world-intelligence.p2b-prepared-interpreter-replay/v1alpha1",
+  "invariants": {
+    "default_pack_mutated": false,
+    "delivery_authority": false,
+    "external_action": false,
+    "frozen_packet_mutated": false,
+    "live_resources": 0,
+    "private_detector_runtime": false
+  },
+  "numeric_delta_percent": -12.2977,
+  "observation_count": 8,
+  "orientation_case": {
+    "as_of": "2026-03-12T14:10:00+00:00",
+    "assembled_at": "2026-03-12T14:10:00+00:00",
+    "case_digest": "sha256:2ee200c03f2576307b0bc43e6e128f309e9de7efd3c11b1cad2ad1c250b4591f",
+    "case_id": "case:2ee200c03f2576307b0bc43e6e128f30",
+    "member_count": 5,
+    "member_ids": [
+      "shift:6c255df41b6dc14d3ae674f82fada23b",
+      "signal:1ca4aaac6e6334f292273cd0770aa72a",
+      "signal:372de47c7d177ff00a9a782206aeccd0",
+      "signal:64af15944773f3124b93d836fdda1d68",
+      "signal:99b72160c0dc9d00c9db18ce67fdaec3"
+    ],
+    "subject_refs": [
+      "entity:claim/farm_allocation_cut",
+      "entity:claim/supply_restoration",
+      "entity:event/accelerated_reservoir_release",
+      "entity:public_indicator/reservoir_storage_percent",
+      "source:ledger_report_1088"
+    ]
+  },
+  "orientation_case_resource_set": {
+    "admission_digest": "sha256:5190fce71b6976bd00da6f8934255b42792d4543197aa7fbf1fed330e0c6722f",
+    "admission_id": "resource_set_admission:d1833406b2e099cd1cbdfdf38d7ee2a8",
+    "case_is_last": true,
+    "resource_count": 28
+  },
+  "pack": {
+    "compiled_pack_id": "pack_ir:758974adc317ee67b2b244fb2dc4088a",
+    "pack_digest": "sha256:758974adc317ee67b2b244fb2dc4088a67c98999e57926ac103bb50f4f578f33",
+    "pack_version": "0.2.0"
+  },
+  "routes": {
+    "claim_disputed": [
+      {
+        "brief_template_id": "reality_change_brief",
+        "persona_ids": [
+          "general_reader",
+          "public_researcher"
+        ],
+        "routing_rule_id": "route_claim_conflict"
+      }
+    ],
+    "event_status": [
+      {
+        "brief_template_id": "reality_change_brief",
+        "persona_ids": [
+          "general_reader",
+          "public_researcher"
+        ],
+        "routing_rule_id": "route_breaking_development"
+      }
+    ],
+    "public_indicator": [
+      {
+        "brief_template_id": "reality_change_brief",
+        "persona_ids": [
+          "general_reader",
+          "public_researcher"
+        ],
+        "routing_rule_id": "route_public_indicator_move"
+      }
+    ],
+    "record_correction": [
+      {
+        "brief_template_id": "reality_change_brief",
+        "persona_ids": [
+          "public_researcher"
+        ],
+        "routing_rule_id": "route_material_correction"
+      }
+    ]
+  },
+  "runtime_gaps": [
+    {
+      "boundary": "epistemic_status_projection",
+      "finding": "Brief claims expose cited or inference grounding but cannot bind the seven domain statuses per statement.",
+      "request_id": "WI-CR-002"
+    },
+    {
+      "boundary": "source_independence_closure",
+      "finding": "No public runtime predicate proves that corroboration uses distinct derivation families.",
+      "request_id": "WI-CR-003"
+    },
+    {
+      "boundary": "supersession_impact_projection",
+      "finding": "No public query enumerates downstream resources affected by a superseding record.",
+      "request_id": "WI-CR-004"
+    }
+  ],
+  "scenario_id": "meridia_reservoir_release_72h",
+  "shift_count": 5,
+  "shift_ids": {
+    "claim_corroborated": "shift:6c255df41b6dc14d3ae674f82fada23b",
+    "claim_disputed": "shift:905c174782abd915cb3cf6b0c7754b69",
+    "event_status": "shift:9b44d1d2291909dec4d96bd0faeefe5d",
+    "public_indicator": "shift:62f16b30e76aafe1afe24500c8f5ae0b",
+    "record_correction": "shift:4a39116f49da29887113faf194d85e95"
+  },
+  "shift_types": {
+    "claim_corroborated": "claim_support_shift",
+    "claim_disputed": "claim_support_shift",
+    "event_status": "event_status_shift",
+    "public_indicator": "public_indicator_shift",
+    "record_correction": "record_correction_shift"
+  },
+  "signal_count": 4,
+  "signal_ids": {
+    "claim_disputed": "signal:1ca4aaac6e6334f292273cd0770aa72a",
+    "event_status": "signal:99b72160c0dc9d00c9db18ce67fdaec3",
+    "public_indicator": "signal:372de47c7d177ff00a9a782206aeccd0",
+    "record_correction": "signal:64af15944773f3124b93d836fdda1d68"
+  },
+  "signal_types": {
+    "claim_disputed": "claim_conflict",
+    "event_status": "breaking_development",
+    "public_indicator": "public_indicator_move",
+    "record_correction": "material_correction"
+  }
+}

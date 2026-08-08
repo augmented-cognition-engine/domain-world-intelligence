@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "path": "scripts/p2b_prepared_replay.py",
+      "sha256": "34f4ceab7376a3da973e879751e88f3e569398d65393605be4a1b848963f614c"
+    },
+    {
+      "path": "domain_packs/world_intelligence/conformance/p2b_prepared_replay_expected.json",
+      "sha256": "83923a1349c93c6a152e668ddf4f5f9fafb09437106505f06bbe04370977fce2"
+    },
+    {
+      "path": "domain_packs/tests/test_world_intelligence_p2b_prepared_replay.py",
+      "sha256": "b3762a16fab7bafbb9741422110eaf6ff7152c5fc6a54bf3e8aef21c6db32edc"
+    }
+  ],
+  "contract": "ace.world-intelligence.p2b-prepared-replay-manifest/v1alpha1",
+  "default_pack": {
+    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
+    "pack_version": "0.1.0"
+  },
+  "frozen_scenario_packet_identity": "sha256:9efb3e53f7a8b8b8b3fadb2ecede62cf7d6d7550b37ec74912c0efaa1ecadf73",
+  "open_contract_requests": [
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-004"
+  ],
+  "package_version": "0.3.0",
+  "packet": "P2B-PR1",
+  "replay_pack": {
+    "compiled_pack_id": "pack_ir:758974adc317ee67b2b244fb2dc4088a",
+    "pack_digest": "sha256:758974adc317ee67b2b244fb2dc4088a67c98999e57926ac103bb50f4f578f33",
+    "pack_version": "0.2.0"
+  },
+  "satisfied_contract_requests": [
+    "WI-CR-001",
+    "WI-CR-005",
+    "WI-CR-006"
+  ],
+  "verification": {
+    "live_resources": 0,
+    "numeric_delta_percent": -12.2977,
+    "observations": 8,
+    "orientation_case_id": "case:2ee200c03f2576307b0bc43e6e128f30",
+    "orientation_case_members": 5,
+    "orientation_case_resource_set": 28,
+    "private_runtime": false,
+    "routes": 4,
+    "shift_only_resource_set": true,
+    "shifts": 5,
+    "signals": 4
+  }
+}

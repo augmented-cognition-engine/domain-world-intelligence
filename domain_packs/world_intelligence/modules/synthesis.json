@@ -1,0 +1,28 @@
+{
+  "contract": "ace.intelligence.synthesis/v1alpha2",
+  "module_id": "world_synthesis",
+  "brief_templates": [
+    {
+      "template_id": "reality_change_brief",
+      "brief_type": "world_intelligence",
+      "display_name": "What Changed Reality Brief",
+      "objective": "Explain what happened and what changed while keeping admitted records, attributed claims, corroboration, disputes, ACE inference, unknowns, and scenarios visibly distinct.",
+      "required_sections": [
+        "what_happened",
+        "what_changed",
+        "established_records",
+        "attributed_claims",
+        "where_sources_agree",
+        "where_sources_conflict",
+        "ace_inferences",
+        "unknowns",
+        "why_it_matters",
+        "watchpoints",
+        "limitations"
+      ],
+      "recommendation_required": false,
+      "claim_policy": "citation_or_explicit_inference"
+    }
+  ]
+}
+

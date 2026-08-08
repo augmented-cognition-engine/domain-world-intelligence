@@ -1,0 +1,26 @@
+{
+  "contract": "ace.intelligence.personas/v1alpha1",
+  "module_id": "world_personas",
+  "personas": [
+    {
+      "persona_id": "general_reader",
+      "display_name": "General Reader",
+      "description": "Needs a concise, inspectable account of what happened, what changed, what is disputed, and what remains unknown."
+    },
+    {
+      "persona_id": "public_researcher",
+      "display_name": "Public Researcher",
+      "description": "Inspects exact sources, provenance families, claims, contradictions, corrections, inference, and uncertainty."
+    }
+  ],
+  "signal_routing_rules": [
+    {
+      "routing_rule_id": "route_public_indicator_move",
+      "signal_type": "public_indicator_move",
+      "persona_ids": ["general_reader", "public_researcher"],
+      "minimum_confidence": 0.8,
+      "brief_template_id": "reality_change_brief"
+    }
+  ]
+}
+

@@ -1,0 +1,42 @@
+{
+  "contract": "ace.world-intelligence.epistemic-policy/v1alpha1",
+  "statuses": [
+    {
+      "status_id": "observed",
+      "meaning": "Directly supported by an admitted record or measurement."
+    },
+    {
+      "status_id": "attributed_claim",
+      "meaning": "Asserted by a named actor or source; attribution is part of the claim."
+    },
+    {
+      "status_id": "corroborated",
+      "meaning": "Supported by disclosed evidence whose provenance family can be inspected."
+    },
+    {
+      "status_id": "disputed",
+      "meaning": "Materially contradicted by another attributable source or record."
+    },
+    {
+      "status_id": "inferred",
+      "meaning": "An explicitly labeled ACE interpretation linked to supporting context."
+    },
+    {
+      "status_id": "unknown",
+      "meaning": "Not resolved by the admitted evidence."
+    },
+    {
+      "status_id": "scenario",
+      "meaning": "A conditional future state with named assumptions and watchpoints."
+    }
+  ],
+  "rules": {
+    "source_repetition_is_independent_corroboration": false,
+    "publisher_has_hidden_universal_truth_score": false,
+    "persona_may_change_evidence_status": false,
+    "correction_rewrites_historical_record": false,
+    "inference_requires_explicit_label": true,
+    "scenario_requires_assumptions_and_watchpoints": true
+  }
+}
+

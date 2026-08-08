@@ -1,0 +1,75 @@
+{
+  "artifacts": [
+    {
+      "path": "scripts/p2b_status_case_brief.py",
+      "sha256": "fc3d4f475ea2cc4f1dc94797a3e242716b918deebdfb0cf19bd129472678eac2"
+    },
+    {
+      "path": "domain_packs/world_intelligence/modules/epistemic_status.json",
+      "sha256": "0cc4ac2833e8f58b6ebe44f9203fe33b30ce0487b93b82e20b6de89f8acc672e"
+    },
+    {
+      "path": "domain_packs/world_intelligence/conformance/p2b_status_case_brief_expected.json",
+      "sha256": "57d1bf7c748071b7a52fbd3796ba061eff7884ee4fa180919d7c66e1576aab40"
+    },
+    {
+      "path": "domain_packs/tests/test_world_intelligence_p2b_status_case_brief.py",
+      "sha256": "1d2ba2a7d4ad4d5cb3ce1b46f8f2d87209f39a139fe657f8d47f4f20e8efe0d6"
+    }
+  ],
+  "brief": {
+    "brief_digest": "sha256:7adb24b596cac21d7aa4e5476bc8733c148edefdb7d3711c868a00a810bc4a34",
+    "brief_id": "brief:7adb24b596cac21d7aa4e5476bc8733c",
+    "lineage_count": 26
+  },
+  "case": {
+    "case_digest": "sha256:bc28c76926d733c0ce0fe03b9c9222db5b19681d28da8b70449c2d9af5e4f141",
+    "case_id": "case:bc28c76926d733c0ce0fe03b9c9222db",
+    "member_count": 5
+  },
+  "contract": "ace.world-intelligence.p2b-status-case-brief-manifest/v1alpha1",
+  "default_pack": {
+    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
+    "pack_version": "0.1.0"
+  },
+  "frozen_wi_cr_005_identities": {
+    "brief_id": "brief:8fb3173069eca502652b1c9c004c92e6",
+    "case_id": "case:2ee200c03f2576307b0bc43e6e128f30",
+    "unchanged_by_this_packet": true
+  },
+  "open_contract_requests": [
+    "WI-CR-003",
+    "WI-CR-004"
+  ],
+  "package_version": "0.5.0",
+  "packet": "P2B-SB1",
+  "satisfied_contract_requests": [
+    "WI-CR-002",
+    "WI-CR-005"
+  ],
+  "status_pack": {
+    "compiled_pack_id": "pack_ir:36cccb917b1420bf85e8c79f0dd9c579",
+    "pack_digest": "sha256:36cccb917b1420bf85e8c79f0dd9c57991e236ec5de996f9b0b1a522aa634500",
+    "pack_version": "0.3.0"
+  },
+  "status_projection": {
+    "declared_status_ids": [
+      "ace_inference",
+      "admitted_record",
+      "attributed_claim",
+      "corroborated",
+      "disputed",
+      "scenario",
+      "unknown"
+    ],
+    "projection_digest": "sha256:fca9062883e92e2e632388c0069c310efbfd48c98b5c6d61897fdecde28f0f79",
+    "projection_id": "brief_epistemic_status_projection:fca9062883e92e2e632388c0069c310e",
+    "status_set_id": "world_reality_status"
+  },
+  "synthesis_receipt": {
+    "receipt_digest": "sha256:e79d934e0300901e18e0fe4af1064ba2ba53fff662d1995fff6539c6753544ad",
+    "receipt_id": "case_brief_synthesis_receipt:e79d934e0300901e18e0fe4af1064ba2",
+    "selected_context_count": 26,
+    "template_id": "reality_change_brief"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "contract": "ace.world-intelligence.p2a-compile-expected/v1alpha1",
+  "expected": {
+    "contract": "ace.world-intelligence.p2a-compile-evidence/v1alpha1",
+    "pack_id": "world_intelligence",
+    "pack_version": "0.1.0",
+    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
+    "pack_digest": "sha256:683de57a71669814e507d07d65a109db49abfd2f2d800d89c5faa281bccdbfb1",
+    "module_count": 5,
+    "entity_type_count": 9,
+    "relation_type_count": 11,
+    "epistemic_status_count": 7,
+    "numeric_detector_ids": ["public_indicator_change"],
+    "deferred_generic_detector_strategies": ["categorical", "semantic", "structural"],
+    "persona_ids": ["general_reader", "public_researcher"],
+    "brief_template_ids": ["reality_change_brief"],
+    "executable_pack_resources": 0,
+    "hidden_truth_score": false,
+    "political_targeting": false,
+    "pack_schema_changed": false
+  }
+}

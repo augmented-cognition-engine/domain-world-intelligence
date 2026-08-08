@@ -1,0 +1,50 @@
+{
+  "contract": "ace.world-intelligence.p2b-negative-cases/v1alpha1",
+  "cases": [
+    {
+      "case_id": "missing_attribution",
+      "mutation": "Remove the actor_made_claim relation that attributes the farm-allocation claim to Delegate Quell.",
+      "expected_violation": "missing_claim_attribution"
+    },
+    {
+      "case_id": "false_independent_corroboration",
+      "mutation": "Replace the independent Hydrology Office support of the corroborated statement with the syndicated Coastal Wire copy, leaving only one provenance family.",
+      "expected_violation": "false_independent_corroboration"
+    },
+    {
+      "case_id": "history_rewrite",
+      "mutation": "Silently rewrite the erroneous 40 percent figure inside the original Ledger report instead of admitting the correction as a new record.",
+      "expected_violation": "historical_record_rewritten"
+    },
+    {
+      "case_id": "inference_as_observation",
+      "mutation": "Relabel the explicitly bounded suspension-driver inference as an observed statement while keeping its inference basis.",
+      "expected_violation": "inference_presented_as_observation"
+    },
+    {
+      "case_id": "scenario_as_prediction",
+      "mutation": "Strip the named assumptions from the rationing scenario so it reads as an unconditional forecast.",
+      "expected_violation": "scenario_presented_as_prediction"
+    },
+    {
+      "case_id": "persona_dependent_evidence_status",
+      "mutation": "Add a persona override that upgrades the disputed supply claim to corroborated for the general reader.",
+      "expected_violation": "persona_dependent_evidence_status"
+    },
+    {
+      "case_id": "unsupported_claim",
+      "mutation": "Empty the support references of the observed announcement statement.",
+      "expected_violation": "unsupported_material_statement"
+    },
+    {
+      "case_id": "stale_closure",
+      "mutation": "Move the Brief context cutoff before Order 47 and correction 114 were ingested while the Brief still cites them.",
+      "expected_violation": "stale_closure"
+    },
+    {
+      "case_id": "divergent_replay",
+      "mutation": "Alter the Brief generation timestamp by one second so a replay no longer reproduces the pinned packet identity.",
+      "expected_violation": "divergent_replay_identity"
+    }
+  ]
+}

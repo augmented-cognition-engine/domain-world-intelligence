@@ -1,0 +1,306 @@
+{
+  "brief": {
+    "citation_count": 6,
+    "claim_count": 11,
+    "claims": [
+      {
+        "carries_uncertainty": false,
+        "cited_sources": [
+          "record:mwa_order_47",
+          "record:mwa_bulletin_214"
+        ],
+        "claim_id": "grounded_claim:ac36d12770e8a2c49e3d8d45baa51b30",
+        "confidence": 1.0,
+        "distinct_derivation_families": 2,
+        "grounding_kind": "cited",
+        "required_derivation_families": 1,
+        "section": "What happened",
+        "statement": "The named admitted public records establish this statement directly.",
+        "status": "admitted_record",
+        "support_record_ids": [
+          "observation:01562681bebfdcee9dca4b3be068d0d3",
+          "observation:8a5a225649246ded718df80d4190fc0d"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:6deb41b413436af44f49c8f4c104f373",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "What changed",
+        "statement": "ACE derived this statement only from the exact frozen resources named as supports.",
+        "status": "ace_inference",
+        "support_record_ids": [
+          "case:412426eee708d56f6bda931ccf9e5d8b",
+          "entity_snapshot:1a2323a027f6f94f8e1689a147b0d558",
+          "entity_snapshot:5095261b095b2a87c516df1a0055e624"
+        ]
+      },
+      {
+        "carries_uncertainty": false,
+        "cited_sources": [
+          "record:assembly_transcript_0310"
+        ],
+        "claim_id": "grounded_claim:14edc273434d2dd03763ceb238ad5d15",
+        "confidence": 1.0,
+        "distinct_derivation_families": 1,
+        "grounding_kind": "cited",
+        "required_derivation_families": 1,
+        "section": "Established records",
+        "statement": "The named admitted public records establish this statement directly.",
+        "status": "admitted_record",
+        "support_record_ids": [
+          "observation:292c0c70d3c77a41708918bf1f971a60"
+        ]
+      },
+      {
+        "carries_uncertainty": false,
+        "cited_sources": [
+          "record:ledger_correction_114"
+        ],
+        "claim_id": "grounded_claim:9b4ebb7ea2e4fa9d5cadce746b17400d",
+        "confidence": 1.0,
+        "distinct_derivation_families": 1,
+        "grounding_kind": "cited",
+        "required_derivation_families": 1,
+        "section": "Attributed claims",
+        "statement": "Exactly one named source record asserts this statement; the attribution is part of it.",
+        "status": "attributed_claim",
+        "support_record_ids": [
+          "observation:60dc0f3818d765b8d75f8a94e804a6f9"
+        ]
+      },
+      {
+        "carries_uncertainty": false,
+        "cited_sources": [
+          "record:ledger_report_1088",
+          "record:basin_gauge_series_w10"
+        ],
+        "claim_id": "grounded_claim:d3618122209bab77b540f6336ef7b57e",
+        "confidence": 1.0,
+        "distinct_derivation_families": 2,
+        "grounding_kind": "cited",
+        "required_derivation_families": 2,
+        "section": "Where sources agree",
+        "statement": "At least two admitted records from distinct derivation families support this statement. Syndicated copies and reprints of one origin do not count.",
+        "status": "corroborated",
+        "support_record_ids": [
+          "observation:5104e12c85dd2881f8f36d587e623783",
+          "observation:a88aacd586b1b5ef81b69d2ce649e9a0"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:f768183a9685eb72eb560be84199192c",
+        "confidence": 0.7,
+        "distinct_derivation_families": 1,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "Where sources conflict",
+        "statement": "The admitted material is materially in conflict on this statement.",
+        "status": "disputed",
+        "support_record_ids": [
+          "observation:45d7ee763b2106c65ce7bd37e32d13e2",
+          "observation:69116e2186c3ddbcdfc26a55a9125aad"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:8e1f621db19d32c9a8d23c07cef5e865",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "ACE inferences",
+        "statement": "ACE derived this statement only from the exact frozen resources named as supports.",
+        "status": "ace_inference",
+        "support_record_ids": [
+          "entity_snapshot:65dfe1aa5a7e6f61fd3883e16c0dc396",
+          "entity_snapshot:6657202c165cb19f8eaf49d3c9adbceb",
+          "entity_snapshot:749f7ca53dac0d41667fdf9032659d10"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:579b2e451e1580f2f21af49804bdd5c3",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "Unknowns",
+        "statement": "The admitted evidence does not resolve this statement.",
+        "status": "unknown",
+        "support_record_ids": [
+          "entity_snapshot:945233fc82aa51f4585ed58ce1e735b9",
+          "entity_snapshot:c76ece6fd1594ad742d986194927b6e9",
+          "entity_snapshot:ea8969f682699f82550e6c2e93a25abc"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:59f4a8dc4b4a8b2a962a5fc13fd834ac",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "Why it matters",
+        "statement": "ACE derived this statement only from the exact frozen resources named as supports.",
+        "status": "ace_inference",
+        "support_record_ids": [
+          "entity_snapshot:ed615b887545dc04e70f53576b041e2d",
+          "entity_snapshot:f61e8c6f494647e42d650549da6f5160",
+          "shift:13e0751fa6cd1af0fb307cc00e6101cf"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:77655a5468f2394b39f8cca860f140d1",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "Watchpoints",
+        "statement": "This is a conditional future state built only from the exact derived resources named.",
+        "status": "scenario",
+        "support_record_ids": [
+          "shift:2f18f85cab21797c98c70d0760646ac9",
+          "signal:0cad46aece91b381b52c76c95849b3e7"
+        ]
+      },
+      {
+        "carries_uncertainty": true,
+        "cited_sources": [],
+        "claim_id": "grounded_claim:6d41fc7e77947bb24957a992e75a52d4",
+        "confidence": 0.7,
+        "distinct_derivation_families": 0,
+        "grounding_kind": "inference",
+        "required_derivation_families": 1,
+        "section": "Limitations",
+        "statement": "The admitted evidence does not resolve this statement.",
+        "status": "unknown",
+        "support_record_ids": [
+          "shift:38a19f735e1ed9b32b6298a562f1cebb",
+          "shift:b702801f9c606a476a69070b327fb52e",
+          "shift:d439c264d1ea86cab30c97c2091ddc1e",
+          "signal:2db255bc3a5682413c148173c85a87f6",
+          "signal:50ed1d068c4337c5113043a9d90431ab",
+          "signal:e6598f5cdcfe41104cd926588b3cb02e"
+        ]
+      }
+    ],
+    "claims_per_status": {
+      "ace_inference": 3,
+      "admitted_record": 2,
+      "attributed_claim": 1,
+      "corroborated": 1,
+      "disputed": 1,
+      "scenario": 1,
+      "unknown": 2
+    },
+    "title": "What Changed Reality Brief"
+  },
+  "contract": "ace.world-intelligence.public-demo/v1alpha1",
+  "correction_impact": {
+    "closure_size": 28,
+    "direct": 6,
+    "fully_impacted_claims": 3,
+    "impact_means_dependency_not_falsehood": true,
+    "impacted_claims": 9,
+    "impacted_resources": 11,
+    "max_depth": 3,
+    "partially_impacted_claims": 6,
+    "superseded_resource_id": "observation:5104e12c85dd2881f8f36d587e623783",
+    "superseder_resource_id": "observation:272f569a258c44d84828282acf00f184",
+    "supersession_id": "supersession:correction_114_over_report_1088",
+    "transitive": 5,
+    "unaffected": 16
+  },
+  "evidence_graph": {
+    "corroboration": {
+      "claim_id": "grounded_claim:d3618122209bab77b540f6336ef7b57e",
+      "observed_distinct_roots": 2,
+      "publisher_count_is_independence": false,
+      "required_distinct_roots": 2
+    },
+    "displayed_derivation_root_count": 2,
+    "displayed_record_count": 4,
+    "independent_family": {
+      "root": {
+        "label": "Basin gauge series W10",
+        "resource_id": "observation:a88aacd586b1b5ef81b69d2ce649e9a0",
+        "source_ref": "record:basin_gauge_series_w10"
+      }
+    },
+    "ledger_family": {
+      "derived_records": [
+        {
+          "label": "Coastal Wire syndication",
+          "resource_id": "observation:69116e2186c3ddbcdfc26a55a9125aad",
+          "source_ref": "record:coastal_wire_5521"
+        },
+        {
+          "label": "Harborview reprint",
+          "resource_id": "observation:45d7ee763b2106c65ce7bd37e32d13e2",
+          "source_ref": "record:harborview_reprint_302"
+        }
+      ],
+      "root": {
+        "label": "Ledger report 1088",
+        "resource_id": "observation:5104e12c85dd2881f8f36d587e623783",
+        "source_ref": "record:ledger_report_1088"
+      }
+    },
+    "policy": "observation_lineage_root_closure/v1alpha1"
+  },
+  "governance": {
+    "all_contract_requests_closed": [
+      "WI-CR-002",
+      "WI-CR-003",
+      "WI-CR-004",
+      "WI-CR-005"
+    ],
+    "deterministic_brief_replay": true,
+    "external_action": false,
+    "impact_replay_exact": true,
+    "live_resources": 0,
+    "runtime_gaps": []
+  },
+  "historical_integrity": {
+    "brief_cutoff_precedes_the_correction": true,
+    "brief_id_unchanged": true,
+    "brief_replays_identically": true,
+    "receipt_replays_identically": true,
+    "replay_used_no_new_reasoning": true,
+    "status_projection_replays_identically": true
+  },
+  "identities": {
+    "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
+    "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
+    "impact_projection_id": "supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e",
+    "status_projection_id": "brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c"
+  },
+  "limits": [
+    "Prepared synthetic scenario; no LIVE source adapter is exercised.",
+    "Independence is only as strong as the admitted lineage.",
+    "Impact identifies dependency, not truth or falsehood.",
+    "Developer-preview release candidate; no production-scale claim."
+  ],
+  "release": "0.7.0-rc1",
+  "scenario": {
+    "as_of": "2026-03-12T14:10:00Z",
+    "generated_at": "2026-03-12T14:11:20Z",
+    "id": "meridia_reservoir_release_72h",
+    "is_live": false,
+    "kind": "synthetic, hermetic, redistributable fixture",
+    "mode": "PREPARED",
+    "state": "FROZEN"
+  }
+}

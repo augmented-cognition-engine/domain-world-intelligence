@@ -1,0 +1,124 @@
+{
+  "brief": {
+    "brief_digest": "sha256:25d8232c9bfa27050bdcb160fb75f06c2df505d526256532450abae2ee1d428d",
+    "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c"
+  },
+  "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
+  "closed_requests": [
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-004",
+    "WI-CR-005"
+  ],
+  "contract": "ace.world-intelligence.p2b-supersession-impact/v1alpha1",
+  "eligible_relations": [
+    "context",
+    "contradicts",
+    "derived_from",
+    "supersedes",
+    "supports"
+  ],
+  "historical_integrity": {
+    "brief_cutoff_precedes_the_correction": true,
+    "brief_id_unchanged": true,
+    "brief_replays_identically": true,
+    "receipt_replays_identically": true,
+    "replay_used_no_new_reasoning": true,
+    "status_projection_replays_identically": true
+  },
+  "impact_policy": "lineage_dependency_closure/v1alpha1",
+  "invariants": {
+    "delivery_authority": false,
+    "external_action": false,
+    "historical_artifact_rewritten": false,
+    "imperative_pack_code": false,
+    "live_resources": 0,
+    "private_aggregation_in_world": false,
+    "private_reasoning_runtime": false,
+    "private_source_independence_engine": false,
+    "private_status_projector": false,
+    "private_supersession_engine": false,
+    "world_semantics_added_to_ace": false
+  },
+  "negative_vectors": {
+    "durable_brief_count_after_all_negatives": 1,
+    "future_leakage_before_the_closure_exists": {
+      "error_type": "SupersessionImpactAdmissionError",
+      "rejected": true
+    },
+    "superseder_targets_a_different_record": {
+      "error_type": "SupersessionImpactAdmissionError",
+      "rejected": true
+    },
+    "target_outside_the_authorized_closure": {
+      "error_type": "SupersessionImpactAdmissionError",
+      "rejected": true
+    },
+    "wrong_direction_derived_from_is_not_supersession": {
+      "error_type": "SupersessionImpactAdmissionError",
+      "rejected": true
+    }
+  },
+  "proven": {
+    "impact_is_dependency_not_falsehood": true,
+    "impact_never_invented_without_lineage": true,
+    "prior_brief_remains_immutable": true,
+    "prior_brief_replays_under_its_original_cutoff": true,
+    "unaffected_boundary_is_disclosed": true
+  },
+  "runtime_gaps": [],
+  "scenario_id": "meridia_reservoir_release_72h",
+  "supersessions": {
+    "supersession:correction_114_over_report_1088": {
+      "atomic_records": 1,
+      "case_is_impacted": true,
+      "closure_size": 28,
+      "direct_count": 6,
+      "durable_replay_is_exact": true,
+      "fully_impacted_claim_count": 3,
+      "governed_state_preconditions": 4,
+      "impacted_claim_count": 9,
+      "impacted_count": 11,
+      "impacted_kinds": {
+        "case": 1,
+        "entity_snapshot": 4,
+        "observation": 3,
+        "shift": 2,
+        "signal": 1
+      },
+      "max_depth": 3,
+      "partially_impacted_claim_count": 6,
+      "projection_digest": "sha256:f3723de8e9ac5c4390c5c46137f3765e0c544596da10249eef8a83c7ddaf161f",
+      "projection_id": "supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e",
+      "superseded_resource_id": "observation:5104e12c85dd2881f8f36d587e623783",
+      "superseder_resource_id": "observation:272f569a258c44d84828282acf00f184",
+      "transitive_count": 5,
+      "unaffected_count": 16
+    },
+    "supersession:order_47_over_bulletin_214": {
+      "atomic_records": 1,
+      "case_is_impacted": true,
+      "closure_size": 28,
+      "direct_count": 2,
+      "durable_replay_is_exact": true,
+      "fully_impacted_claim_count": 0,
+      "governed_state_preconditions": 4,
+      "impacted_claim_count": 5,
+      "impacted_count": 7,
+      "impacted_kinds": {
+        "case": 1,
+        "entity_snapshot": 2,
+        "shift": 2,
+        "signal": 2
+      },
+      "max_depth": 4,
+      "partially_impacted_claim_count": 5,
+      "projection_digest": "sha256:61e8fb0eae42019e7344e97210638a54a842a916a76a3c3c421cb3ab18470b4a",
+      "projection_id": "supersession_impact_projection:61e8fb0eae42019e7344e97210638a54",
+      "superseded_resource_id": "observation:01562681bebfdcee9dca4b3be068d0d3",
+      "superseder_resource_id": "observation:a2c2ef19556b7ea029226de3c459f3ed",
+      "transitive_count": 5,
+      "unaffected_count": 20
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "consumer": "world_intelligence",
+  "contract": "ace.world-intelligence.p2b-consumer-contract-requests/v1alpha1",
+  "deferred": [
+    {
+      "note": "Deliberately not requested in P2B; requires disclosed domain exemplars and a later semantic detector contract per the roadmap.",
+      "topic": "semantic position_or_narrative_shift"
+    }
+  ],
+  "requests": [
+    {
+      "acceptance_probe": "DetectionModuleV1 (or a successor public detection contract) accepts a categorical_rules declaration.",
+      "blocked_expectations": [
+        "shift:event_status_suspension",
+        "shift:record_correction_ledger_1088",
+        "shift:claim_support_supply_restoration",
+        "shift:claim_support_farm_allocation",
+        "signal:breaking_development_suspension",
+        "signal:material_correction_ledger",
+        "signal:claim_conflict_supply_restoration"
+      ],
+      "market_compatibility_requirement": "The Market pack must compile unchanged and its conformance suite must stay green before World may depend on the new strategy.",
+      "motivation": "The alpha detection contract exposes numeric deltas only. The P2B scenario requires detecting an event status change (announced to suspended), a record correction, and two claim-support changes; none is a numeric delta and none may be encoded as a hidden numeric truth score.",
+      "quarantined_test": "test_platform_gap_categorical_state_change_detection",
+      "request_id": "WI-CR-001",
+      "requested_contract_shape": "A declarative categorical rule in the public detection module: entity type, watched categorical attribute, optional from/to value sets, baseline prior_snapshot, shift_type, signal_type. Intelligence owns the comparison strategy; packs contribute vocabulary and materiality policy only.",
+      "status": "open",
+      "title": "Generic categorical state-change detection strategy"
+    },
+    {
+      "acceptance_probe": "The public claim-grounding vocabulary distinguishes named-actor attribution from direct citation, at minimum an 'attributed' grounding kind or an equivalent status-projection contract.",
+      "blocked_expectations": [
+        "brief.statements.epistemic_status runtime projection for meridia_reservoir_release_72h"
+      ],
+      "market_compatibility_requirement": "Existing cited/inference grounding must remain the default so current Market Briefs compile and verify unchanged.",
+      "motivation": "Brief claim grounding distinguishes only cited and inference. The World epistemic contract needs attributed, corroborated, disputed, unknown, and scenario preserved as inspectable, domain-declared projections of generic grounding evidence, without politics-specific Core types and without unsupported promotion between statuses.",
+      "quarantined_test": "test_wi_cr_002_is_closed_by_a_domain_neutral_status_capability",
+      "request_id": "WI-CR-002",
+      "requested_contract_shape": "A pack-declared status vocabulary bound to generic grounding classes (record support, named-actor attribution, independent-family support, material contradiction, explicit inference, unresolved, conditional scenario with assumptions and watchpoints), validated by Intelligence at synthesis time.",
+      "satisfied_by_contract": "ace.intelligence.epistemic-status/v1alpha1",
+      "satisfied_by_packet": "P2B-SB1",
+      "status": "satisfied",
+      "title": "Generic epistemic-status projection for Brief claims"
+    },
+    {
+      "acceptance_probe": "A public Intelligence contract exposes derivation-family closure or a source-independence predicate over Observation lineage.",
+      "blocked_expectations": [
+        "stmt:sa_allocation runtime independence enforcement",
+        "claim_status_timeline corroborated transitions"
+      ],
+      "market_compatibility_requirement": "Family closure must be opt-in metadata; Market packs without derivation lineage must behave exactly as today.",
+      "motivation": "Three publications in the scenario repeat one original report. Corroboration must require evidence from at least two independent derivation families, with the family closure computed by the platform from admitted derivation lineage rather than by pack code or a hidden publisher score.",
+      "quarantined_test": "test_wi_cr_003_is_closed_by_a_domain_neutral_independence_predicate",
+      "request_id": "WI-CR-003",
+      "requested_contract_shape": "A generic derivation-family closure over Observation lineage (derived_from chains resolve to a root family) plus an independence predicate usable by detection and synthesis: minimum distinct families for corroboration, disclosed in the Brief receipt.",
+      "satisfied_by_contract": "ace.intelligence.epistemic-status/v1alpha2",
+      "satisfied_by_packet": "P2B-IB1",
+      "status": "satisfied",
+      "title": "Source-independence and derivation-family closure"
+    },
+    {
+      "acceptance_probe": "A public Intelligence contract or API exposes supersession impact / affected-resource enumeration over lineage.",
+      "blocked_expectations": [
+        "supersession:correction_114_over_report_1088 affected-resource enumeration",
+        "supersession:order_47_over_bulletin_214 affected-resource enumeration"
+      ],
+      "market_compatibility_requirement": "Purely additive query surface; no change to existing resource identities or digests.",
+      "motivation": "Lineage already carries a supersedes relation, but there is no public projection answering which admitted claims, inferences, and Briefs transitively cite a superseded or corrected record. The correction in this scenario must surface affected resources without rewriting any historical record.",
+      "quarantined_test": "test_wi_cr_004_is_closed_by_a_domain_neutral_impact_projection",
+      "request_id": "WI-CR-004",
+      "requested_contract_shape": "A generic append-only supersession impact query: given a superseding record, enumerate downstream resources whose lineage cites the superseded record, with exact identities and digests, leaving all prior records admitted and unmodified.",
+      "satisfied_by_contract": "ace.intelligence.supersession-impact-projection/v1alpha1",
+      "satisfied_by_packet": "P2B-SI1",
+      "status": "satisfied",
+      "title": "Correction and supersession impact projection"
+    }
+  ]
+}

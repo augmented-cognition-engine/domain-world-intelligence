@@ -1,0 +1,55 @@
+{
+  "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
+  "metadata": {
+    "pack_id": "world_intelligence_federal_register",
+    "version": "0.1.0",
+    "display_name": "ACE World Intelligence — Federal Register LIVE admission",
+    "description": "Additive declarative activation pack for one governed Federal Register document source."
+  },
+  "compatibility": {
+    "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
+    "intelligence_contract": "ace.intelligence.runtime/v1alpha1"
+  },
+  "resources": [
+    {
+      "resource_id": "world_federal_register_ontology",
+      "path": "modules/ontology.json",
+      "media_type": "application/json",
+      "digest": "sha256:0787b37c7c9207f7602a6499e38c79b789b389a60216a5c1af530367c5f3fa28"
+    },
+    {
+      "resource_id": "world_federal_register_source_mapping",
+      "path": "modules/source_mapping.json",
+      "media_type": "application/json",
+      "digest": "sha256:070ddb6b054838d506ffc5f10aeb0c7941b9620e6dc2070dd1f7fcd1e9f0c333"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "world_federal_register_ontology",
+      "contract": "ace.intelligence.ontology/v1alpha1",
+      "resource_id": "world_federal_register_ontology",
+      "depends_on": []
+    },
+    {
+      "module_id": "world_federal_register_source_mapping",
+      "contract": "ace.intelligence.source-mapping/v1alpha1",
+      "resource_id": "world_federal_register_source_mapping",
+      "depends_on": ["world_federal_register_ontology"]
+    }
+  ],
+  "capability_requirements": [
+    {
+      "requirement_id": "federal_register_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    }
+  ],
+  "authority_requests": [
+    {
+      "request_id": "read_federal_register_document",
+      "authority": "source_read"
+    }
+  ],
+  "overlay_slots": []
+}

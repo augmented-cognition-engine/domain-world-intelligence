@@ -1,0 +1,171 @@
+{
+  "brief": {
+    "brief_digest": "sha256:25d8232c9bfa27050bdcb160fb75f06c2df505d526256532450abae2ee1d428d",
+    "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
+    "claim_count": 11,
+    "lineage_count": 28
+  },
+  "case": {
+    "case_digest": "sha256:412426eee708d56f6bda931ccf9e5d8b88d0def9a5eb969aaa472b9887fa6610",
+    "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
+    "member_count": 5
+  },
+  "closed_requests": [
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-005"
+  ],
+  "contract": "ace.world-intelligence.p2b-independent-governed-brief/v1alpha1",
+  "governance": {
+    "atomic_records": 3,
+    "deterministic_replay": true,
+    "durable_brief_count": 1,
+    "governed_state_preconditions": 4,
+    "provider_invocations": 1,
+    "record_kinds": [
+      "brief",
+      "case_brief_synthesis_receipt",
+      "brief_derivation_family_status_projection"
+    ]
+  },
+  "independence": {
+    "corroborated_claim_count": 1,
+    "corroborated_distinct_families": [
+      2
+    ],
+    "corroborated_required_families": [
+      2
+    ],
+    "corroborated_roots_are_ledger_and_hydrology": true,
+    "distinct_families_in_closure": 5,
+    "hydrology_is_a_separate_single_member_family": true,
+    "ledger_family_member_count": 4,
+    "ledger_family_members": [
+      "observation:45d7ee763b2106c65ce7bd37e32d13e2",
+      "observation:5104e12c85dd2881f8f36d587e623783",
+      "observation:60dc0f3818d765b8d75f8a94e804a6f9",
+      "observation:69116e2186c3ddbcdfc26a55a9125aad"
+    ],
+    "negative_vectors": {
+      "ledger_plus_coastal_wire_syndication": {
+        "durable_brief_count": 0,
+        "error_type": "CaseBriefFamilyStatusSynthesisError",
+        "mentions_derivation_families": true,
+        "rejected": true
+      },
+      "ledger_plus_harborview_reprint": {
+        "durable_brief_count": 0,
+        "error_type": "CaseBriefFamilyStatusSynthesisError",
+        "mentions_derivation_families": true,
+        "rejected": true
+      },
+      "two_publishers_one_origin": {
+        "durable_brief_count": 0,
+        "error_type": "CaseBriefFamilyStatusSynthesisError",
+        "mentions_derivation_families": true,
+        "rejected": true
+      }
+    },
+    "syndicated_copies_are_exact_members_of_the_ledger_family": true,
+    "syndicated_copies_are_inside_the_closure": true
+  },
+  "invariants": {
+    "delivery_authority": false,
+    "duplicated_source_records": false,
+    "external_action": false,
+    "imperative_pack_code": false,
+    "live_resources": 0,
+    "private_aggregation_in_world": false,
+    "private_reasoning_runtime": false,
+    "private_source_independence_engine": false,
+    "private_status_projector": false,
+    "unreferenced_admitted_records": 0,
+    "world_semantics_added_to_ace": false
+  },
+  "proven": {
+    "corroborated_requires_distinct_derivation_families": true,
+    "independence_is_only_as_strong_as_admitted_lineage": true,
+    "publisher_count_is_not_independence": true,
+    "syndication_collapses_to_its_root": true,
+    "textual_variation_is_not_independence": true
+  },
+  "runtime_gaps": [
+    {
+      "boundary": "supersession_impact_projection",
+      "finding": "No public query enumerates the downstream resources affected by the admitted record correction.",
+      "request_id": "WI-CR-004"
+    }
+  ],
+  "scenario_id": "meridia_reservoir_release_72h",
+  "status_projection": {
+    "claim_status_count": 11,
+    "claims_per_status": {
+      "ace_inference": 3,
+      "admitted_record": 2,
+      "attributed_claim": 1,
+      "corroborated": 1,
+      "disputed": 1,
+      "scenario": 1,
+      "unknown": 2
+    },
+    "closure_families": [
+      {
+        "member_record_ids": [
+          "observation:01562681bebfdcee9dca4b3be068d0d3"
+        ],
+        "root_record_id": "observation:01562681bebfdcee9dca4b3be068d0d3"
+      },
+      {
+        "member_record_ids": [
+          "observation:292c0c70d3c77a41708918bf1f971a60"
+        ],
+        "root_record_id": "observation:292c0c70d3c77a41708918bf1f971a60"
+      },
+      {
+        "member_record_ids": [
+          "observation:45d7ee763b2106c65ce7bd37e32d13e2",
+          "observation:5104e12c85dd2881f8f36d587e623783",
+          "observation:60dc0f3818d765b8d75f8a94e804a6f9",
+          "observation:69116e2186c3ddbcdfc26a55a9125aad"
+        ],
+        "root_record_id": "observation:5104e12c85dd2881f8f36d587e623783"
+      },
+      {
+        "member_record_ids": [
+          "observation:8a5a225649246ded718df80d4190fc0d"
+        ],
+        "root_record_id": "observation:8a5a225649246ded718df80d4190fc0d"
+      },
+      {
+        "member_record_ids": [
+          "observation:a88aacd586b1b5ef81b69d2ce649e9a0"
+        ],
+        "root_record_id": "observation:a88aacd586b1b5ef81b69d2ce649e9a0"
+      }
+    ],
+    "closure_family_count": 5,
+    "collapsing_relations": [
+      "derived_from",
+      "supersedes"
+    ],
+    "declared_status_ids": [
+      "ace_inference",
+      "admitted_record",
+      "attributed_claim",
+      "corroborated",
+      "disputed",
+      "scenario",
+      "unknown"
+    ],
+    "derivation_family_policy": "observation_lineage_root_closure/v1alpha1",
+    "every_required_status_used": true,
+    "projection_digest": "sha256:3500889a2d75af7a5484a681afbee34ca86067c9693b878625b36c4d48a38e7a",
+    "projection_id": "brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c",
+    "status_set_id": "world_reality_status"
+  },
+  "synthesis_receipt": {
+    "receipt_digest": "sha256:0016875ed9869be69714b5a9c8cefb4f68ef9824406f47ca34eaa4de790db1ed",
+    "receipt_id": "case_brief_synthesis_receipt:0016875ed9869be69714b5a9c8cefb4f",
+    "selected_context_count": 28
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "contract": "ace.intelligence.ontology/v1alpha1",
+  "module_id": "world_ontology",
+  "entity_types": [
+    {
+      "entity_type_id": "actor",
+      "display_name": "Actor",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "role", "value_type": "string", "required": false}
+      ]
+    },
+    {
+      "entity_type_id": "claim",
+      "display_name": "Attributed Claim",
+      "attributes": [
+        {"attribute_id": "statement", "value_type": "string", "required": true},
+        {"attribute_id": "status", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "event",
+      "display_name": "Public Event",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "status", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "institution",
+      "display_name": "Institution",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "institution_type", "value_type": "string", "required": false}
+      ]
+    },
+    {
+      "entity_type_id": "issue",
+      "display_name": "Public Issue",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "jurisdiction",
+      "display_name": "Jurisdiction",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "policy",
+      "display_name": "Policy",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "status", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "public_indicator",
+      "display_name": "Public Indicator",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "value", "value_type": "number", "required": true},
+        {"attribute_id": "unit", "value_type": "string", "required": true},
+        {"attribute_id": "jurisdiction", "value_type": "string", "required": true}
+      ]
+    },
+    {
+      "entity_type_id": "source",
+      "display_name": "Public Source",
+      "attributes": [
+        {"attribute_id": "name", "value_type": "string", "required": true},
+        {"attribute_id": "source_category", "value_type": "string", "required": true},
+        {"attribute_id": "provenance_family", "value_type": "string", "required": true}
+      ]
+    }
+  ],
+  "relation_types": [
+    {"relation_type_id": "actor_made_claim", "source_entity_types": ["actor"], "target_entity_types": ["claim"]},
+    {"relation_type_id": "actor_opposes_policy", "source_entity_types": ["actor"], "target_entity_types": ["policy"]},
+    {"relation_type_id": "actor_supports_policy", "source_entity_types": ["actor"], "target_entity_types": ["policy"]},
+    {"relation_type_id": "claim_concerns_event", "source_entity_types": ["claim"], "target_entity_types": ["event"]},
+    {"relation_type_id": "event_concerns_issue", "source_entity_types": ["event"], "target_entity_types": ["issue"]},
+    {"relation_type_id": "institution_issued_record", "source_entity_types": ["institution"], "target_entity_types": ["source"]},
+    {"relation_type_id": "policy_applies_in_jurisdiction", "source_entity_types": ["policy"], "target_entity_types": ["jurisdiction"]},
+    {"relation_type_id": "record_corrects_record", "source_entity_types": ["source"], "target_entity_types": ["source"]},
+    {"relation_type_id": "source_contradicts_claim", "source_entity_types": ["source"], "target_entity_types": ["claim"]},
+    {"relation_type_id": "source_derived_from_source", "source_entity_types": ["source"], "target_entity_types": ["source"]},
+    {"relation_type_id": "source_supports_claim", "source_entity_types": ["source"], "target_entity_types": ["claim"]}
+  ]
+}
+

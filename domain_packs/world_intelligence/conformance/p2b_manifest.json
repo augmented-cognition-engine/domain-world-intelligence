@@ -1,0 +1,146 @@
+{
+  "artifacts": [
+    {
+      "path": "p2b_scenario.json",
+      "sha256": "cf6163b70253ae0e32fc6e750c842c06dfdde9592b421947bcb8debff9948d04"
+    },
+    {
+      "path": "p2b_expected.json",
+      "sha256": "7077144e32e500d54d7ba023472b8a58d49212f57a51b4bb03eb02a9a976effc"
+    },
+    {
+      "path": "p2b_negative_cases.json",
+      "sha256": "da7663505acf1fb029230ea2614d14d30611b7da74e0915dda42b36800a1d42e"
+    },
+    {
+      "path": "p2b_contract_requests.json",
+      "sha256": "f5cd05926f000638ca8b0834712d7e1f823c66f9fefd2e04c64201796a5768ab"
+    },
+    {
+      "path": "scripts/p2b_scenario_acceptance.py",
+      "sha256": "a164b66f2d9db4d0830d7bba375f58d741f0de7d8744cefed8f0099512ce9555"
+    }
+  ],
+  "contract": "ace.world-intelligence.p2b-manifest/v1alpha1",
+  "contract_request_ids": [
+    "WI-CR-001",
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-004"
+  ],
+  "expected_projection": {
+    "all_seven_statuses_present": true,
+    "blocking_contract_request_ids": [
+      "WI-CR-001"
+    ],
+    "brief_section_order": [
+      "what_happened",
+      "what_changed",
+      "established_records",
+      "attributed_claims",
+      "where_sources_agree",
+      "where_sources_conflict",
+      "ace_inferences",
+      "unknowns",
+      "why_it_matters",
+      "watchpoints",
+      "limitations"
+    ],
+    "brief_statement_count": 17,
+    "contract": "ace.world-intelligence.p2b-scenario-evidence/v1alpha1",
+    "contract_blocked_shift_ids": [
+      "shift:claim_support_farm_allocation",
+      "shift:claim_support_supply_restoration",
+      "shift:event_status_suspension",
+      "shift:record_correction_ledger_1088"
+    ],
+    "contract_blocked_signal_ids": [
+      "signal:breaking_development_suspension",
+      "signal:claim_conflict_supply_restoration",
+      "signal:material_correction_ledger"
+    ],
+    "entity_count_by_type": {
+      "actor": 2,
+      "claim": 2,
+      "event": 1,
+      "institution": 2,
+      "issue": 1,
+      "jurisdiction": 1,
+      "policy": 1,
+      "public_indicator": 1,
+      "source": 8
+    },
+    "epistemic_status_counts": {
+      "attributed_claim": 2,
+      "corroborated": 1,
+      "disputed": 1,
+      "inferred": 2,
+      "observed": 8,
+      "scenario": 1,
+      "unknown": 2
+    },
+    "hermetic": true,
+    "numeric_shift_delta_percent": -12.2977,
+    "packet_identity": "sha256:9efb3e53f7a8b8b8b3fadb2ecede62cf7d6d7550b37ec74912c0efaa1ecadf73",
+    "provenance_family_count": 4,
+    "relation_count_by_type": {
+      "actor_made_claim": 2,
+      "actor_opposes_policy": 1,
+      "actor_supports_policy": 1,
+      "claim_concerns_event": 2,
+      "event_concerns_issue": 1,
+      "institution_issued_record": 3,
+      "policy_applies_in_jurisdiction": 1,
+      "record_corrects_record": 1,
+      "source_contradicts_claim": 1,
+      "source_derived_from_source": 2,
+      "source_supports_claim": 1
+    },
+    "runtime_supported_shift_ids": [
+      "shift:public_indicator_reservoir_storage"
+    ],
+    "runtime_supported_signal_ids": [
+      "signal:public_indicator_move_reservoir"
+    ],
+    "scenario_id": "meridia_reservoir_release_72h",
+    "source_record_count": 8,
+    "supersession_count": 2,
+    "synthetic": true,
+    "violations": [],
+    "window_hours": 72
+  },
+  "negative_case_count": 9,
+  "pack": {
+    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
+    "pack_digest": "sha256:683de57a71669814e507d07d65a109db49abfd2f2d800d89c5faa281bccdbfb1",
+    "pack_id": "world_intelligence",
+    "pack_version": "0.1.0"
+  },
+  "packet": "P2B",
+  "packet_identity": "sha256:9efb3e53f7a8b8b8b3fadb2ecede62cf7d6d7550b37ec74912c0efaa1ecadf73",
+  "packet_version": "0.1.0",
+  "scope": {
+    "autonomous_truth_adjudication": false,
+    "contract_blocked_detector_strategies": [
+      "categorical"
+    ],
+    "deferred_detector_strategies": [
+      "semantic",
+      "structural"
+    ],
+    "delivery": false,
+    "external_actions": false,
+    "hidden_truth_score": false,
+    "live_sources": false,
+    "mode": "prepared",
+    "pack_modules_changed": false,
+    "political_persuasion": false,
+    "political_targeting": false,
+    "runtime_supported_detector_strategies": [
+      "numeric"
+    ],
+    "scenario_is_hermetic": true,
+    "scenario_is_redistributable": true,
+    "scenario_is_synthetic": true
+  }
+}

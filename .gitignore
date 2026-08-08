@@ -1,0 +1,18 @@
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+*.egg-info/
+
+# The public demo output under artifacts/public-demo/ is committed deliberately: it is
+# deterministic (verified byte-identical across repeated runs and across ACE generations), and a
+# tagged release must contain the proof its evidence records describe, not only the generator.
+# Regenerate with scripts/public_demo.py; the page refuses to render if pinned identities drift.
+artifacts/*
+!artifacts/public-demo/
+artifacts/public-demo/*
+!artifacts/public-demo/demo-data.json
+!artifacts/public-demo/index.html
+!artifacts/public-demo/*.png

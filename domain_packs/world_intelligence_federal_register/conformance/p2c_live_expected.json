@@ -1,0 +1,115 @@
+{
+  "contract": "ace.world-intelligence.federal-register-live-expected/v1alpha1",
+  "expected": {
+    "acquisition": {
+      "captured_payload_digest": "sha256:5310fab9696e287eff47e21dc70cab11ad1e2d82f9249532e4586f3f6c5fb06e",
+      "locator": "json-pointer:/document_number",
+      "receipt_digest": "sha256:7481dbdbe8d956b4365c0f1082644e761b20303ba1916611388933c49aa76f55",
+      "receipt_id": "source_acquisition_receipt:7481dbdbe8d956b4365c0f1082644e76",
+      "resolved_ip_addresses": [
+        "1.1.1.1"
+      ]
+    },
+    "activation": {
+      "activation_id": "domain_activation:fd298c450113e90195095e4fcbd95fe0",
+      "live_authority": false,
+      "revision_id": "activation_revision:efa443d7d3d888c8bbfa3176cf0edd86"
+    },
+    "live_records": {
+      "admission_receipt_digest": "sha256:91fc36ce6084aa1bb5a3e1130baa4f7644e54d237c830f475ea67f3b164b2cf0",
+      "admission_receipt_id": "live_source_admission_receipt:91fc36ce6084aa1bb5a3e1130baa4f76",
+      "entity_mode": "live",
+      "entity_snapshot_digest": "sha256:25686860ee9a3506d753412685328a4e23507f271f54d5d7bcebe206ceff574d",
+      "entity_snapshot_id": "entity_snapshot:25686860ee9a3506d753412685328a4e",
+      "observation_digest": "sha256:b316859307d82d5b6696783f715cacc1d7244d2a9265c8897d84e7cb79d3eaed",
+      "observation_id": "observation:b316859307d82d5b6696783f715cacc1",
+      "observation_mode": "live",
+      "record_count": 5,
+      "record_space": "live",
+      "records": [
+        {
+          "material_hash": "sha256:1aa254a9d68d9c503394d4fb6344043fc2011648837caa95246590ec7d3563bb",
+          "processing_order": 0,
+          "record_key": "source_acquisition_receipt:7481dbdbe8d956b4365c0f1082644e76",
+          "record_kind": "source_acquisition",
+          "storage_id": "immutable_record:be733d3f4e6460608827155323a9d76e"
+        },
+        {
+          "material_hash": "sha256:038852f5d0a782bddd49985fea807ada8e7bfea8d4923adf80e63ce8552b8b3a",
+          "processing_order": 1,
+          "record_key": "source_snapshot:676fc90db2fe007feeeb1444cfc69e49",
+          "record_kind": "source_snapshot",
+          "storage_id": "immutable_record:f371a04a56f3454b422f3bb731e79b7b"
+        },
+        {
+          "material_hash": "sha256:a093375ef8f74493fdad571cb297b2d055b543514e0fca8e0dff78c591453b5d",
+          "processing_order": 2,
+          "record_key": "observation:b316859307d82d5b6696783f715cacc1",
+          "record_kind": "observation",
+          "storage_id": "immutable_record:dff6fec098b545568ba9915b0c6377bf"
+        },
+        {
+          "material_hash": "sha256:9f889d9e2772701879aa14124a2cd1bab3f89a125770eca0f9e9bd73a67ddfe8",
+          "processing_order": 3,
+          "record_key": "entity_snapshot:25686860ee9a3506d753412685328a4e",
+          "record_kind": "entity_snapshot",
+          "storage_id": "immutable_record:79c48c344cd304650e9c13f26c219f7c"
+        },
+        {
+          "material_hash": "sha256:318aec00c0b70618a22bb06d3e796c8a87fe920b558600178d8316ecc81c452f",
+          "processing_order": 4,
+          "record_key": "live_source_admission_receipt:91fc36ce6084aa1bb5a3e1130baa4f76",
+          "record_kind": "source_admission",
+          "storage_id": "immutable_record:bf6b78eb63d4e66a8a16d51e9e016e79"
+        }
+      ],
+      "source_snapshot_digest": "sha256:676fc90db2fe007feeeb1444cfc69e49225df20d990eab6db6822fcb926fd313",
+      "source_snapshot_ref": "source_snapshot:676fc90db2fe007feeeb1444cfc69e49",
+      "transaction_id": "append_only_transaction:60d787a531a652091159ee8e4fadb4f6",
+      "transaction_receipt_digest": "sha256:1d4aebe1497517bee1510efa5973acdfca7a6feee49859e18fcc96cd28057b77",
+      "transaction_receipt_id": "append_only_receipt:60d787a531a652091159ee8e4fadb4f6"
+    },
+    "mapped_result": {
+      "attributes": {
+        "agency_name": "Federal Communications Commission",
+        "document_number": "2026-16197",
+        "document_type": "Proposed Rule",
+        "federal_register_url": "https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the",
+        "legal_status_notice": "FederalRegister.gov is not the official legal edition.",
+        "official_pdf_url": "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf",
+        "publication_date": "2026-08-07",
+        "title": "Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program",
+        "verification_reference": "The govinfo.gov PDF is the official-format verification reference."
+      },
+      "captured_payload_json": "{\"agency_name\":\"Federal Communications Commission\",\"document_number\":\"2026-16197\",\"document_type\":\"Proposed Rule\",\"federal_register_url\":\"https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the\",\"legal_status_notice\":\"FederalRegister.gov is not the official legal edition.\",\"official_pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf\",\"publication_date\":\"2026-08-07\",\"title\":\"Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program\",\"verification_reference\":\"The govinfo.gov PDF is the official-format verification reference.\"}",
+      "entity_ref": "source:federal-register-2026-16197",
+      "source_uri": "https://www.federalregister.gov/api/v1/documents/2026-16197.json"
+    },
+    "pack": {
+      "compiled_pack_id": "pack_ir:1847032fc5301bba9b6f85d3d091400d",
+      "pack_digest": "sha256:1847032fc5301bba9b6f85d3d091400dfc3e2679496e2932d4345bddfb799d1f"
+    },
+    "request": {
+      "operation": "capture",
+      "request_digest": "sha256:f4d6fca0e39a0fe3b2a2887be757c48b5591c4e3f7c0f8e49c3e0c0a5d19b8b1",
+      "request_id": "live_source_ingress_request:f4d6fca0e39a0fe3b2a2887be757c48b"
+    },
+    "scope": {
+      "admission_disposition": "committed",
+      "capture_calls": 1,
+      "exact_record_order": [
+        "source_acquisition",
+        "source_snapshot",
+        "observation",
+        "entity_snapshot",
+        "source_admission"
+      ],
+      "live_acquisition": true,
+      "network_access": false,
+      "prohibited_record_kinds_present": [],
+      "reusable_authority": false,
+      "transport_calls": 1,
+      "transport_fixture_only": true
+    }
+  }
+}

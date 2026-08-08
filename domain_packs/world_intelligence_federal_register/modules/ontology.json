@@ -1,0 +1,22 @@
+{
+  "contract": "ace.intelligence.ontology/v1alpha1",
+  "module_id": "world_federal_register_ontology",
+  "entity_types": [
+    {
+      "entity_type_id": "federal_register_document",
+      "display_name": "Federal Register Document",
+      "attributes": [
+        {"attribute_id": "title", "value_type": "string", "required": true},
+        {"attribute_id": "document_number", "value_type": "string", "required": true},
+        {"attribute_id": "document_type", "value_type": "string", "required": true},
+        {"attribute_id": "publication_date", "value_type": "string", "required": true},
+        {"attribute_id": "agency_name", "value_type": "string", "required": true},
+        {"attribute_id": "federal_register_url", "value_type": "string", "required": true},
+        {"attribute_id": "official_pdf_url", "value_type": "string", "required": true},
+        {"attribute_id": "legal_status_notice", "value_type": "string", "required": true},
+        {"attribute_id": "verification_reference", "value_type": "string", "required": true}
+      ]
+    }
+  ],
+  "relation_types": []
+}

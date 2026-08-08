@@ -1,0 +1,104 @@
+{
+  "brief": {
+    "binds_case_in_lineage": true,
+    "brief_digest": "sha256:8fb3173069eca502652b1c9c004c92e6f5ef16b6ffecfcd7fc2e97daed594d81",
+    "brief_id": "brief:8fb3173069eca502652b1c9c004c92e6",
+    "brief_type_ref": "world_intelligence",
+    "citation_count": 6,
+    "claim_count": 11,
+    "lineage_count": 26,
+    "lineage_kinds": {
+      "case": 1,
+      "entity_snapshot": 10,
+      "observation": 6,
+      "shift": 5,
+      "signal": 4
+    }
+  },
+  "case": {
+    "case_digest": "sha256:2ee200c03f2576307b0bc43e6e128f309e9de7efd3c11b1cad2ad1c250b4591f",
+    "case_id": "case:2ee200c03f2576307b0bc43e6e128f30",
+    "member_count": 5
+  },
+  "closed_requests": [
+    "WI-CR-005"
+  ],
+  "contract": "ace.world-intelligence.p2b-case-bound-governed-brief/v1alpha1",
+  "epistemic_status_projection": {
+    "expressible_status_count": 2,
+    "expressible_statuses": [
+      "cited",
+      "inference"
+    ],
+    "required_status_count": 7,
+    "required_statuses": [
+      "admitted_record",
+      "attributed_claim",
+      "corroborated",
+      "disputed",
+      "ace_inference",
+      "unknown",
+      "scenario"
+    ],
+    "section_membership_is_validated_status": false,
+    "status_aware_packet": "P2B-SB1",
+    "status_aware_path_available": true,
+    "status_carrier": "claim.grounding_kind"
+  },
+  "governance": {
+    "atomic_records": 2,
+    "deterministic_replay": true,
+    "durable_brief_count": 1,
+    "governed_state_preconditions": 4,
+    "provider_invocations": 1
+  },
+  "invariants": {
+    "delivery_authority": false,
+    "duplicated_source_records": false,
+    "external_action": false,
+    "live_resources": 0,
+    "private_aggregation_in_world": false,
+    "private_reasoning_runtime": false,
+    "unreferenced_admitted_records": 2,
+    "world_semantics_added_to_ace": false
+  },
+  "runtime_gaps": [
+    {
+      "boundary": "source_independence_closure",
+      "finding": "The Case-bound closure proves complete membership but no public runtime predicate proves that corroboration uses distinct derivation families.",
+      "request_id": "WI-CR-003"
+    },
+    {
+      "boundary": "supersession_impact_projection",
+      "finding": "No public query enumerates the downstream resources affected by the admitted record correction.",
+      "request_id": "WI-CR-004"
+    }
+  ],
+  "scenario_id": "meridia_reservoir_release_72h",
+  "synthesis_receipt": {
+    "case_member_count": 5,
+    "persona_ids": [
+      "general_reader",
+      "public_researcher"
+    ],
+    "receipt_digest": "sha256:3e122634e7f7a76390e6574dfc4f3e8d07d2259d5f2e9d1b2ec9ac804be8875b",
+    "receipt_id": "case_brief_synthesis_receipt:3e122634e7f7a76390e6574dfc4f3e8d",
+    "routed_member_count": 4,
+    "section_ids": [
+      "what_happened",
+      "what_changed",
+      "established_records",
+      "attributed_claims",
+      "where_sources_agree",
+      "where_sources_conflict",
+      "ace_inferences",
+      "unknowns",
+      "why_it_matters",
+      "watchpoints",
+      "limitations"
+    ],
+    "selected_context_count": 26,
+    "template_id": "reality_change_brief"
+  },
+  "wi_cr_002_closed_by": "P2B-SB1"
+}

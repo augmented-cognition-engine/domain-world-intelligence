@@ -1,0 +1,19 @@
+{
+  "contract": "ace.intelligence.detection/v1alpha1",
+  "module_id": "world_detection",
+  "numeric_delta_rules": [
+    {
+      "detector_id": "public_indicator_change",
+      "entity_type_id": "public_indicator",
+      "attribute_id": "value",
+      "baseline": "prior_snapshot",
+      "context_attribute_ids": ["jurisdiction", "unit"],
+      "metric": "percent_change",
+      "threshold": 5.0,
+      "direction": "any",
+      "shift_type": "public_indicator_shift",
+      "signal_type": "public_indicator_move"
+    }
+  ]
+}
+

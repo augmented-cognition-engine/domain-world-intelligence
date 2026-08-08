@@ -1,0 +1,531 @@
+{
+  "contract": "ace.world-intelligence.p2b-expected/v1alpha1",
+  "scenario_id": "meridia_reservoir_release_72h",
+  "graph": {
+    "entity_count_by_type": {
+      "actor": 2,
+      "claim": 2,
+      "event": 1,
+      "institution": 2,
+      "issue": 1,
+      "jurisdiction": 1,
+      "policy": 1,
+      "public_indicator": 1,
+      "source": 8
+    },
+    "relation_count_by_type": {
+      "actor_made_claim": 2,
+      "actor_opposes_policy": 1,
+      "actor_supports_policy": 1,
+      "claim_concerns_event": 2,
+      "event_concerns_issue": 1,
+      "institution_issued_record": 3,
+      "policy_applies_in_jurisdiction": 1,
+      "record_corrects_record": 1,
+      "source_contradicts_claim": 1,
+      "source_derived_from_source": 2,
+      "source_supports_claim": 1
+    },
+    "all_eleven_relation_types_exercised": true
+  },
+  "record_digests": {
+    "record:assembly_transcript_0310": "sha256:1596be02b3d4e3959da2644dcf9191bbc9bf79c2d13a69c6c2a6a307017161d4",
+    "record:basin_gauge_series_w10": "sha256:fc5307140544ecaa827f42537847b0c361bf039af6539e8feb1f029f40d9a643",
+    "record:coastal_wire_5521": "sha256:b9f75c1e9c89eca0ec42c09c8a26a8dad8c0c0981c52fdd76d42ed561992ab33",
+    "record:harborview_reprint_302": "sha256:4d8b406710331e39bb23ffffb347a4954b09bce8432d317837bcf06ea371471a",
+    "record:ledger_correction_114": "sha256:8b1940130419d32ac533c729a6f746b6e3bdcea6db1b8e501c7fe057f273f752",
+    "record:ledger_report_1088": "sha256:3b949835cae3e41b1ef5671e5e6f6bb1a50f8d614f6aed09e87aec57758b6553",
+    "record:mwa_bulletin_214": "sha256:547b91e1bd886bedc573cf9f205cb61d80df0a9d8505e6f2c0376610238ebb71",
+    "record:mwa_order_47": "sha256:7888bab851f39c0af335b1fad677406ae0438e2193a8fd4635defb05be641b21"
+  },
+  "provenance": {
+    "family_membership": {
+      "family:basin_hydrology_datasets": [
+        "record:basin_gauge_series_w10"
+      ],
+      "family:civic_assembly_transcripts": [
+        "record:assembly_transcript_0310"
+      ],
+      "family:meridia_ledger_reporting": [
+        "record:coastal_wire_5521",
+        "record:harborview_reprint_302",
+        "record:ledger_correction_114",
+        "record:ledger_report_1088"
+      ],
+      "family:meridia_water_authority_records": [
+        "record:mwa_bulletin_214",
+        "record:mwa_order_47"
+      ]
+    },
+    "family_count": 4,
+    "syndication_note": "The Coastal Wire copy and Harborview reprint derive from Ledger report 1088 and never count as independent corroboration of anything the report asserts.",
+    "independent_corroboration_minimum_families": 2
+  },
+  "claim_status_timeline": [
+    {
+      "claim_entity_id": "entity:claim/supply_restoration",
+      "transitions": [
+        {
+          "status": "attributed_claim",
+          "effective_from": "2026-03-10T10:25:00Z",
+          "basis_record_ids": [
+            "record:assembly_transcript_0310"
+          ]
+        },
+        {
+          "status": "disputed",
+          "effective_from": "2026-03-11T12:10:00Z",
+          "basis_record_ids": [
+            "record:basin_gauge_series_w10"
+          ]
+        }
+      ],
+      "status_at_window_close": "disputed"
+    },
+    {
+      "claim_entity_id": "entity:claim/farm_allocation_cut",
+      "transitions": [
+        {
+          "status": "attributed_claim",
+          "effective_from": "2026-03-10T13:10:00Z",
+          "basis_record_ids": [
+            "record:ledger_report_1088"
+          ]
+        },
+        {
+          "status": "corroborated",
+          "effective_from": "2026-03-11T12:10:00Z",
+          "basis_record_ids": [
+            "record:basin_gauge_series_w10",
+            "record:ledger_report_1088"
+          ]
+        }
+      ],
+      "status_at_window_close": "corroborated"
+    }
+  ],
+  "entity_status_timeline": [
+    {
+      "entity_id": "entity:event/accelerated_reservoir_release",
+      "transitions": [
+        {
+          "status": "announced",
+          "effective_from": "2026-03-10T06:10:00Z",
+          "basis_record_ids": [
+            "record:mwa_bulletin_214"
+          ]
+        },
+        {
+          "status": "suspended",
+          "effective_from": "2026-03-12T14:10:00Z",
+          "basis_record_ids": [
+            "record:mwa_order_47"
+          ]
+        }
+      ],
+      "status_at_window_close": "suspended"
+    },
+    {
+      "entity_id": "entity:policy/accelerated_release_schedule",
+      "transitions": [
+        {
+          "status": "in_effect",
+          "effective_from": "2026-03-10T06:10:00Z",
+          "basis_record_ids": [
+            "record:mwa_bulletin_214"
+          ]
+        },
+        {
+          "status": "suspended",
+          "effective_from": "2026-03-12T14:10:00Z",
+          "basis_record_ids": [
+            "record:mwa_order_47"
+          ]
+        }
+      ],
+      "status_at_window_close": "suspended"
+    }
+  ],
+  "supersessions": [
+    {
+      "supersession_id": "supersession:order_47_over_bulletin_214",
+      "superseding_record_id": "record:mwa_order_47",
+      "superseded_record_id": "record:mwa_bulletin_214",
+      "aspect": "event_and_policy_status",
+      "append_only": true,
+      "superseded_record_remains_admitted": true
+    },
+    {
+      "supersession_id": "supersession:correction_114_over_report_1088",
+      "superseding_record_id": "record:ledger_correction_114",
+      "superseded_record_id": "record:ledger_report_1088",
+      "aspect": "release_volume_above_seasonal_norm_percent",
+      "append_only": true,
+      "superseded_record_remains_admitted": true,
+      "unaffected_content": "Delegate Quell's attributed statement in report 1088"
+    }
+  ],
+  "shifts": [
+    {
+      "shift_id": "shift:public_indicator_reservoir_storage",
+      "shift_type": "public_indicator_shift",
+      "strategy": "numeric_delta",
+      "runtime_supported": true,
+      "detector_id": "public_indicator_change",
+      "subject_entity_id": "entity:public_indicator/reservoir_storage_percent",
+      "baseline_snapshot_id": "snapshot:reservoir_storage_t0",
+      "current_snapshot_id": "snapshot:reservoir_storage_t30",
+      "baseline_value": 61.8,
+      "current_value": 54.2,
+      "metric": "percent_change",
+      "delta_percent": -12.2977,
+      "delta_rounding": "half_even_4dp",
+      "threshold_percent": 5.0,
+      "direction": "any",
+      "material": true,
+      "detected_at": "2026-03-11T12:10:00Z"
+    },
+    {
+      "shift_id": "shift:event_status_suspension",
+      "shift_type": "event_status_shift",
+      "strategy": "categorical_state_change",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "subject_entity_id": "entity:event/accelerated_reservoir_release",
+      "baseline_status": "announced",
+      "current_status": "suspended",
+      "basis_record_ids": [
+        "record:mwa_order_47"
+      ],
+      "material": true,
+      "detected_at": "2026-03-12T14:10:00Z"
+    },
+    {
+      "shift_id": "shift:record_correction_ledger_1088",
+      "shift_type": "record_correction_shift",
+      "strategy": "categorical_state_change",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "subject_entity_id": "source:ledger_report_1088",
+      "baseline_status": "as_published",
+      "current_status": "corrected",
+      "basis_record_ids": [
+        "record:ledger_correction_114"
+      ],
+      "material": true,
+      "detected_at": "2026-03-12T08:10:00Z"
+    },
+    {
+      "shift_id": "shift:claim_support_supply_restoration",
+      "shift_type": "claim_support_shift",
+      "strategy": "categorical_state_change",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "subject_entity_id": "entity:claim/supply_restoration",
+      "baseline_status": "attributed_claim",
+      "current_status": "disputed",
+      "basis_record_ids": [
+        "record:basin_gauge_series_w10"
+      ],
+      "material": true,
+      "detected_at": "2026-03-11T12:10:00Z"
+    },
+    {
+      "shift_id": "shift:claim_support_farm_allocation",
+      "shift_type": "claim_support_shift",
+      "strategy": "categorical_state_change",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "subject_entity_id": "entity:claim/farm_allocation_cut",
+      "baseline_status": "attributed_claim",
+      "current_status": "corroborated",
+      "basis_record_ids": [
+        "record:basin_gauge_series_w10",
+        "record:ledger_report_1088"
+      ],
+      "material": true,
+      "detected_at": "2026-03-11T12:10:00Z"
+    }
+  ],
+  "signals": [
+    {
+      "signal_id": "signal:public_indicator_move_reservoir",
+      "signal_type": "public_indicator_move",
+      "runtime_supported": true,
+      "detector_id": "public_indicator_change",
+      "shift_id": "shift:public_indicator_reservoir_storage",
+      "routing_rule_id": "route_public_indicator_move",
+      "routed_persona_ids": [
+        "general_reader",
+        "public_researcher"
+      ],
+      "brief_template_id": "reality_change_brief",
+      "detected_at": "2026-03-11T12:10:00Z"
+    },
+    {
+      "signal_id": "signal:breaking_development_suspension",
+      "signal_type": "breaking_development",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "shift_id": "shift:event_status_suspension",
+      "intended_persona_ids": [
+        "general_reader",
+        "public_researcher"
+      ],
+      "intended_brief_template_id": "reality_change_brief",
+      "detected_at": "2026-03-12T14:10:00Z"
+    },
+    {
+      "signal_id": "signal:material_correction_ledger",
+      "signal_type": "material_correction",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "shift_id": "shift:record_correction_ledger_1088",
+      "intended_persona_ids": [
+        "public_researcher"
+      ],
+      "intended_brief_template_id": "reality_change_brief",
+      "detected_at": "2026-03-12T08:10:00Z"
+    },
+    {
+      "signal_id": "signal:claim_conflict_supply_restoration",
+      "signal_type": "claim_conflict",
+      "runtime_supported": false,
+      "blocked_by_contract_request_id": "WI-CR-001",
+      "shift_id": "shift:claim_support_supply_restoration",
+      "intended_persona_ids": [
+        "general_reader",
+        "public_researcher"
+      ],
+      "intended_brief_template_id": "reality_change_brief",
+      "detected_at": "2026-03-11T12:10:00Z"
+    }
+  ],
+  "brief": {
+    "brief_template_id": "reality_change_brief",
+    "brief_type": "world_intelligence",
+    "title": "What changed on Meridia coastal water reliability, 2026-03-10 to 2026-03-13",
+    "persona_ids": [
+      "general_reader",
+      "public_researcher"
+    ],
+    "persona_status_overrides": [],
+    "brief_as_of": "2026-03-13T06:00:00Z",
+    "context_cutoff_at": "2026-03-13T06:00:00Z",
+    "generated_at": "2026-03-13T07:00:00Z",
+    "section_order": [
+      "what_happened",
+      "what_changed",
+      "established_records",
+      "attributed_claims",
+      "where_sources_agree",
+      "where_sources_conflict",
+      "ace_inferences",
+      "unknowns",
+      "why_it_matters",
+      "watchpoints",
+      "limitations"
+    ],
+    "statements": [
+      {
+        "statement_id": "stmt:wh_announcement",
+        "section_id": "what_happened",
+        "epistemic_status": "observed",
+        "text": "On 2026-03-10 the Meridia Water Authority initiated the Accelerated Release Schedule 2026-R1, with coastal reservoir storage at 61.8 percent of capacity.",
+        "support_record_ids": [
+          "record:mwa_bulletin_214"
+        ]
+      },
+      {
+        "statement_id": "stmt:wh_suspension",
+        "section_id": "what_happened",
+        "epistemic_status": "observed",
+        "text": "On 2026-03-12 the Authority suspended the schedule effective 12:00Z pending a basin condition review.",
+        "support_record_ids": [
+          "record:mwa_order_47"
+        ]
+      },
+      {
+        "statement_id": "stmt:wc_event_status",
+        "section_id": "what_changed",
+        "epistemic_status": "observed",
+        "text": "The release program moved from announced to suspended within the 72-hour window.",
+        "support_record_ids": [
+          "record:mwa_bulletin_214",
+          "record:mwa_order_47"
+        ]
+      },
+      {
+        "statement_id": "stmt:wc_indicator",
+        "section_id": "what_changed",
+        "epistemic_status": "observed",
+        "text": "Reported reservoir storage fell from 61.8 to 54.2 percent of capacity, a 12.3 percent relative decline.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_bulletin_214"
+        ]
+      },
+      {
+        "statement_id": "stmt:wc_correction",
+        "section_id": "what_changed",
+        "epistemic_status": "observed",
+        "text": "The Meridia Ledger corrected its report 1088: release volumes run 14 percent above seasonal norms, not the 40 percent it first printed.",
+        "support_record_ids": [
+          "record:ledger_correction_114"
+        ]
+      },
+      {
+        "statement_id": "stmt:er_records",
+        "section_id": "established_records",
+        "epistemic_status": "observed",
+        "text": "Three official records are admitted: Bulletin 214, the week-10 gauge series, and Order 47. Each remains inspectable with its own publication and ingestion times.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_bulletin_214",
+          "record:mwa_order_47"
+        ]
+      },
+      {
+        "statement_id": "stmt:ac_marran",
+        "section_id": "attributed_claims",
+        "epistemic_status": "attributed_claim",
+        "text": "Councilor Ivette Marran said the schedule will restore full municipal supply within two weeks. The attribution is part of the claim.",
+        "support_record_ids": [
+          "record:assembly_transcript_0310"
+        ],
+        "claim_entity_id": "entity:claim/supply_restoration"
+      },
+      {
+        "statement_id": "stmt:ac_quell",
+        "section_id": "attributed_claims",
+        "epistemic_status": "attributed_claim",
+        "text": "Delegate Tomas Quell said the schedule will cut downstream farm allocations by roughly one third this season. The attribution is part of the claim.",
+        "support_record_ids": [
+          "record:ledger_report_1088"
+        ],
+        "claim_entity_id": "entity:claim/farm_allocation_cut"
+      },
+      {
+        "statement_id": "stmt:sa_allocation",
+        "section_id": "where_sources_agree",
+        "epistemic_status": "corroborated",
+        "text": "Quell's allocation claim gains independent support: the Hydrology Office allocation index at 71 against a seasonal norm of 100 comes from a provenance family independent of the Ledger reporting family that first carried the claim.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:ledger_report_1088"
+        ],
+        "claim_entity_id": "entity:claim/farm_allocation_cut",
+        "independent_family_ids": [
+          "family:basin_hydrology_datasets",
+          "family:meridia_ledger_reporting"
+        ]
+      },
+      {
+        "statement_id": "stmt:sc_supply",
+        "section_id": "where_sources_conflict",
+        "epistemic_status": "disputed",
+        "text": "Marran's restoration claim is materially contradicted by the gauge series, which shows storage falling and municipal pressure flat rather than recovering.",
+        "support_record_ids": [
+          "record:assembly_transcript_0310",
+          "record:basin_gauge_series_w10"
+        ],
+        "claim_entity_id": "entity:claim/supply_restoration"
+      },
+      {
+        "statement_id": "stmt:inf_suspension_driver",
+        "section_id": "ace_inferences",
+        "epistemic_status": "inferred",
+        "text": "ACE inference: the suspension most plausibly responds to the storage decline recorded in the week-10 gauge series; Order 47 does not state its motivation.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_order_47"
+        ],
+        "inference_basis_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_order_47"
+        ],
+        "uncertainty": "Order 47 names a basin condition review but no cause; other administrative causes cannot be excluded from the admitted evidence."
+      },
+      {
+        "statement_id": "stmt:unk_allocation_outcome",
+        "section_id": "unknowns",
+        "epistemic_status": "unknown",
+        "text": "Whether downstream farm allocations will actually fall by one third this season is unresolved by the admitted evidence.",
+        "support_record_ids": [],
+        "resolution_watch": "The next seasonal allocation bulletin from the Meridia Water Authority."
+      },
+      {
+        "statement_id": "stmt:unk_resumption",
+        "section_id": "unknowns",
+        "epistemic_status": "unknown",
+        "text": "Whether and when the release schedule resumes is unresolved; Order 47 sets no end date for the basin condition review.",
+        "support_record_ids": [],
+        "resolution_watch": "Any Meridia Water Authority order following the basin condition review."
+      },
+      {
+        "statement_id": "stmt:wim_context",
+        "section_id": "why_it_matters",
+        "epistemic_status": "inferred",
+        "text": "ACE inference: with storage already down 12.3 percent relative in roughly a day of measurement and the release program suspended, near-term coastal supply decisions will likely be made under tighter constraints than Bulletin 214 assumed.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_bulletin_214"
+        ],
+        "inference_basis_record_ids": [
+          "record:basin_gauge_series_w10",
+          "record:mwa_bulletin_214"
+        ],
+        "uncertainty": "The gauge series covers one week; the drawdown rate may not persist."
+      },
+      {
+        "statement_id": "stmt:wp_rationing_scenario",
+        "section_id": "watchpoints",
+        "epistemic_status": "scenario",
+        "text": "Scenario: if reservoir storage falls below 50 percent of capacity before 2026-03-20, a statutory rationing review would be triggered under Meridia water law as characterized in the admitted records.",
+        "support_record_ids": [
+          "record:basin_gauge_series_w10"
+        ],
+        "assumptions": [
+          "The observed drawdown of roughly 7.6 points per 30 hours continues.",
+          "No new inflow event or emergency order intervenes."
+        ],
+        "watchpoints": [
+          "The next Meridia Water Authority bulletin.",
+          "The week-11 Basin Hydrology Office gauge release.",
+          "Whether the Coastal Wire and Harborview copies publish correction 114."
+        ]
+      },
+      {
+        "statement_id": "stmt:lim_syndication",
+        "section_id": "limitations",
+        "epistemic_status": "observed",
+        "text": "As of the context cutoff, neither the Coastal Wire syndication nor the Harborview reprint had carried correction 114; readers of those copies still see the erroneous 40 percent figure.",
+        "support_record_ids": [
+          "record:coastal_wire_5521",
+          "record:harborview_reprint_302",
+          "record:ledger_correction_114"
+        ]
+      },
+      {
+        "statement_id": "stmt:lim_families",
+        "section_id": "limitations",
+        "epistemic_status": "observed",
+        "text": "Three publications carried the same original report; they belong to one provenance family and count once in every corroboration judgment in this Brief.",
+        "support_record_ids": [
+          "record:coastal_wire_5521",
+          "record:harborview_reprint_302",
+          "record:ledger_report_1088"
+        ]
+      }
+    ],
+    "status_counts": {
+      "observed": 8,
+      "attributed_claim": 2,
+      "corroborated": 1,
+      "disputed": 1,
+      "inferred": 2,
+      "unknown": 2,
+      "scenario": 1
+    }
+  }
+}

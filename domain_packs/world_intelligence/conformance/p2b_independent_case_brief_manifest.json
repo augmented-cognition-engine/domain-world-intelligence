@@ -1,0 +1,126 @@
+{
+  "artifacts": [
+    {
+      "path": "scripts/p2b_independent_case_brief.py",
+      "sha256": "68a841cf796304de3235c640f2acd6c67450c13b860aa4c1c284ead0fc74b251"
+    },
+    {
+      "path": "domain_packs/world_intelligence/modules/epistemic_status_v2.json",
+      "sha256": "dc66f84c7199ee7aae8630c06ca15275c2a87476c368d4b175cf1be738227f72"
+    },
+    {
+      "path": "domain_packs/world_intelligence/conformance/p2b_independent_case_brief_expected.json",
+      "sha256": "3d45c7007adbbda065ab92abfd613488cf3244300e085a1de890f0632367e780"
+    },
+    {
+      "path": "domain_packs/tests/test_world_intelligence_p2b_independent_case_brief.py",
+      "sha256": "5c25c44decd178867c7b7226952b2ded6ce1ece802b76cb81103e362b01d552d"
+    }
+  ],
+  "brief": {
+    "brief_digest": "sha256:25d8232c9bfa27050bdcb160fb75f06c2df505d526256532450abae2ee1d428d",
+    "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
+    "claim_count": 11,
+    "lineage_count": 28
+  },
+  "case": {
+    "case_digest": "sha256:412426eee708d56f6bda931ccf9e5d8b88d0def9a5eb969aaa472b9887fa6610",
+    "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
+    "member_count": 5
+  },
+  "contract": "ace.world-intelligence.p2b-independent-case-brief-manifest/v1alpha1",
+  "derivation_family_policy": "observation_lineage_root_closure/v1alpha1",
+  "frozen_prior_packet_identities": {
+    "unchanged_by_this_packet": true,
+    "wi_cr_002_brief_id": "brief:7adb24b596cac21d7aa4e5476bc8733c",
+    "wi_cr_002_case_id": "case:bc28c76926d733c0ce0fe03b9c9222db",
+    "wi_cr_005_brief_id": "brief:8fb3173069eca502652b1c9c004c92e6",
+    "wi_cr_005_case_id": "case:2ee200c03f2576307b0bc43e6e128f30"
+  },
+  "independence_pack": {
+    "compiled_pack_id": "pack_ir:c6f8dd96892e51cac7e9ea5a27480f56",
+    "pack_digest": "sha256:c6f8dd96892e51cac7e9ea5a27480f56b61cec98323e318e32a0b95e88bd0792",
+    "pack_version": "0.4.0"
+  },
+  "open_contract_requests": [
+    "WI-CR-004"
+  ],
+  "package_version": "0.6.0",
+  "packet": "P2B-IB1",
+  "satisfied_contract_requests": [
+    "WI-CR-002",
+    "WI-CR-003",
+    "WI-CR-005"
+  ],
+  "status_projection": {
+    "claim_status_count": 11,
+    "claims_per_status": {
+      "ace_inference": 3,
+      "admitted_record": 2,
+      "attributed_claim": 1,
+      "corroborated": 1,
+      "disputed": 1,
+      "scenario": 1,
+      "unknown": 2
+    },
+    "closure_families": [
+      {
+        "member_record_ids": [
+          "observation:01562681bebfdcee9dca4b3be068d0d3"
+        ],
+        "root_record_id": "observation:01562681bebfdcee9dca4b3be068d0d3"
+      },
+      {
+        "member_record_ids": [
+          "observation:292c0c70d3c77a41708918bf1f971a60"
+        ],
+        "root_record_id": "observation:292c0c70d3c77a41708918bf1f971a60"
+      },
+      {
+        "member_record_ids": [
+          "observation:45d7ee763b2106c65ce7bd37e32d13e2",
+          "observation:5104e12c85dd2881f8f36d587e623783",
+          "observation:60dc0f3818d765b8d75f8a94e804a6f9",
+          "observation:69116e2186c3ddbcdfc26a55a9125aad"
+        ],
+        "root_record_id": "observation:5104e12c85dd2881f8f36d587e623783"
+      },
+      {
+        "member_record_ids": [
+          "observation:8a5a225649246ded718df80d4190fc0d"
+        ],
+        "root_record_id": "observation:8a5a225649246ded718df80d4190fc0d"
+      },
+      {
+        "member_record_ids": [
+          "observation:a88aacd586b1b5ef81b69d2ce649e9a0"
+        ],
+        "root_record_id": "observation:a88aacd586b1b5ef81b69d2ce649e9a0"
+      }
+    ],
+    "closure_family_count": 5,
+    "collapsing_relations": [
+      "derived_from",
+      "supersedes"
+    ],
+    "declared_status_ids": [
+      "ace_inference",
+      "admitted_record",
+      "attributed_claim",
+      "corroborated",
+      "disputed",
+      "scenario",
+      "unknown"
+    ],
+    "derivation_family_policy": "observation_lineage_root_closure/v1alpha1",
+    "every_required_status_used": true,
+    "projection_digest": "sha256:3500889a2d75af7a5484a681afbee34ca86067c9693b878625b36c4d48a38e7a",
+    "projection_id": "brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c",
+    "status_set_id": "world_reality_status"
+  },
+  "synthesis_receipt": {
+    "receipt_digest": "sha256:0016875ed9869be69714b5a9c8cefb4f68ef9824406f47ca34eaa4de790db1ed",
+    "receipt_id": "case_brief_synthesis_receipt:0016875ed9869be69714b5a9c8cefb4f",
+    "selected_context_count": 28
+  }
+}

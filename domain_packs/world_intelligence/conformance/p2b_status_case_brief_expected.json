@@ -1,0 +1,206 @@
+{
+  "brief": {
+    "brief_digest": "sha256:7adb24b596cac21d7aa4e5476bc8733c148edefdb7d3711c868a00a810bc4a34",
+    "brief_id": "brief:7adb24b596cac21d7aa4e5476bc8733c",
+    "brief_type_ref": "world_intelligence",
+    "citation_count": 6,
+    "claim_count": 11,
+    "lineage_count": 26
+  },
+  "case": {
+    "case_digest": "sha256:bc28c76926d733c0ce0fe03b9c9222db5b19681d28da8b70449c2d9af5e4f141",
+    "case_id": "case:bc28c76926d733c0ce0fe03b9c9222db",
+    "member_count": 5
+  },
+  "closed_requests": [
+    "WI-CR-002",
+    "WI-CR-005"
+  ],
+  "contract": "ace.world-intelligence.p2b-status-aware-governed-brief/v1alpha1",
+  "governance": {
+    "atomic_records": 3,
+    "deterministic_replay": true,
+    "durable_brief_count": 1,
+    "governed_state_preconditions": 4,
+    "provider_invocations": 1,
+    "record_kinds": [
+      "brief",
+      "case_brief_synthesis_receipt",
+      "brief_epistemic_status_projection"
+    ]
+  },
+  "invariants": {
+    "delivery_authority": false,
+    "duplicated_source_records": false,
+    "external_action": false,
+    "imperative_pack_code": false,
+    "live_resources": 0,
+    "private_aggregation_in_world": false,
+    "private_reasoning_runtime": false,
+    "private_status_projector": false,
+    "unreferenced_admitted_records": 2,
+    "world_semantics_added_to_ace": false
+  },
+  "proven": {
+    "corroborated_proves_source_family_independence": false,
+    "status_is_per_statement_and_machine_readable": true,
+    "status_validated_against_grounding_kind": true,
+    "status_validated_against_support_count": true,
+    "status_validated_against_support_kinds": true
+  },
+  "runtime_gaps": [
+    {
+      "boundary": "source_independence_closure",
+      "finding": "The declared corroborated status enforces a minimum admitted-Observation support count and a closed support-kind set, but no public runtime predicate proves those supports come from distinct derivation or source families.",
+      "request_id": "WI-CR-003"
+    },
+    {
+      "boundary": "supersession_impact_projection",
+      "finding": "No public query enumerates the downstream resources affected by the admitted record correction.",
+      "request_id": "WI-CR-004"
+    }
+  ],
+  "scenario_id": "meridia_reservoir_release_72h",
+  "status_projection": {
+    "all_seven_required_statuses_present": true,
+    "binds_every_receipted_claim": true,
+    "claim_status_count": 11,
+    "claims_per_status": {
+      "ace_inference": 3,
+      "admitted_record": 2,
+      "attributed_claim": 1,
+      "corroborated": 1,
+      "disputed": 1,
+      "scenario": 1,
+      "unknown": 2
+    },
+    "declared_status_ids": [
+      "ace_inference",
+      "admitted_record",
+      "attributed_claim",
+      "corroborated",
+      "disputed",
+      "scenario",
+      "unknown"
+    ],
+    "every_required_status_used": true,
+    "module_id": "world_epistemic_status",
+    "projection_digest": "sha256:fca9062883e92e2e632388c0069c310efbfd48c98b5c6d61897fdecde28f0f79",
+    "projection_id": "brief_epistemic_status_projection:fca9062883e92e2e632388c0069c310e",
+    "section_membership_is_validated_status": false,
+    "status_carrier": "brief_epistemic_status_projection.claim_statuses",
+    "status_set_id": "world_reality_status",
+    "statuses_per_claim": [
+      {
+        "claim_id": "grounded_claim:eb3c2c10dcd521ac44b3bd9c6a8c8c26",
+        "grounding_kind": "cited",
+        "status_id": "admitted_record",
+        "support_count": 2,
+        "support_kinds": [
+          "observation"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:d443b691b5387081321cdc5316001438",
+        "grounding_kind": "inference",
+        "status_id": "ace_inference",
+        "support_count": 3,
+        "support_kinds": [
+          "case",
+          "entity_snapshot"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:fe096220e1be835ad5b710ba24effd03",
+        "grounding_kind": "cited",
+        "status_id": "admitted_record",
+        "support_count": 1,
+        "support_kinds": [
+          "observation"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:9f84c99e72ca4fef203668c3edb402ee",
+        "grounding_kind": "cited",
+        "status_id": "attributed_claim",
+        "support_count": 1,
+        "support_kinds": [
+          "observation"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:cbec181888ccf65ad6705bb5d4cfae48",
+        "grounding_kind": "cited",
+        "status_id": "corroborated",
+        "support_count": 2,
+        "support_kinds": [
+          "observation"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:a7af6cc23f113617b89032e8c71d03f8",
+        "grounding_kind": "inference",
+        "status_id": "disputed",
+        "support_count": 2,
+        "support_kinds": [
+          "shift"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:23d81a716b8e81b369cd384aa656a617",
+        "grounding_kind": "inference",
+        "status_id": "ace_inference",
+        "support_count": 3,
+        "support_kinds": [
+          "entity_snapshot"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:bbd2bfba5070087424a21a13326aa254",
+        "grounding_kind": "inference",
+        "status_id": "unknown",
+        "support_count": 3,
+        "support_kinds": [
+          "entity_snapshot"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:dc6ad8c6b8b4fc1abeadb0de0edd5a23",
+        "grounding_kind": "inference",
+        "status_id": "ace_inference",
+        "support_count": 3,
+        "support_kinds": [
+          "entity_snapshot",
+          "shift"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:1313c811b79c6124e59e1c1add56866e",
+        "grounding_kind": "inference",
+        "status_id": "scenario",
+        "support_count": 2,
+        "support_kinds": [
+          "shift",
+          "signal"
+        ]
+      },
+      {
+        "claim_id": "grounded_claim:98cdf7aeaa77b8d18fb556cd5dbb149b",
+        "grounding_kind": "inference",
+        "status_id": "unknown",
+        "support_count": 4,
+        "support_kinds": [
+          "shift",
+          "signal"
+        ]
+      }
+    ],
+    "template_id": "reality_change_brief"
+  },
+  "synthesis_receipt": {
+    "receipt_digest": "sha256:e79d934e0300901e18e0fe4af1064ba2ba53fff662d1995fff6539c6753544ad",
+    "receipt_id": "case_brief_synthesis_receipt:e79d934e0300901e18e0fe4af1064ba2",
+    "selected_context_count": 26,
+    "template_id": "reality_change_brief"
+  }
+}

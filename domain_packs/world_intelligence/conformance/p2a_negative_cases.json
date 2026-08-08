@@ -1,0 +1,30 @@
+{
+  "contract": "ace.world-intelligence.p2a-negative-cases/v1alpha1",
+  "cases": [
+    {
+      "case_id": "imperative_manifest_control_flow",
+      "mutation": "Add an execute field to the pack manifest.",
+      "expected": "invalid_manifest"
+    },
+    {
+      "case_id": "unresolved_relation_endpoint",
+      "mutation": "Point a declared relation at an undeclared entity type.",
+      "expected": "invalid_pack_ir"
+    },
+    {
+      "case_id": "unknown_source_attribute",
+      "mutation": "Map an official source field to an undeclared entity attribute.",
+      "expected": "unknown_target_attribute"
+    },
+    {
+      "case_id": "private_categorical_detector_fork",
+      "mutation": "Add a categorical detector field not supported by the public alpha contract.",
+      "expected": "invalid_module"
+    },
+    {
+      "case_id": "executable_source_adapter_in_pack",
+      "mutation": "Add a Python adapter resource and executable module contract.",
+      "expected": "invalid_manifest"
+    }
+  ]
+}

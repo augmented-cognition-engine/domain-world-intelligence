@@ -1,0 +1,113 @@
+{
+  "contract": "ace.world-intelligence.federal-register-live-source-input/v1alpha1",
+  "fixture_id": "p2c_live_federal_register_2026_16197",
+  "fixture_version": "0.1.0",
+  "adapter_artifact": {
+    "package": "ace-ext-world-federal-register-source",
+    "implementation_id": "world_federal_register_source",
+    "implementation_version": "0.1.0",
+    "capability": "source_snapshot",
+    "contract": "ace.source.snapshot/v1alpha1",
+    "artifact_digest": "sha256:bcb568fbd1b6cd54bf806ce306ad9044dcae9df557bd1af3df0f1ff980ca0e9a"
+  },
+  "scenario": {
+    "product_id": "product:world-watch",
+    "actor_ref": "actor:world-analyst",
+    "activation_key": "world_federal_register_live_source",
+    "mapping_id": "federal_register_document_snapshot",
+    "source_definition_ref": "source_definition:federal-register-2026-16197",
+    "source_type_ref": "federal_register_document",
+    "entity_ref": "source:federal-register-2026-16197",
+    "subject_binding_id": "published_federal_register_document",
+    "entity_type_id": "federal_register_document",
+    "idempotency_key": "live-source:federal-register:2026-16197:2026-08-07",
+    "configuration_ref": "config:federal-register-2026-16197",
+    "configuration_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "authority": "source_read",
+    "grant_ref": "authority_grant:world-federal-register-read",
+    "grant_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "grant_expires_at": "2026-08-07T18:15:00Z",
+    "authentication_receipt_ref": "authentication_receipt:world-p2c-live",
+    "authentication_receipt_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "authenticated_at": "2026-08-07T17:57:00Z",
+    "authentication_expires_at": "2026-08-07T18:10:00Z",
+    "requested_at": "2026-08-07T18:00:00Z",
+    "activation_occurred_at": "2026-08-07T17:55:00Z",
+    "activation_committed_at": "2026-08-07T17:56:00Z",
+    "capture_started_at": "2026-08-07T18:00:01Z",
+    "observed_at": "2026-08-07T18:00:02Z",
+    "captured_at": "2026-08-07T18:00:03Z",
+    "rechecked_at": "2026-08-07T18:00:04Z",
+    "admitted_at": "2026-08-07T18:00:05Z",
+    "approval_receipt_ref": "approval_receipt:world-p2c-live",
+    "compilation_receipt_ref": "compilation_receipt:world-p2c-live",
+    "conformance_receipt_ref": "conformance_receipt:world-p2c-live"
+  },
+  "activation_binding": {
+    "overlay_id": "world_federal_register_live_conformance",
+    "overlay_version": "0.1.0",
+    "capability_requirement_id": "federal_register_snapshot",
+    "authority_request_id": "read_federal_register_document"
+  },
+  "governed_heads": {
+    "capability": {
+      "sequence": 1,
+      "revision_id": "capability_state_revision:world-federal-register-v1",
+      "commit_receipt_id": "governed_state_commit:world-federal-register-v1",
+      "updated_at": "2026-08-07T17:56:10Z"
+    },
+    "grant": {
+      "sequence": 1,
+      "revision_id": "authority_grant_revision:world-federal-register-v1",
+      "commit_receipt_id": "governed_state_commit:world-federal-register-grant-v1",
+      "updated_at": "2026-08-07T17:56:20Z"
+    },
+    "source_definition": {
+      "sequence": 1,
+      "revision_id": "source_definition_revision:federal-register-2026-16197-v1",
+      "commit_receipt_id": "governed_state_commit:federal-register-2026-16197-v1",
+      "updated_at": "2026-08-07T17:56:30Z"
+    }
+  },
+  "transport_fixture": {
+    "fixture_only": true,
+    "network_access": false,
+    "requested_uri": "https://www.federalregister.gov/api/v1/documents/2026-16197.json",
+    "effective_uri": "https://www.federalregister.gov/api/v1/documents/2026-16197.json",
+    "status_code": 200,
+    "media_type": "application/json",
+    "redirect_chain": [],
+    "resolved_ip_addresses": ["1.1.1.1"],
+    "connected_ip_addresses": ["1.1.1.1"],
+    "dns_rebinding_protection_applied": true,
+    "credentials_used": false,
+    "locator": "json-pointer:/document_number",
+    "response_body": "{\"title\":\"Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program\",\"document_number\":\"2026-16197\",\"type\":\"Proposed Rule\",\"publication_date\":\"2026-08-07\",\"agencies\":[{\"name\":\"Federal Communications Commission\",\"id\":161}],\"html_url\":\"https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the\",\"pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf\",\"abstract\":\"Recorded API fixture; excluded from the canonical mapping.\"}"
+  },
+  "expected_attributes": {
+    "agency_name": "Federal Communications Commission",
+    "document_number": "2026-16197",
+    "document_type": "Proposed Rule",
+    "federal_register_url": "https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the",
+    "legal_status_notice": "FederalRegister.gov is not the official legal edition.",
+    "official_pdf_url": "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf",
+    "publication_date": "2026-08-07",
+    "title": "Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program",
+    "verification_reference": "The govinfo.gov PDF is the official-format verification reference."
+  },
+  "prohibited_record_kinds": [
+    "signal",
+    "shift",
+    "brief",
+    "route",
+    "delivery",
+    "decision",
+    "outcome",
+    "feedback",
+    "learning_event",
+    "schedule",
+    "monitor",
+    "publication",
+    "persuasion"
+  ]
+}

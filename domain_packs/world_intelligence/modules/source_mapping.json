@@ -1,0 +1,24 @@
+{
+  "contract": "ace.intelligence.source-mapping/v1alpha1",
+  "module_id": "world_source_mapping",
+  "mappings": [
+    {
+      "mapping_id": "official_public_indicator_snapshot",
+      "source_definition_ref": "source_definition:world-official-public-indicator",
+      "source_type_ref": "official_public_data",
+      "capability_requirement_id": "public_record_snapshot",
+      "authority_request_id": "read_public_record_source",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_indicator",
+      "entity_type_id": "public_indicator",
+      "attribute_mappings": [
+        {"attribute_id": "name", "source_pointer": "/indicator_name", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "value", "source_pointer": "/value", "transform": "decimal_text_to_number"},
+        {"attribute_id": "unit", "source_pointer": "/unit", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "jurisdiction", "source_pointer": "/jurisdiction", "transform": "copy", "min_length": 1, "max_length": 160}
+      ],
+      "static_confidence": 1.0
+    }
+  ]
+}
+

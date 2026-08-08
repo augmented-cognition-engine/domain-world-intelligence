@@ -1,0 +1,292 @@
+{
+  "contract": "ace.world-intelligence.p2b-scenario/v1alpha1",
+  "scenario_id": "meridia_reservoir_release_72h",
+  "display_name": "Meridia accelerated reservoir release, 72-hour public-issue scenario",
+  "synthetic": true,
+  "hermetic": true,
+  "redistributable": true,
+  "fictional_notice": "Every actor, institution, publisher, jurisdiction, record, and measurement in this scenario is fictional and synthetic. Any resemblance to a real person, organization, or current political controversy is unintended.",
+  "window": {
+    "starts_at": "2026-03-10T06:00:00Z",
+    "ends_at": "2026-03-13T06:00:00Z",
+    "duration_hours": 72
+  },
+  "entities": [
+    {
+      "entity_id": "entity:jurisdiction/meridia",
+      "entity_type_id": "jurisdiction",
+      "attributes": {"name": "Republic of Meridia"}
+    },
+    {
+      "entity_id": "entity:issue/coastal_water_reliability",
+      "entity_type_id": "issue",
+      "attributes": {"name": "Coastal water reliability in the Republic of Meridia"}
+    },
+    {
+      "entity_id": "entity:institution/meridia_water_authority",
+      "entity_type_id": "institution",
+      "attributes": {"name": "Meridia Water Authority", "institution_type": "public_utility_regulator"}
+    },
+    {
+      "entity_id": "entity:institution/meridia_basin_hydrology_office",
+      "entity_type_id": "institution",
+      "attributes": {"name": "Meridia Basin Hydrology Office", "institution_type": "public_measurement_office"}
+    },
+    {
+      "entity_id": "entity:actor/ivette_marran",
+      "entity_type_id": "actor",
+      "attributes": {"name": "Councilor Ivette Marran", "role": "Councilor, Meridia Civic Assembly"}
+    },
+    {
+      "entity_id": "entity:actor/tomas_quell",
+      "entity_type_id": "actor",
+      "attributes": {"name": "Delegate Tomas Quell", "role": "Delegate, Meridia Agrarian Caucus"}
+    },
+    {
+      "entity_id": "entity:event/accelerated_reservoir_release",
+      "entity_type_id": "event",
+      "attributes": {"name": "Accelerated reservoir release program", "status": "announced"}
+    },
+    {
+      "entity_id": "entity:policy/accelerated_release_schedule",
+      "entity_type_id": "policy",
+      "attributes": {"name": "Accelerated Release Schedule 2026-R1", "status": "in_effect"}
+    },
+    {
+      "entity_id": "entity:claim/supply_restoration",
+      "entity_type_id": "claim",
+      "attributes": {
+        "statement": "The accelerated release schedule will restore full municipal supply within two weeks.",
+        "status": "attributed_claim"
+      }
+    },
+    {
+      "entity_id": "entity:claim/farm_allocation_cut",
+      "entity_type_id": "claim",
+      "attributes": {
+        "statement": "The accelerated release schedule will cut downstream farm allocations by roughly one third this season.",
+        "status": "attributed_claim"
+      }
+    },
+    {
+      "entity_id": "entity:public_indicator/reservoir_storage_percent",
+      "entity_type_id": "public_indicator",
+      "attributes": {
+        "name": "Meridia coastal reservoir storage",
+        "value": 61.8,
+        "unit": "percent_of_capacity",
+        "jurisdiction": "Republic of Meridia"
+      }
+    }
+  ],
+  "provenance_families": [
+    {
+      "family_id": "family:meridia_water_authority_records",
+      "description": "Official records issued by the Meridia Water Authority.",
+      "root_record_ids": ["record:mwa_bulletin_214", "record:mwa_order_47"]
+    },
+    {
+      "family_id": "family:civic_assembly_transcripts",
+      "description": "Direct attributable statements recorded by the Meridia Civic Assembly transcript service.",
+      "root_record_ids": ["record:assembly_transcript_0310"]
+    },
+    {
+      "family_id": "family:meridia_ledger_reporting",
+      "description": "Original reporting by The Meridia Ledger and every copy derived from it, including its correction.",
+      "root_record_ids": ["record:ledger_report_1088"]
+    },
+    {
+      "family_id": "family:basin_hydrology_datasets",
+      "description": "Public measurement datasets issued by the Meridia Basin Hydrology Office.",
+      "root_record_ids": ["record:basin_gauge_series_w10"]
+    }
+  ],
+  "source_records": [
+    {
+      "record_id": "record:mwa_bulletin_214",
+      "record_kind": "official_announcement",
+      "source_entity_id": "source:mwa_bulletin_214",
+      "source_name": "Meridia Water Authority Bulletin 214",
+      "source_category": "official_record",
+      "provenance_family_id": "family:meridia_water_authority_records",
+      "locator": "fixture:meridia/water-authority/bulletin-214",
+      "event_effective_at": "2026-03-10T06:00:00Z",
+      "source_published_at": "2026-03-10T06:00:00Z",
+      "observed_at": "2026-03-10T06:05:00Z",
+      "ingested_at": "2026-03-10T06:10:00Z",
+      "statement_text": "The Meridia Water Authority initiates the Accelerated Release Schedule 2026-R1 effective immediately. Coastal reservoir storage stands at 61.8 percent of capacity. Release volumes will run 14 percent above seasonal norms until further notice.",
+      "reported_values": {
+        "indicator_name": "Meridia coastal reservoir storage",
+        "value": "61.8",
+        "unit": "percent_of_capacity",
+        "jurisdiction": "Republic of Meridia",
+        "release_volume_above_seasonal_norm_percent": "14"
+      }
+    },
+    {
+      "record_id": "record:assembly_transcript_0310",
+      "record_kind": "direct_statement_transcript",
+      "source_entity_id": "source:assembly_transcript_0310",
+      "source_name": "Meridia Civic Assembly press availability transcript, 2026-03-10",
+      "source_category": "direct_statement",
+      "provenance_family_id": "family:civic_assembly_transcripts",
+      "locator": "fixture:meridia/civic-assembly/transcript-2026-03-10",
+      "event_effective_at": "2026-03-10T09:30:00Z",
+      "source_published_at": "2026-03-10T10:15:00Z",
+      "observed_at": "2026-03-10T10:20:00Z",
+      "ingested_at": "2026-03-10T10:25:00Z",
+      "statement_text": "Councilor Ivette Marran: The accelerated release schedule will restore full municipal supply within two weeks.",
+      "attributed_actor_entity_id": "entity:actor/ivette_marran",
+      "attributed_claim_entity_id": "entity:claim/supply_restoration"
+    },
+    {
+      "record_id": "record:ledger_report_1088",
+      "record_kind": "original_report",
+      "source_entity_id": "source:ledger_report_1088",
+      "source_name": "The Meridia Ledger, report 1088: Authority accelerates reservoir releases",
+      "source_category": "secondary_reporting",
+      "provenance_family_id": "family:meridia_ledger_reporting",
+      "locator": "fixture:meridia/ledger/report-1088",
+      "event_effective_at": "2026-03-10T11:00:00Z",
+      "source_published_at": "2026-03-10T13:00:00Z",
+      "observed_at": "2026-03-10T13:05:00Z",
+      "ingested_at": "2026-03-10T13:10:00Z",
+      "statement_text": "The Meridia Water Authority began accelerated reservoir releases Tuesday, with volumes it said would run 40 percent above seasonal norms. Delegate Tomas Quell, interviewed at 11:00, said the schedule will cut downstream farm allocations by roughly one third this season.",
+      "attributed_actor_entity_id": "entity:actor/tomas_quell",
+      "attributed_claim_entity_id": "entity:claim/farm_allocation_cut",
+      "erratum": {
+        "field": "release_volume_above_seasonal_norm_percent",
+        "reported": "40",
+        "authoritative": "14",
+        "corrected_by_record_id": "record:ledger_correction_114"
+      }
+    },
+    {
+      "record_id": "record:coastal_wire_5521",
+      "record_kind": "syndicated_copy",
+      "source_entity_id": "source:coastal_wire_5521",
+      "source_name": "Coastal Wire Service syndication 5521",
+      "source_category": "secondary_reporting",
+      "provenance_family_id": "family:meridia_ledger_reporting",
+      "derived_from_record_id": "record:ledger_report_1088",
+      "derived_at": "2026-03-10T15:00:00Z",
+      "locator": "fixture:meridia/coastal-wire/syndication-5521",
+      "source_published_at": "2026-03-10T15:00:00Z",
+      "observed_at": "2026-03-10T15:05:00Z",
+      "ingested_at": "2026-03-10T15:10:00Z",
+      "statement_text": "Syndicated from The Meridia Ledger report 1088 without independent verification, including the 40 percent release figure and Delegate Quell's farm-allocation statement.",
+      "carries_correction": false
+    },
+    {
+      "record_id": "record:harborview_reprint_302",
+      "record_kind": "syndicated_copy",
+      "source_entity_id": "source:harborview_reprint_302",
+      "source_name": "Harborview Daily reprint 302",
+      "source_category": "secondary_reporting",
+      "provenance_family_id": "family:meridia_ledger_reporting",
+      "derived_from_record_id": "record:ledger_report_1088",
+      "derived_at": "2026-03-11T02:00:00Z",
+      "locator": "fixture:meridia/harborview-daily/reprint-302",
+      "source_published_at": "2026-03-11T02:00:00Z",
+      "observed_at": "2026-03-11T02:05:00Z",
+      "ingested_at": "2026-03-11T02:10:00Z",
+      "statement_text": "Reprint of The Meridia Ledger report 1088, run in full and unedited.",
+      "carries_correction": false
+    },
+    {
+      "record_id": "record:basin_gauge_series_w10",
+      "record_kind": "official_dataset_release",
+      "source_entity_id": "source:basin_gauge_series_w10",
+      "source_name": "Meridia Basin Hydrology Office gauge series, week 10",
+      "source_category": "official_public_data",
+      "provenance_family_id": "family:basin_hydrology_datasets",
+      "locator": "fixture:meridia/basin-hydrology/gauge-series-w10",
+      "event_effective_at": "2026-03-11T00:00:00Z",
+      "source_published_at": "2026-03-11T12:00:00Z",
+      "observed_at": "2026-03-11T12:05:00Z",
+      "ingested_at": "2026-03-11T12:10:00Z",
+      "statement_text": "Week-10 gauge series: coastal reservoir storage 54.2 percent of capacity as of 2026-03-11T00:00Z; downstream agricultural allocation index 71 against a seasonal norm of 100; municipal main-line pressure unchanged week over week.",
+      "reported_values": {
+        "indicator_name": "Meridia coastal reservoir storage",
+        "value": "54.2",
+        "unit": "percent_of_capacity",
+        "jurisdiction": "Republic of Meridia",
+        "downstream_allocation_index": "71",
+        "downstream_allocation_seasonal_norm": "100"
+      }
+    },
+    {
+      "record_id": "record:ledger_correction_114",
+      "record_kind": "publisher_correction",
+      "source_entity_id": "source:ledger_correction_114",
+      "source_name": "The Meridia Ledger, correction 114 to report 1088",
+      "source_category": "secondary_reporting",
+      "provenance_family_id": "family:meridia_ledger_reporting",
+      "corrects_record_id": "record:ledger_report_1088",
+      "locator": "fixture:meridia/ledger/correction-114",
+      "source_published_at": "2026-03-12T08:00:00Z",
+      "observed_at": "2026-03-12T08:05:00Z",
+      "ingested_at": "2026-03-12T08:10:00Z",
+      "statement_text": "Correction to report 1088: the Authority stated release volumes would run 14 percent above seasonal norms, not 40 percent. The error was introduced in transcription of Bulletin 214. Delegate Quell's quoted statement is unaffected and stands as reported.",
+      "carries_correction": true
+    },
+    {
+      "record_id": "record:mwa_order_47",
+      "record_kind": "official_status_change",
+      "source_entity_id": "source:mwa_order_47",
+      "source_name": "Meridia Water Authority Order 47",
+      "source_category": "official_record",
+      "provenance_family_id": "family:meridia_water_authority_records",
+      "locator": "fixture:meridia/water-authority/order-47",
+      "event_effective_at": "2026-03-12T12:00:00Z",
+      "source_published_at": "2026-03-12T14:00:00Z",
+      "observed_at": "2026-03-12T14:05:00Z",
+      "ingested_at": "2026-03-12T14:10:00Z",
+      "statement_text": "Order 47: the Accelerated Release Schedule 2026-R1 is suspended effective 2026-03-12T12:00Z pending a basin condition review. Bulletin 214 remains the record of the original announcement and is not withdrawn.",
+      "status_change": {
+        "event_entity_id": "entity:event/accelerated_reservoir_release",
+        "policy_entity_id": "entity:policy/accelerated_release_schedule",
+        "prior_status": "announced",
+        "new_status": "suspended"
+      }
+    }
+  ],
+  "relations": [
+    {"relation_id": "rel:mwa_issued_bulletin_214", "relation_type_id": "institution_issued_record", "source_entity_id": "entity:institution/meridia_water_authority", "target_entity_id": "source:mwa_bulletin_214"},
+    {"relation_id": "rel:mwa_issued_order_47", "relation_type_id": "institution_issued_record", "source_entity_id": "entity:institution/meridia_water_authority", "target_entity_id": "source:mwa_order_47"},
+    {"relation_id": "rel:hydrology_issued_gauge_w10", "relation_type_id": "institution_issued_record", "source_entity_id": "entity:institution/meridia_basin_hydrology_office", "target_entity_id": "source:basin_gauge_series_w10"},
+    {"relation_id": "rel:marran_made_supply_claim", "relation_type_id": "actor_made_claim", "source_entity_id": "entity:actor/ivette_marran", "target_entity_id": "entity:claim/supply_restoration"},
+    {"relation_id": "rel:quell_made_allocation_claim", "relation_type_id": "actor_made_claim", "source_entity_id": "entity:actor/tomas_quell", "target_entity_id": "entity:claim/farm_allocation_cut"},
+    {"relation_id": "rel:supply_claim_concerns_release", "relation_type_id": "claim_concerns_event", "source_entity_id": "entity:claim/supply_restoration", "target_entity_id": "entity:event/accelerated_reservoir_release"},
+    {"relation_id": "rel:allocation_claim_concerns_release", "relation_type_id": "claim_concerns_event", "source_entity_id": "entity:claim/farm_allocation_cut", "target_entity_id": "entity:event/accelerated_reservoir_release"},
+    {"relation_id": "rel:release_concerns_reliability", "relation_type_id": "event_concerns_issue", "source_entity_id": "entity:event/accelerated_reservoir_release", "target_entity_id": "entity:issue/coastal_water_reliability"},
+    {"relation_id": "rel:schedule_applies_in_meridia", "relation_type_id": "policy_applies_in_jurisdiction", "source_entity_id": "entity:policy/accelerated_release_schedule", "target_entity_id": "entity:jurisdiction/meridia"},
+    {"relation_id": "rel:marran_supports_schedule", "relation_type_id": "actor_supports_policy", "source_entity_id": "entity:actor/ivette_marran", "target_entity_id": "entity:policy/accelerated_release_schedule"},
+    {"relation_id": "rel:quell_opposes_schedule", "relation_type_id": "actor_opposes_policy", "source_entity_id": "entity:actor/tomas_quell", "target_entity_id": "entity:policy/accelerated_release_schedule"},
+    {"relation_id": "rel:wire_derived_from_report", "relation_type_id": "source_derived_from_source", "source_entity_id": "source:coastal_wire_5521", "target_entity_id": "source:ledger_report_1088"},
+    {"relation_id": "rel:reprint_derived_from_report", "relation_type_id": "source_derived_from_source", "source_entity_id": "source:harborview_reprint_302", "target_entity_id": "source:ledger_report_1088"},
+    {"relation_id": "rel:correction_corrects_report", "relation_type_id": "record_corrects_record", "source_entity_id": "source:ledger_correction_114", "target_entity_id": "source:ledger_report_1088"},
+    {"relation_id": "rel:gauge_supports_allocation_claim", "relation_type_id": "source_supports_claim", "source_entity_id": "source:basin_gauge_series_w10", "target_entity_id": "entity:claim/farm_allocation_cut"},
+    {"relation_id": "rel:gauge_contradicts_supply_claim", "relation_type_id": "source_contradicts_claim", "source_entity_id": "source:basin_gauge_series_w10", "target_entity_id": "entity:claim/supply_restoration"}
+  ],
+  "indicator_snapshots": [
+    {
+      "snapshot_id": "snapshot:reservoir_storage_t0",
+      "indicator_entity_id": "entity:public_indicator/reservoir_storage_percent",
+      "source_record_id": "record:mwa_bulletin_214",
+      "as_of": "2026-03-10T06:00:00Z",
+      "value": 61.8,
+      "unit": "percent_of_capacity",
+      "jurisdiction": "Republic of Meridia"
+    },
+    {
+      "snapshot_id": "snapshot:reservoir_storage_t30",
+      "indicator_entity_id": "entity:public_indicator/reservoir_storage_percent",
+      "source_record_id": "record:basin_gauge_series_w10",
+      "as_of": "2026-03-11T00:00:00Z",
+      "value": 54.2,
+      "unit": "percent_of_capacity",
+      "jurisdiction": "Republic of Meridia"
+    }
+  ]
+}
