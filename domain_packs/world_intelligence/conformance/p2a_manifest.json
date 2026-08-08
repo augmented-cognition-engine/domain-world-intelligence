@@ -1,13 +1,4 @@
 {
-  "contract": "ace.world-intelligence.p2a-manifest/v1alpha1",
-  "packet": "P2A",
-  "packet_version": "0.1.0",
-  "pack": {
-    "pack_id": "world_intelligence",
-    "pack_version": "0.1.0",
-    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
-    "pack_digest": "sha256:683de57a71669814e507d07d65a109db49abfd2f2d800d89c5faa281bccdbfb1"
-  },
   "artifacts": [
     {
       "path": "epistemic_policy.json",
@@ -23,20 +14,35 @@
     },
     {
       "path": "scripts/p2a_compile_acceptance.py",
-      "sha256": "eaade2bafca8cdc12d2f36770688270e45ccecab8ab996f41e17a250548d2b6b"
+      "sha256": "f2d861da1a413b1ba2a0af93fdc591426e184db7797d777f1c87a539d0691452"
     }
   ],
+  "contract": "ace.world-intelligence.p2a-manifest/v1alpha1",
   "negative_case_count": 5,
+  "pack": {
+    "compiled_pack_id": "pack_ir:683de57a71669814e507d07d65a109db",
+    "pack_digest": "sha256:683de57a71669814e507d07d65a109db49abfd2f2d800d89c5faa281bccdbfb1",
+    "pack_id": "world_intelligence",
+    "pack_version": "0.1.0"
+  },
+  "packet": "P2A",
+  "packet_version": "0.1.0",
   "scope": {
+    "deferred_generic_detector_strategies": [
+      "categorical",
+      "semantic",
+      "structural"
+    ],
+    "delivery": false,
+    "external_actions": false,
+    "hidden_truth_score": false,
+    "live_sources": false,
     "mode": "prepared",
     "pack_is_json_only": true,
     "pack_schema_changed": false,
-    "live_sources": false,
-    "delivery": false,
-    "external_actions": false,
     "political_targeting": false,
-    "hidden_truth_score": false,
-    "supported_detector_strategies": ["numeric"],
-    "deferred_generic_detector_strategies": ["categorical", "semantic", "structural"]
+    "supported_detector_strategies": [
+      "numeric"
+    ]
   }
 }

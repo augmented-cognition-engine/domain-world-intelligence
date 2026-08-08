@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "path": "scripts/p2b_prepared_replay.py",
-      "sha256": "34f4ceab7376a3da973e879751e88f3e569398d65393605be4a1b848963f614c"
+      "sha256": "8e0de9c8b1608fe5fa0a0c41c9acdd070ff11fbf1a40e575dd59cf9aa6b97125"
     },
     {
       "path": "domain_packs/world_intelligence/conformance/p2b_prepared_replay_expected.json",

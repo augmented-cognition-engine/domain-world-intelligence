@@ -5,8 +5,8 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from ace.intelligence import compile_pack_document
 from ace.intelligence.contracts.resources import ClaimGroundingKind
+from ace.intelligence.packs import compile_pack_document
 
 import ace.intelligence
 from scripts.p2b_case_brief import WORLD_EPISTEMIC_STATUSES

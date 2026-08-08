@@ -32,6 +32,8 @@ from ace.intelligence import (
     CapabilityBindingV1,
     LiveSourceIngressRequestV1Alpha1,
     OrganizationOverlayV1,
+)
+from ace.intelligence.packs import (
     compile_overlay,
     compile_pack_document,
     prepare_activation_revision,

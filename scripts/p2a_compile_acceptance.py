@@ -10,7 +10,7 @@ from importlib.resources import files
 from pathlib import Path
 from typing import Any
 
-from ace.intelligence import PackCompilationError, compile_pack_document
+from ace.intelligence.packs import PackCompilationError, compile_pack_document
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 

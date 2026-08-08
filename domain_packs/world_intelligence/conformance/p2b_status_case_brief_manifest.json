@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "path": "scripts/p2b_status_case_brief.py",
-      "sha256": "fc3d4f475ea2cc4f1dc94797a3e242716b918deebdfb0cf19bd129472678eac2"
+      "sha256": "b71b7a2f6a2b1036491cd84821c0fc32a708c9a5df804dc4c5d581369e4214f4"
     },
     {
       "path": "domain_packs/world_intelligence/modules/epistemic_status.json",

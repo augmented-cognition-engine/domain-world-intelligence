@@ -62,11 +62,13 @@ from ace.intelligence import (
     ClaimGroundingKind,
     IntelligenceRecordKind,
     OrganizationOverlayV1,
+    resource_reference,
+)
+from ace.intelligence.packs import (
     compile_overlay,
     compile_pack_document,
     prepare_activation_revision,
     prepare_domain_activation,
-    resource_reference,
 )
 from ace.intelligence.contracts.activation import ActivationState
 from ace.testing import InMemoryImmutableRecordStore

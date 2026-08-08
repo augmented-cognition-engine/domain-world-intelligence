@@ -26,18 +26,20 @@ from ace.intelligence import (
     ObservationV1Alpha1,
     OrganizationOverlayV1,
     PreparedResourceSetAdmissionV1Alpha1,
-    bind_prepared_activation,
-    compile_overlay,
-    compile_pack_document,
     detect_categorical_shift,
     detect_numeric_shift,
     deterministic_resource_order,
     eligible_signal_routes,
-    prepare_activation_revision,
-    prepare_domain_activation,
     resource_reference,
     route_categorical_shift_as_signal,
     route_shift_as_signal,
+)
+from ace.intelligence.packs import (
+    bind_prepared_activation,
+    compile_overlay,
+    compile_pack_document,
+    prepare_activation_revision,
+    prepare_domain_activation,
 )
 from ace.intelligence.contracts.resources import (
     LineageReferenceV1Alpha1,
