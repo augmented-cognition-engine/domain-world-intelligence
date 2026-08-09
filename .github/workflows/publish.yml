@@ -1,0 +1,210 @@
+name: publish
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Exact release tag to publish (must match the root project version)"
+        required: true
+        type: string
+        default: v0.8.0
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.workflow }}
+  cancel-in-progress: false
+
+env:
+  UV_PYTHON: "3.12"
+  ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
+  ADAPTER_DISTRIBUTION: "ace-ext-world-federal-register-source"
+
+jobs:
+  verify:
+    name: verify tag and build the root distribution
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.request.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
+      wheel: ${{ steps.version.outputs.wheel }}
+      sdist: ${{ steps.version.outputs.sdist }}
+    steps:
+      - name: Resolve the requested tag
+        id: request
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          case "${EVENT_NAME}" in
+            release) TAG="${RELEASE_TAG}" ;;
+            workflow_dispatch) TAG="${DISPATCH_TAG}" ;;
+            *) echo "::error::unsupported trigger: ${EVENT_NAME}"; exit 1 ;;
+          esac
+          if [ -z "${TAG}" ]; then
+            echo "::error::no release tag was supplied"
+            exit 1
+          fi
+          echo "tag=${TAG}" >> "${GITHUB_OUTPUT}"
+          echo "publishing tag ${TAG}"
+
+      - name: Check out the exact tag
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ steps.request.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify the exact tag exists and is the checked-out commit
+        env:
+          TAG: ${{ steps.request.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if ! git show-ref --verify --quiet "refs/tags/${TAG}"; then
+            echo "::error::tag refs/tags/${TAG} does not exist in this repository"
+            exit 1
+          fi
+          TAG_COMMIT="$(git rev-list -n 1 "refs/tags/${TAG}")"
+          HEAD_COMMIT="$(git rev-parse "HEAD^{commit}")"
+          if [ "${TAG_COMMIT}" != "${HEAD_COMMIT}" ]; then
+            echo "::error::tag ${TAG} resolves to ${TAG_COMMIT} but the checkout is ${HEAD_COMMIT}"
+            exit 1
+          fi
+          echo "tag ${TAG} == checkout commit ${HEAD_COMMIT}"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Verify the tag matches the root project version
+        id: version
+        env:
+          TAG: ${{ steps.request.outputs.tag }}
+        run: |
+          set -euo pipefail
+          python - <<'PY' >> "${GITHUB_OUTPUT}"
+          import os
+          import tomllib
+          from pathlib import Path
+
+          project = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))["project"]
+          assert project["name"] == os.environ["ROOT_DISTRIBUTION"], project["name"]
+
+          version = project["version"]
+          tag = os.environ["TAG"]
+          expected_tag = f"v{version}"
+          if tag != expected_tag:
+              raise SystemExit(f"::error::tag {tag} does not match root project version {version} (expected {expected_tag})")
+
+          print(f"version={version}")
+          print(f"wheel=ace_domain_world_intelligence-{version}-py3-none-any.whl")
+          print(f"sdist=ace_domain_world_intelligence-{version}.tar.gz")
+          PY
+          echo "tag ${TAG} matches the root project version"
+
+      - name: Build the root distribution only
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          uv build --out-dir dist
+          # uv creates this output-directory marker; it is not publishable.
+          rm -f dist/.gitignore
+
+      - name: Confirm dist holds only the root sdist and wheel
+        env:
+          EXPECTED_WHEEL: ${{ steps.version.outputs.wheel }}
+          EXPECTED_SDIST: ${{ steps.version.outputs.sdist }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          expected_wheel = os.environ["EXPECTED_WHEEL"]
+          expected_sdist = os.environ["EXPECTED_SDIST"]
+
+          entries = sorted(path.name for path in Path("dist").iterdir())
+          assert [name for name in entries if name.endswith(".whl")] == [expected_wheel], entries
+          assert [name for name in entries if name.endswith(".tar.gz")] == [expected_sdist], entries
+          assert set(entries) == {expected_wheel, expected_sdist}, entries
+
+          # The adapter is a separate distribution and is never published here.
+          assert not [name for name in entries if "federal_register" in name], entries
+          assert not Path("adapters/federal_register_source/dist").exists()
+          print("publishable artifacts:", entries)
+          PY
+
+      - name: Validate distribution metadata with twine
+        env:
+          EXPECTED_WHEEL: ${{ steps.version.outputs.wheel }}
+          EXPECTED_SDIST: ${{ steps.version.outputs.sdist }}
+        run: |
+          set -euo pipefail
+          uvx --from twine twine check --strict "dist/${EXPECTED_SDIST}" "dist/${EXPECTED_WHEEL}"
+
+      - name: Upload the publishable artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-distribution
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: publish to PyPI via trusted publishing
+    needs: verify
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ace-domain-world-intelligence
+    permissions:
+      contents: read
+      # Trusted publishing exchanges this OIDC token with PyPI. No API token or
+      # repository secret is used anywhere in this workflow.
+      id-token: write
+    steps:
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download the publishable artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: root-distribution
+          path: dist
+
+      - name: Confirm only the root distribution is about to be published
+        env:
+          EXPECTED_WHEEL: ${{ needs.verify.outputs.wheel }}
+          EXPECTED_SDIST: ${{ needs.verify.outputs.sdist }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          from pathlib import Path
+
+          expected = {os.environ["EXPECTED_WHEEL"], os.environ["EXPECTED_SDIST"]}
+          entries = sorted(path.name for path in Path("dist").iterdir())
+          assert set(entries) == expected, entries
+          assert not [name for name in entries if "federal_register" in name], entries
+          print("publishing:", entries)
+          PY
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          print-hash: true

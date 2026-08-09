@@ -8,6 +8,75 @@ truth.
 This repository is a consumer of the public ACE Core + Intelligence distribution. It does not own
 a reasoning runtime, graph, state store, authority system, detector engine, or feedback loop.
 
+- **Distribution:** `ace-domain-world-intelligence` 0.8.0 — JSON-only, data-only, inert
+- **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
+- **Status:** release candidate. The 0.8.0 tag, GitHub Release, and PyPI publication are **pending**
+  and have not occurred yet. See
+  [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md).
+
+## What you install, and what you get
+
+The product is split into three layers, and this repository owns only the third.
+
+| Layer | Distribution | What it is |
+|---|---|---|
+| **ACE Core** | `ace-core` (public on PyPI, 0.4.1) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay. |
+| **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
+| **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
+
+Installing the Domain Pack adds **data**, not behaviour. The wheel contains no `.py`, no entry
+points, and no install hooks; nothing in it executes on install or import. ACE Core compiles those
+JSON modules and does the reasoning. If you want to sense a live official source, you additionally
+install a separately reviewed connector — see [Connector boundary](#connector-boundary).
+
+### Install (after publication)
+
+These commands become valid once 0.8.0 is published. They are documented ahead of the tag so the
+consumption model is reviewable now; **they will not resolve until publication happens.**
+
+With `uv`:
+
+```bash
+uv add "ace-domain-world-intelligence==0.8.0"
+```
+
+With `pip`:
+
+```bash
+pip install "ace-domain-world-intelligence==0.8.0"
+```
+
+Either command also brings in `ace-core>=0.4.1,<0.5`, which is already public. It does **not** bring
+in the Federal Register connector; that is a deliberate boundary, not an omission.
+
+Resolve the pack data from the installed distribution:
+
+```python
+import json
+from importlib.resources import files
+
+manifest = json.loads(
+    files("domain_packs.world_intelligence").joinpath("manifest.json").read_text(encoding="utf-8")
+)
+print(manifest["metadata"]["pack_id"])  # world_intelligence
+```
+
+### Use it today, from a source checkout
+
+Until the release is published, run everything from a checkout alongside an ACE Core checkout or
+installation:
+
+```bash
+# from the root of this checkout
+export REPO="$PWD"
+export ACE=/path/to/ace-core
+export PYTHONPATH="$REPO:$REPO/adapters/federal_register_source/src:$ACE"
+export PY="$ACE/.venv/bin/python"
+```
+
+`PYTHONPATH` above includes the connector source so that the P2C packet runs. Drop that middle entry
+and the P2C modules skip rather than fail.
+
 ## Product loop
 
 ```text
@@ -67,11 +136,11 @@ falsehood — the prior Brief keeps its exact identity, replays byte-identically
 rewritten.
 
 P2C adds the first official-source sensing proof without mutating that frozen pack. A separate,
-JSON-only activation pack maps one exact Federal Register document, while a separately versioned,
-transport-injected adapter validates the exact source, artifact, URI, network attestations, and
-closed payload. ACE then admits one acquisition receipt, source snapshot, visibly LIVE Observation,
-LIVE Entity Snapshot, and admission receipt as one atomic transaction. Exact replay and
-fresh-service restart replay perform no second capture.
+JSON-only activation pack (`pack_ir:1847032fc5301bba9b6f85d3d091400d`) maps one exact Federal
+Register document, while a separately versioned, transport-injected adapter validates the exact
+source, artifact, URI, network attestations, and closed payload. ACE then admits one acquisition
+receipt, source snapshot, visibly LIVE Observation, LIVE Entity Snapshot, and admission receipt as
+one atomic transaction. Exact replay and fresh-service restart replay perform no second capture.
 
 The conformance transport is a recorded, network-free response from the reviewed official API URI;
 it proves the governed LIVE contract and deterministic admission, not that the test suite performed
@@ -80,7 +149,7 @@ and the corresponding `govinfo.gov` PDF is retained as the official-format verif
 No Signal, Shift, Brief, Decision, Outcome, feedback, delivery, publishing, persuasion, or external
 action is created.
 
-## Public proof surface
+## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
 
@@ -91,24 +160,63 @@ PYTHONPATH=/path/to/domain-world-intelligence:/path/to/ace-core \
 
 The command writes `artifacts/public-demo/index.html` and `demo-data.json`. It runs the accepted
 independence and correction-impact harnesses, refuses to render if the pinned release proof drifts,
-and uses no external web assets. The page is explicitly a synthetic PREPARED / FROZEN scenario,
-not a live news product. See
-[`docs/releases/world-intelligence-public-demo-v0.7.0.md`](docs/releases/world-intelligence-public-demo-v0.7.0.md)
-for the release boundary and exact identities.
+and uses no external web assets.
 
-Run the acceptance proofs alongside an ACE checkout or installation.
+It demonstrates four things, and only these:
+
+1. **Two publishers are not two sources.** Coastal Wire and Harborview are different publishers, but
+   both derive from the Ledger report and collapse into one derivation family. Only the Ledger +
+   Basin pairing satisfies the Brief's two-family corroboration rule.
+2. **Every statement carries its own epistemic status.** The seven-label World vocabulary is
+   validated by ACE against each statement's exact supports, not asserted by the pack.
+3. **Corrections append rather than rewrite.** Admitting the later Ledger correction produces a
+   governed impact projection over 11 downstream resources and 9 Brief claims, and discloses the 16
+   resources it found unaffected. Impact means dependency, not falsehood.
+4. **The result is reproducible.** The prior Brief keeps its exact identity and replays
+   byte-identically, and the two artifacts are byte-identical across runs.
+
+Exact public identities reproduced by the demo:
+
+- Case: `case:412426eee708d56f6bda931ccf9e5d8b`
+- Brief: `brief:25d8232c9bfa27050bdcb160fb75f06c`
+
+The page is explicitly a synthetic PREPARED / FROZEN scenario, **not a live news product**. It does
+not monitor the news, and it takes no action of its own. See
+[`docs/releases/world-intelligence-public-demo-v0.7.0.md`](docs/releases/world-intelligence-public-demo-v0.7.0.md)
+for the 0.7.0 release boundary and full identity list.
+
+## Connector boundary
 
 This repository ships an **inert Domain Pack**. The Federal Register connector is a separately
-versioned executable artifact (`ace-ext-world-federal-register-source`) with its own review
-boundary, so it is not a dependency of the pack and must be put on the path explicitly. Omit it and
-the P2C modules skip rather than fail.
+versioned executable artifact, `ace-ext-world-federal-register-source` 0.1.0, with its own review
+boundary:
+
+- it is **not** a dependency of the Domain Pack, and no extra reintroduces it;
+- installing `ace-domain-world-intelligence` never installs it;
+- it is **not** published by this repository's release workflow, which builds and uploads the root
+  sdist and wheel only;
+- it contains no network client — it accepts only an injected, separately reviewed transport, and
+  validates the exact artifact identity, source type, HTTPS URI, empty redirect chain, absence of
+  credentials, exact HTTP 200 `application/json`, bounded strict JSON, globally routable address
+  attestations, DNS-rebinding protection, and monotonic operation times;
+- to exercise it, put it on the path explicitly. Omit it and the P2C modules skip rather than fail.
+
+Rebuild the connector reproducibly:
 
 ```bash
-export REPO=/path/to/domain-world-intelligence
-export ACE=/path/to/ace-core
-export PYTHONPATH="$REPO:$REPO/adapters/federal_register_source/src:$ACE"
-export PY="$ACE/.venv/bin/python"
+cd adapters/federal_register_source
+SOURCE_DATE_EPOCH=1735689600 uv build --wheel
+```
 
+A production host must supply and review a real transport that enforces address validation and
+rebinding protection throughout use. The shipped conformance material does not do that for you.
+
+## Verification
+
+With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
+[Use it today](#use-it-today-from-a-source-checkout):
+
+```bash
 # Complete suite, including every frozen P2A/P2B packet and P2C: 81 passed
 $PY -m pytest -q
 
@@ -125,8 +233,17 @@ $PY scripts/p2b_independent_case_brief.py
 $PY scripts/p2c_federal_register_live_acceptance.py
 ```
 
-Expected totals as of 2026-08-08: complete suite `81 passed`, connector suite `24 passed`. The
-public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
+Or run the same gates through the locked environment, as CI does:
+
+```bash
+uv sync --frozen --no-install-project
+uv run --no-sync pytest                                   # World suite: 81 passed
+uv run --no-sync pytest tests/test_release_contract.py    # publishable-identity gate
+uv run --no-sync pytest adapters/federal_register_source/tests   # connector: 24 passed
+```
+
+Expected totals as of 2026-08-08: complete World suite **81 passed**, connector suite
+**24 passed**. The public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
 The exact identities, negative cases, and artifact proofs are recorded in
@@ -144,6 +261,10 @@ and the independent-corroboration proof in
 The governed official-source admission proof is recorded in
 [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md).
 
+Release-level scope, artifacts, and open gates are recorded in
+[`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md),
+and version history in [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Guardrails
 
 - A publisher is not assigned a hidden universal truth score.
@@ -154,6 +275,14 @@ The governed official-source admission proof is recorded in
 - Persona routing never changes an evidence status.
 - No political persuasion, voter targeting, autonomous publishing, or external action.
 
+World Intelligence does not watch live news feeds, does not decide anything on its own, and does not
+publish, deliver, or act outside the process that invokes it. Every LIVE capture demonstrated here is
+one explicitly requested, governed, read-only retrieval.
+
 Next: add a separately reviewed, opt-in network transport for the exact source-adapter contract,
 then exercise P2D multi-source conflict and correction with LIVE inputs. Neither step may add
 publishing, delivery, persuasion, or other external-action authority.
+
+## License
+
+Apache-2.0.
