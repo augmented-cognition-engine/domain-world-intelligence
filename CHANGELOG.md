@@ -8,10 +8,13 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
-## [0.8.0] — unreleased release candidate
+## [0.8.0] — 2026-08-09
 
-Release candidate. The `v0.8.0` tag, the GitHub Release, and PyPI publication are **pending** and
-have not occurred. Scope and evidence are recorded in
+Public release. The `v0.8.0` tag exists, the
+[GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0)
+is published, and
+[`ace-domain-world-intelligence` 0.8.0](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/)
+was published to PyPI at 2026-08-09T18:33:44Z. Scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md).
 
 ### Added
@@ -58,6 +61,10 @@ have not occurred. Scope and evidence are recorded in
 
 - Complete World suite: **81 passed**.
 - Connector fail-closed unit suite: **24 passed**.
+- Public publication verified: a clean install from PyPI on Python 3.12 resolved
+  `ace-domain-world-intelligence==0.8.0` and `ace-core==0.4.1`; the installed wheel contains
+  exactly 32 JSON Domain Pack resources and no `.py`, `.pyc`, or `.so` resource, and the connector
+  import package is absent.
 
 ### Not included
 

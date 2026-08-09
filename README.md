@@ -10,8 +10,11 @@ a reasoning runtime, graph, state store, authority system, detector engine, or f
 
 - **Distribution:** `ace-domain-world-intelligence` 0.8.0 — JSON-only, data-only, inert
 - **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
-- **Status:** release candidate. The 0.8.0 tag, GitHub Release, and PyPI publication are **pending**
-  and have not occurred yet. See
+- **Status:** released. The `v0.8.0` tag exists, the
+  [GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0)
+  is published, and the distribution is
+  [public on PyPI](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/)
+  (published 2026-08-09). See
   [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md).
 
 ## What you install, and what you get
@@ -29,10 +32,12 @@ points, and no install hooks; nothing in it executes on install or import. ACE C
 JSON modules and does the reasoning. If you want to sense a live official source, you additionally
 install a separately reviewed connector — see [Connector boundary](#connector-boundary).
 
-### Install (after publication)
+### Install
 
-These commands become valid once 0.8.0 is published. They are documented ahead of the tag so the
-consumption model is reviewable now; **they will not resolve until publication happens.**
+0.8.0 is published on PyPI:
+[`ace-domain-world-intelligence` 0.8.0](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/).
+A public clean install on Python 3.12 resolves `ace-domain-world-intelligence==0.8.0` and
+`ace-core==0.4.1`.
 
 With `uv`:
 
@@ -61,10 +66,10 @@ manifest = json.loads(
 print(manifest["metadata"]["pack_id"])  # world_intelligence
 ```
 
-### Use it today, from a source checkout
+### Develop from a source checkout
 
-Until the release is published, run everything from a checkout alongside an ACE Core checkout or
-installation:
+To develop the pack, or to run the acceptance harnesses and the P2C connector packet, work from a
+checkout alongside an ACE Core checkout or installation:
 
 ```bash
 # from the root of this checkout
@@ -214,7 +219,7 @@ rebinding protection throughout use. The shipped conformance material does not d
 ## Verification
 
 With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
-[Use it today](#use-it-today-from-a-source-checkout):
+[Develop from a source checkout](#develop-from-a-source-checkout):
 
 ```bash
 # Complete suite, including every frozen P2A/P2B packet and P2C: 81 passed
