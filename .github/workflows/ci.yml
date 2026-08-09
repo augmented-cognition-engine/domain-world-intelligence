@@ -1,0 +1,265 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Pin every uv invocation to the only interpreter this project supports.
+  UV_PYTHON: "3.12"
+  ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
+  ROOT_VERSION: "0.8.0"
+  # Exact expected build outputs. Never matched with a glob: the point of the
+  # release gate is that we know precisely which files were produced.
+  ROOT_WHEEL: "ace_domain_world_intelligence-0.8.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_world_intelligence-0.8.0.tar.gz"
+  ACE_CORE_VERSION: "0.4.1"
+  RELEASE_CONTRACT_TEST: "tests/test_release_contract.py"
+  ADAPTER_TEST_SUITE: "adapters/federal_register_source/tests"
+  # Keep the repository's proof scripts and separately packaged connector ahead
+  # of unrelated installed namespace packages during source-tree acceptance.
+  PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/adapters/federal_register_source/src"
+
+jobs:
+  release-readiness:
+    name: release readiness (python 3.12, uv)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Sync the locked environment
+        # Installing the root project editable would add a second
+        # domain_packs namespace location and invalidate importlib.resources
+        # checks. The wheel is installed separately below in a clean venv.
+        run: uv sync --frozen --no-install-project
+
+      - name: Confirm the synced interpreter is Python 3.12
+        run: |
+          set -euo pipefail
+          uv run --no-sync python - <<'PY'
+          import sys
+
+          assert sys.version_info[:2] == (3, 12), sys.version
+          print(sys.version)
+          PY
+
+      - name: Lint the release contract test
+        run: |
+          set -euo pipefail
+          uv run --no-sync ruff check --no-cache "${RELEASE_CONTRACT_TEST}"
+
+      - name: Check formatting of the release contract test
+        run: |
+          set -euo pipefail
+          uv run --no-sync ruff format --check --no-cache "${RELEASE_CONTRACT_TEST}"
+
+      - name: Run the complete root pytest suite
+        run: |
+          set -euo pipefail
+          uv run --no-sync pytest
+
+      - name: Run the release contract suite
+        run: |
+          set -euo pipefail
+          uv run --no-sync pytest "${RELEASE_CONTRACT_TEST}"
+
+      - name: Run the Federal Register adapter suite
+        run: |
+          set -euo pipefail
+          uv run --no-sync pytest "${ADAPTER_TEST_SUITE}"
+
+      - name: Build the root distribution
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          uv build --out-dir dist
+
+      - name: Confirm the build produced exactly the root sdist and wheel
+        run: |
+          set -euo pipefail
+          uv run --no-sync python - <<'PY'
+          import os
+          from pathlib import Path
+
+          expected_wheel = os.environ["ROOT_WHEEL"]
+          expected_sdist = os.environ["ROOT_SDIST"]
+
+          dist = Path("dist")
+          entries = sorted(path.name for path in dist.iterdir())
+          wheels = [name for name in entries if name.endswith(".whl")]
+          sdists = [name for name in entries if name.endswith(".tar.gz")]
+
+          assert wheels == [expected_wheel], entries
+          assert sdists == [expected_sdist], entries
+          assert set(entries) == {expected_wheel, expected_sdist}, entries
+          print("built:", entries)
+          PY
+
+      - name: Validate distribution metadata with twine
+        run: |
+          set -euo pipefail
+          uvx --from twine twine check --strict "dist/${ROOT_SDIST}" "dist/${ROOT_WHEEL}"
+
+      - name: Inspect the exact built wheel
+        run: |
+          set -euo pipefail
+          uv run --no-sync python - <<'PY'
+          import os
+          import zipfile
+          from email import message_from_string
+          from pathlib import Path
+
+          from packaging.requirements import Requirement
+          from packaging.specifiers import SpecifierSet
+          from packaging.utils import canonicalize_name
+
+          wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
+          dist_info = "ace_domain_world_intelligence-0.8.0.dist-info/"
+          adapter_import_package = "ace_world_federal_register_source"
+          adapter_distribution = "ace-ext-world-federal-register-source"
+
+          world = "domain_packs/world_intelligence/"
+          federal = "domain_packs/world_intelligence_federal_register/"
+          expected_payload = sorted(
+              [
+                  world + "manifest.json",
+                  world + "modules/detection.json",
+                  world + "modules/epistemic_status.json",
+                  world + "modules/epistemic_status_v2.json",
+                  world + "modules/ontology.json",
+                  world + "modules/personas.json",
+                  world + "modules/source_mapping.json",
+                  world + "modules/synthesis.json",
+                  world + "conformance/epistemic_policy.json",
+                  world + "conformance/p2a_expected.json",
+                  world + "conformance/p2a_manifest.json",
+                  world + "conformance/p2a_negative_cases.json",
+                  world + "conformance/p2b_case_brief_expected.json",
+                  world + "conformance/p2b_case_brief_manifest.json",
+                  world + "conformance/p2b_contract_requests.json",
+                  world + "conformance/p2b_expected.json",
+                  world + "conformance/p2b_independent_case_brief_expected.json",
+                  world + "conformance/p2b_independent_case_brief_manifest.json",
+                  world + "conformance/p2b_manifest.json",
+                  world + "conformance/p2b_negative_cases.json",
+                  world + "conformance/p2b_prepared_replay_expected.json",
+                  world + "conformance/p2b_prepared_replay_manifest.json",
+                  world + "conformance/p2b_scenario.json",
+                  world + "conformance/p2b_status_case_brief_expected.json",
+                  world + "conformance/p2b_status_case_brief_manifest.json",
+                  world + "conformance/p2b_supersession_impact_expected.json",
+                  world + "conformance/p2b_supersession_impact_manifest.json",
+                  federal + "manifest.json",
+                  federal + "modules/ontology.json",
+                  federal + "modules/source_mapping.json",
+                  federal + "conformance/p2c_live_expected.json",
+                  federal + "conformance/p2c_live_source_input.json",
+              ]
+          )
+
+          with zipfile.ZipFile(wheel_path) as wheel:
+              names = sorted(wheel.namelist())
+              metadata_text = wheel.read(dist_info + "METADATA").decode("utf-8")
+
+          payload = sorted(name for name in names if not name.startswith(dist_info))
+
+          # Contains the World Domain Pack data, exactly and only.
+          assert payload == expected_payload, payload
+
+          # Data-only and inert: no importable code of any kind.
+          assert not [name for name in names if name.endswith((".py", ".pyc", ".so", ".pyd"))], names
+
+          # Excludes adapter code and the test package.
+          assert not [name for name in names if adapter_import_package in name], names
+          assert not [name for name in names if name.startswith("domain_packs/tests")], names
+          assert not [name for name in names if name.startswith(("scripts/", "adapters/"))], names
+
+          metadata = message_from_string(metadata_text)
+          assert metadata["Name"] == os.environ["ROOT_DISTRIBUTION"], metadata["Name"]
+          assert metadata["Version"] == os.environ["ROOT_VERSION"], metadata["Version"]
+          assert SpecifierSet(metadata["Requires-Python"]) == SpecifierSet(">=3.12,<3.13")
+
+          requires_dist = metadata.get_all("Requires-Dist") or []
+          assert len(requires_dist) == 1, requires_dist
+          requirement = Requirement(requires_dist[0])
+          assert canonicalize_name(requirement.name) == "ace-core"
+          assert requirement.specifier == SpecifierSet(">=0.4.1,<0.5"), requires_dist
+          assert canonicalize_name(adapter_distribution) not in {
+              canonicalize_name(Requirement(entry).name) for entry in requires_dist
+          }
+          print("inspected wheel:", wheel_path.name, "with", len(payload), "data resources")
+          PY
+
+      - name: Prove the wheel installs against public ace-core 0.4.1 in an isolated environment
+        run: |
+          set -euo pipefail
+          ISOLATED="$(mktemp -d)"
+          cp "dist/${ROOT_WHEEL}" "${ISOLATED}/${ROOT_WHEEL}"
+          cd "${ISOLATED}"
+          # --no-config keeps the repository's [tool.uv] settings (including the
+          # editable adapter path source) out of this resolution, so the wheel is
+          # proven against the public PyPI release of ace-core and nothing local.
+          uv venv --no-config --python 3.12 isolated-venv
+          uv pip install --no-config --python isolated-venv/bin/python \
+            "./${ROOT_WHEEL}" "ace-core==${ACE_CORE_VERSION}"
+          # Run with -I from outside the checkout so the repository's source tree
+          # cannot shadow the installed distribution.
+          isolated-venv/bin/python -I - <<'PY'
+          import importlib.metadata as metadata
+          import importlib.util
+          import json
+          import os
+          import sys
+          from importlib.resources import files
+          from pathlib import Path
+
+          root_distribution = os.environ["ROOT_DISTRIBUTION"]
+          root_version = os.environ["ROOT_VERSION"]
+          ace_core_version = os.environ["ACE_CORE_VERSION"]
+
+          assert metadata.version(root_distribution) == root_version
+          assert metadata.version("ace-core") == ace_core_version
+
+          site_packages = Path(sys.prefix).resolve()
+
+          # World Domain Pack data resolves out of the installed wheel.
+          for package, pack_id in (
+              ("domain_packs.world_intelligence", "world_intelligence"),
+              ("domain_packs.world_intelligence_federal_register", "world_intelligence_federal_register"),
+          ):
+              resource = files(package).joinpath("manifest.json")
+              assert Path(str(resource)).resolve().is_relative_to(site_packages), str(resource)
+              manifest = json.loads(resource.read_text(encoding="utf-8"))
+              assert manifest["metadata"]["pack_id"] == pack_id, manifest["metadata"]
+
+          # Adapter code and its distribution are absent.
+          assert importlib.util.find_spec("ace_world_federal_register_source") is None
+          try:
+              metadata.distribution("ace-ext-world-federal-register-source")
+          except metadata.PackageNotFoundError:
+              pass
+          else:
+              raise AssertionError("the adapter distribution must not be installed by the root wheel")
+
+          print("isolated install verified against ace-core", ace_core_version)
+          PY

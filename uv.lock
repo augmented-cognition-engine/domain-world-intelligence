@@ -4,7 +4,7 @@ requires-python = "==3.12.*"
 
 [[package]]
 name = "ace-core"
-version = "0.3.1"
+version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -21,6 +21,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "fastmcp" },
     { name = "gitpython" },
+    { name = "h2" },
     { name = "httpx" },
     { name = "jinja2" },
     { name = "lxml" },
@@ -51,9 +52,9 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/df/a1e9aad3318193d656fe5e1503690dc5eb55a554f96cdfedd24280828cd2/ace_core-0.3.1.tar.gz", hash = "sha256:48f881a3f631fff9e0b1d49f78fdc87942049a1ae667fc3f9ef57e37de5ec667", size = 4716715, upload-time = "2026-08-05T21:01:09.367Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/28/f5/9d289d4e1102b697bb74d1d9e9f58a7f6446e4f57b46102445a5a6e19741/ace_core-0.4.1.tar.gz", hash = "sha256:583ab0920a770d0953546c8f23453d2265946ce494d39ff16ea08d523e20eef2", size = 4935100, upload-time = "2026-08-09T17:30:08.645Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cc/cc/3a928b730233e8341cf7f592e01bf30091cac58b8d4e0cd92207ea7d9b53/ace_core-0.3.1-py3-none-any.whl", hash = "sha256:e6df7a5834c9caed1261e6dc93d4b3335f283b8b8b90e37a3bb434350982b7c6", size = 5364447, upload-time = "2026-08-05T21:01:07.189Z" },
+    { url = "https://files.pythonhosted.org/packages/80/79/17331d5ac172648817de4bdbf06dd00c31282a5bd35368ded693670d3340/ace_core-0.4.1-py3-none-any.whl", hash = "sha256:591c2106894139e008f09979a80523785e64fd9422ac758ae760f3916a6f0bc0", size = 5646377, upload-time = "2026-08-09T17:30:06.897Z" },
 ]
 
 [[package]]
@@ -73,7 +74,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.3.0,<0.4" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.4.1,<0.5" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -92,7 +93,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.3.0,<0.4" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.4.1,<0.5" }]
 
 [package.metadata.requires-dev]
 dev = [
