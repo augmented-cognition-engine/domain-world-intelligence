@@ -93,6 +93,8 @@ jobs:
           set -euo pipefail
           rm -rf dist
           uv build --out-dir dist
+          # uv creates this output-directory marker; it is not a release artifact.
+          rm -f dist/.gitignore
 
       - name: Confirm the build produced exactly the root sdist and wheel
         run: |

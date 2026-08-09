@@ -119,6 +119,8 @@ jobs:
           set -euo pipefail
           rm -rf dist
           uv build --out-dir dist
+          # uv creates this output-directory marker; it is not publishable.
+          rm -f dist/.gitignore
 
       - name: Confirm dist holds only the root sdist and wheel
         env:
