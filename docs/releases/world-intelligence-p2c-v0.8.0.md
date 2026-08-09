@@ -1,6 +1,9 @@
 # ACE World Intelligence 0.8.0 — P2C release record
 
-**Release status:** release candidate — **not tagged, not released, not published**
+**Release status:** released — tagged `v0.8.0`,
+[GitHub Release published](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0),
+[public on PyPI](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/) since
+2026-08-09T18:33:44Z
 **Root distribution:** `ace-domain-world-intelligence` 0.8.0 (inert, JSON-only Domain Pack)
 **Connector distribution:** `ace-ext-world-federal-register-source` 0.1.0 (separate, optional)
 **Platform requirement:** Python 3.12, `ace-core>=0.4.1,<0.5`
@@ -10,15 +13,15 @@
 
 | Step | State |
 |---|---|
-| `v0.8.0` git tag | **pending** — not yet created |
-| GitHub Release | **pending** — not yet published |
-| PyPI publication of `ace-domain-world-intelligence` 0.8.0 | **pending** — not yet uploaded |
-| PyPI publication of `ace-ext-world-federal-register-source` 0.1.0 | **not planned for this release**; the root publish workflow builds and uploads the root distribution only |
+| `v0.8.0` git tag | **done** — tag exists |
+| GitHub Release | **done** — [published](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0) |
+| PyPI publication of `ace-domain-world-intelligence` 0.8.0 | **done** — [published](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/) at 2026-08-09T18:33:44Z, via a publish-workflow rerun that succeeded |
+| PyPI publication of `ace-ext-world-federal-register-source` 0.1.0 | **not part of this release**; the root publish workflow builds and uploads the root distribution only, and the connector remains unpublished |
 | `ace-core` 0.4.1 | already public on PyPI |
 
-Nothing in this document should be read as a claim that the 0.8.0 artifacts are installable from
-PyPI today. Until the three pending rows above actually occur, the release exists only as this
-repository's source tree and its locally reproducible build.
+The 0.8.0 root artifacts are installable from PyPI. A clean public install on Python 3.12 resolves
+`ace-domain-world-intelligence==0.8.0` and `ace-core==0.4.1`; the connector distribution and import
+package remain absent, by design.
 
 ## Scope
 
@@ -71,7 +74,8 @@ recommend a response.
 |---|---|
 | Root wheel | `ace_domain_world_intelligence-0.8.0-py3-none-any.whl` |
 | Root sdist | `ace_domain_world_intelligence-0.8.0.tar.gz` |
-| Root wheel SHA-256 | **pending** — recorded from the final tagged build, not a pre-release candidate build |
+| Root wheel SHA-256 | `ed088e4bef56fca95efd1cc7ac427fa83ed405a1eae414bde7fa3ce0a1f7c395` |
+| Root sdist SHA-256 | `a91ec786ffc82f92a9d1250a85965fa6cd006f433a88f8692e82f7546fc917c5` |
 | Connector wheel SHA-256 (reproducible) | `bcb568fbd1b6cd54bf806ce306ad9044dcae9df557bd1af3df0f1ff980ca0e9a` |
 
 The root wheel carries 32 JSON resources across the two Domain Packs and nothing else. CI asserts
@@ -175,6 +179,11 @@ inspects the exact wheel payload, and installs the wheel into a clean `--no-conf
 environment against the public `ace-core` 0.4.1, asserting from outside the checkout that the pack
 data resolves from site-packages and that the connector import package and distribution are absent.
 
+After publication, an independent clean install from public PyPI on Python 3.12 resolved
+`ace-domain-world-intelligence==0.8.0` and `ace-core==0.4.1`. Inspection of the installed
+distribution found exactly 32 JSON Domain Pack resources, no `.py`, `.pyc`, or `.so` resource, and
+no `ace_world_federal_register_source` import package.
+
 The public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
@@ -199,10 +208,11 @@ This release does not include, and must not be described as including:
 - **Truth determination.** Provenance structure and epistemic status are not claims that ACE has
   established objective truth. Independence is only as strong as the lineage admitted to the graph.
 
-## Installation after publication
+## Installation
 
-Once the tag, GitHub Release, and PyPI upload have actually occurred, consumers install the inert
-Domain Pack with either tool:
+The inert Domain Pack is public on
+[PyPI](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/). Consumers install it with
+either tool:
 
 ```bash
 uv add "ace-domain-world-intelligence==0.8.0"
@@ -215,8 +225,8 @@ pip install "ace-domain-world-intelligence==0.8.0"
 Both resolve `ace-core>=0.4.1,<0.5` and **neither installs the connector**. Consumers who want the
 P2C sensing path install `ace-ext-world-federal-register-source` deliberately and separately once it
 has its own release, review it on its own boundary, and supply their own reviewed transport. This
-0.8.0 workflow does not publish the connector. Until the root publication happens, use the
-source-checkout path in the [README](../../README.md).
+0.8.0 workflow did not publish the connector. Development and acceptance-harness instructions for a
+source checkout remain in the [README](../../README.md).
 
 ## Remaining gate
 
