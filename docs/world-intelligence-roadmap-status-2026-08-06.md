@@ -1,8 +1,8 @@
 # World Intelligence roadmap status — 2026-08-06
 
-The canonical domain roadmap lives in the ACE program repository
-(`ace-world-intelligence-domain-roadmap-2026-08-06.md`) and is not modified from this consumer
-repository. This file records the World-side status against that roadmap from actual evidence.
+The canonical current domain roadmap is [`../ROADMAP.md`](../ROADMAP.md). This dated file preserves
+the detailed World-side packet status and evidence history that led to it; it is not the current
+dispatch surface.
 
 ## Status by packet
 

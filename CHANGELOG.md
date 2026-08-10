@@ -8,6 +8,16 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
+## Unreleased
+
+### Repository consistency
+
+- Added the full Apache-2.0 license, NOTICE, security policy, contribution guide, Code of Conduct,
+  and a root domain roadmap.
+- Aligned the README and package project links with the Market Intelligence sibling while
+  preserving World-specific proof, connector, and guardrail language.
+- Added conformance assertions for the public repository identity and community baseline.
+
 ## [0.9.0] — 2026-08-10
 
 Public release. The

@@ -11,6 +11,13 @@ requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
 dependencies = ["ace-core>=0.5.0,<0.6"]
 
+[project.urls]
+Homepage = "https://github.com/augmented-cognition-engine/domain-world-intelligence"
+Repository = "https://github.com/augmented-cognition-engine/domain-world-intelligence"
+Issues = "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues"
+Changelog = "https://github.com/augmented-cognition-engine/domain-world-intelligence/blob/main/CHANGELOG.md"
+Roadmap = "https://github.com/augmented-cognition-engine/domain-world-intelligence/blob/main/ROADMAP.md"
+
 [dependency-groups]
 dev = [
   "ace-ext-world-federal-register-source",

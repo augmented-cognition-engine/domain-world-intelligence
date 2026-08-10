@@ -1,16 +1,24 @@
 # ACE World Intelligence
 
-ACE World Intelligence is an inert Domain Pack and reference solution for making sense of a
-changing public issue. It separates admitted records, attributed claims, corroboration, disputes,
-ACE inference, unknowns, and conditional scenarios instead of presenting one opaque summary as
-truth.
+**Governed public-issue sensemaking on the shared ACE foundation.**
 
-This repository is a consumer of the public ACE Core + Intelligence distribution. It does not own
-a reasoning runtime, graph, state store, authority system, detector engine, or feedback loop.
+ACE World Intelligence is an independently versioned ACE domain product. Its installable package
+is an inert, JSON-only Domain Pack for making sense of a changing public issue. It separates
+admitted records, attributed claims, corroboration, disputes, ACE inference, unknowns, and
+conditional scenarios instead of presenting one opaque summary as truth.
 
-- **Distribution:** `ace-domain-world-intelligence` 0.9.0 — JSON-only, data-only, inert
+It supplies World vocabulary, source mappings, material-change policy, personas, synthesis policy,
+connectors, fixtures, and product evidence. It does not implement a second reasoning runtime,
+graph, state store, authority system, detector engine, or feedback loop.
+
+[Install](#install) · [Architecture](#what-you-install-and-what-you-get) ·
+[Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
+[Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+
+- **Distribution:** `ace-domain-world-intelligence` 0.9.0
 - **Requires:** Python 3.12 and `ace-core>=0.5.0,<0.6`
-- **Status:** released. The
+- **Artifact boundary:** JSON-only, data-only, inert
+- **Release:** public. The
   [`v0.9.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.9.0)
   and [`0.9.0 PyPI distribution`](https://pypi.org/project/ace-domain-world-intelligence/0.9.0/)
   are public. See the [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
@@ -81,14 +89,22 @@ and the P2C modules skip rather than fail.
 ## Product loop
 
 ```text
-authorized public sources
-  → attributable Observations and entity state
-  → event, actor, institution, issue, policy, claim, and source graph
-  → meaningful Signal or Shift
-  → cited reality Brief
-  → user correction or disposition
-  → governed Outcome and feedback
+authorized evidence → Observation → Entity Snapshot
+                           ├────────→ Signal ──┐
+                           └────────→ Shift ───┼→ Case / Brief → Decision → Outcome
+                                               └→ governed feedback proposal
 ```
+
+This is a typed DAG, not a forced pipeline. A Shift need not become a Signal, a Signal need not
+become a Brief, and no downstream resource grants itself authority.
+
+## Domain scope
+
+World Intelligence is intended to cover public events, actors, institutions, issues, policies,
+claims, commitments, actions, reactions, corrections, and source relationships. Its user-facing
+products can include Reality Briefs, event summaries, standing investigations, material-change
+alerts, and personal briefings. These are World-domain types and policies; shared graph,
+detection, routing, synthesis, authority, and feedback machinery remains in ACE.
 
 ## Current milestone
 
@@ -308,10 +324,22 @@ content autonomously. Every LIVE capture demonstrated here is one explicitly req
 read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
 workspace export followed by separate verification and promotion.
 
-Next: add a separately reviewed opt-in network transport and exercise P2D
-multi-source conflict/correction with LIVE inputs. Neither step may add autonomous publishing,
-delivery, persuasion, or action authority to a Domain Pack.
+## Roadmap and project status
+
+The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
+remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is a separately
+reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE inputs. Neither
+step may add autonomous publishing, delivery, persuasion, or action authority to a Domain Pack.
+
+## Community and security
+
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Issues](https://github.com/augmented-cognition-engine/domain-world-intelligence/issues)
 
 ## License
 
-Apache-2.0.
+Apache-2.0. See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE). Existing work is copyright Edwin
+Amirian; contributors retain copyright in their contributions and license them under Apache-2.0.
