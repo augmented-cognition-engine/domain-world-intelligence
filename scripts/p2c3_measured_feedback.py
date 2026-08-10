@@ -546,7 +546,11 @@ def _install_impact_policy(state: dict[str, Any]):
     return criterion_head, impact_binding
 
 
-async def run_measured_feedback(workspace_root: Path) -> dict[str, Any]:
+async def run_measured_feedback(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run official records through matched Outcomes and proposal-only feedback."""
 
     state: dict[str, Any] = {"workspace_root": workspace_root}
@@ -711,7 +715,7 @@ async def run_measured_feedback(workspace_root: Path) -> dict[str, Any]:
     if admission.proposal is None or admission.proposal.action is not ImpactGovernanceAction.PROMOTE:
         raise AssertionError("useful World evaluation did not emit the product-mapped proposal")
 
-    return {
+    result = {
         "contract": "ace.world-intelligence.measured-feedback/v1alpha1",
         "journey": prior,
         "criterion": {
@@ -745,6 +749,17 @@ async def run_measured_feedback(workspace_root: Path) -> dict[str, Any]:
             "autonomous_publication": False,
         },
     }
+    if state_sink is not None:
+        state_sink.update(state)
+        state_sink.update(
+            {
+                "impact_binding": impact_binding,
+                "impact_criterion": criterion,
+                "impact_request": request,
+                "impact_admission": admission,
+            }
+        )
+    return result
 
 
 def main() -> None:

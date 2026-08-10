@@ -194,6 +194,13 @@ general Brief-quality score, or network-freshness proof. The proposal is not app
 on the unreleased Core candidate in [PR #88](https://github.com/augmented-cognition-engine/core/pull/88),
 so World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
 
+P2C4 submits that exact proposal to a separate governed review path. A named, authenticated World
+reviewer records `reject` with `no_action`: the bounded `useful` classification and `promote`
+proposal remain immutable, and no governed head changes. The rationale rejects broader promotion
+because structural coverage does not establish citation correctness, general Brief quality, human
+benefit, causality, or live freshness. Exact replay returns the historical Decision without new
+authorization. This is explicit disposition, not reclassification or proposal application.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -284,6 +291,9 @@ $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 
 # Candidate measured Outcome -> governed-feedback extension (requires Core PR #88 source)
 $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
+
+# Stacked candidate: explicit reject/no-action review of the exact proposal
+$PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -346,10 +356,13 @@ workspace export followed by separate verification and promotion.
 
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
-and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is a separately
-reviewed disposition of the P2C3 non-effective proposal plus a separately reviewed opt-in network
-transport and P2D multi-source conflict/correction with LIVE inputs. None of these steps may add
-autonomous publishing, delivery, persuasion, or action authority to a Domain Pack.
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 now demonstrates a separately
+authorized reject/no-action disposition of the P2C3 proposal without effective state change. The
+next bounded measurement work is an independently reviewed product outcome such as citation
+correctness, contradiction coverage, correction quality, detection delay, or false-alert rate.
+Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
+inputs remain independent work. None of these steps may add autonomous publishing, delivery,
+persuasion, or action authority to a Domain Pack.
 
 ## Community and security
 
