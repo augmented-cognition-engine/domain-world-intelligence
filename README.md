@@ -8,13 +8,12 @@ truth.
 This repository is a consumer of the public ACE Core + Intelligence distribution. It does not own
 a reasoning runtime, graph, state store, authority system, detector engine, or feedback loop.
 
-- **Distribution:** `ace-domain-world-intelligence` 0.9.0 release candidate — JSON-only, data-only, inert
+- **Distribution:** `ace-domain-world-intelligence` 0.9.0 — JSON-only, data-only, inert
 - **Requires:** Python 3.12 and `ace-core>=0.5.0,<0.6`
-- **Status:** release candidate. The complete P2C2 journey passes against public `ace-core==0.5.0`
-  and the public reference-action adapter without a Core checkout. The World `v0.9.0` tag and PyPI
-  publication remain the final release gate. The current public release remains
-  [`0.8.0`](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/). See the
-  [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
+- **Status:** released. The
+  [`v0.9.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.9.0)
+  and [`0.9.0 PyPI distribution`](https://pypi.org/project/ace-domain-world-intelligence/0.9.0/)
+  are public. See the [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
 ## What you install, and what you get
 
@@ -33,8 +32,8 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-After the `v0.9.0` release is published, install it on Python 3.12 with either command below. The
-release candidate has already been built and tested against public `ace-core==0.5.0`.
+0.9.0 is published on PyPI. Install it on Python 3.12 with either command below; a public clean
+install resolves `ace-domain-world-intelligence==0.9.0` and `ace-core==0.5.0`.
 
 With `uv`:
 
@@ -255,7 +254,7 @@ WORKSPACE=$(mktemp -d)
 $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 ```
 
-The 0.9.0 release-candidate gates are reproducible through the locked environment, as CI does. The
+The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
 P2C2 action test runs when the independently packaged Core reference adapter is installed:
 
 ```bash
@@ -288,8 +287,8 @@ The governed official-source admission proof is recorded in
 The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 
-Release-level scope, artifacts, and open gates are recorded in
-[`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md),
+Release-level scope and evidence are recorded in
+[`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
 and version history in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Guardrails
@@ -309,8 +308,7 @@ content autonomously. Every LIVE capture demonstrated here is one explicitly req
 read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
 workspace export followed by separate verification and promotion.
 
-Next: publish World Intelligence 0.9.0, verify its installed wheel with public Core 0.5.0, then add
-a separately reviewed opt-in network transport and exercise P2D
+Next: add a separately reviewed opt-in network transport and exercise P2D
 multi-source conflict/correction with LIVE inputs. Neither step may add autonomous publishing,
 delivery, persuasion, or action authority to a Domain Pack.
 

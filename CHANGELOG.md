@@ -8,7 +8,12 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
-## [0.9.0] — release candidate 2026-08-10
+## [0.9.0] — 2026-08-10
+
+Public release. The
+[`v0.9.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.9.0)
+and [`ace-domain-world-intelligence` 0.9.0](https://pypi.org/project/ace-domain-world-intelligence/0.9.0/)
+are public; the wheel was published at 2026-08-10T18:46:16Z.
 
 ### Added
 
