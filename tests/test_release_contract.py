@@ -68,6 +68,48 @@ def test_root_distribution_is_named_and_versioned_exactly_for_the_release() -> N
     assert "version" not in project.get("dynamic", [])
 
 
+def test_repository_identity_license_and_public_links_are_complete() -> None:
+    project = ROOT_PROJECT["project"]
+    expected_urls = {
+        "Homepage": "https://github.com/augmented-cognition-engine/domain-world-intelligence",
+        "Repository": "https://github.com/augmented-cognition-engine/domain-world-intelligence",
+        "Issues": "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues",
+        "Changelog": "https://github.com/augmented-cognition-engine/domain-world-intelligence/blob/main/CHANGELOG.md",
+        "Roadmap": "https://github.com/augmented-cognition-engine/domain-world-intelligence/blob/main/ROADMAP.md",
+    }
+
+    assert project["license"] == "Apache-2.0"
+    assert project["urls"] == expected_urls
+    for name in (
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "ROADMAP.md",
+        "CHANGELOG.md",
+        "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CODE_OF_CONDUCT.md",
+    ):
+        assert (REPO_ROOT / name).is_file(), name
+
+    license_text = (REPO_ROOT / "LICENSE").read_text(encoding="utf-8")
+    assert "Apache License" in license_text
+    assert "Version 2.0, January 2004" in license_text
+
+    readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    for phrase in (
+        "independently versioned ACE domain product",
+        "JSON-only Domain Pack",
+        "## What you install, and what you get",
+        "## Product loop",
+        "## Connector boundary",
+        "## Guardrails",
+        "## Roadmap and project status",
+        "## Community and security",
+    ):
+        assert phrase in readme
+
+
 def test_root_requires_python_is_exactly_the_3_12_series() -> None:
     project = ROOT_PROJECT["project"]
 
@@ -106,7 +148,13 @@ def test_federal_register_adapter_is_a_separate_distribution() -> None:
     assert adapter["name"] != ROOT_DISTRIBUTION
     assert adapter["version"] == "0.2.0"
     assert adapter["requires-python"] == EXPECTED_REQUIRES_PYTHON
+    assert adapter["license"] == "Apache-2.0"
+    assert adapter["readme"] == "README.md"
     assert adapter["dependencies"] == [EXPECTED_ACE_CORE_REQUIREMENT]
+    assert adapter["urls"] == {
+        "Repository": "https://github.com/augmented-cognition-engine/domain-world-intelligence",
+        "Issues": "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues",
+    }
 
     # The adapter carries its own build backend, so it is built and released on
     # its own cadence rather than as part of the root distribution.

@@ -15,3 +15,7 @@ page and the corresponding `govinfo.gov` PDF. FederalRegister.gov is an informat
 not the official legal edition; the govinfo PDF is retained as the official-format verification
 reference. The adapter does not decide what the document means, create Signals, Shifts or Briefs,
 publish anything, or grant authority.
+
+## License
+
+Apache-2.0 under the repository [`LICENSE`](../../LICENSE) and [`NOTICE`](../../NOTICE).
