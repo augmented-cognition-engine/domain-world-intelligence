@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3 measured feedback over the public journey
+## Candidate — P2C3/P2C4 measured feedback and reviewed disposition
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -24,10 +24,15 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   conditions, and cutoff feed the domain-neutral Core + Intelligence measured-impact contract.
 - The candidate classifies the bounded result as useful and appends only a non-effective,
   non-selectable promote proposal; exact replay performs no reauthorization.
+- A separate authenticated and authorized World reviewer rejects broader promotion with an exact
+  `no_action` Core Decision. The useful evaluation and promote proposal remain unchanged, and no
+  effective governed-state head changes.
 - This is source-checkout evidence against Core PR #88, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
+The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)
+freezes the exact proposal-disposition boundary.
 
 ## Next — trustworthy live orientation
 
