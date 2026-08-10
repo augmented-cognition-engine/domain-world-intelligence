@@ -570,10 +570,14 @@ async def _record_review_outcome(
     )
 
 
-async def run_contradiction_attention_outcome(workspace_root: Path) -> dict[str, Any]:
+async def run_contradiction_attention_outcome(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run the recorded World journey through exact contradiction-attention Outcomes."""
 
-    state: dict[str, Any] = {}
+    state: dict[str, Any] = {} if state_sink is None else state_sink
     prior = await run_citation_correctness_outcome(workspace_root, state_sink=state)
     environment = state["environment"]
     source_brief = state["impact_target_ref"]
