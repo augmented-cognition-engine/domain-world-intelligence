@@ -74,7 +74,11 @@ def _install_disposition_policy(state: dict[str, Any]) -> GovernedOperationBindi
     return binding
 
 
-async def run_reviewed_disposition(workspace_root: Path) -> dict[str, Any]:
+async def run_reviewed_disposition(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run P2C3, then record one exact reject/no-action human Decision."""
 
     state: dict[str, Any] = {}
@@ -125,7 +129,7 @@ async def run_reviewed_disposition(workspace_root: Path) -> dict[str, Any]:
     if heads_after != heads_before:
         raise AssertionError("reviewed proposal disposition mutated effective governed state")
 
-    return {
+    result = {
         "contract": "ace.world-intelligence.reviewed-impact-disposition/v1alpha1",
         "measured_feedback": measured,
         "disposition": {
@@ -148,6 +152,16 @@ async def run_reviewed_disposition(workspace_root: Path) -> dict[str, Any]:
             "autonomous_publication": False,
         },
     }
+    if state_sink is not None:
+        state_sink.update(state)
+        state_sink.update(
+            {
+                "impact_disposition_binding": binding,
+                "impact_disposition_request": request,
+                "impact_disposition_admission": admission,
+            }
+        )
+    return result
 
 
 def main() -> None:

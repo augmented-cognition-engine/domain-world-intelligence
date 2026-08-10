@@ -753,6 +753,10 @@ async def run_measured_feedback(
         state_sink.update(state)
         state_sink.update(
             {
+                "impact_target_ref": target_ref,
+                "impact_control_ref": control_ref,
+                "measured_treatments": treatments,
+                "measured_controls": controls,
                 "impact_binding": impact_binding,
                 "impact_criterion": criterion,
                 "impact_request": request,

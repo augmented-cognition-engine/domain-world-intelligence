@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3/P2C4 measured feedback and reviewed disposition
+## Candidate — P2C3–P2C5 measured feedback, disposition, and citation correctness
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -27,12 +27,18 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 - A separate authenticated and authorized World reviewer rejects broader promotion with an exact
   `no_action` Core Decision. The useful evaluation and promote proposal remain unchanged, and no
   effective governed-state head changes.
-- This is source-checkout evidence against Core PR #88, not a released World capability, human
+- A second frozen criterion requires exact independent review provenance behind every Outcome
+  score. A citation-preserving date-swap control retains `1.0` citation coverage while correctness
+  falls from `1.0` to `0.0` over two matched pairs; the bounded evaluation again emits only a
+  non-effective proposal.
+- This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)
-freezes the exact proposal-disposition boundary.
+freezes the exact proposal-disposition boundary. The stacked
+[P2C5 work packet](docs/design/world-intelligence-p2c5-citation-correctness-outcome-work-packet-v1.md)
+freezes independently reviewed citation correctness and its citation-preserving negative control.
 
 ## Next — trustworthy live orientation
 
