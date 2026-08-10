@@ -2,8 +2,8 @@
 
 ## Result
 
-**Implemented candidate passed from clean source checkouts. Released-artifact reproduction remains
-open.**
+**Implemented candidate and public Core 0.5.0 artifact reproduction passed. World 0.9.0 publication
+remains open.**
 
 The accepted journey is:
 
@@ -44,10 +44,12 @@ own exact identities; the terminal action replays without a second effect.
 |---|---|
 | New monitor pack compile | passed; 5 declarative modules |
 | Full World domain suite | `83 passed in 16.72s` |
-| Locked 0.8.0 environment | `82 passed, 1 skipped`; P2C2 action proof correctly release-gated on Core 0.5.0 adapter |
+| Previous locked 0.8.0 environment | `82 passed, 1 skipped`; P2C2 action proof correctly release-gated on Core 0.5.0 adapter |
+| Locked 0.9.0 candidate environment | `82 passed, 1 skipped`; root, source adapter, and lock consume public Core 0.5.0; action adapter intentionally remains separate |
 | Federal Register adapter suite | `26 passed` |
 | Root release-contract suite | `6 passed` |
 | New P2C2 focused tests | `2 passed` |
+| Fresh public-artifact environment | PyPI `ace-core==0.5.0` + Core release `ace-reference-workspace-action==0.1.0`; `83 passed` World, `26 passed` connector, `2 passed` focused P2C2; no Core checkout |
 | Ruff on new scripts, tests, and adapter | passed |
 | Candidate World wheel contents | passed; new monitor manifest, five modules, and fixture included |
 | Source acquisition count | exactly 2; replay performed no reacquisition |
@@ -57,10 +59,10 @@ own exact identities; the terminal action replays without a second effect.
 | Action replay | exact terminal reopened; no second file creation |
 | Human gates | Decision, review, verification, and promotion all separate |
 
-The acceptance ran against ACE Core main commit
-`55e6bcc2ddf921681a1654c47ab409a48576f7e8` and the independently packaged Core reference
-workspace-action adapter source. The candidate branch is rebased on World Intelligence main commit
-`c439394`, which contains the reconciled 0.8.0 release.
+The source-checkout acceptance ran against the ACE 0.5.0 candidate. The release gate was then
+reproduced in a fresh Python 3.12 environment using public `ace-core==0.5.0` from PyPI and the
+public reference workspace-action wheel from the Core `v0.5.0` GitHub release. Core and adapter
+both imported from `site-packages`; no Core source checkout was on the path.
 
 ## Boundary findings
 
@@ -82,7 +84,7 @@ The two inputs are exact official public records but use recorded transport. Net
 multi-source conflict/correction, autonomous scheduling, and public publishing are not claimed.
 The exported file is a bounded local review artifact, not a published news product.
 
-World Intelligence 0.9.0 remains blocked only on packaging evidence: ACE Core 0.5.0 and the
-reference action adapter must be released, installed without either source checkout, and used to
-reproduce this same semantic journey. The later opt-in network transport is a separate source
-boundary and does not belong in this release claim unless it receives its own review and evidence.
+World Intelligence 0.9.0 remains blocked only on its own publication evidence: tag and publish the
+0.9.0 root wheel, install it with public Core 0.5.0 outside the checkout, and confirm its exact inert
+payload. The later opt-in network transport is a separate source boundary and does not belong in
+this release claim unless it receives its own review and evidence.

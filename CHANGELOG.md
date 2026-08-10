@@ -8,6 +8,36 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
+## [0.9.0] — release candidate 2026-08-10
+
+### Added
+
+- **P2C2 official-record Reality Brief journey.** Two exact Federal Register records become LIVE
+  Observations and stable entity snapshots, one configured Shift and routed Signal, and a governed
+  six-claim/two-citation Reality Brief.
+- **Reasoning into reviewed action.** A named human Decision authorizes an effect-free plan; a
+  second exact review gates a create-only workspace export; verification and promotion remain
+  separate; replay performs no second reasoning call or file effect.
+- **Public-artifact reproduction.** A fresh Python 3.12 environment installed `ace-core==0.5.0`
+  from PyPI and `ace-reference-workspace-action==0.1.0` from the Core `v0.5.0` GitHub release,
+  then passed the complete World suite (`83 passed`), connector suite (`26 passed`), and focused
+  P2C2 proof (`2 passed`) without a Core checkout.
+
+### Changed
+
+- Raised the root Domain Pack compatibility window to `ace-core>=0.5.0,<0.6` and bumped the inert
+  root distribution to 0.9.0.
+- Bumped the separately packaged Federal Register source adapter to 0.2.0 with the same Core 0.5
+  compatibility window. It remains outside the root wheel and runtime dependency closure. Its
+  unchanged `0.1.0` implementation identity preserves the accepted source receipts; 0.2.0 is the
+  distribution version for the new dependency boundary.
+
+### Not included
+
+No continuous network monitoring, autonomous publishing, political persuasion, voter targeting,
+or legal/policy-impact inference is claimed. The accepted source transport is exact, recorded, and
+network-free; the only effect is a reviewed create-only local export.
+
 ## [0.8.0] — 2026-08-09
 
 Public release. The `v0.8.0` tag exists, the

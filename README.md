@@ -8,14 +8,13 @@ truth.
 This repository is a consumer of the public ACE Core + Intelligence distribution. It does not own
 a reasoning runtime, graph, state store, authority system, detector engine, or feedback loop.
 
-- **Distribution:** `ace-domain-world-intelligence` 0.8.0 — JSON-only, data-only, inert
-- **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
-- **Status:** released. The `v0.8.0` tag exists, the
-  [GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0)
-  is published, and the distribution is
-  [public on PyPI](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/)
-  (published 2026-08-09). See
-  [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md).
+- **Distribution:** `ace-domain-world-intelligence` 0.9.0 release candidate — JSON-only, data-only, inert
+- **Requires:** Python 3.12 and `ace-core>=0.5.0,<0.6`
+- **Status:** release candidate. The complete P2C2 journey passes against public `ace-core==0.5.0`
+  and the public reference-action adapter without a Core checkout. The World `v0.9.0` tag and PyPI
+  publication remain the final release gate. The current public release remains
+  [`0.8.0`](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/). See the
+  [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
 ## What you install, and what you get
 
@@ -23,7 +22,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (public on PyPI, 0.4.1) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay. |
+| **ACE Core** | `ace-core` (public on PyPI, 0.5.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, and governed bounded action. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
 | **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
 
@@ -34,24 +33,22 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-0.8.0 is published on PyPI:
-[`ace-domain-world-intelligence` 0.8.0](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/).
-A public clean install on Python 3.12 resolves `ace-domain-world-intelligence==0.8.0` and
-`ace-core==0.4.1`.
+After the `v0.9.0` release is published, install it on Python 3.12 with either command below. The
+release candidate has already been built and tested against public `ace-core==0.5.0`.
 
 With `uv`:
 
 ```bash
-uv add "ace-domain-world-intelligence==0.8.0"
+uv add "ace-domain-world-intelligence==0.9.0"
 ```
 
 With `pip`:
 
 ```bash
-pip install "ace-domain-world-intelligence==0.8.0"
+pip install "ace-domain-world-intelligence==0.9.0"
 ```
 
-Either command also brings in `ace-core>=0.4.1,<0.5`, which is already public. It does **not** bring
+Either command also brings in `ace-core>=0.5.0,<0.6`, which is already public. It does **not** bring
 in the Federal Register connector; that is a deliberate boundary, not an omission.
 
 Resolve the pack data from the installed distribution:
@@ -208,7 +205,7 @@ for the 0.7.0 release boundary and full identity list.
 ## Connector boundary
 
 This repository ships an **inert Domain Pack**. The Federal Register connector is a separately
-versioned executable artifact, `ace-ext-world-federal-register-source` 0.1.0, with its own review
+versioned executable artifact, `ace-ext-world-federal-register-source` 0.2.0, with its own review
 boundary:
 
 - it is **not** a dependency of the Domain Pack, and no extra reintroduces it;
@@ -258,9 +255,8 @@ WORKSPACE=$(mktemp -d)
 $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 ```
 
-The released 0.8.0 gates remain reproducible through the locked environment, as CI does. The P2C2
-action test is release-gated and skips until the independently packaged Core 0.5.0 adapter is
-available:
+The 0.9.0 release-candidate gates are reproducible through the locked environment, as CI does. The
+P2C2 action test runs when the independently packaged Core reference adapter is installed:
 
 ```bash
 uv sync --frozen --no-install-project
@@ -269,8 +265,9 @@ uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-
 uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 26 passed
 ```
 
-Expected totals as of 2026-08-10 with the ACE 0.5.0 candidate and its independently packaged
-reference adapter on `PYTHONPATH`: domain suite `83 passed`, connector suite `26 passed`. The
+Verified totals as of 2026-08-10 with public `ace-core==0.5.0` from PyPI and the independently
+packaged reference adapter from the Core `v0.5.0` GitHub release: domain suite `83 passed`,
+connector suite `26 passed`. The
 public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
@@ -312,8 +309,8 @@ content autonomously. Every LIVE capture demonstrated here is one explicitly req
 read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
 workspace export followed by separate verification and promotion.
 
-Next: release ACE Core 0.5.0 and its independent reference action adapter, reproduce P2C2 from those
-released artifacts, then add a separately reviewed opt-in network transport and exercise P2D
+Next: publish World Intelligence 0.9.0, verify its installed wheel with public Core 0.5.0, then add
+a separately reviewed opt-in network transport and exercise P2D
 multi-source conflict/correction with LIVE inputs. Neither step may add autonomous publishing,
 delivery, persuasion, or action authority to a Domain Pack.
 

@@ -1,6 +1,6 @@
 # P2C2 — official-record Reality Brief into reviewed action
 
-Status: **implemented candidate for World Intelligence 0.9.0; released-artifact reproduction pending ACE Core 0.5.0**
+Status: **World Intelligence 0.9.0 release candidate; public Core 0.5.0 artifact reproduction passed**
 
 ## Objective
 
@@ -70,10 +70,9 @@ The create-only workspace effect remains Core's independently packaged reference
 
 ## Release dependency
 
-The packet consumes the ACE 0.5.0 candidate contracts and
-`ace-reference-workspace-action>=0.1.0,<0.2` in cross-repository acceptance. The currently released
-World distribution remains 0.8.0 and retains its prior dependency metadata. After ACE Core 0.5.0
-and the adapter are public, the release-closeout change will set the true dependency floor, bump the
-World and source-adapter distributions, refresh the lock, and reproduce the journey from installed
-artifacts. Until then, this is source-checkout candidate evidence, not a completed World
-Intelligence 0.9.0 release claim.
+The packet consumes public `ace-core==0.5.0` from PyPI and
+`ace-reference-workspace-action==0.1.0` from the Core `v0.5.0` GitHub release. A fresh Python 3.12
+environment with no Core checkout passed the focused P2C2 proof, all 83 World tests, and all 26
+Federal Register adapter tests. The release-closeout change sets the root and source-adapter Core
+window to `>=0.5.0,<0.6`, bumps them to 0.9.0 and 0.2.0 respectively, and refreshes the lock. The
+remaining gate is publication and clean installation of the World 0.9.0 wheel itself.
