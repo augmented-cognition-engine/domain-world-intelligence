@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3–P2C5 measured feedback, disposition, and citation correctness
+## Candidate — P2C3–P2C6 measured feedback and product-owned outcomes
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -31,6 +31,11 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   score. A citation-preserving date-swap control retains `1.0` citation coverage while correctness
   falls from `1.0` to `0.0` over two matched pairs; the bounded evaluation again emits only a
   non-effective proposal.
+- A third frozen criterion reviews two exact statement candidates derived from the same admitted
+  records. Treatment and inverted control each emit one alert, but treatment recalls the
+  contradiction, produces no false alert, and preserves silence on the valid comparator while the
+  control does the opposite. The exact result records recall, false-alert rate, confusion counts,
+  valid silence, policy, reviewer, Brief, and Observation provenance.
 - This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
@@ -39,6 +44,10 @@ The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-im
 freezes the exact proposal-disposition boundary. The stacked
 [P2C5 work packet](docs/design/world-intelligence-p2c5-citation-correctness-outcome-work-packet-v1.md)
 freezes independently reviewed citation correctness and its citation-preserving negative control.
+The stacked
+[P2C6 work packet](docs/design/world-intelligence-p2c6-contradiction-attention-outcome-work-packet-v1.md)
+freezes contradiction recall, false-alert rate, equal alert volume, and valid silence without
+claiming live conflict detection or population performance.
 
 ## Next — trustworthy live orientation
 

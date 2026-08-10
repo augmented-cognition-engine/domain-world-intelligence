@@ -8,8 +8,6 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Literal, Self
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-
 from ace.application import MeasuredImpactService
 from ace.core import (
     AppendOnlyTransactionRequestV1,
@@ -36,6 +34,7 @@ from ace.intelligence import (
     ImpactOutcomeMeasuresV1Alpha1,
     ImpactTargetKind,
 )
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from scripts.p2c2_federal_register_monitor import _time
 from scripts.p2c2_governed_reality_brief import _context, _head
@@ -455,10 +454,14 @@ async def _record_review_outcome(
     )
 
 
-async def run_citation_correctness_outcome(workspace_root: Path) -> dict[str, Any]:
+async def run_citation_correctness_outcome(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run the P2C4 journey through exact independent citation review Outcomes."""
 
-    state: dict[str, Any] = {}
+    state: dict[str, Any] = {} if state_sink is None else state_sink
     prior = await run_reviewed_disposition(workspace_root, state_sink=state)
     environment = state["environment"]
     target_ref = state["impact_target_ref"]

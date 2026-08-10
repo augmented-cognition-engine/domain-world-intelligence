@@ -215,6 +215,18 @@ does not establish reviewer infallibility, current network freshness, source ind
 Brief quality, causal impact, or human benefit. Citation review vocabulary and policy remain in
 World; Core and Intelligence receive only the exact immutable observed-result coordinate.
 
+P2C6 adds an exact contradiction-attention outcome over the same recorded official sources. One
+candidate states the admitted document/date facts exactly and one swaps the dates. Treatment
+alerts only on the contradiction; an inverted-routing control alerts only on the valid comparator.
+Both emit exactly one alert, so raw alert volume cannot explain the `1.0` treatment/control quality
+difference. The independently recorded review exposes contradiction recall, false-alert rate, one
+valid silence, confusion counts, exact Brief/Observation provenance, policy identity, and limits.
+
+This source-checkout candidate demonstrates one frozen challenge, not a live observed public
+conflict or a population false-alert rate. It does not establish autonomous discovery, network
+freshness, correction quality, general Brief quality, causality, or human benefit. The resulting
+proposal remains non-effective and unapplied.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -308,6 +320,10 @@ $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 
 # Stacked candidate: explicit reject/no-action review of the exact proposal
 $PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
+
+# Stacked candidates: exact citation correctness, then contradiction recall/false-alert outcome
+$PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
+$PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -373,8 +389,10 @@ remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-i
 and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 demonstrates a separately
 authorized reject/no-action disposition of the P2C3 proposal without effective state change. P2C5
 adds an independently reviewed citation-correctness Outcome and a citation-preserving semantic
-negative control. The next bounded measurement work is contradiction/correction coverage,
-detection delay, false-alert rate, or independent Market reproduction.
+negative control. P2C6 adds exact contradiction recall, false-alert rate, equal alert-volume
+control, and valid silence under one frozen recorded-source challenge. The next bounded
+measurement work is correction handling, detection delay, calibration/revision stability, or
+independent Market reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
