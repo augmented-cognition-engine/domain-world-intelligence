@@ -226,6 +226,20 @@ because structural coverage does not establish citation correctness, general Bri
 benefit, causality, or live freshness. Exact replay returns the historical Decision without new
 authorization. This is explicit disposition, not reclassification or proposal application.
 
+P2C5 adds a distinct product-owned outcome rather than broadening the structural score. The named
+principal `principal:world-citation-correctness-reviewer` records an exact immutable review over
+the Brief, its one cited claim, the exact two citation identities, and the two admitted official
+Observation references. Each Core Outcome names that exact result. A matched negative control
+retains both citation identities but swaps the two publication dates in the claim: treatment and
+control both have `1.0` coverage, while correctness is `1.0` and `0.0` respectively across two
+pairs. The domain-neutral evaluator classifies that bounded difference as useful and still emits
+only a non-effective proposal requiring separate review.
+
+This candidate establishes exact review provenance and sensitivity to one semantic corruption. It
+does not establish reviewer infallibility, current network freshness, source independence, general
+Brief quality, causal impact, or human benefit. Citation review vocabulary and policy remain in
+World; Core and Intelligence receive only the exact immutable observed-result coordinate.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -391,10 +405,11 @@ publishing, delivery, persuasion, or other external-action authority.
 
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
-and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 now demonstrates a separately
-authorized reject/no-action disposition of the P2C3 proposal without effective state change. The
-next bounded measurement work is an independently reviewed product outcome such as citation
-correctness, contradiction coverage, correction quality, detection delay, or false-alert rate.
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 demonstrates a separately
+authorized reject/no-action disposition of the P2C3 proposal without effective state change. P2C5
+adds an independently reviewed citation-correctness Outcome and a citation-preserving semantic
+negative control. The next bounded measurement work is contradiction/correction coverage,
+detection delay, false-alert rate, or independent Market reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
