@@ -1,0 +1,19 @@
+{
+  "contract": "ace.intelligence.detection/v1alpha2",
+  "module_id": "world_federal_register_monitor_detection",
+  "numeric_delta_rules": [],
+  "categorical_transition_rules": [
+    {
+      "detector_id": "fcc_latest_publication_change",
+      "entity_type_id": "federal_register_agency_monitor",
+      "attribute_id": "document_number",
+      "baseline": "prior_snapshot",
+      "context_attribute_ids": ["agency_name"],
+      "transitions": [
+        {"from_value": "2026-15932", "to_value": "2026-16197"}
+      ],
+      "shift_type": "official_publication_change",
+      "signal_type": "official_publication"
+    }
+  ]
+}

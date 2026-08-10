@@ -13,6 +13,7 @@ from ace_world_federal_register_source import (
     FEDERAL_REGISTER_LOCATOR,
     FEDERAL_REGISTER_SOURCE_TYPE,
     OFFICIAL_PDF_URI,
+    FederalRegisterDocumentProfile,
     FederalRegisterRetrievalResult,
     FederalRegisterSourceAdapter,
     FederalRegisterSourceAdapterError,
@@ -161,6 +162,7 @@ async def test_exact_document_becomes_closed_canonical_inert_payload() -> None:
         ({"response_body": "not-json"}, "unambiguous bounded JSON"),
         ({"response_body": "x" * 32_769}, "character bound"),
         ({"response_body": _body(document_number="2026-00001")}, "document_number"),
+        ({"response_body": _body(title="Changed title")}, "title"),
         ({"response_body": _body(type="Rule")}, "document_type"),
         ({"response_body": _body(publication_date="2026-08-08")}, "publication_date"),
         ({"response_body": _body(agencies=[])}, "exactly one agency"),
@@ -222,3 +224,74 @@ async def test_forged_artifact_and_different_uri_reject_before_transport() -> No
     with pytest.raises(FederalRegisterSourceAdapterError, match="revalidation"):
         await adapter.capture(different_uri)
     assert transport.calls == 0
+
+
+@pytest.mark.asyncio
+async def test_reviewed_multi_document_profile_preserves_exact_allowlist() -> None:
+    prior_uri = "https://www.federalregister.gov/api/v1/documents/2026-15932.json"
+    prior_html = (
+        "https://www.federalregister.gov/documents/2026/08/06/2026-15932/"
+        "information-collection-being-reviewed-by-the-federal-communications-commission"
+    )
+    prior_pdf = "https://www.govinfo.gov/content/pkg/FR-2026-08-06/pdf/2026-15932.pdf"
+    prior = FederalRegisterDocumentProfile(
+        document_number="2026-15932",
+        title="Information Collection Being Reviewed by the Federal Communications Commission",
+        document_type="Notice",
+        publication_date="2026-08-06",
+        agency_name="Federal Communications Commission",
+        document_uri=prior_uri,
+        html_uri=prior_html,
+        official_pdf_uri=prior_pdf,
+    )
+    response_body = _body(
+        title="Information Collection Being Reviewed by the Federal Communications Commission",
+        document_number=prior.document_number,
+        type=prior.document_type,
+        publication_date=prior.publication_date,
+        html_url=prior.html_uri,
+        pdf_url=prior.official_pdf_uri,
+    )
+    result = _result(
+        requested_uri=prior_uri,
+        effective_uri=prior_uri,
+        response_body=response_body,
+    )
+    transport = _Transport(result)
+    adapter = FederalRegisterSourceAdapter(
+        transport=transport,
+        artifact_digest=ARTIFACT_DIGEST,
+        profiles=(prior,),
+        implementation_id="world_federal_register_monitor_source",
+        implementation_version="0.2.0",
+    )
+    _, _, default_request = _adapter_and_request()
+    request = SourceAdapterCaptureRequestV1Alpha1.model_validate(
+        {
+            **default_request.model_dump(
+                mode="python", exclude={"request_id", "request_digest"}
+            ),
+            "requested_uri": prior_uri,
+            "source_definition_ref": "source_definition:federal-register-2026-15932",
+            "configuration_ref": "config:federal-register-2026-15932",
+            "adapter_artifact": adapter.artifact_identity,
+        }
+    )
+
+    capture = await adapter.capture(request)
+
+    assert json.loads(capture.captured_payload_json)["document_number"] == "2026-15932"
+    assert capture.requested_uri == prior_uri
+    assert transport.calls == 1
+
+    outside_allowlist = SourceAdapterCaptureRequestV1Alpha1.model_validate(
+        {
+            **request.model_dump(
+                mode="python", exclude={"request_id", "request_digest"}
+            ),
+            "requested_uri": FEDERAL_REGISTER_DOCUMENT_URI,
+        }
+    )
+    with pytest.raises(FederalRegisterSourceAdapterError, match="exact Federal Register URI"):
+        await adapter.capture(outside_allowlist)
+    assert transport.calls == 1

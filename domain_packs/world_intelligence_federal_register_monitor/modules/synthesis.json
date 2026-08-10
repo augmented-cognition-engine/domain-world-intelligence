@@ -1,0 +1,22 @@
+{
+  "contract": "ace.intelligence.synthesis/v1alpha2",
+  "module_id": "world_federal_register_monitor_synthesis",
+  "brief_templates": [
+    {
+      "template_id": "official_record_change_brief",
+      "brief_type": "world_intelligence",
+      "display_name": "Official Record Change Brief",
+      "objective": "Explain the exact change in an official public-record monitor while separating cited facts, ACE inference, unknowns, and limitations.",
+      "required_sections": [
+        "what_changed",
+        "established_records",
+        "why_it_matters",
+        "unknowns",
+        "watchpoints",
+        "limitations"
+      ],
+      "recommendation_required": false,
+      "claim_policy": "citation_or_explicit_inference"
+    }
+  ]
+}

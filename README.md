@@ -154,6 +154,21 @@ and the corresponding `govinfo.gov` PDF is retained as the official-format verif
 No Signal, Shift, Brief, Decision, Outcome, feedback, delivery, publishing, persuasion, or external
 action is created.
 
+P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
+declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
+and document `2026-16197` published August 7 — as successive LIVE snapshots of one stable monitor
+entity. Its configured categorical detector produces an `official_publication_change` Shift, routes
+an `official_publication` Signal, and invokes Core-governed reasoning to produce one LIVE Reality
+Brief with six claims and two exact citations. A named human Decision then authorizes only a
+create-only workspace export; a second exact human review precedes the effect, and separate
+verification and promotion receipts follow it. Replay performs neither a second reasoning call nor
+a second file effect.
+
+This is a governed export proof, not autonomous publishing. The pack contains no executable code or
+action authority; the export is provided by Core's separately packaged reference adapter. The two
+source responses are exact official public records under recorded transport, so P2C2 proves the
+complete deterministic product journey but still does not claim network freshness at test time.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -222,10 +237,11 @@ With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
 [Develop from a source checkout](#develop-from-a-source-checkout):
 
 ```bash
-# Complete suite, including every frozen P2A/P2B packet and P2C: 81 passed
+# Complete domain suite, including every frozen packet and the P2C2 product journey: 83 passed
+export PYTHONPATH="$PYTHONPATH:$ACE/adapters/reference_workspace_action/src"
 $PY -m pytest -q
 
-# Connector fail-closed unit suite: 24 passed
+# Connector fail-closed unit suite: 26 passed
 $PY -m pytest adapters/federal_register_source/tests -q
 
 # Individual acceptance harnesses
@@ -236,19 +252,26 @@ $PY scripts/p2b_case_brief.py
 $PY scripts/p2b_status_case_brief.py
 $PY scripts/p2b_independent_case_brief.py
 $PY scripts/p2c_federal_register_live_acceptance.py
+
+# Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
+WORKSPACE=$(mktemp -d)
+$PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 ```
 
-Or run the same gates through the locked environment, as CI does:
+The released 0.8.0 gates remain reproducible through the locked environment, as CI does. The P2C2
+action test is release-gated and skips until the independently packaged Core 0.5.0 adapter is
+available:
 
 ```bash
 uv sync --frozen --no-install-project
-uv run --no-sync pytest                                   # World suite: 81 passed
-uv run --no-sync pytest tests/test_release_contract.py    # publishable-identity gate
-uv run --no-sync pytest adapters/federal_register_source/tests   # connector: 24 passed
+uv run --no-sync python -m pytest                         # released + candidate-compatible gates
+uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-identity gate
+uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 26 passed
 ```
 
-Expected totals as of 2026-08-08: complete World suite **81 passed**, connector suite
-**24 passed**. The public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
+Expected totals as of 2026-08-10 with the ACE 0.5.0 candidate and its independently packaged
+reference adapter on `PYTHONPATH`: domain suite `83 passed`, connector suite `26 passed`. The
+public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
 The exact identities, negative cases, and artifact proofs are recorded in
@@ -265,6 +288,8 @@ and the independent-corroboration proof in
 [`docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md`](docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md).
 The governed official-source admission proof is recorded in
 [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md).
+The complete governed product-journey evidence is recorded in
+[`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 
 Release-level scope, artifacts, and open gates are recorded in
 [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md),
@@ -278,15 +303,19 @@ and version history in [`CHANGELOG.md`](CHANGELOG.md).
 - Corrections append state rather than rewriting history.
 - Inference and scenario material remain explicitly labeled.
 - Persona routing never changes an evidence status.
-- No political persuasion, voter targeting, autonomous publishing, or external action.
+- No political persuasion, voter targeting, or autonomous publishing.
+- External effects require an exact Core-governed Decision, human review, post-effect
+  verification, and promotion; the reference proof is limited to one create-only workspace file.
 
-World Intelligence does not watch live news feeds, does not decide anything on its own, and does not
-publish, deliver, or act outside the process that invokes it. Every LIVE capture demonstrated here is
-one explicitly requested, governed, read-only retrieval.
+World Intelligence does not watch live news feeds, decide anything on its own, or publish or deliver
+content autonomously. Every LIVE capture demonstrated here is one explicitly requested, governed,
+read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
+workspace export followed by separate verification and promotion.
 
-Next: add a separately reviewed, opt-in network transport for the exact source-adapter contract,
-then exercise P2D multi-source conflict and correction with LIVE inputs. Neither step may add
-publishing, delivery, persuasion, or other external-action authority.
+Next: release ACE Core 0.5.0 and its independent reference action adapter, reproduce P2C2 from those
+released artifacts, then add a separately reviewed opt-in network transport and exercise P2D
+multi-source conflict/correction with LIVE inputs. Neither step may add autonomous publishing,
+delivery, persuasion, or action authority to a Domain Pack.
 
 ## License
 

@@ -42,6 +42,11 @@ include-package-data = false
   "modules/*.json",
   "conformance/*.json",
 ]
+"domain_packs.world_intelligence_federal_register_monitor" = [
+  "*.json",
+  "modules/*.json",
+  "conformance/*.json",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["domain_packs/tests"]

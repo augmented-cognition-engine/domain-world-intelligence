@@ -159,6 +159,7 @@ def test_root_distribution_mapping_stays_inert_and_data_only() -> None:
     assert set(package_data) == {
         "domain_packs.world_intelligence",
         "domain_packs.world_intelligence_federal_register",
+        "domain_packs.world_intelligence_federal_register_monitor",
     }
     for patterns in package_data.values():
         assert patterns == ["*.json", "modules/*.json", "conformance/*.json"]
