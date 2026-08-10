@@ -1,7 +1,9 @@
 # World Intelligence 0.9.0 — Reality Brief into reviewed action
 
-**Release status:** candidate verified against public ACE Core 0.5.0 artifacts; World tag, PyPI
-publication, and clean installed-wheel reproduction pending.
+**Release status:** released 2026-08-10. The
+[`v0.9.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.9.0)
+and [`0.9.0 PyPI distribution`](https://pypi.org/project/ace-domain-world-intelligence/0.9.0/)
+are public.
 
 ## Install target
 
@@ -41,6 +43,15 @@ With no Core checkout present, that environment passed:
 
 The accepted journey performs one governed reasoning call, one reviewed create-only file effect,
 and no second call or effect on exact replay.
+
+The public World wheel was then installed without a World or Core checkout. It resolved
+`ace-core==0.5.0`, loaded `world_intelligence_federal_register_monitor` from `site-packages`, and
+did not install the optional Federal Register source adapter.
+
+Published artifact SHA-256:
+
+- wheel: `9514c0ad9602bad6568a57768790c5524454a8cf5e229aff4ded7b9e515e1d2c`;
+- source distribution: `a08ce41cd26af2ff6c8c257f641407633fd2843eec616c7bebba38323938d3d8`.
 
 ## Boundary
 

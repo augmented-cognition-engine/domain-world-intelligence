@@ -1,6 +1,6 @@
 # P2C2 — official-record Reality Brief into reviewed action
 
-Status: **World Intelligence 0.9.0 release candidate; public Core 0.5.0 artifact reproduction passed**
+Status: **released in World Intelligence 0.9.0 on 2026-08-10**
 
 ## Objective
 
@@ -75,4 +75,6 @@ The packet consumes public `ace-core==0.5.0` from PyPI and
 environment with no Core checkout passed the focused P2C2 proof, all 83 World tests, and all 26
 Federal Register adapter tests. The release-closeout change sets the root and source-adapter Core
 window to `>=0.5.0,<0.6`, bumps them to 0.9.0 and 0.2.0 respectively, and refreshes the lock. The
-remaining gate is publication and clean installation of the World 0.9.0 wheel itself.
+public World 0.9.0 wheel was then installed without either repository checkout, resolved public
+Core 0.5.0, loaded the monitor pack from `site-packages`, and kept the optional source adapter
+absent. All release gates are complete.

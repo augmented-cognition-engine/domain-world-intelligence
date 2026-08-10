@@ -2,8 +2,7 @@
 
 ## Result
 
-**Implemented candidate and public Core 0.5.0 artifact reproduction passed. World 0.9.0 publication
-remains open.**
+**Released-artifact reproduction passed. World Intelligence 0.9.0 is public.**
 
 The accepted journey is:
 
@@ -50,6 +49,7 @@ own exact identities; the terminal action replays without a second effect.
 | Root release-contract suite | `6 passed` |
 | New P2C2 focused tests | `2 passed` |
 | Fresh public-artifact environment | PyPI `ace-core==0.5.0` + Core release `ace-reference-workspace-action==0.1.0`; `83 passed` World, `26 passed` connector, `2 passed` focused P2C2; no Core checkout |
+| Public World 0.9.0 wheel | clean PyPI install resolved Core 0.5.0; monitor pack loaded from `site-packages`; optional source adapter absent |
 | Ruff on new scripts, tests, and adapter | passed |
 | Candidate World wheel contents | passed; new monitor manifest, five modules, and fixture included |
 | Source acquisition count | exactly 2; replay performed no reacquisition |
@@ -78,13 +78,12 @@ both imported from `site-packages`; no Core source checkout was on the path.
 - The domain pack owns no executable code, persistence, credentials, authority, feedback mutation,
   or action adapter.
 
-## Honest limits and remaining gate
+## Honest limits and next gate
 
 The two inputs are exact official public records but use recorded transport. Network freshness,
 multi-source conflict/correction, autonomous scheduling, and public publishing are not claimed.
 The exported file is a bounded local review artifact, not a published news product.
 
-World Intelligence 0.9.0 remains blocked only on its own publication evidence: tag and publish the
-0.9.0 root wheel, install it with public Core 0.5.0 outside the checkout, and confirm its exact inert
-payload. The later opt-in network transport is a separate source boundary and does not belong in
-this release claim unless it receives its own review and evidence.
+World Intelligence 0.9.0 has no remaining release gate. The later opt-in network transport is a
+separate source boundary and does not belong in this release claim unless it receives its own
+review and evidence. P2D LIVE multi-source conflict/correction is the next semantic packet.
