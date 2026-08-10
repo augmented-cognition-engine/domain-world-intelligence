@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3–P2C6 measured feedback and product-owned outcomes
+## Candidate — P2C3–P2C7 measured feedback and product-owned outcomes
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -36,6 +36,11 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   contradiction, produces no false alert, and preserves silence on the valid comparator while the
   control does the opposite. The exact result records recall, false-alert rate, confusion counts,
   valid silence, policy, reviewer, Brief, and Observation provenance.
+- A fourth frozen criterion uses one explicit recorded FCC correction pair. Treatment and delayed
+  control preserve the same exact correction linkage, instruction, prior immutable record, and
+  reviewed workflow, but their replay delays are 300 and 21600 seconds against a product-owned
+  600-second target. Exact reviews and Outcomes expose the source pair, rule, delay, score, and
+  limitations without claiming live network-arrival performance.
 - This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
@@ -47,12 +52,16 @@ freezes independently reviewed citation correctness and its citation-preserving 
 The stacked
 [P2C6 work packet](docs/design/world-intelligence-p2c6-contradiction-attention-outcome-work-packet-v1.md)
 freezes contradiction recall, false-alert rate, equal alert volume, and valid silence without
-claiming live conflict detection or population performance.
+claiming live conflict detection or population performance. The stacked
+[P2C7 work packet](docs/design/world-intelligence-p2c7-correction-detection-delay-outcome-work-packet-v1.md)
+freezes exact correction linkage, prior-record preservation, and recorded-replay detection delay
+without claiming live monitoring or network-arrival latency.
 
 ## Next — trustworthy live orientation
 
 - Add a separately reviewed, opt-in production transport without bundling it into the Domain Pack.
-- Exercise multi-source conflict, correction, and supersession against LIVE admitted records.
+- Exercise multi-source conflict, correction, and supersession against LIVE admitted records,
+  including network-observed correction arrival rather than frozen replay times.
 - Turn one-shot governed sensing into explicit user-owned monitors and subscriptions.
 - Preserve source independence, per-claim epistemic status, exact citations, correction visibility,
   and PREPARED/LIVE separation.

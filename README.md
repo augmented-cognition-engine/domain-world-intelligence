@@ -252,6 +252,17 @@ conflict or a population false-alert rate. It does not establish autonomous disc
 freshness, correction quality, general Brief quality, causality, or human benefit. The resulting
 proposal remains non-effective and unapplied.
 
+P2C7 uses an actual explicit FCC correction pair under recorded replay. Document `2021-10670`
+names and corrects `2020-28779`; treatment and delayed control preserve that same exact linkage,
+corrected instruction, original immutable Observation, and reviewed workflow. Against a frozen
+600-second World target, treatment delay is 300 seconds and control delay is 21600 seconds. Exact
+independent reviews become Core Outcomes, and the bounded two-pair difference is useful while the
+proposal remains non-effective and unapplied.
+
+The recorded availability and detection instants are test coordinates. The suite performs no
+network access and does not establish live monitoring, network-arrival latency, population delay
+performance, legal truth, calibration, general Brief quality, causality, or human benefit.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -347,9 +358,10 @@ $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 # Stacked candidate: explicit reject/no-action review of the exact proposal
 $PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
 
-# Stacked candidates: exact citation correctness, then contradiction recall/false-alert outcome
+# Stacked candidates: exact citation correctness, contradiction attention, and correction delay
 $PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
 $PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
+$PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -425,9 +437,11 @@ and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 demonstrates a se
 authorized reject/no-action disposition of the P2C3 proposal without effective state change. P2C5
 adds an independently reviewed citation-correctness Outcome and a citation-preserving semantic
 negative control. P2C6 adds exact contradiction recall, false-alert rate, equal alert-volume
-control, and valid silence under one frozen recorded-source challenge. The next bounded
-measurement work is correction handling, detection delay, calibration/revision stability, or
-independent Market reproduction.
+control, and valid silence under one frozen recorded-source challenge. P2C7 adds exact handling of
+one explicit recorded correction pair, preserves the prior record, and measures frozen-replay
+detection delay against a product target. The next bounded measurement work is
+calibration/revision stability, another independently sourced correction event, or independent
+Market reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
