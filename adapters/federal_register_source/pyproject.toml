@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-ext-world-federal-register-source"
-version = "0.1.0"
+version = "0.2.0"
 description = "Read-only Federal Register source adapter for ACE World Intelligence"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.4.1,<0.5"]
+dependencies = ["ace-core>=0.5.0,<0.6"]
 
 [dependency-groups]
 dev = ["pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.12"]

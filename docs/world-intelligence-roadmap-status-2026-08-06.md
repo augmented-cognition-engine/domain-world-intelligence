@@ -11,6 +11,7 @@ repository. This file records the World-side status against that roadmap from ac
 | P2A — inert pack and compiler falsification | **Verified 2026-08-06** | [`docs/audits/world-intelligence-p2a-2026-08-06.md`](audits/world-intelligence-p2a-2026-08-06.md); `pack_ir:683de57a71669814e507d07d65a109db`; 7 conformance tests |
 | P2B — prepared epistemic scenario | **Interpreter replay, immutable Case closure, governed Case-bound Brief, per-statement epistemic status, derivation-family independence, and supersession impact all verified 2026-08-07** | [`docs/audits/world-intelligence-p2b-case-brief-2026-08-07.md`](audits/world-intelligence-p2b-case-brief-2026-08-07.md); [`docs/audits/world-intelligence-p2b-status-case-brief-2026-08-07.md`](audits/world-intelligence-p2b-status-case-brief-2026-08-07.md); [`docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md`](audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md); [`docs/audits/world-intelligence-p2b-supersession-impact-2026-08-07.md`](audits/world-intelligence-p2b-supersession-impact-2026-08-07.md); 8 Observations, 5 Shifts, 4 Signals, 1 Case, 1 governed Brief over 26 closure resources; all seven statuses bound per statement; corroboration proven independent; correction impact projected; `70 passed, 0 xfailed` at the time of writing, superseded by `81 passed` for the complete suite once P2C landed (re-measured 2026-08-08) |
 | P2C — governed LIVE official-source proof | **Governed admission, exact replay, restart replay, and artifact binding verified 2026-08-07; reviewed network transport remains separate** | [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](audits/world-intelligence-p2c-federal-register-live-2026-08-07.md); additive pack `pack_ir:1847032fc5301bba9b6f85d3d091400d`; adapter wheel SHA-256 `6b794c47…9b1f97`; one capture, 5 atomic LIVE records, zero downstream intelligence/action |
+| P2C2 — official-record Reality Brief into reviewed action | **Release candidate verified 2026-08-10 against public ACE Core 0.5.0 artifacts; World 0.9.0 publication pending** | Two exact FCC records; stable LIVE entity; Shift; Signal; routed attention; six-claim/two-citation LIVE Brief; governed Decision; exact review; create-only export; verification; promotion; no second reasoning/effect on replay. Fresh public-artifact environment: 83 World + 26 connector + 2 focused tests passed without a Core checkout. See [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md). |
 | P2D — multi-source conflict and correction | Partially pre-staged: the P2B fixtures already model multi-family conflict and append-only correction; runtime proof not started | — |
 
 ## P2B deliverable inventory
@@ -155,7 +156,16 @@ harnesses and renders a deterministic, self-contained visual proof plus its mach
 
 P2C is now implemented as an additive activation pack plus a separately versioned, read-only
 Federal Register adapter. The original World pack hashes remain frozen. The accepted transport is
-recorded and network-free, so the next bounded dispatch is a separately reviewed opt-in network
-transport for that exact adapter contract, followed by P2D LIVE multi-source conflict/correction.
-Visible PREPARED/LIVE separation and the prohibition on autonomous publishing or external action
-remain invariant.
+recorded and network-free.
+
+P2C2 now carries that official-record path through public ACE Core 0.5.0:
+two recorded official snapshots become a configured categorical Shift and routed Signal, then one
+Core-governed LIVE Reality Brief. A human Decision authorizes the exact action type; a separate
+review binds the effect-free plan before Core admits execution; verification and promotion remain
+separate after the create-only workspace export. The Domain Pack remains JSON-only and never owns
+action authority. The same journey now passes with Core installed from PyPI and the reference
+adapter installed from the Core `v0.5.0` GitHub release, with no Core checkout.
+
+The next bounded dispatch is World 0.9.0 publication and clean-wheel reproduction, followed by a
+separately reviewed opt-in network transport and P2D LIVE multi-source conflict/correction. Visible
+PREPARED/LIVE separation and the prohibition on autonomous publishing remain invariant.

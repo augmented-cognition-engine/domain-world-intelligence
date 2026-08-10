@@ -1,0 +1,97 @@
+{
+  "contract": "ace.world-intelligence.federal-register-monitor-input/v1alpha1",
+  "fixture_id": "p2c2_fcc_publication_change",
+  "fixture_version": "0.1.0",
+  "product_id": "product:world-watch",
+  "actor_ref": "actor:world-analyst",
+  "activation_key": "world_federal_register_monitor",
+  "entity_ref": "entity:monitor/fcc-latest-federal-register-publication",
+  "entity_type_id": "federal_register_agency_monitor",
+  "source_type_ref": "federal_register_document",
+  "subject_binding_id": "fcc_publication_monitor",
+  "configuration_ref": "config:federal-register-fcc-monitor",
+  "configuration_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "authority": "source_read",
+  "grant_ref": "authority_grant:world-federal-register-monitor-read",
+  "grant_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "adapter_artifact": {
+    "capability": "source_snapshot",
+    "contract": "ace.source.snapshot/v1alpha1",
+    "implementation_id": "world_federal_register_monitor_source",
+    "implementation_version": "0.2.0",
+    "artifact_digest": "sha256:abababababababababababababababababababababababababababababababab"
+  },
+  "activation": {
+    "overlay_id": "world_federal_register_monitor_conformance",
+    "overlay_version": "0.1.0",
+    "capability_requirement_id": "federal_register_snapshot",
+    "authority_request_id": "read_federal_register_document",
+    "approval_receipt_ref": "approval_receipt:world-p2c2-monitor",
+    "compilation_receipt_ref": "compilation_receipt:world-p2c2-monitor",
+    "conformance_receipt_ref": "conformance_receipt:world-p2c2-monitor",
+    "occurred_at": "2026-08-06T17:50:00Z",
+    "committed_at": "2026-08-06T17:51:00Z"
+  },
+  "authentication": {
+    "receipt_ref": "authentication_receipt:world-p2c2-monitor",
+    "receipt_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "authenticated_at": "2026-08-06T17:45:00Z",
+    "expires_at": "2026-08-11T19:30:00Z"
+  },
+  "grant_expires_at": "2026-08-11T19:30:00Z",
+  "governed_heads": {
+    "capability": {"sequence": 1, "revision_id": "capability_state_revision:fcc-monitor-v1", "commit_receipt_id": "governed_state_commit:fcc-monitor-capability-v1", "updated_at": "2026-08-06T17:51:10Z"},
+    "grant": {"sequence": 1, "revision_id": "authority_grant_revision:fcc-monitor-v1", "commit_receipt_id": "governed_state_commit:fcc-monitor-grant-v1", "updated_at": "2026-08-06T17:51:20Z"},
+    "sources": {
+      "2026-15932": {"sequence": 1, "revision_id": "source_definition_revision:federal-register-2026-15932-v1", "commit_receipt_id": "governed_state_commit:federal-register-2026-15932-v1", "updated_at": "2026-08-06T17:51:30Z"},
+      "2026-16197": {"sequence": 1, "revision_id": "source_definition_revision:federal-register-2026-16197-v1", "commit_receipt_id": "governed_state_commit:federal-register-2026-16197-v1", "updated_at": "2026-08-06T17:51:40Z"}
+    }
+  },
+  "documents": [
+    {
+      "document_number": "2026-15932",
+      "mapping_id": "fcc_publication_2026_15932",
+      "source_definition_ref": "source_definition:federal-register-2026-15932",
+      "idempotency_key": "live-source:federal-register:2026-15932:2026-08-06",
+      "requested_at": "2026-08-06T18:00:00Z",
+      "capture_started_at": "2026-08-06T18:00:01Z",
+      "observed_at": "2026-08-06T18:00:02Z",
+      "captured_at": "2026-08-06T18:00:03Z",
+      "rechecked_at": "2026-08-06T18:00:04Z",
+      "admitted_at": "2026-08-06T18:00:05Z",
+      "requested_uri": "https://www.federalregister.gov/api/v1/documents/2026-15932.json",
+      "html_uri": "https://www.federalregister.gov/documents/2026/08/06/2026-15932/information-collection-being-reviewed-by-the-federal-communications-commission",
+      "official_pdf_uri": "https://www.govinfo.gov/content/pkg/FR-2026-08-06/pdf/2026-15932.pdf",
+      "document_type": "Notice",
+      "publication_date": "2026-08-06",
+      "agency_name": "Federal Communications Commission",
+      "title": "Information Collection Being Reviewed by the Federal Communications Commission"
+    },
+    {
+      "document_number": "2026-16197",
+      "mapping_id": "fcc_publication_2026_16197",
+      "source_definition_ref": "source_definition:federal-register-2026-16197",
+      "idempotency_key": "live-source:federal-register:2026-16197:2026-08-07",
+      "requested_at": "2026-08-07T18:00:00Z",
+      "capture_started_at": "2026-08-07T18:00:01Z",
+      "observed_at": "2026-08-07T18:00:02Z",
+      "captured_at": "2026-08-07T18:00:03Z",
+      "rechecked_at": "2026-08-07T18:00:04Z",
+      "admitted_at": "2026-08-07T18:00:05Z",
+      "requested_uri": "https://www.federalregister.gov/api/v1/documents/2026-16197.json",
+      "html_uri": "https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the",
+      "official_pdf_uri": "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf",
+      "document_type": "Proposed Rule",
+      "publication_date": "2026-08-07",
+      "agency_name": "Federal Communications Commission",
+      "title": "Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program"
+    }
+  ],
+  "derivation": {
+    "detector_id": "fcc_latest_publication_change",
+    "derivation_key": "live-derivation:fcc-latest-publication:2026-08-07",
+    "detected_at": "2026-08-07T18:01:00Z",
+    "attention_evaluated_at": "2026-08-07T18:01:01Z",
+    "requested_at": "2026-08-07T18:01:02Z"
+  }
+}

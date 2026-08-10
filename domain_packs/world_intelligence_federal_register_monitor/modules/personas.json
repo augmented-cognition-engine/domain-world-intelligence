@@ -1,0 +1,25 @@
+{
+  "contract": "ace.intelligence.personas/v1alpha1",
+  "module_id": "world_federal_register_monitor_personas",
+  "personas": [
+    {
+      "persona_id": "general_reader",
+      "display_name": "General Reader",
+      "description": "Needs a concise, inspectable account of what changed and what remains unknown."
+    },
+    {
+      "persona_id": "public_researcher",
+      "display_name": "Public Researcher",
+      "description": "Inspects exact public records, citations, inferences, and limitations."
+    }
+  ],
+  "signal_routing_rules": [
+    {
+      "routing_rule_id": "route_official_publication",
+      "signal_type": "official_publication",
+      "persona_ids": ["general_reader", "public_researcher"],
+      "minimum_confidence": 0.8,
+      "brief_template_id": "official_record_change_brief"
+    }
+  ]
+}

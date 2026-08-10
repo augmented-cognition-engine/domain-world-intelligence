@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-domain-world-intelligence"
-version = "0.8.0"
+version = "0.9.0"
 description = "Inert ACE World Intelligence Domain Pack and conformance fixtures"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.4.1,<0.5"]
+dependencies = ["ace-core>=0.5.0,<0.6"]
 
 [dependency-groups]
 dev = [
@@ -38,6 +38,11 @@ include-package-data = false
   "conformance/*.json",
 ]
 "domain_packs.world_intelligence_federal_register" = [
+  "*.json",
+  "modules/*.json",
+  "conformance/*.json",
+]
+"domain_packs.world_intelligence_federal_register_monitor" = [
   "*.json",
   "modules/*.json",
   "conformance/*.json",

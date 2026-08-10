@@ -17,12 +17,12 @@ env:
   # Pin every uv invocation to the only interpreter this project supports.
   UV_PYTHON: "3.12"
   ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
-  ROOT_VERSION: "0.8.0"
+  ROOT_VERSION: "0.9.0"
   # Exact expected build outputs. Never matched with a glob: the point of the
   # release gate is that we know precisely which files were produced.
-  ROOT_WHEEL: "ace_domain_world_intelligence-0.8.0-py3-none-any.whl"
-  ROOT_SDIST: "ace_domain_world_intelligence-0.8.0.tar.gz"
-  ACE_CORE_VERSION: "0.4.1"
+  ROOT_WHEEL: "ace_domain_world_intelligence-0.9.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_world_intelligence-0.9.0.tar.gz"
+  ACE_CORE_VERSION: "0.5.0"
   RELEASE_CONTRACT_TEST: "tests/test_release_contract.py"
   ADAPTER_TEST_SUITE: "adapters/federal_register_source/tests"
   # Keep the repository's proof scripts and separately packaged connector ahead
@@ -76,17 +76,17 @@ jobs:
       - name: Run the complete root pytest suite
         run: |
           set -euo pipefail
-          uv run --no-sync pytest
+          uv run --no-sync python -m pytest
 
       - name: Run the release contract suite
         run: |
           set -euo pipefail
-          uv run --no-sync pytest "${RELEASE_CONTRACT_TEST}"
+          uv run --no-sync python -m pytest "${RELEASE_CONTRACT_TEST}"
 
       - name: Run the Federal Register adapter suite
         run: |
           set -euo pipefail
-          uv run --no-sync pytest "${ADAPTER_TEST_SUITE}"
+          uv run --no-sync python -m pytest "${ADAPTER_TEST_SUITE}"
 
       - name: Build the root distribution
         run: |
@@ -136,12 +136,13 @@ jobs:
           from packaging.utils import canonicalize_name
 
           wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
-          dist_info = "ace_domain_world_intelligence-0.8.0.dist-info/"
+          dist_info = "ace_domain_world_intelligence-0.9.0.dist-info/"
           adapter_import_package = "ace_world_federal_register_source"
           adapter_distribution = "ace-ext-world-federal-register-source"
 
           world = "domain_packs/world_intelligence/"
           federal = "domain_packs/world_intelligence_federal_register/"
+          monitor = "domain_packs/world_intelligence_federal_register_monitor/"
           expected_payload = sorted(
               [
                   world + "manifest.json",
@@ -176,6 +177,13 @@ jobs:
                   federal + "modules/source_mapping.json",
                   federal + "conformance/p2c_live_expected.json",
                   federal + "conformance/p2c_live_source_input.json",
+                  monitor + "manifest.json",
+                  monitor + "modules/detection.json",
+                  monitor + "modules/ontology.json",
+                  monitor + "modules/personas.json",
+                  monitor + "modules/source_mapping.json",
+                  monitor + "modules/synthesis.json",
+                  monitor + "conformance/p2c2_monitor_input.json",
               ]
           )
 
@@ -205,14 +213,14 @@ jobs:
           assert len(requires_dist) == 1, requires_dist
           requirement = Requirement(requires_dist[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.4.1,<0.5"), requires_dist
+          assert requirement.specifier == SpecifierSet(">=0.5.0,<0.6"), requires_dist
           assert canonicalize_name(adapter_distribution) not in {
               canonicalize_name(Requirement(entry).name) for entry in requires_dist
           }
           print("inspected wheel:", wheel_path.name, "with", len(payload), "data resources")
           PY
 
-      - name: Prove the wheel installs against public ace-core 0.4.1 in an isolated environment
+      - name: Prove the wheel installs against public ace-core 0.5.0 in an isolated environment
         run: |
           set -euo pipefail
           ISOLATED="$(mktemp -d)"

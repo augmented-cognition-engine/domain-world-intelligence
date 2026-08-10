@@ -1,4 +1,4 @@
-"""Release contract for the ACE World Intelligence 0.8.0 root distribution.
+"""Release contract for the ACE World Intelligence 0.9.0 root distribution.
 
 These assertions are the publishable-identity gate. They pin what a consumer of
 ``ace-domain-world-intelligence`` receives from PyPI: the exact version, the exact
@@ -33,10 +33,10 @@ ROOT_DISTRIBUTION = "ace-domain-world-intelligence"
 ADAPTER_DISTRIBUTION = "ace-ext-world-federal-register-source"
 ADAPTER_IMPORT_PACKAGE = "ace_world_federal_register_source"
 
-EXPECTED_ROOT_VERSION = "0.8.0"
+EXPECTED_ROOT_VERSION = "0.9.0"
 EXPECTED_REQUIRES_PYTHON = ">=3.12,<3.13"
-EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.4.1,<0.5"
-EXPECTED_ACE_CORE_SPECIFIER = ">=0.4.1,<0.5"
+EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.5.0,<0.6"
+EXPECTED_ACE_CORE_SPECIFIER = ">=0.5.0,<0.6"
 
 DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence",
@@ -81,7 +81,7 @@ def test_root_requires_python_is_exactly_the_3_12_series() -> None:
     assert not specifier.contains(Version("3.13.0"))
 
 
-def test_root_depends_only_on_the_ace_core_0_4_1_compatibility_window() -> None:
+def test_root_depends_only_on_the_ace_core_0_5_compatibility_window() -> None:
     dependencies = ROOT_PROJECT["project"]["dependencies"]
 
     assert dependencies == [EXPECTED_ACE_CORE_REQUIREMENT]
@@ -92,11 +92,10 @@ def test_root_depends_only_on_the_ace_core_0_4_1_compatibility_window() -> None:
     assert requirement.marker is None
     assert requirement.url is None
     assert requirement.specifier == SpecifierSet(EXPECTED_ACE_CORE_SPECIFIER)
-    assert requirement.specifier.contains(Version("0.4.1"))
-    assert requirement.specifier.contains(Version("0.4.9"))
-    assert not requirement.specifier.contains(Version("0.4.0"))
-    assert not requirement.specifier.contains(Version("0.3.1"))
-    assert not requirement.specifier.contains(Version("0.5.0"))
+    assert requirement.specifier.contains(Version("0.5.0"))
+    assert requirement.specifier.contains(Version("0.5.9"))
+    assert not requirement.specifier.contains(Version("0.4.4"))
+    assert not requirement.specifier.contains(Version("0.6.0"))
 
 
 def test_federal_register_adapter_is_a_separate_distribution() -> None:
@@ -105,7 +104,7 @@ def test_federal_register_adapter_is_a_separate_distribution() -> None:
     assert ADAPTER_PYPROJECT.is_file()
     assert adapter["name"] == ADAPTER_DISTRIBUTION
     assert adapter["name"] != ROOT_DISTRIBUTION
-    assert adapter["version"] == "0.1.0"
+    assert adapter["version"] == "0.2.0"
     assert adapter["requires-python"] == EXPECTED_REQUIRES_PYTHON
     assert adapter["dependencies"] == [EXPECTED_ACE_CORE_REQUIREMENT]
 
@@ -159,6 +158,7 @@ def test_root_distribution_mapping_stays_inert_and_data_only() -> None:
     assert set(package_data) == {
         "domain_packs.world_intelligence",
         "domain_packs.world_intelligence_federal_register",
+        "domain_packs.world_intelligence_federal_register_monitor",
     }
     for patterns in package_data.values():
         assert patterns == ["*.json", "modules/*.json", "conformance/*.json"]

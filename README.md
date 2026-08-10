@@ -8,14 +8,13 @@ truth.
 This repository is a consumer of the public ACE Core + Intelligence distribution. It does not own
 a reasoning runtime, graph, state store, authority system, detector engine, or feedback loop.
 
-- **Distribution:** `ace-domain-world-intelligence` 0.8.0 — JSON-only, data-only, inert
-- **Requires:** Python 3.12 and `ace-core>=0.4.1,<0.5`
-- **Status:** released. The `v0.8.0` tag exists, the
-  [GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.8.0)
-  is published, and the distribution is
-  [public on PyPI](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/)
-  (published 2026-08-09). See
-  [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md).
+- **Distribution:** `ace-domain-world-intelligence` 0.9.0 release candidate — JSON-only, data-only, inert
+- **Requires:** Python 3.12 and `ace-core>=0.5.0,<0.6`
+- **Status:** release candidate. The complete P2C2 journey passes against public `ace-core==0.5.0`
+  and the public reference-action adapter without a Core checkout. The World `v0.9.0` tag and PyPI
+  publication remain the final release gate. The current public release remains
+  [`0.8.0`](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/). See the
+  [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
 ## What you install, and what you get
 
@@ -23,7 +22,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (public on PyPI, 0.4.1) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay. |
+| **ACE Core** | `ace-core` (public on PyPI, 0.5.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, and governed bounded action. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
 | **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
 
@@ -34,24 +33,22 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-0.8.0 is published on PyPI:
-[`ace-domain-world-intelligence` 0.8.0](https://pypi.org/project/ace-domain-world-intelligence/0.8.0/).
-A public clean install on Python 3.12 resolves `ace-domain-world-intelligence==0.8.0` and
-`ace-core==0.4.1`.
+After the `v0.9.0` release is published, install it on Python 3.12 with either command below. The
+release candidate has already been built and tested against public `ace-core==0.5.0`.
 
 With `uv`:
 
 ```bash
-uv add "ace-domain-world-intelligence==0.8.0"
+uv add "ace-domain-world-intelligence==0.9.0"
 ```
 
 With `pip`:
 
 ```bash
-pip install "ace-domain-world-intelligence==0.8.0"
+pip install "ace-domain-world-intelligence==0.9.0"
 ```
 
-Either command also brings in `ace-core>=0.4.1,<0.5`, which is already public. It does **not** bring
+Either command also brings in `ace-core>=0.5.0,<0.6`, which is already public. It does **not** bring
 in the Federal Register connector; that is a deliberate boundary, not an omission.
 
 Resolve the pack data from the installed distribution:
@@ -154,6 +151,21 @@ and the corresponding `govinfo.gov` PDF is retained as the official-format verif
 No Signal, Shift, Brief, Decision, Outcome, feedback, delivery, publishing, persuasion, or external
 action is created.
 
+P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
+declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
+and document `2026-16197` published August 7 — as successive LIVE snapshots of one stable monitor
+entity. Its configured categorical detector produces an `official_publication_change` Shift, routes
+an `official_publication` Signal, and invokes Core-governed reasoning to produce one LIVE Reality
+Brief with six claims and two exact citations. A named human Decision then authorizes only a
+create-only workspace export; a second exact human review precedes the effect, and separate
+verification and promotion receipts follow it. Replay performs neither a second reasoning call nor
+a second file effect.
+
+This is a governed export proof, not autonomous publishing. The pack contains no executable code or
+action authority; the export is provided by Core's separately packaged reference adapter. The two
+source responses are exact official public records under recorded transport, so P2C2 proves the
+complete deterministic product journey but still does not claim network freshness at test time.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -193,7 +205,7 @@ for the 0.7.0 release boundary and full identity list.
 ## Connector boundary
 
 This repository ships an **inert Domain Pack**. The Federal Register connector is a separately
-versioned executable artifact, `ace-ext-world-federal-register-source` 0.1.0, with its own review
+versioned executable artifact, `ace-ext-world-federal-register-source` 0.2.0, with its own review
 boundary:
 
 - it is **not** a dependency of the Domain Pack, and no extra reintroduces it;
@@ -222,10 +234,11 @@ With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
 [Develop from a source checkout](#develop-from-a-source-checkout):
 
 ```bash
-# Complete suite, including every frozen P2A/P2B packet and P2C: 81 passed
+# Complete domain suite, including every frozen packet and the P2C2 product journey: 83 passed
+export PYTHONPATH="$PYTHONPATH:$ACE/adapters/reference_workspace_action/src"
 $PY -m pytest -q
 
-# Connector fail-closed unit suite: 24 passed
+# Connector fail-closed unit suite: 26 passed
 $PY -m pytest adapters/federal_register_source/tests -q
 
 # Individual acceptance harnesses
@@ -236,19 +249,26 @@ $PY scripts/p2b_case_brief.py
 $PY scripts/p2b_status_case_brief.py
 $PY scripts/p2b_independent_case_brief.py
 $PY scripts/p2c_federal_register_live_acceptance.py
+
+# Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
+WORKSPACE=$(mktemp -d)
+$PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 ```
 
-Or run the same gates through the locked environment, as CI does:
+The 0.9.0 release-candidate gates are reproducible through the locked environment, as CI does. The
+P2C2 action test runs when the independently packaged Core reference adapter is installed:
 
 ```bash
 uv sync --frozen --no-install-project
-uv run --no-sync pytest                                   # World suite: 81 passed
-uv run --no-sync pytest tests/test_release_contract.py    # publishable-identity gate
-uv run --no-sync pytest adapters/federal_register_source/tests   # connector: 24 passed
+uv run --no-sync python -m pytest                         # released + candidate-compatible gates
+uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-identity gate
+uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 26 passed
 ```
 
-Expected totals as of 2026-08-08: complete World suite **81 passed**, connector suite
-**24 passed**. The public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
+Verified totals as of 2026-08-10 with public `ace-core==0.5.0` from PyPI and the independently
+packaged reference adapter from the Core `v0.5.0` GitHub release: domain suite `83 passed`,
+connector suite `26 passed`. The
+public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
 The exact identities, negative cases, and artifact proofs are recorded in
@@ -265,6 +285,8 @@ and the independent-corroboration proof in
 [`docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md`](docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md).
 The governed official-source admission proof is recorded in
 [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md).
+The complete governed product-journey evidence is recorded in
+[`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 
 Release-level scope, artifacts, and open gates are recorded in
 [`docs/releases/world-intelligence-p2c-v0.8.0.md`](docs/releases/world-intelligence-p2c-v0.8.0.md),
@@ -278,15 +300,19 @@ and version history in [`CHANGELOG.md`](CHANGELOG.md).
 - Corrections append state rather than rewriting history.
 - Inference and scenario material remain explicitly labeled.
 - Persona routing never changes an evidence status.
-- No political persuasion, voter targeting, autonomous publishing, or external action.
+- No political persuasion, voter targeting, or autonomous publishing.
+- External effects require an exact Core-governed Decision, human review, post-effect
+  verification, and promotion; the reference proof is limited to one create-only workspace file.
 
-World Intelligence does not watch live news feeds, does not decide anything on its own, and does not
-publish, deliver, or act outside the process that invokes it. Every LIVE capture demonstrated here is
-one explicitly requested, governed, read-only retrieval.
+World Intelligence does not watch live news feeds, decide anything on its own, or publish or deliver
+content autonomously. Every LIVE capture demonstrated here is one explicitly requested, governed,
+read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
+workspace export followed by separate verification and promotion.
 
-Next: add a separately reviewed, opt-in network transport for the exact source-adapter contract,
-then exercise P2D multi-source conflict and correction with LIVE inputs. Neither step may add
-publishing, delivery, persuasion, or other external-action authority.
+Next: publish World Intelligence 0.9.0, verify its installed wheel with public Core 0.5.0, then add
+a separately reviewed opt-in network transport and exercise P2D
+multi-source conflict/correction with LIVE inputs. Neither step may add autonomous publishing,
+delivery, persuasion, or action authority to a Domain Pack.
 
 ## License
 

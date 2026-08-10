@@ -1,0 +1,34 @@
+{
+  "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
+  "metadata": {
+    "pack_id": "world_intelligence_federal_register_monitor",
+    "version": "0.1.0",
+    "display_name": "ACE World Intelligence — Federal Register monitor",
+    "description": "Declarative official-record monitor that turns exact Federal Register snapshots into governed Shifts, Signals, and cited Briefs."
+  },
+  "compatibility": {
+    "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
+    "intelligence_contract": "ace.intelligence.runtime/v1alpha1"
+  },
+  "resources": [
+    {"resource_id": "world_federal_register_monitor_ontology", "path": "modules/ontology.json", "media_type": "application/json", "digest": "sha256:6b6182581306408d47c30bc4d9650b680e73367485ea4f35f9edd08170d0a164"},
+    {"resource_id": "world_federal_register_monitor_source_mapping", "path": "modules/source_mapping.json", "media_type": "application/json", "digest": "sha256:94e47ba1311b2fd7c84f54c72378b6ff08a6c58b500fff7f696d12ae82ad57bf"},
+    {"resource_id": "world_federal_register_monitor_detection", "path": "modules/detection.json", "media_type": "application/json", "digest": "sha256:143b5c02802dc1e287a1e5aaf926282707f05dcdc115fd3fd48b763279dc2c07"},
+    {"resource_id": "world_federal_register_monitor_synthesis", "path": "modules/synthesis.json", "media_type": "application/json", "digest": "sha256:a46657b0e0504935020de31736d763f46d3efafbdec090b2ad93060f35b11f69"},
+    {"resource_id": "world_federal_register_monitor_personas", "path": "modules/personas.json", "media_type": "application/json", "digest": "sha256:103746644bfae4c02b531ff740ae9e26afce1d48fc47f83e367a3e5aa62024e7"}
+  ],
+  "modules": [
+    {"module_id": "world_federal_register_monitor_ontology", "contract": "ace.intelligence.ontology/v1alpha1", "resource_id": "world_federal_register_monitor_ontology", "depends_on": []},
+    {"module_id": "world_federal_register_monitor_source_mapping", "contract": "ace.intelligence.source-mapping/v1alpha1", "resource_id": "world_federal_register_monitor_source_mapping", "depends_on": ["world_federal_register_monitor_ontology"]},
+    {"module_id": "world_federal_register_monitor_detection", "contract": "ace.intelligence.detection/v1alpha2", "resource_id": "world_federal_register_monitor_detection", "depends_on": ["world_federal_register_monitor_ontology"]},
+    {"module_id": "world_federal_register_monitor_synthesis", "contract": "ace.intelligence.synthesis/v1alpha2", "resource_id": "world_federal_register_monitor_synthesis", "depends_on": []},
+    {"module_id": "world_federal_register_monitor_personas", "contract": "ace.intelligence.personas/v1alpha1", "resource_id": "world_federal_register_monitor_personas", "depends_on": ["world_federal_register_monitor_detection", "world_federal_register_monitor_synthesis"]}
+  ],
+  "capability_requirements": [
+    {"requirement_id": "federal_register_snapshot", "capability": "source_snapshot", "contract": "ace.source.snapshot/v1alpha1"}
+  ],
+  "authority_requests": [
+    {"request_id": "read_federal_register_document", "authority": "source_read"}
+  ],
+  "overlay_slots": []
+}

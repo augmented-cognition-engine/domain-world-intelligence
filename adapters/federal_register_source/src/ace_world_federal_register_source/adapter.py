@@ -40,6 +40,10 @@ FEDERAL_REGISTER_LOCATOR = "json-pointer:/document_number"
 PUBLICATION_DATE = "2026-08-07"
 AGENCY_NAME = "Federal Communications Commission"
 DOCUMENT_TYPE = "Proposed Rule"
+DOCUMENT_TITLE = (
+    "Protecting Against National Security Threats to the Communications Supply "
+    "Chain Through the Equipment Authorization Program"
+)
 
 LEGAL_STATUS_NOTICE = "FederalRegister.gov is not the official legal edition."
 VERIFICATION_REFERENCE = (
@@ -132,7 +136,38 @@ def _text(value: object, *, name: str, maximum: int) -> str:
     return value
 
 
-def _canonical_document_payload(response_body: object, *, max_chars: int) -> str:
+@dataclass(frozen=True, slots=True)
+class FederalRegisterDocumentProfile:
+    """Exact reviewed identity for one credential-free Federal Register record."""
+
+    document_number: str
+    title: str
+    document_type: str
+    publication_date: str
+    agency_name: str
+    document_uri: str
+    html_uri: str
+    official_pdf_uri: str
+
+
+DEFAULT_DOCUMENT_PROFILE = FederalRegisterDocumentProfile(
+    document_number=DOCUMENT_NUMBER,
+    title=DOCUMENT_TITLE,
+    document_type=DOCUMENT_TYPE,
+    publication_date=PUBLICATION_DATE,
+    agency_name=AGENCY_NAME,
+    document_uri=FEDERAL_REGISTER_DOCUMENT_URI,
+    html_uri=FEDERAL_REGISTER_HTML_URI,
+    official_pdf_uri=OFFICIAL_PDF_URI,
+)
+
+
+def _canonical_document_payload(
+    response_body: object,
+    *,
+    max_chars: int,
+    profile: FederalRegisterDocumentProfile = DEFAULT_DOCUMENT_PROFILE,
+) -> str:
     if type(response_body) is not str:
         raise _fail("Federal Register response body must be text")
     if not response_body or len(response_body) > max_chars:
@@ -166,12 +201,13 @@ def _canonical_document_payload(response_body: object, *, max_chars: int) -> str
     agency_name = _text(agencies[0].get("name"), name="agencies[0].name", maximum=256)
 
     exact = {
-        "document_number": (document_number, DOCUMENT_NUMBER),
-        "document_type": (document_type, DOCUMENT_TYPE),
-        "publication_date": (publication_date, PUBLICATION_DATE),
-        "agency_name": (agency_name, AGENCY_NAME),
-        "federal_register_url": (html_url, FEDERAL_REGISTER_HTML_URI),
-        "official_pdf_url": (official_pdf_url, OFFICIAL_PDF_URI),
+        "title": (title, profile.title),
+        "document_number": (document_number, profile.document_number),
+        "document_type": (document_type, profile.document_type),
+        "publication_date": (publication_date, profile.publication_date),
+        "agency_name": (agency_name, profile.agency_name),
+        "federal_register_url": (html_url, profile.html_uri),
+        "official_pdf_url": (official_pdf_url, profile.official_pdf_uri),
     }
     for name, (actual, expected) in exact.items():
         if actual != expected:
@@ -211,15 +247,30 @@ def _validated_addresses(values: object, *, name: str) -> tuple[str, ...]:
 
 
 class FederalRegisterSourceAdapter:
-    """Validate one injected retrieval and return inert canonical source material."""
+    """Validate injected retrievals against an explicit reviewed document allowlist."""
 
-    def __init__(self, *, transport: FederalRegisterTransport, artifact_digest: str) -> None:
+    def __init__(
+        self,
+        *,
+        transport: FederalRegisterTransport,
+        artifact_digest: str,
+        profiles: tuple[FederalRegisterDocumentProfile, ...] = (DEFAULT_DOCUMENT_PROFILE,),
+        implementation_id: str = ADAPTER_IMPLEMENTATION_ID,
+        implementation_version: str = ADAPTER_IMPLEMENTATION_VERSION,
+    ) -> None:
+        if not profiles or len({item.document_uri for item in profiles}) != len(profiles):
+            raise _fail("document profiles must be a non-empty exact URI allowlist")
+        for profile in profiles:
+            validate_exact_https_uri(profile.document_uri, name="profile.document_uri")
+            validate_exact_https_uri(profile.html_uri, name="profile.html_uri")
+            validate_exact_https_uri(profile.official_pdf_uri, name="profile.official_pdf_uri")
         self._transport = transport
+        self._profiles = {item.document_uri: item for item in profiles}
         self.artifact_identity = CapabilityArtifactIdentityV1Alpha1(
             capability=ADAPTER_CAPABILITY,
             contract=ADAPTER_CONTRACT,
-            implementation_id=ADAPTER_IMPLEMENTATION_ID,
-            implementation_version=ADAPTER_IMPLEMENTATION_VERSION,
+            implementation_id=implementation_id,
+            implementation_version=implementation_version,
             artifact_digest=artifact_digest,
         )
         self.capture_calls = 0
@@ -238,7 +289,8 @@ class FederalRegisterSourceAdapter:
             raise _fail("source-adapter request names a different installed artifact")
         if validated.source_type_ref != FEDERAL_REGISTER_SOURCE_TYPE:
             raise _fail("source-adapter request names an unsupported source type")
-        if validated.requested_uri != FEDERAL_REGISTER_DOCUMENT_URI:
+        profile = self._profiles.get(validated.requested_uri)
+        if profile is None:
             raise _fail("source-adapter request crossed the exact Federal Register URI")
         validate_exact_https_uri(validated.requested_uri, name="requested_uri")
 
@@ -276,8 +328,8 @@ class FederalRegisterSourceAdapter:
             raise _fail("retrieval result must attest exact true DNS-rebinding protection")
         if (
             result.source_type_ref != validated.source_type_ref
-            or result.requested_uri != FEDERAL_REGISTER_DOCUMENT_URI
-            or result.effective_uri != FEDERAL_REGISTER_DOCUMENT_URI
+            or result.requested_uri != profile.document_uri
+            or result.effective_uri != profile.document_uri
         ):
             raise _fail("retrieval result crossed source type or exact URI scope")
         if result.locator != FEDERAL_REGISTER_LOCATOR:
@@ -300,6 +352,7 @@ class FederalRegisterSourceAdapter:
         payload_json = _canonical_document_payload(
             result.response_body,
             max_chars=transport_request.max_response_chars,
+            profile=profile,
         )
         payload_digest = "sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
         return CapturedSourceMaterialV1Alpha1(
@@ -326,11 +379,13 @@ __all__ = [
     "ADAPTER_CONTRACT",
     "ADAPTER_IMPLEMENTATION_ID",
     "ADAPTER_IMPLEMENTATION_VERSION",
+    "DEFAULT_DOCUMENT_PROFILE",
     "DOCUMENT_NUMBER",
     "FEDERAL_REGISTER_DOCUMENT_URI",
     "FEDERAL_REGISTER_LOCATOR",
     "FEDERAL_REGISTER_SOURCE_TYPE",
     "OFFICIAL_PDF_URI",
+    "FederalRegisterDocumentProfile",
     "FederalRegisterRetrievalRequest",
     "FederalRegisterRetrievalResult",
     "FederalRegisterSourceAdapter",
