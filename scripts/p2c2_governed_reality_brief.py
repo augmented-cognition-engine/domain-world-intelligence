@@ -439,7 +439,11 @@ async def _record_decision(
     return decision, record.reference(), receipt
 
 
-async def run_acceptance(workspace_root: Path) -> dict[str, Any]:
+async def run_acceptance(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     environment = await build_environment()
     admissions = await admit_snapshots(environment)
     baseline, current = admissions
@@ -608,7 +612,7 @@ async def run_acceptance(workspace_root: Path) -> dict[str, Any]:
     if not action_replay.replayed:
         raise AssertionError("reviewed action did not reopen without a second effect")
 
-    return {
+    result = {
         "contract": "ace.world-intelligence.governed-reality-brief-action/v1alpha1",
         "source": source_projection(admissions),
         "intelligence": {
@@ -652,6 +656,26 @@ async def run_acceptance(workspace_root: Path) -> dict[str, Any]:
             "political_persuasion": False,
         },
     }
+    if state_sink is not None:
+        state_sink.update(
+            {
+                "environment": environment,
+                "admissions": admissions,
+                "runtime": runtime,
+                "reasoning": reasoning,
+                "append_binding": append_binding,
+                "action_binding": action_binding,
+                "clock": clock,
+                "brief_admission": brief,
+                "decision": decision,
+                "decision_ref": decision_ref,
+                "review": review,
+                "action_outcome": outcome,
+                "review_service": review_service,
+                "written": written,
+            }
+        )
+    return result
 
 
 def main() -> None:

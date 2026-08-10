@@ -16,6 +16,19 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
+## Candidate — P2C3 measured feedback over the public journey
+
+- The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
+  export pairs under one frozen structural citation-coverage criterion.
+- Exact material-use receipts, Decisions, reviewed Actions, terminal results, observed Outcomes,
+  conditions, and cutoff feed the domain-neutral Core + Intelligence measured-impact contract.
+- The candidate classifies the bounded result as useful and appends only a non-effective,
+  non-selectable promote proposal; exact replay performs no reauthorization.
+- This is source-checkout evidence against Core PR #88, not a released World capability, human
+  benefit finding, causal claim, network-freshness proof, or applied governance change.
+
+See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
+
 ## Next — trustworthy live orientation
 
 - Add a separately reviewed, opt-in production transport without bundling it into the Domain Pack.

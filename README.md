@@ -181,6 +181,19 @@ action authority; the export is provided by Core's separately packaged reference
 source responses are exact official public records under recorded transport, so P2C2 proves the
 complete deterministic product journey but still does not claim network freshness at test time.
 
+P2C3 is a source-checkout candidate over that unchanged public journey. It compares two exact
+reviewed exports of the cited Brief with two reviewed exports of a World-owned source-only control.
+The frozen product measure is the fraction of the two required admitted Observation identities
+preserved in each exported artifact: treatment scores `1.0, 1.0`; control scores `0.0, 0.0`. Under
+the declared minimum of two matched pairs and useful-effect threshold of `0.5`, Core + Intelligence
+classifies the exact result as `useful` and appends a `promote` proposal that is non-effective,
+non-selectable, and requires separate human review. Historical replay performs no reauthorization.
+
+That measure is structural citation coverage. It is not a human-benefit measure, causal estimate,
+general Brief-quality score, or network-freshness proof. The proposal is not applied. P2C3 depends
+on the unreleased Core candidate in [PR #88](https://github.com/augmented-cognition-engine/core/pull/88),
+so World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -268,6 +281,9 @@ $PY scripts/p2c_federal_register_live_acceptance.py
 # Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
 WORKSPACE=$(mktemp -d)
 $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
+
+# Candidate measured Outcome -> governed-feedback extension (requires Core PR #88 source)
+$PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -302,6 +318,8 @@ The governed official-source admission proof is recorded in
 [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md).
 The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
+The source-checkout measured-feedback candidate is recorded in
+[`docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md`](docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
@@ -329,8 +347,9 @@ workspace export followed by separate verification and promotion.
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
 and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is a separately
-reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE inputs. Neither
-step may add autonomous publishing, delivery, persuasion, or action authority to a Domain Pack.
+reviewed disposition of the P2C3 non-effective proposal plus a separately reviewed opt-in network
+transport and P2D multi-source conflict/correction with LIVE inputs. None of these steps may add
+autonomous publishing, delivery, persuasion, or action authority to a Domain Pack.
 
 ## Community and security
 
