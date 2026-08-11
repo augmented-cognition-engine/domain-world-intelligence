@@ -64,9 +64,7 @@ Resolve the pack data from the installed distribution:
 import json
 from importlib.resources import files
 
-manifest = json.loads(
-    files("domain_packs.world_intelligence").joinpath("manifest.json").read_text(encoding="utf-8")
-)
+manifest = json.loads(files("domain_packs.world_intelligence").joinpath("manifest.json").read_text(encoding="utf-8"))
 print(manifest["metadata"]["pack_id"])  # world_intelligence
 ```
 

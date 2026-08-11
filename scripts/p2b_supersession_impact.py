@@ -198,9 +198,7 @@ async def _build_world() -> dict[str, Any]:
         ("capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)): _head(
             "capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)
         ),
-        ("authority_grant", execution_binding.grant_ref): _head(
-            "authority_grant", execution_binding.grant_ref
-        ),
+        ("authority_grant", execution_binding.grant_ref): _head("authority_grant", execution_binding.grant_ref),
         ("authority_grant", append_binding.grant_ref): _head("authority_grant", append_binding.grant_ref),
     }
     activation_head = activation_store.heads[
@@ -213,9 +211,7 @@ async def _build_world() -> dict[str, Any]:
     for head in (*heads.values(), activation_head):
         store.set_governed_state_head(head)
 
-    observation_ids = {
-        record_id: str(item.resource_id) for record_id, item in material["observations"].items()
-    }
+    observation_ids = {record_id: str(item.resource_id) for record_id, item in material["observations"].items()}
     provider = _IndependenceProvider(
         observation_ids=observation_ids,
         corroboration=CORROBORATION_VECTORS["independent_roots"],
@@ -291,9 +287,7 @@ async def _build_world() -> dict[str, Any]:
             activation_revision=binding.prepared_binding.reference,
             pack=binding.prepared_binding.revision.spec.pack,
             resources=tuple(assertions[key] for key, _ in SUPERSESSION_VECTORS),
-            processing_order=deterministic_resource_order(
-                tuple(assertions[key] for key, _ in SUPERSESSION_VECTORS)
-            ),
+            processing_order=deterministic_resource_order(tuple(assertions[key] for key, _ in SUPERSESSION_VECTORS)),
             admitted_at=correction_at,
         )
     )
@@ -428,22 +422,12 @@ async def run_supersession_impact() -> dict[str, Any]:
             "max_depth": max((item.depth for item in projection.impacted), default=0),
             "unaffected_count": len(projection.unaffected_resource_ids),
             "impacted_claim_count": len(projection.claim_impacts),
-            "fully_impacted_claim_count": sum(
-                1 for item in projection.claim_impacts if item.fully_impacted
-            ),
-            "partially_impacted_claim_count": sum(
-                1 for item in projection.claim_impacts if not item.fully_impacted
-            ),
-            "case_is_impacted": any(
-                item.resource_kind.value == "case" for item in projection.impacted
-            ),
-            "durable_replay_is_exact": bool(
-                replayed.replayed and replayed.projection == appended.projection
-            ),
+            "fully_impacted_claim_count": sum(1 for item in projection.claim_impacts if item.fully_impacted),
+            "partially_impacted_claim_count": sum(1 for item in projection.claim_impacts if not item.fully_impacted),
+            "case_is_impacted": any(item.resource_kind.value == "case" for item in projection.impacted),
+            "durable_replay_is_exact": bool(replayed.replayed and replayed.projection == appended.projection),
             "atomic_records": len(appended.transaction_receipt.records),
-            "governed_state_preconditions": len(
-                appended.transaction_receipt.governed_state_preconditions
-            ),
+            "governed_state_preconditions": len(appended.transaction_receipt.governed_state_preconditions),
         }
 
     negatives = await run_negative_vectors(world)
@@ -496,13 +480,9 @@ async def _historical_view(world) -> dict[str, Any]:
         "brief_id_unchanged": str(replay.brief.resource_id) == str(admission.brief.resource_id),
         "brief_replays_identically": replay.brief == admission.brief,
         "receipt_replays_identically": replay.synthesis_receipt == admission.synthesis_receipt,
-        "status_projection_replays_identically": (
-            replay.status_projection == admission.status_projection
-        ),
+        "status_projection_replays_identically": (replay.status_projection == admission.status_projection),
         "replay_used_no_new_reasoning": world["provider"].calls == 1,
-        "brief_cutoff_precedes_the_correction": (
-            admission.brief.generated_at < world["correction_at"]
-        ),
+        "brief_cutoff_precedes_the_correction": (admission.brief.generated_at < world["correction_at"]),
     }
 
 
@@ -548,7 +528,7 @@ async def run_negative_vectors(world) -> dict[str, Any]:
                 generated_at=world["correction_at"] + timedelta(hours=1),
                 as_of=admission.brief.as_of,
             )
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001 - the probe records fail-closed error types
             results[name] = {"rejected": True, "error_type": type(exc).__name__}
         else:
             results[name] = {"rejected": False}

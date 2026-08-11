@@ -81,10 +81,7 @@ def compile_monitor_pack():
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            item["path"]: (PACK_ROOT / item["path"]).read_bytes()
-            for item in manifest["resources"]
-        },
+        {item["path"]: (PACK_ROOT / item["path"]).read_bytes() for item in manifest["resources"]},
     )
 
 
@@ -102,13 +99,9 @@ def _head(*, kind: str, product_id: str, state_id: str, material: dict[str, Any]
 
 class ExactSourceDefinitions:
     def __init__(self, definitions: tuple[ResolvedSourceDefinitionV1Alpha1, ...]) -> None:
-        self.definitions = {
-            item.source_definition_ref: item for item in definitions
-        }
+        self.definitions = {item.source_definition_ref: item for item in definitions}
 
-    async def resolve_source_definition(
-        self, *, product_id, source_definition_ref, resolved_at
-    ):
+    async def resolve_source_definition(self, *, product_id, source_definition_ref, resolved_at):
         del resolved_at
         definition = self.definitions.get(source_definition_ref)
         if definition is None or definition.product_id != product_id:
@@ -277,9 +270,7 @@ async def build_environment() -> MonitorEnvironment:
                 subject_binding_id=fixture["subject_binding_id"],
                 entity_type_id=fixture["entity_type_id"],
                 entity_ref=fixture["entity_ref"],
-                state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                    source_head
-                ),
+                state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(source_head),
             )
         )
         requests.append(
@@ -345,9 +336,7 @@ async def build_environment() -> MonitorEnvironment:
         grant_head=grant_head,
     )
     store = InMemoryImmutableRecordStore()
-    activation_head = activation_store.heads[
-        ("domain_activation", product_id, committed.revision.activation_id)
-    ]
+    activation_head = activation_store.heads[("domain_activation", product_id, committed.revision.activation_id)]
     for head in (activation_head, capability_head, grant_head, *source_heads):
         store.set_governed_state_head(head)
     return MonitorEnvironment(
@@ -369,9 +358,7 @@ async def build_environment() -> MonitorEnvironment:
 
 async def admit_snapshots(environment: MonitorEnvironment):
     admissions = []
-    for document, request in zip(
-        environment.fixture["documents"], environment.requests, strict=True
-    ):
+    for document, request in zip(environment.fixture["documents"], environment.requests, strict=True):
         service = environment.ingress(
             SequenceClock(
                 _time(document["capture_started_at"]),
@@ -446,15 +433,10 @@ def source_projection(admissions) -> dict[str, Any]:
     return {
         "baseline": admissions[0].entity_snapshot.attributes.parsed_value(),
         "current": admissions[1].entity_snapshot.attributes.parsed_value(),
-        "entity_ref_stable": (
-            admissions[0].entity_snapshot.entity_ref
-            == admissions[1].entity_snapshot.entity_ref
-        ),
+        "entity_ref_stable": (admissions[0].entity_snapshot.entity_ref == admissions[1].entity_snapshot.entity_ref),
         "observation_modes": [item.observation.mode.value for item in admissions],
     }
 
 
 if __name__ == "__main__":
-    raise SystemExit(
-        "This packet is composed by the governed Reality Brief acceptance harness."
-    )
+    raise SystemExit("This packet is composed by the governed Reality Brief acceptance harness.")

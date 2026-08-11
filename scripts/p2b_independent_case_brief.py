@@ -231,7 +231,12 @@ def independence_activation_revision():
 #: all 28 selected context items are attributed exactly once.
 CLAIM_PLAN = (
     ("what_happened", "admitted_record", "cited", ("record", "record:mwa_bulletin_214", "record:mwa_order_47")),
-    ("what_changed", "ace_inference", "inference", ("kind", ("case", 0), ("entity_snapshot", 0), ("entity_snapshot", 1))),
+    (
+        "what_changed",
+        "ace_inference",
+        "inference",
+        ("kind", ("case", 0), ("entity_snapshot", 0), ("entity_snapshot", 1)),
+    ),
     ("established_records", "admitted_record", "cited", ("record", "record:assembly_transcript_0310")),
     ("attributed_claims", "attributed_claim", "cited", ("record", "record:ledger_correction_114")),
     ("where_sources_agree", "corroborated", "cited", ("corroboration",)),
@@ -332,9 +337,7 @@ class _IndependenceProvider:
             attributed.update(supports)
             claim = BriefDraftClaimV1Alpha1(
                 statement=STATEMENTS[status_id],
-                grounding_kind=(
-                    ClaimGroundingKind.CITED if grounding == "cited" else ClaimGroundingKind.INFERENCE
-                ),
+                grounding_kind=(ClaimGroundingKind.CITED if grounding == "cited" else ClaimGroundingKind.INFERENCE),
                 support_refs=supports,
                 confidence=1.0 if grounding == "cited" else 0.7,
                 uncertainty=None if grounding == "cited" else UNCERTAINTY,
@@ -434,9 +437,7 @@ async def _environment(*, corroboration: tuple[str, ...], synthesis_key: str):
         ("capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)): _head(
             "capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)
         ),
-        ("authority_grant", execution_binding.grant_ref): _head(
-            "authority_grant", execution_binding.grant_ref
-        ),
+        ("authority_grant", execution_binding.grant_ref): _head("authority_grant", execution_binding.grant_ref),
         ("authority_grant", append_binding.grant_ref): _head("authority_grant", append_binding.grant_ref),
     }
     activation_head = activation_store.heads[
@@ -449,9 +450,7 @@ async def _environment(*, corroboration: tuple[str, ...], synthesis_key: str):
     for head in (*heads.values(), activation_head):
         store.set_governed_state_head(head)
 
-    observation_ids = {
-        record_id: str(item.resource_id) for record_id, item in material["observations"].items()
-    }
+    observation_ids = {record_id: str(item.resource_id) for record_id, item in material["observations"].items()}
     provider = _IndependenceProvider(observation_ids=observation_ids, corroboration=corroboration)
     reasoning = GovernedReasoningService(
         store=store,
@@ -543,7 +542,7 @@ async def run_negative_corroboration_vectors() -> dict[str, Any]:
         )
         try:
             await environment["service"].synthesize_with_status(environment["request"])
-        except Exception as exc:  # the exact public fail-closed error
+        except Exception as exc:  # noqa: BLE001 - the probe records the exact public fail-closed error
             results[name] = {
                 "rejected": True,
                 "error_type": type(exc).__name__,
@@ -625,32 +624,23 @@ async def run_independent_case_brief() -> dict[str, Any]:
         },
         "independence": {
             "corroborated_claim_count": len(corroborated),
-            "corroborated_required_families": [
-                item.required_distinct_derivation_families for item in corroborated
-            ],
-            "corroborated_distinct_families": [
-                item.distinct_derivation_family_count for item in corroborated
-            ],
+            "corroborated_required_families": [item.required_distinct_derivation_families for item in corroborated],
+            "corroborated_distinct_families": [item.distinct_derivation_family_count for item in corroborated],
             "corroborated_roots_are_ledger_and_hydrology": all(
                 sorted(item.derivation_family_roots) == sorted((ledger_root_id, hydrology_root_id))
                 for item in corroborated
             ),
             "syndicated_copies_are_inside_the_closure": syndication_ids
             <= {str(item.record.resource_id) for item in receipt.selected_context},
-            "ledger_family_members": sorted(ledger_family.member_record_ids)
-            if ledger_family is not None
-            else [],
-            "ledger_family_member_count": len(ledger_family.member_record_ids)
-            if ledger_family is not None
-            else 0,
+            "ledger_family_members": sorted(ledger_family.member_record_ids) if ledger_family is not None else [],
+            "ledger_family_member_count": len(ledger_family.member_record_ids) if ledger_family is not None else 0,
             # The exact acceptance check: not merely "these are not roots", but
             # "these resolve specifically to the Ledger root family".
             "syndicated_copies_are_exact_members_of_the_ledger_family": (
                 ledger_family is not None and syndication_ids <= set(ledger_family.member_record_ids)
             ),
             "hydrology_is_a_separate_single_member_family": (
-                hydrology_family is not None
-                and hydrology_family.member_record_ids == (hydrology_root_id,)
+                hydrology_family is not None and hydrology_family.member_record_ids == (hydrology_root_id,)
             ),
             "distinct_families_in_closure": len(projection.closure_families),
             "negative_vectors": dict(sorted(negatives.items())),
@@ -658,9 +648,7 @@ async def run_independent_case_brief() -> dict[str, Any]:
         "governance": {
             "atomic_records": len(admission.transaction_receipt.records),
             "record_kinds": [item.record_kind for item in admission.transaction_receipt.records],
-            "governed_state_preconditions": len(
-                admission.transaction_receipt.governed_state_preconditions
-            ),
+            "governed_state_preconditions": len(admission.transaction_receipt.governed_state_preconditions),
             "durable_brief_count": durable_brief_count,
             "deterministic_replay": bool(
                 replay.replayed
@@ -682,8 +670,7 @@ async def run_independent_case_brief() -> dict[str, Any]:
                 "request_id": "WI-CR-004",
                 "boundary": "supersession_impact_projection",
                 "finding": (
-                    "No public query enumerates the downstream resources affected by the admitted "
-                    "record correction."
+                    "No public query enumerates the downstream resources affected by the admitted record correction."
                 ),
             }
         ],

@@ -9,8 +9,9 @@ import hashlib
 import importlib.metadata
 import json
 import re
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any
 
 import ace
 import ace_reference_workspace_action

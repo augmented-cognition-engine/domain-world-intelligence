@@ -45,10 +45,10 @@ from ace.core import (
     GovernedOperationBindingV1Alpha1,
     GovernedReasoningService,
     GovernedStateHeadPreconditionV1Alpha1,
-    ReasoningExecutionBindingV1Alpha1,
     ProviderRouteV1Alpha1,
     ProviderStructuredOutputV1Alpha1,
     ProviderUsageV1Alpha1,
+    ReasoningExecutionBindingV1Alpha1,
     canonical_json,
     capability_state_ref_for_artifact,
 )
@@ -64,13 +64,13 @@ from ace.intelligence import (
     OrganizationOverlayV1,
     resource_reference,
 )
+from ace.intelligence.contracts.activation import ActivationState
 from ace.intelligence.packs import (
     compile_overlay,
     compile_pack_document,
     prepare_activation_revision,
     prepare_domain_activation,
 )
-from ace.intelligence.contracts.activation import ActivationState
 from ace.testing import InMemoryImmutableRecordStore
 
 from scripts.p2a_compile_acceptance import _encoded, _pack_material, _replace_resource
@@ -88,8 +88,8 @@ from scripts.p2b_case_brief import (
 )
 from scripts.p2b_prepared_replay import (
     ACTIVATED_AT,
-    CATEGORICAL_RULES,
     ADDITIVE_ROUTES,
+    CATEGORICAL_RULES,
     PRODUCT_ID,
     build_replay_material,
 )
@@ -266,9 +266,7 @@ STATEMENTS = {
     "scenario": "This is a conditional future state built only from the exact derived resources named.",
 }
 
-UNCERTAINTY = (
-    "The frozen prepared records do not establish anything beyond the named exact resources."
-)
+UNCERTAINTY = "The frozen prepared records do not establish anything beyond the named exact resources."
 
 
 class _StatusProvider:
@@ -308,9 +306,7 @@ class _StatusProvider:
             attributed.update(supports)
             claim = BriefDraftClaimV1Alpha1(
                 statement=STATEMENTS[status_id],
-                grounding_kind=(
-                    ClaimGroundingKind.CITED if grounding == "cited" else ClaimGroundingKind.INFERENCE
-                ),
+                grounding_kind=(ClaimGroundingKind.CITED if grounding == "cited" else ClaimGroundingKind.INFERENCE),
                 support_refs=supports,
                 confidence=1.0 if grounding == "cited" else 0.7,
                 uncertainty=None if grounding == "cited" else UNCERTAINTY,
@@ -409,9 +405,7 @@ async def run_status_case_brief() -> dict[str, Any]:
         ("capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)): _head(
             "capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)
         ),
-        ("authority_grant", execution_binding.grant_ref): _head(
-            "authority_grant", execution_binding.grant_ref
-        ),
+        ("authority_grant", execution_binding.grant_ref): _head("authority_grant", execution_binding.grant_ref),
         ("authority_grant", append_binding.grant_ref): _head("authority_grant", append_binding.grant_ref),
     }
     activation_head = activation_store.heads[
@@ -531,12 +525,9 @@ async def run_status_case_brief() -> dict[str, Any]:
                 for item in projection.claim_statuses
             ],
             "claims_per_status": dict(sorted(by_status.items())),
-            "binds_every_receipted_claim": tuple(
-                item.claim_id for item in projection.claim_statuses
-            )
+            "binds_every_receipted_claim": tuple(item.claim_id for item in projection.claim_statuses)
             == tuple(item.claim_id for item in receipt.claim_supports),
-            "all_seven_required_statuses_present": sorted(declared)
-            == sorted(WORLD_EPISTEMIC_STATUSES),
+            "all_seven_required_statuses_present": sorted(declared) == sorted(WORLD_EPISTEMIC_STATUSES),
             "every_required_status_used": sorted(by_status) == sorted(WORLD_EPISTEMIC_STATUSES),
             "status_carrier": "brief_epistemic_status_projection.claim_statuses",
             "section_membership_is_validated_status": False,
@@ -544,9 +535,7 @@ async def run_status_case_brief() -> dict[str, Any]:
         "governance": {
             "atomic_records": len(admission.transaction_receipt.records),
             "record_kinds": [item.record_kind for item in admission.transaction_receipt.records],
-            "governed_state_preconditions": len(
-                admission.transaction_receipt.governed_state_preconditions
-            ),
+            "governed_state_preconditions": len(admission.transaction_receipt.governed_state_preconditions),
             "durable_brief_count": durable_brief_count,
             "deterministic_replay": bool(
                 replay.replayed
@@ -577,8 +566,7 @@ async def run_status_case_brief() -> dict[str, Any]:
                 "request_id": "WI-CR-004",
                 "boundary": "supersession_impact_projection",
                 "finding": (
-                    "No public query enumerates the downstream resources affected by the admitted "
-                    "record correction."
+                    "No public query enumerates the downstream resources affected by the admitted record correction."
                 ),
             },
         ],

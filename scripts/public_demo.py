@@ -13,9 +13,10 @@ import argparse
 import asyncio
 import html
 import json
+from collections.abc import Sequence
 from pathlib import Path
 from string import Template
-from typing import Any, Sequence
+from typing import Any
 
 try:
     from scripts.p2b_independent_case_brief import (
@@ -45,12 +46,8 @@ EXPECTED = {
     "scenario_id": "meridia_reservoir_release_72h",
     "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
     "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
-    "status_projection_id": (
-        "brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c"
-    ),
-    "impact_projection_id": (
-        "supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e"
-    ),
+    "status_projection_id": ("brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c"),
+    "impact_projection_id": ("supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e"),
     "impacted_resources": 11,
     "impacted_claims": 9,
     "direct": 6,
@@ -109,12 +106,8 @@ async def collect_demo_data() -> dict[str, Any]:
     admission = world["admission"]
     brief = admission.brief
     status_projection = admission.status_projection
-    status_by_claim = {
-        str(item.claim_id): item for item in status_projection.claim_statuses
-    }
-    citation_sources = {
-        str(item.citation_id): str(item.source_ref) for item in brief.citations
-    }
+    status_by_claim = {str(item.claim_id): item for item in status_projection.claim_statuses}
+    citation_sources = {str(item.citation_id): str(item.source_ref) for item in brief.citations}
 
     claims: list[dict[str, Any]] = []
     for section, claim in zip(SECTION_TITLES, brief.claims, strict=True):
@@ -127,9 +120,7 @@ async def collect_demo_data() -> dict[str, Any]:
                 "status": status.status_id,
                 "grounding_kind": claim.grounding_kind.value,
                 "confidence": claim.confidence,
-                "cited_sources": [
-                    citation_sources[str(citation_id)] for citation_id in claim.citation_ids
-                ],
+                "cited_sources": [citation_sources[str(citation_id)] for citation_id in claim.citation_ids],
                 "support_record_ids": list(status.support_record_ids),
                 "distinct_derivation_families": status.distinct_derivation_family_count,
                 "required_derivation_families": status.required_distinct_derivation_families,
@@ -188,9 +179,7 @@ async def collect_demo_data() -> dict[str, Any]:
                 }
             },
             "corroboration": {
-                "claim_id": next(
-                    item["claim_id"] for item in claims if item["status"] == "corroborated"
-                ),
+                "claim_id": next(item["claim_id"] for item in claims if item["status"] == "corroborated"),
                 "required_distinct_roots": 2,
                 "observed_distinct_roots": 2,
                 "publisher_count_is_independence": False,
@@ -216,9 +205,7 @@ async def collect_demo_data() -> dict[str, Any]:
             "unaffected": ledger["unaffected_count"],
             "max_depth": ledger["max_depth"],
             "closure_size": ledger["closure_size"],
-            "impact_means_dependency_not_falsehood": impact["proven"][
-                "impact_is_dependency_not_falsehood"
-            ],
+            "impact_means_dependency_not_falsehood": impact["proven"]["impact_is_dependency_not_falsehood"],
         },
         "historical_integrity": impact["historical_integrity"],
         "governance": {
@@ -271,11 +258,11 @@ def _claim_rows(data: dict[str, Any]) -> str:
             "scenario": "uncertain",
         }.get(claim["status"], "neutral")
         rows.append(
-            "<article class=\"claim-row\">"
-            f"<div><span class=\"status {status_class}\">{_e(claim['status'].replace('_', ' '))}</span>"
-            f"<span class=\"section-label\">{_e(claim['section'])}</span></div>"
+            '<article class="claim-row">'
+            f'<div><span class="status {status_class}">{_e(claim["status"].replace("_", " "))}</span>'
+            f'<span class="section-label">{_e(claim["section"])}</span></div>'
             f"<p>{_e(claim['statement'])}</p>"
-            f"<code title=\"{_e(' | '.join(sources))}\">{_e(source_text)}</code>"
+            f'<code title="{_e(" | ".join(sources))}">{_e(source_text)}</code>'
             "</article>"
         )
     return "".join(rows)
@@ -289,8 +276,8 @@ def _identity_rows(data: dict[str, Any]) -> str:
         ("IMPACT", "impact_projection_id"),
     )
     return "".join(
-        f"<div class=\"identity\"><span>{label}</span>"
-        f"<code title=\"{_e(data['identities'][key])}\">{_e(_short(data['identities'][key], 22, 9))}</code></div>"
+        f'<div class="identity"><span>{label}</span>'
+        f'<code title="{_e(data["identities"][key])}">{_e(_short(data["identities"][key], 22, 9))}</code></div>'
         for label, key in labels
     )
 
@@ -403,9 +390,7 @@ async def write_demo(output_dir: Path) -> tuple[Path, Path, dict[str, Any]]:
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Generate the frozen ACE World Intelligence public proof surface."
-    )
+    parser = argparse.ArgumentParser(description="Generate the frozen ACE World Intelligence public proof surface.")
     parser.add_argument(
         "--output-dir",
         type=Path,
