@@ -215,6 +215,16 @@ The accepted P2D identities are `pack_ir:bb400cc0652622b43c01504e651110e0`, hist
 contains 44 LIVE records and zero PREPARED records. Separate official publication roots do not prove
 independent measurements: both agencies describe a shared international observation ecosystem.
 
+P2E freezes the next user-owned LIVE-orientation boundary without claiming a scheduler or sensing
+runtime. Public ACE 0.5.0 contracts construct one exact Monitor
+(`monitor:bbb0e5ab246c6d1f08f7669226db6873`), principal/persona binding
+(`persona_binding:1349e5c7f78270dd5c8e267b582a1399`), and record-only Subscription
+(`subscription:3bb149effa91c5fdd224780ae0a455ee`) over the accepted planetary-defense activation. Six
+explicitly requested windows freeze initial orientation, no-change suppression, both visible
+corrections, owner pause/resume, and terminal revocation. Lifecycle execution and sensing-window
+receipts remain open generic platform requests `WI-CR-007` and `WI-CR-008`; World supplies no
+private substitute and adds no runtime record, network request, delivery, schedule, or action.
+
 P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
 declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
 and document `2026-16197` published August 7 — as successive LIVE snapshots of one stable monitor
@@ -337,9 +347,13 @@ suite and `26 passed` for the connector. With the AI command-center candidate in
 baseline, the same environment passes `87` domain and `62` connector tests. The
 public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
-With P2D integrated, the source-tree candidate passes `90` domain tests, `80` connector tests, and
-all `7` release-contract tests. Its locally built wheel contains exactly 55 JSON resources, nine
-from the planetary-defense pack, and no executable code.
+The merged P2D baseline passed `90` domain tests, `80` connector tests, and all `7`
+release-contract tests. Its wheel contained exactly 55 JSON resources, nine from the
+planetary-defense pack, and no executable code. The verified P2E candidate passes `101` domain,
+`80` connector, and all `7` release-contract tests. Its wheel contains exactly 59 JSON resources,
+13 from the planetary-defense pack, including exactly four P2E conformance resources and no
+executable payload. A clean install with public `ace-core==0.5.0` reproduces the pinned Monitor,
+PersonaBinding, and record-only Subscription identities without importing either checkout.
 
 The exact identities, negative cases, and artifact proofs are recorded in
 [`docs/audits/world-intelligence-p2a-2026-08-06.md`](docs/audits/world-intelligence-p2a-2026-08-06.md)
@@ -363,6 +377,8 @@ The two-lineage LIVE Shift → Signal → Case → cited Brief proof is recorded
 [`docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md`](docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md).
 The LIVE conflict, correction, supersession, and per-claim status proof is recorded in
 [`docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md`](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
+The user-owned static intent and repeated-window contract boundary is recorded in
+[`docs/audits/world-intelligence-p2e-user-owned-live-orientation-2026-08-11.md`](docs/audits/world-intelligence-p2e-user-owned-live-orientation-2026-08-11.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),

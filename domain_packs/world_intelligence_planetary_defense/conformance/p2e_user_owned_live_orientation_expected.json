@@ -1,0 +1,30 @@
+{
+  "contract": "ace.world-intelligence.p2e-user-owned-live-orientation-expected/v1alpha1",
+  "packet_identity": "sha256:5690d6c1f6e9361e93eea558f9bb2f06dd2491f5b29b59836100a23a92850df8",
+  "expected_projection": {
+    "mode": "LIVE",
+    "window_count": 6,
+    "routed_window_count": 3,
+    "suppressed_window_count": 3,
+    "suppression_reasons": [
+      "no_material_change",
+      "owner_paused",
+      "subscription_revoked"
+    ],
+    "owner_guarded_zero_acquisition_windows": 2,
+    "correction_window_count": 2,
+    "visible_correction_window_count": 2,
+    "publication_family_count": 2,
+    "p2d_live_record_count": 44,
+    "prepared_record_count": 0,
+    "static_intent_contracts_constructed": true,
+    "runtime_materialization_claimed": false,
+    "open_contract_requests": ["WI-CR-007", "WI-CR-008"],
+    "negative_vector_count": 11,
+    "network_access": false,
+    "scheduler_authorized": false,
+    "delivery_authorized": false,
+    "external_action": false,
+    "violations": []
+  }
+}

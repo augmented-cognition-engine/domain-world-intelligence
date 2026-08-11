@@ -1,0 +1,60 @@
+{
+  "contract": "ace.world-intelligence.p2e-negative-cases/v1alpha1",
+  "cases": [
+    {
+      "case_id": "missing_owner",
+      "mutation": "Remove the stable owner reference from the monitor intent.",
+      "expected_violation": "missing_attention_owner"
+    },
+    {
+      "case_id": "owner_changed",
+      "mutation": "Attribute the resume event to a different principal.",
+      "expected_violation": "attention_owner_changed"
+    },
+    {
+      "case_id": "prepared_live_mix",
+      "mutation": "Mark one PREPARED record as reused inside the LIVE packet.",
+      "expected_violation": "prepared_live_mixed"
+    },
+    {
+      "case_id": "acquisition_while_paused",
+      "mutation": "Issue one source acquisition request in the owner-paused window.",
+      "expected_violation": "acquisition_not_authorized"
+    },
+    {
+      "case_id": "acquisition_after_revocation",
+      "mutation": "Issue one source acquisition request after subscription revocation.",
+      "expected_violation": "acquisition_not_authorized"
+    },
+    {
+      "case_id": "correction_suppressed",
+      "mutation": "Suppress the NASA correction as no material change.",
+      "expected_violation": "correction_visibility_lost"
+    },
+    {
+      "case_id": "false_measurement_independence",
+      "mutation": "Claim the NASA and ESA publication roots prove independent measurements.",
+      "expected_violation": "false_independence_claim"
+    },
+    {
+      "case_id": "hidden_delivery",
+      "mutation": "Authorize delivery through the subscription attention policy.",
+      "expected_violation": "external_authority_smuggled"
+    },
+    {
+      "case_id": "autonomous_schedule",
+      "mutation": "Authorize autonomous scheduler execution from a cadence preference.",
+      "expected_violation": "external_authority_smuggled"
+    },
+    {
+      "case_id": "history_rewrite",
+      "mutation": "Replace the accepted P2D historical Brief identity with a rewritten artifact.",
+      "expected_violation": "historical_artifact_rewritten"
+    },
+    {
+      "case_id": "divergent_replay",
+      "mutation": "Move one sensing-window request time by one second without changing the pinned packet identity.",
+      "expected_violation": "divergent_replay_identity"
+    }
+  ]
+}

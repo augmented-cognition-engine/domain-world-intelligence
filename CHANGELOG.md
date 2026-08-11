@@ -12,6 +12,17 @@ noted here only where the boundary between them changes.
 
 ### Added
 
+- **P2E user-owned LIVE-orientation consumer packet.** Public ACE 0.5.0 Monitor,
+  PersonaBinding, and record-only Subscription contracts now bind the accepted planetary-defense
+  pack, exact activation, one fixture principal, and the pack persona with pinned identities.
+- **Repeated-window ownership and suppression boundary.** Six frozen owner-requested windows cover
+  initial orientation, exact no-change suppression, two always-visible corrections, zero
+  acquisition while paused, resume, and zero acquisition after Subscription revocation. Eleven
+  negative mutations fail closed.
+- **Narrow platform requests.** `WI-CR-007` requests owner-authorized lifecycle over the existing
+  inert Monitor/Subscription contracts; `WI-CR-008` requests append-only sensing-window
+  route-or-suppression receipts. No private World implementation simulates either capability.
+
 - **P2D LIVE conflict and correction.** Four exact NASA/ESA planetary-defense publications become
   LIVE Observations, one dated cross-source divergence and two same-source downward-revision Shifts,
   three routed Signals, immutable historical and corrected Cases, and cited Reality Briefs with
@@ -25,6 +36,9 @@ noted here only where the boundary between them changes.
 
 ### Boundaries
 
+- P2E constructs three inert public intent contracts but performs no runtime lifecycle, sensing
+  loop, network request, scheduling, delivery, publication, or external action. Its P2D prerequisite
+  remains 44 LIVE records and zero PREPARED records; P2E appends no runtime records.
 - The new six-module pack is inert JSON only. The P2D proof contains 44 LIVE records and zero
   PREPARED records, performs no network request, and creates no action, delivery, publication,
   persuasion, monitor, or schedule.
