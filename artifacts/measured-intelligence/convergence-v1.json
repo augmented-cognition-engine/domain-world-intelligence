@@ -1,0 +1,139 @@
+{
+  "candidate_identity": {
+    "action_adapter_distribution_version": "0.1.0",
+    "artifacts": {
+      "action_adapter_wheel": {
+        "filename": "ace_reference_workspace_action-0.1.0-py3-none-any.whl",
+        "sha256": "sha256:9c600d4b3e0d19525f1e04629bd231d8d6913d2ad11bc63fa2858e7da396f8f1"
+      },
+      "core_wheel": {
+        "filename": "ace_core-0.5.0-py3-none-any.whl",
+        "sha256": "sha256:29752aa751570286794ff2abd1071a43f622883d4778e161687e10363f76f6c3"
+      },
+      "source_adapter_wheel": {
+        "filename": "ace_ext_world_federal_register_source-0.2.0-py3-none-any.whl",
+        "sha256": "sha256:bee0161c6a02b2d82b698d72365e401e7c58af633c8f0e774e513619866a90d6"
+      },
+      "world_wheel": {
+        "filename": "ace_domain_world_intelligence-0.9.0-py3-none-any.whl",
+        "sha256": "sha256:61abbd08bfedb2dc23cdd0eab8b9a0454b7d7a911ba150e4308e12d9e1cfa534"
+      }
+    },
+    "core_commit": "433e3d16c5458c975557dcd1552824fb959d4d12",
+    "core_distribution_version": "0.5.0",
+    "source_adapter_distribution_version": "0.2.0",
+    "world_commit": "7fec49b163fd4c50964576a45511c8645e856f3d",
+    "world_distribution_version": "0.9.0"
+  },
+  "claim_boundary": {
+    "ace_0_6_complete": false,
+    "association_not_causality": true,
+    "human_benefit_claimed": false,
+    "population_performance_claimed": false,
+    "recorded_replay_not_live_monitoring": true,
+    "si4_passed": false
+  },
+  "contract": "ace.world-intelligence.measured-intelligence-release-convergence/v1",
+  "governed_feedback": {
+    "applied": false,
+    "historical_replay": true,
+    "live_effect": false,
+    "proposed_action": "promote",
+    "replay_reauthorized": false,
+    "requires_human_review": true,
+    "selectable": false
+  },
+  "matched_comparison": {
+    "control": {
+      "artifact_key": "bls-jolts-correction:control:USDL-25-1087",
+      "correction_link_visible": true,
+      "correction_record_id": "bls-errata-2025-07-01-jolts",
+      "correction_relation": "corrects",
+      "corrects_source_record_id": "USDL-25-1087",
+      "displayed_statement": "The number of job openings decreased in federal government (39,000).",
+      "limitations": [
+        "historical_original_form_derived_from_public_erratum",
+        "one_recorded_bls_correction_not_population_performance",
+        "recorded_replay_not_live_monitoring",
+        "statement_quality_not_statistical_validity_or_human_benefit"
+      ],
+      "prior_record_preserved": true,
+      "source_coverage_complete": true,
+      "source_family": "bls_public_errata",
+      "source_release_id": "USDL-25-1087"
+    },
+    "control_scores": [
+      0.0,
+      0.0
+    ],
+    "treatment": {
+      "artifact_key": "bls-jolts-correction:treatment:USDL-25-1087",
+      "correction_link_visible": true,
+      "correction_record_id": "bls-errata-2025-07-01-jolts",
+      "correction_relation": "corrects",
+      "corrects_source_record_id": "USDL-25-1087",
+      "displayed_statement": "The number of job openings decreased in federal government (−39,000).",
+      "limitations": [
+        "historical_original_form_derived_from_public_erratum",
+        "one_recorded_bls_correction_not_population_performance",
+        "recorded_replay_not_live_monitoring",
+        "statement_quality_not_statistical_validity_or_human_benefit"
+      ],
+      "prior_record_preserved": true,
+      "source_coverage_complete": true,
+      "source_family": "bls_public_errata",
+      "source_release_id": "USDL-25-1087"
+    },
+    "treatment_scores": [
+      1.0,
+      1.0
+    ]
+  },
+  "measured_result": {
+    "classification": "useful",
+    "limitations": [
+      "classification_is_bounded_to_the_exact_target_control_criterion_and_cutoff",
+      "historical_original_form_derived_from_public_erratum",
+      "one_recorded_bls_correction_not_population_performance",
+      "paired_association_under_product_defined_conditions_does_not_by_itself_establish_causality",
+      "proposal_requires_separate_human_review_and_has_no_live_effect",
+      "recorded_replay_not_live_monitoring",
+      "statement_quality_not_statistical_validity_or_human_benefit"
+    ],
+    "matched_pair_count": 2,
+    "mean_effect": 1.0,
+    "uncertainty": null
+  },
+  "product_policy": {
+    "policy_id": "world_independent_official_correction_statement_quality",
+    "policy_version": "candidate-1",
+    "reviewer_ref": "principal:world-independent-correction-reviewer",
+    "score_rule": "1 only when exact source coverage, correction linkage, prior-record preservation, corrected statement, and stale-form removal all pass; otherwise 0"
+  },
+  "public_source_pair": {
+    "correction": {
+      "payload_contract": "ace.intelligence.observation/v1alpha1",
+      "record_key": "observation:3a1351d6ac306374b8a5b472c192d2b9"
+    },
+    "fixture_digest": "sha256:981183a2464f74f4421bd0a6470f0342a5abae8cfebc1b5a8da1562df26babb1",
+    "fixture_id": "bls-jolts-may-2025-minus-sign-correction",
+    "original": {
+      "payload_contract": "ace.intelligence.observation/v1alpha1",
+      "record_key": "observation:faf25d26cc88802368cabf3e17538a7d"
+    },
+    "source_policy": {
+      "errata_uri": "https://www.bls.gov/errata/",
+      "historical_original_form_derived_from_erratum": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "recorded_replay": true,
+      "release_uri": "https://www.bls.gov/news.release/archives/jolts_07012025.htm",
+      "source_family": "bls_public_errata",
+      "statistical_validity_claimed": false
+    }
+  },
+  "runtime": {
+    "candidate_contract_available": true,
+    "core_import_mode": "installed_distribution_outside_core_checkout",
+    "network_access": false
+  }
+}

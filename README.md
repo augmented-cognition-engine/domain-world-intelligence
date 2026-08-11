@@ -416,6 +416,9 @@ The bounded installed-Core artifact convergence packet is frozen in
 [`docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md`](docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md).
 It generates one canonical machine-readable P2C10 result without importing Core from a checkout;
 it is candidate evidence, not a release or SI4 pass.
+The point-in-time [convergence audit](docs/audits/world-measured-intelligence-release-convergence-2026-08-11.md)
+binds the exact built-artifact hashes and byte-reproducible
+[`convergence-v1.json`](artifacts/measured-intelligence/convergence-v1.json).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
