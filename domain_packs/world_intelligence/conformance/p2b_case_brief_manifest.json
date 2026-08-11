@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "path": "scripts/p2b_case_brief.py",
-      "sha256": "46fe2bde6c1790c09161b21a6063d68133c4816067e1a774c458489fe5d7cb05"
+      "sha256": "3297af15f9b8d46e207829cb919798a92b0fe57fa13b4e0855e7c5c89b7af290"
     },
     {
       "path": "domain_packs/world_intelligence/conformance/p2b_case_brief_expected.json",

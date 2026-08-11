@@ -127,9 +127,7 @@ async def test_exact_document_becomes_closed_canonical_inert_payload() -> None:
             "Protecting Against National Security Threats to the Communications "
             "Supply Chain Through the Equipment Authorization Program"
         ),
-        "verification_reference": (
-            "The govinfo.gov PDF is the official-format verification reference."
-        ),
+        "verification_reference": ("The govinfo.gov PDF is the official-format verification reference."),
     }
     assert "abstract" not in payload
     assert capture.requested_uri == capture.effective_uri == FEDERAL_REGISTER_DOCUMENT_URI
@@ -179,9 +177,7 @@ async def test_exact_document_becomes_closed_canonical_inert_payload() -> None:
         ({"observed_at": STARTED - timedelta(seconds=1)}, "observation/capture times"),
     ],
 )
-async def test_untrusted_transport_material_fails_closed(
-    changes: dict[str, object], message: str
-) -> None:
+async def test_untrusted_transport_material_fails_closed(changes: dict[str, object], message: str) -> None:
     adapter, _, request = _adapter_and_request(**changes)
     with pytest.raises(FederalRegisterSourceAdapterError, match=message):
         await adapter.capture(request)
@@ -209,9 +205,7 @@ async def test_forged_artifact_and_different_uri_reject_before_transport() -> No
     adapter, transport, request = _adapter_and_request()
     forged_artifact = request.model_copy(
         update={
-            "adapter_artifact": request.adapter_artifact.model_copy(
-                update={"artifact_digest": "sha256:" + "e" * 64}
-            )
+            "adapter_artifact": request.adapter_artifact.model_copy(update={"artifact_digest": "sha256:" + "e" * 64})
         }
     )
     with pytest.raises(FederalRegisterSourceAdapterError, match="revalidation"):
@@ -268,9 +262,7 @@ async def test_reviewed_multi_document_profile_preserves_exact_allowlist() -> No
     _, _, default_request = _adapter_and_request()
     request = SourceAdapterCaptureRequestV1Alpha1.model_validate(
         {
-            **default_request.model_dump(
-                mode="python", exclude={"request_id", "request_digest"}
-            ),
+            **default_request.model_dump(mode="python", exclude={"request_id", "request_digest"}),
             "requested_uri": prior_uri,
             "source_definition_ref": "source_definition:federal-register-2026-15932",
             "configuration_ref": "config:federal-register-2026-15932",
@@ -286,9 +278,7 @@ async def test_reviewed_multi_document_profile_preserves_exact_allowlist() -> No
 
     outside_allowlist = SourceAdapterCaptureRequestV1Alpha1.model_validate(
         {
-            **request.model_dump(
-                mode="python", exclude={"request_id", "request_digest"}
-            ),
+            **request.model_dump(mode="python", exclude={"request_id", "request_digest"}),
             "requested_uri": FEDERAL_REGISTER_DOCUMENT_URI,
         }
     )

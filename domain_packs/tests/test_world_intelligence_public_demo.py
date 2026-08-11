@@ -27,12 +27,8 @@ def test_demo_is_bound_to_the_exact_accepted_release_contract(demo_data):
     assert demo_data["identities"] == {
         "case_id": "case:412426eee708d56f6bda931ccf9e5d8b",
         "brief_id": "brief:25d8232c9bfa27050bdcb160fb75f06c",
-        "status_projection_id": (
-            "brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c"
-        ),
-        "impact_projection_id": (
-            "supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e"
-        ),
+        "status_projection_id": ("brief_derivation_family_status_projection:3500889a2d75af7a5484a681afbee34c"),
+        "impact_projection_id": ("supersession_impact_projection:f3723de8e9ac5c4390c5c46137f3765e"),
     }
 
 

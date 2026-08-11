@@ -247,9 +247,7 @@ class _DeterministicProvider:
         observations = tuple(
             sorted(item.record_key for item in request.context_items if item.record_kind == "observation")
         )
-        inferred = tuple(
-            sorted(item.record_key for item in request.context_items if item.record_kind != "observation")
-        )
+        inferred = tuple(sorted(item.record_key for item in request.context_items if item.record_kind != "observation"))
         instruction = json.loads(request.instruction_json)
         section_ids = tuple(instruction["required_sections"])
         self.sections = section_ids
@@ -284,8 +282,7 @@ class _DeterministicProvider:
                         support_refs=support,
                         confidence=0.7,
                         uncertainty=(
-                            "The frozen prepared records do not establish anything beyond the "
-                            "named exact resources."
+                            "The frozen prepared records do not establish anything beyond the named exact resources."
                         ),
                     ),
                 )
@@ -335,9 +332,7 @@ async def _admit_material(ledger, material, *, attention_at):
     admissions: dict[str, Any] = {}
     for key, derivation_key in ROUTED_DERIVATIONS:
         fresh = tuple(
-            item
-            for item in development_observations[key]
-            if str(item.resource_id) not in admitted_observation_ids
+            item for item in development_observations[key] if str(item.resource_id) not in admitted_observation_ids
         )
         if not fresh:
             raise AssertionError(f"{key} would admit no new exact Observation")
@@ -369,10 +364,7 @@ async def _admit_material(ledger, material, *, attention_at):
         *snapshot_pairs["claim_corroborated"],
         shifts["claim_corroborated"],
     )
-    admitted_observation_ids.update(
-        str(item.resource_id)
-        for item in development_observations["claim_corroborated"]
-    )
+    admitted_observation_ids.update(str(item.resource_id) for item in development_observations["claim_corroborated"])
     await ledger.admit_resource_set(
         PreparedResourceSetAdmissionV1Alpha1(
             admission_key="resource-set:world-claim-corroboration",
@@ -499,9 +491,7 @@ async def run_case_brief() -> dict[str, Any]:
         ("capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)): _head(
             "capability_state", capability_state_ref_for_artifact(APPEND_ARTIFACT)
         ),
-        ("authority_grant", execution_binding.grant_ref): _head(
-            "authority_grant", execution_binding.grant_ref
-        ),
+        ("authority_grant", execution_binding.grant_ref): _head("authority_grant", execution_binding.grant_ref),
         ("authority_grant", append_binding.grant_ref): _head("authority_grant", append_binding.grant_ref),
     }
     activation_head = activation_store.heads[
@@ -609,14 +599,10 @@ async def run_case_brief() -> dict[str, Any]:
         },
         "governance": {
             "atomic_records": len(admission.transaction_receipt.records),
-            "governed_state_preconditions": len(
-                admission.transaction_receipt.governed_state_preconditions
-            ),
+            "governed_state_preconditions": len(admission.transaction_receipt.governed_state_preconditions),
             "durable_brief_count": durable_brief_count,
             "deterministic_replay": bool(
-                replay.replayed
-                and replay.brief == admission.brief
-                and replay.synthesis_receipt == receipt
+                replay.replayed and replay.brief == admission.brief and replay.synthesis_receipt == receipt
             ),
             "provider_invocations": provider.calls,
         },
@@ -634,8 +620,7 @@ async def run_case_brief() -> dict[str, Any]:
                 "request_id": "WI-CR-004",
                 "boundary": "supersession_impact_projection",
                 "finding": (
-                    "No public query enumerates the downstream resources affected by the admitted "
-                    "record correction."
+                    "No public query enumerates the downstream resources affected by the admitted record correction."
                 ),
             },
         ],

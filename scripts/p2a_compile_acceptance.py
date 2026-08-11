@@ -38,10 +38,7 @@ def _encoded(value: dict[str, Any]) -> bytes:
 
 def _pack_material() -> tuple[dict[str, Any], dict[str, bytes]]:
     manifest = _load(PACK_ROOT / "manifest.json")
-    resources = {
-        item["path"]: (PACK_ROOT / item["path"]).read_bytes()
-        for item in manifest["resources"]
-    }
+    resources = {item["path"]: (PACK_ROOT / item["path"]).read_bytes() for item in manifest["resources"]}
     return manifest, resources
 
 
@@ -80,18 +77,12 @@ def run_positive() -> dict[str, Any]:
         "entity_type_count": len(ontology["entity_types"]),
         "relation_type_count": len(ontology["relation_types"]),
         "epistemic_status_count": len(epistemic["statuses"]),
-        "numeric_detector_ids": sorted(
-            item["detector_id"] for item in detection["numeric_delta_rules"]
-        ),
+        "numeric_detector_ids": sorted(item["detector_id"] for item in detection["numeric_delta_rules"]),
         "deferred_generic_detector_strategies": ["categorical", "semantic", "structural"],
         "persona_ids": sorted(item["persona_id"] for item in personas["personas"]),
-        "brief_template_ids": sorted(
-            item["template_id"] for item in synthesis["brief_templates"]
-        ),
+        "brief_template_ids": sorted(item["template_id"] for item in synthesis["brief_templates"]),
         "executable_pack_resources": 0,
-        "hidden_truth_score": epistemic["rules"][
-            "publisher_has_hidden_universal_truth_score"
-        ],
+        "hidden_truth_score": epistemic["rules"]["publisher_has_hidden_universal_truth_score"],
         "political_targeting": False,
         "pack_schema_changed": False,
     }
@@ -128,9 +119,7 @@ def run_negative_cases() -> dict[str, str]:
 
     manifest, resources = _pack_material()
     detection = _load(PACK_ROOT / "modules" / "detection.json")
-    detection["categorical_rules"] = [
-        {"detector_id": "private_event_status", "strategy": "world_private_code"}
-    ]
+    detection["categorical_rules"] = [{"detector_id": "private_event_status", "strategy": "world_private_code"}]
     _replace_resource(manifest, resources, "modules/detection.json", detection)
     results["private_categorical_detector_fork"] = _rejected_code(manifest, resources)
 

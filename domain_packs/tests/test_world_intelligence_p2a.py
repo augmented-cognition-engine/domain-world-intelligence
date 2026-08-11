@@ -80,9 +80,7 @@ def test_world_vocabulary_does_not_leak_into_core_or_intelligence():
         "record_corrects_record",
         "world_intelligence",
     }
-    platform_source = "\n".join(
-        path.read_text(encoding="utf-8") for path in intelligence_root.rglob("*.py")
-    )
+    platform_source = "\n".join(path.read_text(encoding="utf-8") for path in intelligence_root.rglob("*.py"))
     assert all(token not in platform_source for token in forbidden_platform_tokens)
 
 

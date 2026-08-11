@@ -1,0 +1,45 @@
+{
+  "contract": "ace.world-intelligence.recorded-federal-register-correction-pair/v1alpha1",
+  "fixture_id": "fcc_elicensing_correction_2021_10670",
+  "recorded_at": "2026-08-10T23:10:00Z",
+  "network_access": false,
+  "source_policy": {
+    "display_source": "FederalRegister.gov",
+    "display_source_is_official_legal_edition": false,
+    "official_format_source": "govinfo.gov",
+    "legal_truth_claimed": false
+  },
+  "original": {
+    "document_number": "2020-28779",
+    "publication_date": "2020-12-29",
+    "federal_register_citation": "85 FR 85524",
+    "agency": "Federal Communications Commission",
+    "docket": "WT Docket No. 19-212; FCC 20-126; FRS 17235",
+    "action": "Final rule.",
+    "title": "Completing the Transition to Electronic Filing, Licenses and Authorizations, and Correspondence in the Wireless Radio Services",
+    "html_uri": "https://www.federalregister.gov/documents/2020/12/29/2020-28779/completing-the-transition-to-electronic-filing-licenses-and-authorizations-and-correspondence-in-the",
+    "official_pdf_uri": "https://www.govinfo.gov/content/pkg/FR-2020-12-29/pdf/2020-28779.pdf"
+  },
+  "correction": {
+    "document_number": "2021-10670",
+    "publication_date": "2021-05-20",
+    "filed_date": "2021-05-19",
+    "federal_register_citation": "86 FR 27275",
+    "agency": "Federal Communications Commission",
+    "docket": "WT Docket No. 19-212; FCC 20-126; FRS 27277",
+    "action": "Final rule; correction.",
+    "title": "Completing the Transition to Electronic Filing, Licenses and Authorizations, and Correspondence in the Wireless Radio Services",
+    "html_uri": "https://www.federalregister.gov/documents/2021/05/20/2021-10670/completing-the-transition-to-electronic-filing-licenses-and-authorizations-and-correspondence-in-the",
+    "official_pdf_uri": "https://www.govinfo.gov/content/pkg/FR-2021-05-20/pdf/2021-10670.pdf",
+    "corrects_document_number": "2020-28779",
+    "corrects_federal_register_page": 85524,
+    "corrected_page": 85530,
+    "corrected_instruction": "Remove instruction 20a and redesignate instructions 20b and 20c as instructions 20a and 20b."
+  },
+  "recorded_replay": {
+    "correction_available_at": "2021-05-20T00:00:00Z",
+    "treatment_detected_at": "2021-05-20T00:05:00Z",
+    "control_detected_at": "2021-05-20T06:00:00Z",
+    "target_detection_delay_seconds": 600
+  }
+}

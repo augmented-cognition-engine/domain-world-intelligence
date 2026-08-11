@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "path": "scripts/p2b_supersession_impact.py",
-      "sha256": "14c91c6954b9b29262e2337561254527b03904157a21f3dafcdd8f67e2eaf1da"
+      "sha256": "b0b4d151ffb530fcaf6ab0cd25ee2f492171cdf9d4f207f7d58a45848bb4c145"
     },
     {
       "path": "domain_packs/world_intelligence/conformance/p2b_supersession_impact_expected.json",

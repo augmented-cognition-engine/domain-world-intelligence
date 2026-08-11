@@ -25,9 +25,7 @@ class _Response:
     ) -> None:
         self.status = status
         self._body = body
-        self._headers = {
-            key.lower(): value for key, value in (headers or {}).items()
-        }
+        self._headers = {key.lower(): value for key, value in (headers or {}).items()}
 
     def getheader(self, name: str):
         return self._headers.get(name.lower())
@@ -198,9 +196,7 @@ async def test_transport_rejects_policy_drift_before_dns() -> None:
 @pytest.mark.asyncio
 async def test_transport_reuses_security_boundary_for_another_exact_document() -> None:
     ai_uri = "https://www.federalregister.gov/api/v1/documents/2026-11415.json"
-    connection = _Connection(
-        _Response(b"{}", headers={"Content-Type": "application/json"})
-    )
+    connection = _Connection(_Response(b"{}", headers={"Content-Type": "application/json"}))
     transport = OptInFederalRegisterNetworkTransport(
         enabled=True,
         authorized_uri=ai_uri,

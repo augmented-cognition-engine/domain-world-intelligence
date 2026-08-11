@@ -65,11 +65,7 @@ def _pack_file(name: str) -> bytes:
             return candidate.read_bytes()
     except (ModuleNotFoundError, NotADirectoryError, TypeError):
         pass
-    root = (
-        Path(__file__).resolve().parents[1]
-        / "domain_packs"
-        / "world_intelligence_federal_register"
-    )
+    root = Path(__file__).resolve().parents[1] / "domain_packs" / "world_intelligence_federal_register"
     return root.joinpath(name).read_bytes()
 
 
@@ -82,10 +78,7 @@ def compile_live_pack():
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            resource["path"]: _pack_file(resource["path"])
-            for resource in manifest["resources"]
-        },
+        {resource["path"]: _pack_file(resource["path"]) for resource in manifest["resources"]},
     )
 
 
@@ -192,15 +185,10 @@ class ExactSourceDefinitionResolver:
         self.definition = definition
         self.calls = 0
 
-    async def resolve_source_definition(
-        self, *, product_id, source_definition_ref, resolved_at
-    ):
+    async def resolve_source_definition(self, *, product_id, source_definition_ref, resolved_at):
         del resolved_at
         self.calls += 1
-        if (
-            product_id != self.definition.product_id
-            or source_definition_ref != self.definition.source_definition_ref
-        ):
+        if product_id != self.definition.product_id or source_definition_ref != self.definition.source_definition_ref:
             raise ValueError("unknown exact source definition")
         return self.definition
 
@@ -261,9 +249,7 @@ class ExactRuntimeUseResolver:
             configuration_ref=configuration_ref,
             evaluated_at=evaluated_at,
             resolved_at=evaluated_at,
-            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                self.capability_head
-            ),
+            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(self.capability_head),
         )
 
     async def resolve_authority_use(
@@ -297,9 +283,7 @@ class ExactRuntimeUseResolver:
             grant_hash=self.grant_hash,
             evaluated_at=evaluated_at,
             expires_at=self.grant_expires_at,
-            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                self.grant_head
-            ),
+            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(self.grant_head),
         )
 
 
@@ -344,9 +328,7 @@ class LiveEnvironment:
 
     def install_current_heads(self) -> None:
         activation_id = self.committed_activation.revision.activation_id
-        activation_head = self.activation_store.heads[
-            ("domain_activation", self.request.product_id, activation_id)
-        ]
+        activation_head = self.activation_store.heads[("domain_activation", self.request.product_id, activation_id)]
         source_head = self.source_definitions.definition.state_head_precondition
         source = GovernedStateHeadV1(
             **source_head.model_dump(mode="python", exclude={"contract"}),
@@ -477,9 +459,7 @@ async def build_environment() -> LiveEnvironment:
         subject_binding_id=scenario["subject_binding_id"],
         entity_type_id=scenario["entity_type_id"],
         entity_ref=scenario["entity_ref"],
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            source_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(source_head),
     )
     runtime_use = ExactRuntimeUseResolver(
         context=context,
@@ -504,9 +484,7 @@ async def build_environment() -> LiveEnvironment:
             redirect_chain=tuple(transport_fixture["redirect_chain"]),
             resolved_ip_addresses=tuple(transport_fixture["resolved_ip_addresses"]),
             connected_ip_addresses=tuple(transport_fixture["connected_ip_addresses"]),
-            dns_rebinding_protection_applied=transport_fixture[
-                "dns_rebinding_protection_applied"
-            ],
+            dns_rebinding_protection_applied=transport_fixture["dns_rebinding_protection_applied"],
             credentials_used=transport_fixture["credentials_used"],
             locator=transport_fixture["locator"],
             observed_at=_time(scenario["observed_at"]),
@@ -580,9 +558,7 @@ def identity_projection(environment: LiveEnvironment, admission) -> dict[str, An
             "receipt_digest": admission.acquisition_receipt.receipt_digest,
             "captured_payload_digest": admission.acquisition_receipt.captured_payload_digest,
             "locator": admission.acquisition_receipt.locator,
-            "resolved_ip_addresses": list(
-                admission.acquisition_receipt.resolved_ip_addresses
-            ),
+            "resolved_ip_addresses": list(admission.acquisition_receipt.resolved_ip_addresses),
         },
         "live_records": {
             "record_space": transaction.record_space,
@@ -609,12 +585,8 @@ def identity_projection(environment: LiveEnvironment, admission) -> dict[str, An
             "captured_payload_json": admission.source_snapshot.captured_payload_json,
         },
         "scope": {
-            "transport_fixture_only": environment.fixture["transport_fixture"][
-                "fixture_only"
-            ],
-            "network_access": environment.fixture["transport_fixture"][
-                "network_access"
-            ],
+            "transport_fixture_only": environment.fixture["transport_fixture"]["fixture_only"],
+            "network_access": environment.fixture["transport_fixture"]["network_access"],
             "capture_calls": environment.adapter.capture_calls,
             "transport_calls": environment.transport.calls,
             "exact_record_order": [item.record_kind for item in transaction.records],
@@ -628,9 +600,7 @@ def identity_projection(environment: LiveEnvironment, admission) -> dict[str, An
 
 async def run_acceptance(*, assert_expected: bool = True):
     environment = await build_environment()
-    restarted = environment.service(
-        clock=SequenceClock(_time(environment.fixture["scenario"]["admitted_at"]))
-    )
+    restarted = environment.service(clock=SequenceClock(_time(environment.fixture["scenario"]["admitted_at"])))
     conformance = await exercise_live_source_ingress_restart(
         first_service=environment.service(),
         restarted_service=restarted,
@@ -639,14 +609,9 @@ async def run_acceptance(*, assert_expected: bool = True):
     )
     if environment.adapter.capture_calls != 1 or environment.transport.calls != 1:
         raise AssertionError("exact replay reacquired source material")
-    if conformance.first.entity_snapshot.attributes.parsed_value() != environment.fixture[
-        "expected_attributes"
-    ]:
+    if conformance.first.entity_snapshot.attributes.parsed_value() != environment.fixture["expected_attributes"]:
         raise AssertionError("LIVE entity attributes did not match the exact mapping")
-    if (
-        len(environment.immutable_store.records) != 5
-        or len(environment.immutable_store.receipts) != 1
-    ):
+    if len(environment.immutable_store.records) != 5 or len(environment.immutable_store.receipts) != 1:
         raise AssertionError("LIVE ingress was not one atomic five-record transaction")
     projection = identity_projection(environment, conformance.first)
     if projection["scope"]["exact_record_order"] != [
@@ -670,9 +635,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--emit-projection", action="store_true")
     args = parser.parse_args()
-    projection, _, _ = asyncio.run(
-        run_acceptance(assert_expected=not args.emit_projection)
-    )
+    projection, _, _ = asyncio.run(run_acceptance(assert_expected=not args.emit_projection))
     print(json.dumps(projection, indent=2, sort_keys=True))
 
 

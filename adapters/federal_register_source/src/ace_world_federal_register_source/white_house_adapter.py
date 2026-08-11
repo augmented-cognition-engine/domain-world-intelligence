@@ -33,8 +33,7 @@ WHITE_HOUSE_RELEASE_URI = (
     "cybersecurity-vulnerability-coordination/"
 )
 WHITE_HOUSE_RELEASE_TITLE = (
-    "White House Launches Gold Eagle Initiative for Unprecedented "
-    "Cybersecurity Vulnerability Coordination"
+    "White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination"
 )
 WHITE_HOUSE_RELEASE_DATE = "2026-07-14"
 WHITE_HOUSE_RELEASE_IDENTIFIER = "white-house-release-2026-07-14-gold-eagle"
@@ -204,9 +203,7 @@ class WhiteHouseAIPolicySourceAdapter:
         request: SourceAdapterCaptureRequestV1Alpha1,
     ) -> CapturedSourceMaterialV1Alpha1:
         try:
-            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(
-                request.model_dump(mode="python")
-            )
+            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(request.model_dump(mode="python"))
         except (AttributeError, TypeError, ValueError) as exc:
             raise _fail("source-adapter request failed exact public-contract revalidation") from exc
         if validated.adapter_artifact != self.artifact_identity:
@@ -292,9 +289,7 @@ class WhiteHouseAIPolicySourceAdapter:
             resolved_ip_addresses=resolved,
             dns_rebinding_protection_applied=True,
             captured_payload_json=payload_json,
-            captured_payload_digest=(
-                "sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
-            ),
+            captured_payload_digest=("sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()),
             locator=WHITE_HOUSE_LOCATOR,
             source_published_at=datetime(2026, 7, 14, tzinfo=UTC),
             event_effective_at=None,

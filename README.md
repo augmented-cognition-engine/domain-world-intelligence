@@ -64,9 +64,7 @@ Resolve the pack data from the installed distribution:
 import json
 from importlib.resources import files
 
-manifest = json.loads(
-    files("domain_packs.world_intelligence").joinpath("manifest.json").read_text(encoding="utf-8")
-)
+manifest = json.loads(files("domain_packs.world_intelligence").joinpath("manifest.json").read_text(encoding="utf-8"))
 print(manifest["metadata"]["pack_id"])  # world_intelligence
 ```
 
@@ -243,6 +241,101 @@ action authority; the export is provided by Core's separately packaged reference
 source responses are exact official public records under recorded transport, so P2C2 proves the
 complete deterministic product journey but still does not claim network freshness at test time.
 
+P2C3 is a source-checkout candidate over that unchanged public journey. It compares two exact
+reviewed exports of the cited Brief with two reviewed exports of a World-owned source-only control.
+The frozen product measure is the fraction of the two required admitted Observation identities
+preserved in each exported artifact: treatment scores `1.0, 1.0`; control scores `0.0, 0.0`. Under
+the declared minimum of two matched pairs and useful-effect threshold of `0.5`, Core + Intelligence
+classifies the exact result as `useful` and appends a `promote` proposal that is non-effective,
+non-selectable, and requires separate human review. Historical replay performs no reauthorization.
+
+That measure is structural citation coverage. It is not a human-benefit measure, causal estimate,
+general Brief-quality score, or network-freshness proof. The proposal is not applied. P2C3 now
+resolves from the merged experimental Core source introduced through
+[PR #88](https://github.com/augmented-cognition-engine/core/pull/88), but no 0.6 artifact is
+published. World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
+
+P2C4 submits that exact proposal to a separate governed review path. A named, authenticated World
+reviewer records `reject` with `no_action`: the bounded `useful` classification and `promote`
+proposal remain immutable, and no governed head changes. The rationale rejects broader promotion
+because structural coverage does not establish citation correctness, general Brief quality, human
+benefit, causality, or live freshness. Exact replay returns the historical Decision without new
+authorization. This is explicit disposition, not reclassification or proposal application.
+
+P2C5 adds a distinct product-owned outcome rather than broadening the structural score. The named
+principal `principal:world-citation-correctness-reviewer` records an exact immutable review over
+the Brief, its one cited claim, the exact two citation identities, and the two admitted official
+Observation references. Each Core Outcome names that exact result. A matched negative control
+retains both citation identities but swaps the two publication dates in the claim: treatment and
+control both have `1.0` coverage, while correctness is `1.0` and `0.0` respectively across two
+pairs. The domain-neutral evaluator classifies that bounded difference as useful and still emits
+only a non-effective proposal requiring separate review.
+
+This candidate establishes exact review provenance and sensitivity to one semantic corruption. It
+does not establish reviewer infallibility, current network freshness, source independence, general
+Brief quality, causal impact, or human benefit. Citation review vocabulary and policy remain in
+World; Core and Intelligence receive only the exact immutable observed-result coordinate.
+
+P2C6 adds an exact contradiction-attention outcome over the same recorded official sources. One
+candidate states the admitted document/date facts exactly and one swaps the dates. Treatment
+alerts only on the contradiction; an inverted-routing control alerts only on the valid comparator.
+Both emit exactly one alert, so raw alert volume cannot explain the `1.0` treatment/control quality
+difference. The independently recorded review exposes contradiction recall, false-alert rate, one
+valid silence, confusion counts, exact Brief/Observation provenance, policy identity, and limits.
+
+This source-checkout candidate demonstrates one frozen challenge, not a live observed public
+conflict or a population false-alert rate. It does not establish autonomous discovery, network
+freshness, correction quality, general Brief quality, causality, or human benefit. The resulting
+proposal remains non-effective and unapplied.
+
+P2C7 uses an actual explicit FCC correction pair under recorded replay. Document `2021-10670`
+names and corrects `2020-28779`; treatment and delayed control preserve that same exact linkage,
+corrected instruction, original immutable Observation, and reviewed workflow. Against a frozen
+600-second World target, treatment delay is 300 seconds and control delay is 21600 seconds. Exact
+independent reviews become Core Outcomes, and the bounded two-pair difference is useful while the
+proposal remains non-effective and unapplied.
+
+The recorded availability and detection instants are test coordinates. The suite performs no
+network access and does not establish live monitoring, network-arrival latency, population delay
+performance, legal truth, calibration, general Brief quality, causality, or human benefit.
+
+P2C8 creates actual prior, treatment, and control `BriefV1Alpha1` records over that same source
+pair. Both revisions remove the stale instruction claim, add the same exact correction claim,
+retain three claims, and cite the same original/correction sources. Treatment preserves the exact
+identities of both unaffected claims; the paraphrase-drift control preserves neither. Independent
+reviews record every expected, preserved, drifted, and unexpected claim identity, producing scores
+of `1.0` and `0.0` across two matched pairs and another non-effective proposal.
+
+This freezes a World product rule over one recorded pair. It is not live revision, a general
+semantic-equivalence engine, population stability, calibration, causality, or human benefit.
+
+P2C9 freezes one exact probabilistic scoring boundary over that recorded correction. After the
+original Observation is admitted but before the correction is available, treatment and control
+record probabilities of `0.75` and `0.25` for the same explicit-correction event and complete the
+same reviewed workflow. Only then is the exact correction Observation admitted. Independent
+reviews derive the binary result and single-event Brier quality contributions of `0.9375` and
+`0.4375`; the two-pair difference is useful and still emits only a non-effective proposal.
+
+The forecast artifacts contain no correction identity or result material, and every reviewed
+forecast Action completes before the result becomes available. The probabilities are declared
+fixture inputs, not ACE outputs. This is exact forecast/result scoring, not a historically
+contemporaneous forecast, model-skill finding, empirical calibration curve, population reliability
+estimate, causal claim, or human-benefit finding.
+
+P2C10 independently reproduces correction-quality measurement over the U.S. Bureau of Labor
+Statistics public errata family. The recorded July 1, 2025 JOLTS release `USDL-25-1087` and BLS's
+July 2 correction are admitted as distinct immutable Observations. Treatment and control preserve
+both source identities, the exact correction link, two reviewed Actions each, and the same matched
+conditions; treatment renders the required minus sign in `−39,000`, while control retains the
+reported pre-correction form. Exact reviews score `1.0` and `0.0`, so the unchanged domain-neutral
+contract classifies the bounded two-pair difference as useful and emits only a non-effective
+proposal.
+
+The historical wrong form is derived from BLS's explicit statement that the sentence required a
+missing minus sign; the currently archived release is already corrected. This is recorded replay
+over one correction, not live monitoring, statistical validation of JOLTS, population correction
+performance, causality, or human benefit. No Domain Pack, connector, or Core contract changes.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -332,6 +425,20 @@ $PY -m scripts.p2d_live_conflict_correction
 # Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
 WORKSPACE=$(mktemp -d)
 $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
+
+# Candidate measured Outcome -> governed-feedback extension (requires Core PR #88 source)
+$PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
+
+# Stacked candidate: explicit reject/no-action review of the exact proposal
+$PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
+
+# Stacked candidates: correctness, attention, correction delay, revision stability, and forecast scoring
+$PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
+$PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
+$PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
+$PY -m scripts.p2c8_correction_revision_stability_outcome "$WORKSPACE"
+$PY -m scripts.p2c9_forecast_calibration_outcome "$WORKSPACE"
+$PY -m scripts.p2c10_independent_correction_reproduction "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -379,6 +486,30 @@ The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 The two-lineage LIVE Shift → Signal → Case → cited Brief proof is recorded in
 [`docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md`](docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md).
+The source-checkout measured-feedback candidate is recorded in
+[`docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md`](docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md).
+The latest independent-source correction candidate is recorded in
+[`docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md`](docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md).
+The bounded installed-Core artifact convergence packet is frozen in
+[`docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md`](docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md).
+It generates one canonical machine-readable P2C10 result without importing Core from a checkout;
+it is candidate evidence, not a release or SI4 pass.
+The original point-in-time
+[stacked convergence audit](docs/audits/world-measured-intelligence-release-convergence-2026-08-11.md)
+and the later
+[live-main convergence audit](docs/audits/world-measured-intelligence-main-convergence-2026-08-11.md)
+bind their exact built-artifact hashes and byte-reproducible
+[`convergence-v1.json`](artifacts/measured-intelligence/convergence-v1.json). The live-main packet
+also proves coexistence with the separately merged AI Command Center lineage work without changing
+the measured-feedback contract or silently applying its proposal.
+The additive
+[P2D main reconciliation audit](docs/audits/world-measured-intelligence-p2d-main-reconciliation-2026-08-11.md)
+records source-level coexistence with the later merged LIVE correction packet without relabeling the
+earlier artifact hashes.
+The subsequent
+[merged-Core convergence audit](docs/audits/world-measured-intelligence-merged-core-convergence-2026-08-11.md)
+rebuilds all four candidate wheels from exact merged Core and World sources and freezes the updated
+byte-reproducible canonical result. It remains draft artifact evidence, not a release or SI4 pass.
 The LIVE conflict, correction, supersession, and per-claim status proof is recorded in
 [`docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md`](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
 The user-owned static intent and repeated-window contract boundary is recorded in
@@ -413,8 +544,23 @@ may not add publishing, delivery, persuasion, or other external-action authority
 
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
-and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is explicit
-user-owned monitoring and subscription state. It may not add autonomous publishing, delivery,
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). P2C4 demonstrates a separately
+authorized reject/no-action disposition of the P2C3 proposal without effective state change. P2C5
+adds an independently reviewed citation-correctness Outcome and a citation-preserving semantic
+negative control. P2C6 adds exact contradiction recall, false-alert rate, equal alert-volume
+control, and valid silence under one frozen recorded-source challenge. P2C7 adds exact handling of
+one explicit recorded correction pair, preserves the prior record, and measures frozen-replay
+detection delay against a product target. P2C8 measures exact unaffected-claim identity
+preservation across real Brief contracts while holding correction semantics, source coverage, and
+claim count constant. P2C9 adds an exact withheld-result forecast record and derives a single-event
+Brier contribution while explicitly withholding any population-calibration or model-skill claim.
+P2C10 reproduces correction-quality measurement over an independently sourced BLS erratum without
+changing the shared contracts. The next bounded measurement work is independent Market
+reproduction.
+P2D separately demonstrates LIVE multi-source conflict, correction, supersession, and preserved
+historical artifacts under recorded transport. The next bounded World product work is explicit
+user-owned monitoring and subscription state. Separately reviewed opt-in network transport remains
+independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
 
 ## Community and security

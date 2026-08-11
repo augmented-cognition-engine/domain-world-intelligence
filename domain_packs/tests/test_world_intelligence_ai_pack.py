@@ -15,10 +15,7 @@ def _compile():
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            resource["path"]: (PACK / resource["path"]).read_bytes()
-            for resource in manifest["resources"]
-        },
+        {resource["path"]: (PACK / resource["path"]).read_bytes() for resource in manifest["resources"]},
     )
 
 
@@ -50,9 +47,7 @@ def test_ai_topic_pack_is_json_only_and_source_specific() -> None:
     }
 
     manifest = json.loads((PACK / "manifest.json").read_text())
-    assert {item["authority"] for item in manifest["authority_requests"]} == {
-        "source_read"
-    }
+    assert {item["authority"] for item in manifest["authority_requests"]} == {"source_read"}
     assert "entry_points" not in manifest
 
 

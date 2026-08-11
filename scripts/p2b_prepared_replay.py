@@ -34,17 +34,17 @@ from ace.intelligence import (
     route_categorical_shift_as_signal,
     route_shift_as_signal,
 )
+from ace.intelligence.contracts.resources import (
+    LineageReferenceV1Alpha1,
+    LineageRelation,
+    LineageResourceKind,
+)
 from ace.intelligence.packs import (
     bind_prepared_activation,
     compile_overlay,
     compile_pack_document,
     prepare_activation_revision,
     prepare_domain_activation,
-)
-from ace.intelligence.contracts.resources import (
-    LineageReferenceV1Alpha1,
-    LineageRelation,
-    LineageResourceKind,
 )
 
 from scripts.p2a_compile_acceptance import _encoded, _pack_material, _replace_resource
@@ -119,7 +119,7 @@ def _load(path: Path) -> dict[str, Any]:
 
 
 def _time(value: str) -> datetime:
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
 def compile_replay_pack():
@@ -223,9 +223,7 @@ def _build_observations(
         progressed = False
         for record_id in sorted(pending):
             record = pending[record_id]
-            parent_ids = tuple(
-                record[field] for field in DERIVATION_FIELDS if field in record
-            )
+            parent_ids = tuple(record[field] for field in DERIVATION_FIELDS if field in record)
             if any(parent not in built for parent in parent_ids):
                 continue
             built[record_id] = _observation(
@@ -236,9 +234,7 @@ def _build_observations(
             del pending[record_id]
             progressed = True
         if not progressed:
-            raise AssertionError(
-                f"scenario derivation lineage is not acyclic: {sorted(pending)}"
-            )
+            raise AssertionError(f"scenario derivation lineage is not acyclic: {sorted(pending)}")
     return built
 
 
@@ -630,10 +626,7 @@ def build_replay_material(
         activation_revision=binding.reference,
         as_of=case_as_of,
         lineage=(
-            *(
-                _development_lineage(item, LineageResourceKind.SIGNAL)
-                for item in signals.values()
-            ),
+            *(_development_lineage(item, LineageResourceKind.SIGNAL) for item in signals.values()),
             _development_lineage(
                 shifts["claim_corroborated"],
                 LineageResourceKind.SHIFT,
@@ -642,9 +635,7 @@ def build_replay_material(
         case_type_ref="case_type:reality_change_window",
         title="Meridia reservoir release: 72-hour orientation case",
         purpose="Freeze the exact material developments needed for a governed Reality Brief.",
-        subject_refs=tuple(
-            sorted({subject for item in developments for subject in item.subject_refs})
-        ),
+        subject_refs=tuple(sorted({subject for item in developments for subject in item.subject_refs})),
         assembled_at=case_assembled_at,
     )
     all_snapshots = (
@@ -743,8 +734,7 @@ def run_positive() -> dict[str, Any]:
             "admission_digest": shift_only_admission.admission_digest,
             "resource_count": len(shift_only_admission.resources),
             "contains_signal": any(
-                reference.resource_kind.value == "signal"
-                for reference in shift_only_admission.processing_order
+                reference.resource_kind.value == "signal" for reference in shift_only_admission.processing_order
             ),
         },
         "orientation_case": {
@@ -760,8 +750,7 @@ def run_positive() -> dict[str, Any]:
             "admission_id": case_admission.admission_id,
             "admission_digest": case_admission.admission_digest,
             "resource_count": len(case_admission.resources),
-            "case_is_last": case_admission.processing_order[-1].resource_kind.value
-            == "case",
+            "case_is_last": case_admission.processing_order[-1].resource_kind.value == "case",
         },
         "shift_ids": {key: value.resource_id for key, value in shifts.items()},
         "signal_ids": {key: value.resource_id for key, value in signals.items()},

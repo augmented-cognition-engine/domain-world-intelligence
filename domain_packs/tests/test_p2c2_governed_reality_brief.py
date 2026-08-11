@@ -20,9 +20,7 @@ async def test_official_records_reach_reviewed_verified_promoted_export(
     tmp_path,
 ) -> None:
     if importlib.util.find_spec("ace_reference_workspace_action") is None:
-        pytest.skip(
-            "cross-repo acceptance requires the independently packaged Core reference adapter"
-        )
+        pytest.skip("cross-repo acceptance requires the independently packaged Core reference adapter")
     from scripts.p2c2_governed_reality_brief import run_acceptance
 
     result = await run_acceptance(tmp_path)

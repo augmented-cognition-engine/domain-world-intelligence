@@ -117,10 +117,7 @@ def compile_ai_pack():
     manifest = json.loads(manifest_bytes)
     return compile_pack_document(
         manifest_bytes,
-        {
-            item["path"]: (PACK_ROOT / item["path"]).read_bytes()
-            for item in manifest["resources"]
-        },
+        {item["path"]: (PACK_ROOT / item["path"]).read_bytes() for item in manifest["resources"]},
     )
 
 
@@ -145,9 +142,7 @@ def _head(
 
 class ExactSourceDefinitions:
     def __init__(self, definitions: tuple[ResolvedSourceDefinitionV1Alpha1, ...]) -> None:
-        self.definitions = {
-            item.source_definition_ref: item for item in definitions
-        }
+        self.definitions = {item.source_definition_ref: item for item in definitions}
 
     async def resolve_source_definition(
         self,
@@ -165,9 +160,7 @@ class ExactSourceDefinitions:
 
 class ExactAdapterRegistry:
     def __init__(self, adapters: tuple[Any, ...]) -> None:
-        self.adapters = {
-            item.artifact_identity: item for item in adapters
-        }
+        self.adapters = {item.artifact_identity: item for item in adapters}
 
     def resolve_source_adapter(self, *, artifact):
         return self.adapters.get(artifact)
@@ -215,8 +208,7 @@ class ExactRuntimeUse:
             or request["context"] != self.context
             or request["operation"] != "capture"
             or request["configuration_ref"] != binding.configuration_ref
-            or request["capability_state_ref"]
-            != capability_state_ref_for_artifact(binding.artifact)
+            or request["capability_state_ref"] != capability_state_ref_for_artifact(binding.artifact)
         ):
             raise ValueError("capability use crossed exact AI source scope")
         return CapabilityUseReceiptV1Alpha1(
@@ -231,9 +223,7 @@ class ExactRuntimeUse:
             configuration_ref=binding.configuration_ref,
             evaluated_at=request["evaluated_at"],
             resolved_at=request["evaluated_at"],
-            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                binding.capability_head
-            ),
+            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(binding.capability_head),
         )
 
     async def resolve_authority_use(self, **request):
@@ -258,17 +248,13 @@ class ExactRuntimeUse:
             grant_hash=binding.grant_hash,
             evaluated_at=request["evaluated_at"],
             expires_at=self.context.expires_at,
-            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                binding.grant_head
-            ),
+            state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(binding.grant_head),
         )
 
 
 class ExactAppendAuthorizer:
     def __init__(self) -> None:
-        self.issued: dict[
-            tuple[str, str, str], GovernedActionAuthorizationProjection
-        ] = {}
+        self.issued: dict[tuple[str, str, str], GovernedActionAuthorizationProjection] = {}
 
     async def authorize_action(self, request):
         projection = GovernedActionAuthorizationProjection(
@@ -279,9 +265,7 @@ class ExactAppendAuthorizer:
             authorized_at=request.requested_at,
             state_preconditions=request.required_state_preconditions,
         )
-        self.issued[(request.operation, request.subject_ref, request.subject_digest)] = (
-            projection
-        )
+        self.issued[(request.operation, request.subject_ref, request.subject_digest)] = projection
         return projection
 
     async def verify_action_reference(
@@ -375,9 +359,7 @@ async def build_environment() -> CommandCenterEnvironment:
         pack=pack,
         overlay=overlay,
         compilation_receipt_ref=fixture["activation"]["compilation_receipt_ref"],
-        conformance_receipt_refs=(
-            fixture["activation"]["conformance_receipt_ref"],
-        ),
+        conformance_receipt_refs=(fixture["activation"]["conformance_receipt_ref"],),
         capability_bindings=tuple(
             CapabilityBindingV1(
                 requirement_id=source["capability_requirement_id"],
@@ -417,9 +399,7 @@ async def build_environment() -> CommandCenterEnvironment:
         expected_head_revision_id=None,
         committed_at=_time(fixture["activation"]["committed_at"]),
     )
-    activation_head = activation_store.heads[
-        ("domain_activation", product_id, committed.revision.activation_id)
-    ]
+    activation_head = activation_store.heads[("domain_activation", product_id, committed.revision.activation_id)]
 
     heads: list[GovernedStateHeadV1] = []
     runtime_bindings: list[RuntimeBinding] = []
@@ -472,9 +452,7 @@ async def build_environment() -> CommandCenterEnvironment:
                 subject_binding_id=fixture["subject_binding_id"],
                 entity_type_id=fixture["entity_type_id"],
                 entity_ref=fixture["entity_ref"],
-                state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-                    source_head
-                ),
+                state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(source_head),
             )
         )
         requests.append(
@@ -552,9 +530,7 @@ async def build_environment() -> CommandCenterEnvironment:
         configuration_ref=append_head.state_id,
         authority="append_immutable_records",
         grant_ref="authority_grant:world-ai-live-append",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            append_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(append_head),
     )
     store = InMemoryImmutableRecordStore()
     for head in (activation_head, *heads, append_head):
@@ -638,12 +614,8 @@ async def _append_resource(
             subject_digest=str(resource.resource_digest),
             requested_at=submitted_at,
             required_state_preconditions=(
-                GovernedStateHeadPreconditionV1Alpha1.from_head(
-                    environment.activation_head
-                ),
-                GovernedStateHeadPreconditionV1Alpha1.from_head(
-                    environment.append_head
-                ),
+                GovernedStateHeadPreconditionV1Alpha1.from_head(environment.activation_head),
+                GovernedStateHeadPreconditionV1Alpha1.from_head(environment.append_head),
             ),
         )
     )
@@ -755,13 +727,9 @@ async def run_acceptance() -> dict[str, Any]:
 
     def snapshot_reference(admission):
         available_at = next(
-            item.available_at
-            for item in admission.transaction_receipt.records
-            if item.record_kind == "entity_snapshot"
+            item.available_at for item in admission.transaction_receipt.records if item.record_kind == "entity_snapshot"
         )
-        return resource_reference(admission.entity_snapshot).model_copy(
-            update={"available_at": available_at}
-        )
+        return resource_reference(admission.entity_snapshot).model_copy(update={"available_at": available_at})
 
     derivation_request = LiveDerivationRequestV1Alpha1(
         derivation_key=derivation_fixture["derivation_key"],
@@ -773,9 +741,7 @@ async def run_acceptance() -> dict[str, Any]:
         baseline=snapshot_reference(baseline),
         current=snapshot_reference(current),
         detected_at=_time(derivation_fixture["detected_at"]),
-        attention_evaluated_at=_time(
-            derivation_fixture["attention_evaluated_at"]
-        ),
+        attention_evaluated_at=_time(derivation_fixture["attention_evaluated_at"]),
         requested_at=_time(derivation_fixture["requested_at"]),
     )
     bridge = LiveIntelligenceBridgeService(
@@ -803,16 +769,11 @@ async def run_acceptance() -> dict[str, Any]:
         lineage=(
             _lineage(derivation.shift, relation=LineageRelation.DERIVED_FROM),
             _lineage(derivation.signal, relation=LineageRelation.DERIVED_FROM),
-            *(
-                _lineage(item, relation=LineageRelation.SUPPORTS)
-                for item in observations
-            ),
+            *(_lineage(item, relation=LineageRelation.SUPPORTS) for item in observations),
         ),
         case_type_ref="case_type:ai_policy_progression",
         title="Executive Order 14409 to reported GOLD EAGLE implementation",
-        purpose=(
-            "Freeze the exact two-lineage official-source progression before cited synthesis."
-        ),
+        purpose=("Freeze the exact two-lineage official-source progression before cited synthesis."),
         subject_refs=(environment.fixture["entity_ref"],),
         assembled_at=case_time,
     )
@@ -900,12 +861,10 @@ async def run_acceptance() -> dict[str, Any]:
         "source": {
             "modes": [item.observation.mode.value for item in (baseline, current)],
             "lineages": [
-                item.entity_snapshot.attributes.parsed_value()["source_lineage_id"]
-                for item in (baseline, current)
+                item.entity_snapshot.attributes.parsed_value()["source_lineage_id"] for item in (baseline, current)
             ],
             "stages": [
-                item.entity_snapshot.attributes.parsed_value()["development_stage"]
-                for item in (baseline, current)
+                item.entity_snapshot.attributes.parsed_value()["development_stage"] for item in (baseline, current)
             ],
             "stable_entity_ref": (
                 baseline.entity_snapshot.entity_ref
@@ -929,20 +888,14 @@ async def run_acceptance() -> dict[str, Any]:
             "brief_mode": brief.mode.value,
             "citation_count": len(brief.citations),
             "claim_count": len(brief.claims),
-            "cited_source_refs": sorted(
-                citation.source_ref for citation in brief.citations
-            ),
+            "cited_source_refs": sorted(citation.source_ref for citation in brief.citations),
         },
         "separation": {
             "live_record_count": sum(
-                1
-                for record in environment.store.records.values()
-                if record.record_space == LIVE_SOURCE_RECORD_SPACE
+                1 for record in environment.store.records.values() if record.record_space == LIVE_SOURCE_RECORD_SPACE
             ),
             "prepared_record_count": sum(
-                1
-                for record in environment.store.records.values()
-                if record.record_space == "prepared"
+                1 for record in environment.store.records.values() if record.record_space == "prepared"
             ),
             "prepared_material_reused": False,
             "autonomous_publication": False,
