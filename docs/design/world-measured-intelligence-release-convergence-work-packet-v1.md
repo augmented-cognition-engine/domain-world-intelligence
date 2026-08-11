@@ -26,7 +26,7 @@ recorded public BLS release + erratum
 
 The generator must:
 
-1. hash the exact Core, separate reference action-adapter, and World wheels;
+1. hash the exact Core, separate reference action-adapter, World source-adapter, and World wheels;
 2. reject a runtime importing `ace` from any declared Core checkout;
 3. rerun the complete P2C2-P2C10 append-only journey without network access;
 4. freeze stable source, product-policy, comparison, classification, proposal, replay, and

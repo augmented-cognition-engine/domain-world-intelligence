@@ -93,9 +93,11 @@ def build_public_projection(
     world_commit: str,
     core_wheel: dict[str, str],
     action_adapter_wheel: dict[str, str],
+    source_adapter_wheel: dict[str, str],
     world_wheel: dict[str, str],
     core_distribution_version: str,
     action_adapter_distribution_version: str,
+    source_adapter_distribution_version: str,
     world_distribution_version: str,
 ) -> dict[str, Any]:
     source_pair = result["source_pair"]
@@ -135,10 +137,12 @@ def build_public_projection(
             "world_commit": _validated_commit(world_commit, label="world_commit"),
             "core_distribution_version": core_distribution_version,
             "action_adapter_distribution_version": action_adapter_distribution_version,
+            "source_adapter_distribution_version": source_adapter_distribution_version,
             "world_distribution_version": world_distribution_version,
             "artifacts": {
                 "core_wheel": core_wheel,
                 "action_adapter_wheel": action_adapter_wheel,
+                "source_adapter_wheel": source_adapter_wheel,
                 "world_wheel": world_wheel,
             },
         },
@@ -195,6 +199,7 @@ async def generate(
     world_commit: str,
     core_wheel_path: Path,
     action_adapter_wheel_path: Path,
+    source_adapter_wheel_path: Path,
     world_wheel_path: Path,
     forbidden_core_roots: Sequence[Path],
 ) -> dict[str, Any]:
@@ -211,9 +216,11 @@ async def generate(
         world_commit=world_commit,
         core_wheel=artifact_identity(core_wheel_path),
         action_adapter_wheel=artifact_identity(action_adapter_wheel_path),
+        source_adapter_wheel=artifact_identity(source_adapter_wheel_path),
         world_wheel=artifact_identity(world_wheel_path),
         core_distribution_version=importlib.metadata.version("ace-core"),
         action_adapter_distribution_version=importlib.metadata.version("ace-reference-workspace-action"),
+        source_adapter_distribution_version=importlib.metadata.version("ace-ext-world-federal-register-source"),
         world_distribution_version=importlib.metadata.version("ace-domain-world-intelligence"),
     )
 
@@ -229,6 +236,7 @@ def main() -> None:
     parser.add_argument("--world-commit", required=True)
     parser.add_argument("--core-wheel", required=True, type=Path)
     parser.add_argument("--action-adapter-wheel", required=True, type=Path)
+    parser.add_argument("--source-adapter-wheel", required=True, type=Path)
     parser.add_argument("--world-wheel", required=True, type=Path)
     parser.add_argument("--forbid-core-root", action="append", default=[], type=Path)
     parser.add_argument("--output", required=True, type=Path)
@@ -242,6 +250,7 @@ def main() -> None:
             world_commit=args.world_commit,
             core_wheel_path=args.core_wheel,
             action_adapter_wheel_path=args.action_adapter_wheel,
+            source_adapter_wheel_path=args.source_adapter_wheel,
             world_wheel_path=args.world_wheel,
             forbidden_core_roots=tuple(args.forbid_core_root),
         )

@@ -58,9 +58,11 @@ async def test_public_projection_freezes_the_bounded_measured_result(tmp_path: P
         world_commit="b" * 40,
         core_wheel=coordinate,
         action_adapter_wheel=coordinate,
+        source_adapter_wheel=coordinate,
         world_wheel=coordinate,
         core_distribution_version="0.5.0",
         action_adapter_distribution_version="0.1.0",
+        source_adapter_distribution_version="0.2.0",
         world_distribution_version="0.9.0",
     )
 
@@ -91,8 +93,10 @@ async def test_public_projection_freezes_the_bounded_measured_result(tmp_path: P
             world_commit="b" * 40,
             core_wheel=coordinate,
             action_adapter_wheel=coordinate,
+            source_adapter_wheel=coordinate,
             world_wheel=coordinate,
             core_distribution_version="0.5.0",
             action_adapter_distribution_version="0.1.0",
+            source_adapter_distribution_version="0.2.0",
             world_distribution_version="0.9.0",
         )
