@@ -414,6 +414,10 @@ The source-checkout measured-feedback candidate is recorded in
 [`docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md`](docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md).
 The latest independent-source correction candidate is recorded in
 [`docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md`](docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md).
+The bounded installed-Core artifact convergence packet is frozen in
+[`docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md`](docs/design/world-measured-intelligence-release-convergence-work-packet-v1.md).
+It generates one canonical machine-readable P2C10 result without importing Core from a checkout;
+it is candidate evidence, not a release or SI4 pass.
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),

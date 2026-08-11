@@ -16,3 +16,6 @@ artifacts/public-demo/*
 !artifacts/public-demo/demo-data.json
 !artifacts/public-demo/index.html
 !artifacts/public-demo/*.png
+!artifacts/measured-intelligence/
+artifacts/measured-intelligence/*
+!artifacts/measured-intelligence/convergence-v1.json
