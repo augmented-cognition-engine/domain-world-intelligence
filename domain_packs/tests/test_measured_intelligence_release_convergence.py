@@ -50,7 +50,11 @@ async def test_public_projection_freezes_the_bounded_measured_result(tmp_path: P
         run_independent_correction_reproduction,
     )
 
-    result = await run_independent_correction_reproduction(tmp_path)
+    first_root = tmp_path / "first"
+    second_root = tmp_path / "second"
+    first_root.mkdir()
+    second_root.mkdir()
+    result = await run_independent_correction_reproduction(first_root)
     coordinate = {"filename": "candidate.whl", "sha256": "sha256:" + "a" * 64}
     projection = build_public_projection(
         result,
@@ -83,6 +87,21 @@ async def test_public_projection_freezes_the_bounded_measured_result(tmp_path: P
         "replay_reauthorized": False,
     }
     assert projection["claim_boundary"]["ace_0_6_complete"] is False
+
+    repeated = build_public_projection(
+        await run_independent_correction_reproduction(second_root),
+        core_commit="a" * 40,
+        world_commit="b" * 40,
+        core_wheel=coordinate,
+        action_adapter_wheel=coordinate,
+        source_adapter_wheel=coordinate,
+        world_wheel=coordinate,
+        core_distribution_version="0.5.0",
+        action_adapter_distribution_version="0.1.0",
+        source_adapter_distribution_version="0.2.0",
+        world_distribution_version="0.9.0",
+    )
+    assert repeated == projection
 
     effective = copy.deepcopy(result)
     effective["proposal"]["live_effect"] = True

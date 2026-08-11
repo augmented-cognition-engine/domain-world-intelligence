@@ -29,8 +29,8 @@ The generator must:
 1. hash the exact Core, separate reference action-adapter, World source-adapter, and World wheels;
 2. reject a runtime importing `ace` from any declared Core checkout;
 3. rerun the complete P2C2-P2C10 append-only journey without network access;
-4. freeze stable source, product-policy, comparison, classification, proposal, replay, and
-   non-claim fields while excluding wall-clock-dependent record identities;
+4. freeze stable source keys, product-policy version/rule, comparison, classification, proposal,
+   replay, and non-claim fields while excluding wall-clock-dependent record and material digests;
 5. fail if the fixture, source identities, scores, matched effect, useful classification,
    proposal-only authority, or historical replay drifts; and
 6. reproduce the committed JSON byte-for-byte from a fresh workspace.
