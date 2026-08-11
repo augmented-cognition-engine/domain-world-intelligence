@@ -21,7 +21,7 @@ graph, state store, authority system, detector engine, or feedback loop.
 - **Release identity:**
   [`v0.10.0`](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.10.0)
   and [`0.10.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.10.0/).
-  Public-artifact closeout is recorded separately from the immutable source tag.
+  See the [`0.10.0 released-artifact record`](docs/releases/world-intelligence-v0.10.0.md).
 
 ## What you install, and what you get
 
@@ -270,7 +270,7 @@ control both have `1.0` coverage, while correctness is `1.0` and `0.0` respectiv
 pairs. The domain-neutral evaluator classifies that bounded difference as useful and still emits
 only a non-effective proposal requiring separate review.
 
-This candidate establishes exact review provenance and sensitivity to one semantic corruption. It
+This released packet establishes exact review provenance and sensitivity to one semantic corruption. It
 does not establish reviewer infallibility, current network freshness, source independence, general
 Brief quality, causal impact, or human benefit. Citation review vocabulary and policy remain in
 World; Core and Intelligence receive only the exact immutable observed-result coordinate.
@@ -282,7 +282,7 @@ Both emit exactly one alert, so raw alert volume cannot explain the `1.0` treatm
 difference. The independently recorded review exposes contradiction recall, false-alert rate, one
 valid silence, confusion counts, exact Brief/Observation provenance, policy identity, and limits.
 
-This source-checkout candidate demonstrates one frozen challenge, not a live observed public
+This released packet demonstrates one frozen challenge, not a live observed public
 conflict or a population false-alert rate. It does not establish autonomous discovery, network
 freshness, correction quality, general Brief quality, causality, or human benefit. The resulting
 proposal remains non-effective and unapplied.
@@ -374,13 +374,13 @@ for the 0.7.0 release boundary and full identity list.
 ## Connector boundary
 
 This repository ships an **inert Domain Pack**. The Federal Register connector is a separately
-versioned executable artifact, `ace-ext-world-federal-register-source` 0.2.0, with its own review
+versioned executable artifact, `ace-ext-world-federal-register-source` 0.3.0, with its own review
 boundary:
 
 - it is **not** a dependency of the Domain Pack, and no extra reintroduces it;
 - installing `ace-domain-world-intelligence` never installs it;
-- it is **not** published by this repository's release workflow, which builds and uploads the root
-  sdist and wheel only;
+- it is **not** part of the root PyPI distribution; the release workflow builds it in a separate
+  job and attaches only its wheel to the matching GitHub Release;
 - its network client is opt-in and limited to the exact reviewed Federal Register URI; it validates
   the artifact identity, source type, HTTPS URI, empty redirect chain, absence of credentials,
   expected content type, bounded payload, globally routable address attestations, DNS-rebinding
@@ -391,7 +391,7 @@ Rebuild the connector reproducibly:
 
 ```bash
 cd adapters/federal_register_source
-SOURCE_DATE_EPOCH=1735689600 uv build --wheel
+SOURCE_DATE_EPOCH=1786484257 uv build --wheel
 ```
 
 A production host must supply and review a real transport that enforces address validation and
@@ -425,13 +425,13 @@ $PY -m scripts.p2d_live_conflict_correction
 WORKSPACE=$(mktemp -d)
 $PY -m scripts.p2c2_governed_reality_brief "$WORKSPACE"
 
-# Candidate measured Outcome -> governed-feedback extension (requires Core PR #88 source)
+# Measured Outcome -> governed-feedback extension
 $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 
-# Stacked candidate: explicit reject/no-action review of the exact proposal
+# Explicit reject/no-action review of the exact proposal
 $PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
 
-# Stacked candidates: correctness, attention, correction delay, revision stability, and forecast scoring
+# Correctness, attention, correction delay, revision stability, and forecast scoring
 $PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
 $PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
 $PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
@@ -445,10 +445,18 @@ P2C2 action test runs when the independently packaged Core reference adapter is 
 
 ```bash
 uv sync --frozen --no-install-project
-uv run --no-sync python -m pytest                         # released + candidate-compatible gates
+uv run --no-sync python -m pytest                         # complete released domain gates
 uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-identity gate
 uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 80 passed
 ```
+
+The released 0.10.0 gates passed `135` domain tests, `80` connector tests, and all `9`
+release-contract tests against public Core 0.6.0. A cache-free public-index install loaded the
+inert pack from `site-packages` without either optional adapter. The exact public tag then
+reproduced all seven bounded measured stages twice with the two explicit public adapter assets;
+every proposal remained non-effective, and the reviewed disposition was `reject` / `no_action`
+with no effective state change. See the
+[`0.10.0 released-artifact record`](docs/releases/world-intelligence-v0.10.0.md).
 
 The released 0.9.0 baseline, measured with public `ace-core==0.5.0` from PyPI and the independently
 packaged reference adapter from the Core `v0.5.0` GitHub release, was `83 passed` for the domain
