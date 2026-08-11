@@ -10,7 +10,7 @@ on:
         description: "Exact release tag to publish (must match the root project version)"
         required: true
         type: string
-        default: v0.9.0
+        default: v0.10.0
 
 permissions:
   contents: read
@@ -208,3 +208,47 @@ jobs:
         with:
           packages-dir: dist
           print-hash: true
+
+  release-source-adapter:
+    name: attach the separate official-source adapter
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the exact tag
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ needs.verify.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Build and validate only the separate adapter wheel
+        run: |
+          set -euo pipefail
+          export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
+          uv build --wheel --out-dir dist/source-adapter adapters/federal_register_source
+          rm -f dist/source-adapter/.gitignore
+          expected="ace_ext_world_federal_register_source-0.3.0-py3-none-any.whl"
+          entries="$(find dist/source-adapter -maxdepth 1 -type f -printf '%f\n')"
+          if [ "${entries}" != "${expected}" ]; then
+            echo "::error::unexpected adapter artifacts: ${entries}"
+            exit 1
+          fi
+          uvx --from twine twine check --strict "dist/source-adapter/${expected}"
+
+      - name: Attach the independently packaged adapter to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.verify.outputs.tag }}
+        run: >-
+          gh release upload "${TAG}" dist/source-adapter/*
+          --repo "${GITHUB_REPOSITORY}" --clobber

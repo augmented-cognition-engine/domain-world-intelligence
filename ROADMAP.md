@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3–P2C10 measured feedback and artifact convergence
+## Release candidate — 0.10.0 P2C3–P2C10 measured feedback and artifact convergence
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -56,18 +56,18 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   source coverage, reviewed workflow, and matched conditions; only treatment renders the exact
   corrected minus sign. The unchanged shared contract derives `1.0` versus `0.0`, classifies the
   bounded two-pair difference useful, and leaves the proposal non-effective and unapplied.
-- This is source-checkout evidence against stacked Core candidates, not a released World capability, human
-  benefit finding, causal claim, network-freshness proof, or applied governance change.
+- This is bounded recorded-source product evidence, not a human-benefit finding, causal claim,
+  network-freshness proof, population result, or applied governance change.
 - The additive convergence packet hashes built Core, reference-action-adapter, World
   source-adapter, and World wheels, rejects a Core checkout on the runtime path, and freezes a
-  canonical machine-readable P2C10 result. It remains candidate artifact evidence pending combined
-  release gates and publication.
-- A separate direct-to-main convergence candidate replays the measured stack on the live World
-  baseline that includes the AI Command Center lineage proof, rebuilds exact artifacts, and passes
-  the combined journey. It does not merge the review stack or advance release status.
-- The follow-on merged-Core artifact receipt rebuilds that unchanged World result against exact
-  Core `main` commit `7013de62ae7320c51c3de9e9a03b049e768e4d84`. The bounded result remains
-  `useful` with a non-effective proposal; World PR #17 and ACE 0.6.0 remain unreleased candidates.
+  canonical machine-readable P2C10 result. It remains candidate artifact evidence pending exact
+  World 0.10.0 publication and public-index reproduction.
+- The direct-to-main convergence packet is merged through World PR #17. The 0.10.0 release gate
+  reruns that unchanged measured stack against public `ace-core==0.6.0`, rebuilds exact artifacts,
+  and rejects either repository checkout on the public runtime path.
+- The bounded result remains `useful` under the declared World criteria with a non-effective,
+  unapplied proposal. Public package identities and clean-install evidence are recorded separately
+  before this section may advance to passed.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)

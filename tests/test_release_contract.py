@@ -1,4 +1,4 @@
-"""Release contract for the ACE World Intelligence 0.9.0 root distribution.
+"""Release contract for the ACE World Intelligence 0.10.0 root distribution.
 
 These assertions are the publishable-identity gate. They pin what a consumer of
 ``ace-domain-world-intelligence`` receives from PyPI: the exact version, the exact
@@ -33,10 +33,10 @@ ROOT_DISTRIBUTION = "ace-domain-world-intelligence"
 ADAPTER_DISTRIBUTION = "ace-ext-world-federal-register-source"
 ADAPTER_IMPORT_PACKAGE = "ace_world_federal_register_source"
 
-EXPECTED_ROOT_VERSION = "0.9.0"
+EXPECTED_ROOT_VERSION = "0.10.0"
 EXPECTED_REQUIRES_PYTHON = ">=3.12,<3.13"
-EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.5.0,<0.6"
-EXPECTED_ACE_CORE_SPECIFIER = ">=0.5.0,<0.6"
+EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.6.0,<0.7"
+EXPECTED_ACE_CORE_SPECIFIER = ">=0.6.0,<0.7"
 
 DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence",
@@ -126,7 +126,7 @@ def test_root_requires_python_is_exactly_the_3_12_series() -> None:
     assert not specifier.contains(Version("3.13.0"))
 
 
-def test_root_depends_only_on_the_ace_core_0_5_compatibility_window() -> None:
+def test_root_depends_only_on_the_ace_core_0_6_compatibility_window() -> None:
     dependencies = ROOT_PROJECT["project"]["dependencies"]
 
     assert dependencies == [EXPECTED_ACE_CORE_REQUIREMENT]
@@ -137,10 +137,10 @@ def test_root_depends_only_on_the_ace_core_0_5_compatibility_window() -> None:
     assert requirement.marker is None
     assert requirement.url is None
     assert requirement.specifier == SpecifierSet(EXPECTED_ACE_CORE_SPECIFIER)
-    assert requirement.specifier.contains(Version("0.5.0"))
-    assert requirement.specifier.contains(Version("0.5.9"))
-    assert not requirement.specifier.contains(Version("0.4.4"))
-    assert not requirement.specifier.contains(Version("0.6.0"))
+    assert requirement.specifier.contains(Version("0.6.0"))
+    assert requirement.specifier.contains(Version("0.6.9"))
+    assert not requirement.specifier.contains(Version("0.5.0"))
+    assert not requirement.specifier.contains(Version("0.7.0"))
 
 
 def test_federal_register_adapter_is_a_separate_distribution() -> None:
@@ -149,7 +149,7 @@ def test_federal_register_adapter_is_a_separate_distribution() -> None:
     assert ADAPTER_PYPROJECT.is_file()
     assert adapter["name"] == ADAPTER_DISTRIBUTION
     assert adapter["name"] != ROOT_DISTRIBUTION
-    assert adapter["version"] == "0.2.0"
+    assert adapter["version"] == "0.3.0"
     assert adapter["requires-python"] == EXPECTED_REQUIRES_PYTHON
     assert adapter["license"] == "Apache-2.0"
     assert adapter["readme"] == "README.md"
@@ -191,6 +191,23 @@ def test_adapter_is_absent_from_the_root_runtime_dependency_closure() -> None:
         "path": "adapters/federal_register_source",
         "editable": True,
     }
+
+
+def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate() -> None:
+    ci = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    publish = (REPO_ROOT / ".github" / "workflows" / "publish.yml").read_text(encoding="utf-8")
+
+    assert 'ACE_CORE_VERSION: "0.6.0"' in ci
+    assert 'ROOT_VERSION: "0.10.0"' in ci
+    assert "ACE_CORE_CANDIDATE_SHA" not in ci
+    assert "eaa51ea704e9162363a4483d1f7d7779778b953ed2a2d80b67dfb332e1cd3f62" in ci
+    assert "ace_reference_workspace_action-0.2.0-py3-none-any.whl" in ci
+
+    assert "default: v0.10.0" in publish
+    assert "packages-dir: dist" in publish
+    assert "release-source-adapter:" in publish
+    assert "ace_ext_world_federal_register_source-0.3.0-py3-none-any.whl" in publish
+    assert 'gh release upload "${TAG}" dist/source-adapter/*' in publish
 
 
 def test_root_distribution_mapping_stays_inert_and_data_only() -> None:

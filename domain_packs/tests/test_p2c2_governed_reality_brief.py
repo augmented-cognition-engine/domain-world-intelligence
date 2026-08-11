@@ -23,7 +23,8 @@ async def test_official_records_reach_reviewed_verified_promoted_export(
         pytest.skip("cross-repo acceptance requires the independently packaged Core reference adapter")
     from scripts.p2c2_governed_reality_brief import run_acceptance
 
-    result = await run_acceptance(tmp_path)
+    state = {}
+    result = await run_acceptance(tmp_path, state_sink=state)
 
     assert result["source"]["entity_ref_stable"] is True
     assert result["source"]["observation_modes"] == ["live", "live"]
@@ -37,6 +38,12 @@ async def test_official_records_reach_reviewed_verified_promoted_export(
     assert result["action"]["disposition"] == "succeeded"
     assert result["action"]["effect_state"] == "confirmed"
     assert result["action"]["replayed_without_second_effect"] is True
+    context = state["environment"].context
+    decided_at = state["decision"].intent.decided_at
+    completed_at = state["action_outcome"].terminal.result.completed_at
+    assert context.authenticated_at <= decided_at < context.expires_at
+    assert context.authenticated_at <= completed_at < context.expires_at
+    assert state["action_binding"].artifact.implementation_id == "world_recorded_workspace_export_fixture"
     assert result["scope"] == {
         "autonomous_publication": False,
         "human_review_required": True,

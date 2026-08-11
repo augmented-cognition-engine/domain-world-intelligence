@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Literal, Self
 
@@ -323,7 +323,10 @@ async def _append_brief(
     role: str,
 ) -> ImmutableRecordReferenceV1:
     environment = state["environment"]
-    requested_at = state["clock"]()
+    clock = state["clock"]
+    if clock.current <= brief.as_of:
+        clock.set(brief.as_of + timedelta(seconds=1))
+    requested_at = clock()
     authorization = await _authorize_append(
         state,
         context=environment.context,
@@ -592,6 +595,25 @@ async def run_correction_revision_stability_outcome(
     prior_ref = await _append_brief(state, brief=material["prior"], role="prior")
     treatment_ref = await _append_brief(state, brief=material["treatment"], role="treatment")
     control_ref = await _append_brief(state, brief=material["control"], role="drift-control")
+    criterion_head, impact_binding = _install_policy(state)
+    criterion = ImpactCriterionV1Alpha1(
+        product_id=environment.fixture["product_id"],
+        criterion_id=CRITERION_ID,
+        criterion_version="candidate-1",
+        target_kind=ImpactTargetKind.INTELLIGENCE_ARTIFACT,
+        outcome_type=OUTCOME_TYPE,
+        measure_id=MEASURE_ID,
+        metric_direction=ImpactMetricDirection.HIGHER_IS_BETTER,
+        useful_effect_threshold=0.75,
+        harmful_effect_threshold=0.75,
+        minimum_matched_pairs=2,
+        requires_observed_result=True,
+        harmful_action=ImpactGovernanceAction.ROLLBACK,
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(criterion_head),
+        frozen_at=CRITERION_FROZEN_AT,
+    )
+    if state["clock"].current <= CRITERION_FROZEN_AT:
+        state["clock"].set(CRITERION_FROZEN_AT + timedelta(seconds=1))
     treatment_exports = tuple(
         [
             await _run_reviewed_export(
@@ -616,24 +638,6 @@ async def run_correction_revision_stability_outcome(
             for index in (1, 2)
         ]
     )
-    criterion_head, impact_binding = _install_policy(state)
-    criterion = ImpactCriterionV1Alpha1(
-        product_id=environment.fixture["product_id"],
-        criterion_id=CRITERION_ID,
-        criterion_version="candidate-1",
-        target_kind=ImpactTargetKind.INTELLIGENCE_ARTIFACT,
-        outcome_type=OUTCOME_TYPE,
-        measure_id=MEASURE_ID,
-        metric_direction=ImpactMetricDirection.HIGHER_IS_BETTER,
-        useful_effect_threshold=0.75,
-        harmful_effect_threshold=0.75,
-        minimum_matched_pairs=2,
-        requires_observed_result=True,
-        harmful_action=ImpactGovernanceAction.ROLLBACK,
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(criterion_head),
-        frozen_at=CRITERION_FROZEN_AT,
-    )
-
     evidence: list[ImpactEvidenceV1Alpha1] = []
     treatment_reviews: list[BriefRevisionStabilityReviewV1Alpha1] = []
     control_reviews: list[BriefRevisionStabilityReviewV1Alpha1] = []
@@ -753,7 +757,10 @@ async def run_correction_revision_stability_outcome(
     if admission.replayed or not historical.replayed or historical.evaluation != admission.evaluation:
         raise AssertionError("revision-stability evaluation did not replay exact historical material")
     if admission.evaluation.classification is not ImpactClassification.USEFUL:
-        raise AssertionError("frozen revision-stability criterion did not classify useful")
+        raise AssertionError(
+            "frozen revision-stability criterion did not classify useful: "
+            f"{admission.evaluation.model_dump(mode='json')}"
+        )
     if admission.proposal is None or admission.proposal.action is not ImpactGovernanceAction.PROMOTE:
         raise AssertionError("revision-stability result did not emit its proposal-only mapping")
     if {item.revision_stability_score for item in treatment_reviews} != {1.0}:

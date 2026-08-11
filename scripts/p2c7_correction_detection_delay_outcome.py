@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import json
 from collections.abc import Awaitable, Callable
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Literal, Self
 
@@ -561,6 +561,11 @@ async def run_correction_detection_delay_outcome(
     prior = await run_contradiction_attention_outcome(workspace_root, state_sink=state)
     environment = state["environment"]
     fixture = load_correction_fixture()
+    # Advance the recorded-replay clock to the fixture's declared acquisition
+    # epoch. This keeps availability after resource as-of time without borrowing
+    # the host wall clock, and leaves the optional P2C9 forecast hook strictly
+    # before the correction append.
+    state["clock"].set(_time(fixture["recorded_at"]) + timedelta(seconds=1))
     original, original_ref = await _append_source_observation(state, fixture=fixture, role="original")
     if before_correction is not None:
         await before_correction(state, fixture, original, original_ref)

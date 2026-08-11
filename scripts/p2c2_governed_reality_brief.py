@@ -17,6 +17,7 @@ from ace.application import (
 from ace.core import (
     ActionIntentV1Alpha1,
     ActionPromotionDisposition,
+    ActionResultV1Alpha1,
     ActionReviewDisposition,
     ActionVerificationDisposition,
     AppendOnlyTransactionRequestV1,
@@ -36,6 +37,7 @@ from ace.core import (
     GovernedStateHeadPreconditionV1Alpha1,
     GovernedStateHeadV1,
     ImmutableRecordV1,
+    PreparedActionV1Alpha1,
     ProviderRouteV1Alpha1,
     ProviderStructuredOutputV1Alpha1,
     ProviderUsageV1Alpha1,
@@ -55,7 +57,6 @@ from ace.intelligence import (
 )
 from ace_reference_workspace_action import (
     ACTION_TYPE,
-    ADAPTER_ARTIFACT,
     ReferenceWorkspaceActionAdapter,
 )
 
@@ -80,27 +81,62 @@ APPEND_ARTIFACT = CapabilityArtifactIdentityV1Alpha1(
     implementation_version="0.1.0",
     artifact_digest="sha256:" + "8" * 64,
 )
+RECORDED_ACTION_ARTIFACT = CapabilityArtifactIdentityV1Alpha1(
+    capability="bounded_action_execution",
+    contract="ace.core.action-adapter/v1alpha1",
+    implementation_id="world_recorded_workspace_export_fixture",
+    implementation_version="0.1.0",
+    artifact_digest="sha256:" + hashlib.sha256(b"ace-world-recorded-workspace-export-fixture:0.1.0").hexdigest(),
+)
 
 
 class MutableClock:
     def __init__(self, current: datetime, *, step: timedelta = timedelta(seconds=1)) -> None:
         self.current = current
         self.step = step
-        self.realtime = False
 
     def set(self, current: datetime) -> None:
         self.current = current
-        self.realtime = False
-
-    def use_realtime(self) -> None:
-        self.realtime = True
 
     def __call__(self) -> datetime:
-        if self.realtime:
-            return datetime.now(UTC)
         value = self.current
         self.current = value + self.step
         return value
+
+
+class RecordedWorkspaceActionAdapter(ReferenceWorkspaceActionAdapter):
+    """Create-only public adapter with explicit recorded-replay timestamps."""
+
+    artifact_identity = RECORDED_ACTION_ARTIFACT
+
+    def __init__(self, *, workspace_root: Path, clock: MutableClock) -> None:
+        super().__init__(workspace_root=workspace_root)
+        self._recorded_clock = clock
+
+    async def prepare(self, intent: ActionIntentV1Alpha1) -> PreparedActionV1Alpha1:
+        wall_clock_plan = await super().prepare(intent)
+        material = self._prepared.pop(str(wall_clock_plan.plan_id))
+        plan_payload = wall_clock_plan.model_dump(
+            mode="python",
+            exclude={"plan_id", "plan_digest"},
+        )
+        plan_payload["prepared_at"] = self._recorded_clock()
+        recorded_plan = PreparedActionV1Alpha1(**plan_payload)
+        self._prepared[str(recorded_plan.plan_id)] = material.__class__(
+            plan=recorded_plan,
+            target=material.target,
+            content=material.content,
+        )
+        return recorded_plan
+
+    async def execute(self, plan, authorization) -> ActionResultV1Alpha1:
+        wall_clock_result = await super().execute(plan, authorization)
+        result_payload = wall_clock_result.model_dump(
+            mode="python",
+            exclude={"result_id", "result_digest"},
+        )
+        result_payload["completed_at"] = self._recorded_clock()
+        return ActionResultV1Alpha1(**result_payload)
 
 
 def _head(product_id: str, kind: str, state_id: str, sequence: int) -> GovernedStateHeadV1:
@@ -314,14 +350,14 @@ def _bindings(environment, clock):
     )
     action = GovernedOperationBindingV1Alpha1(
         product_id=product_id,
-        artifact=ADAPTER_ARTIFACT,
+        artifact=RECORDED_ACTION_ARTIFACT,
         configuration_ref=action_head.state_id,
         authority="execute_action",
         grant_ref="authority_grant:world-reviewed-export",
         state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(action_head),
     )
     heads = {(item.state_kind, item.state_id): item for item in (execution_head, append_head, action_head)}
-    for index, artifact in enumerate((REASONING_ARTIFACT, APPEND_ARTIFACT, ADAPTER_ARTIFACT), start=20):
+    for index, artifact in enumerate((REASONING_ARTIFACT, APPEND_ARTIFACT, RECORDED_ACTION_ARTIFACT), start=20):
         state_id = capability_state_ref_for_artifact(artifact)
         item = _head(product_id, "capability_state", state_id, index)
         heads[item.state_kind, item.state_id] = item
@@ -505,14 +541,12 @@ async def run_acceptance(
     if brief.replayed or not brief_replay.replayed or provider.calls != 1:
         raise AssertionError("LIVE Brief did not replay without re-reasoning")
 
-    now = datetime.now(UTC)
-    clock.use_realtime()
     decision, decision_ref, decision_receipt = await _record_decision(
         environment=environment,
         reasoning=reasoning,
         append_binding=append_binding,
         brief_admission=brief,
-        decided_at=now - timedelta(seconds=2),
+        decided_at=clock(),
     )
     intent = ActionIntentV1Alpha1(
         action_key="action:world-reality-brief-export:2026-16197",
@@ -528,7 +562,7 @@ async def run_acceptance(
         ),
         requested_at=decision_ref.available_at,
     )
-    adapter = ReferenceWorkspaceActionAdapter(workspace_root=workspace_root)
+    adapter = RecordedWorkspaceActionAdapter(workspace_root=workspace_root, clock=clock)
     executor = GovernedActionExecutionService(
         store=environment.store,
         authorizer=reasoning,

@@ -17,16 +17,15 @@ env:
   # Pin every uv invocation to the only interpreter this project supports.
   UV_PYTHON: "3.12"
   ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
-  ROOT_VERSION: "0.9.0"
+  ROOT_VERSION: "0.10.0"
   # Exact expected build outputs. Never matched with a glob: the point of the
   # release gate is that we know precisely which files were produced.
-  ROOT_WHEEL: "ace_domain_world_intelligence-0.9.0-py3-none-any.whl"
-  ROOT_SDIST: "ace_domain_world_intelligence-0.9.0.tar.gz"
-  ACE_CORE_VERSION: "0.5.0"
-  # P2E consumes the monitoring API merged after the public 0.5.0 artifact.
-  # Keep source acceptance on the exact reviewed commit until a versioned Core
-  # release carries the same tree; the isolated wheel gate below stays public.
-  ACE_CORE_CANDIDATE_SHA: "f0d2191ba7cf2d33ccfc3c821422786929be8349"
+  ROOT_WHEEL: "ace_domain_world_intelligence-0.10.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_world_intelligence-0.10.0.tar.gz"
+  ACE_CORE_VERSION: "0.6.0"
+  REFERENCE_ADAPTER_VERSION: "0.2.0"
+  REFERENCE_ADAPTER_WHEEL: "ace_reference_workspace_action-0.2.0-py3-none-any.whl"
+  REFERENCE_ADAPTER_SHA256: "eaa51ea704e9162363a4483d1f7d7779778b953ed2a2d80b67dfb332e1cd3f62"
   RELEASE_CONTRACT_TEST: "tests/test_release_contract.py"
   ADAPTER_TEST_SUITE: "adapters/federal_register_source/tests"
   # Keep the repository's proof scripts and separately packaged connector ahead
@@ -57,16 +56,41 @@ jobs:
         # checks. The wheel is installed separately below in a clean venv.
         run: uv sync --frozen --no-install-project
 
-      - name: Install the exact merged Core monitoring candidate
+      - name: Confirm the public Core measured and monitoring contracts
         run: |
           set -euo pipefail
-          uv pip install --python .venv/bin/python --reinstall \
-            "ace-core @ git+https://github.com/augmented-cognition-engine/core.git@${ACE_CORE_CANDIDATE_SHA}"
           uv run --no-sync python - <<'PY'
-          from ace.application import MonitoringLifecycleService, SensingWindowService
+          import importlib.metadata as metadata
 
+          from ace.application import (
+              MeasuredImpactDispositionService,
+              MeasuredImpactService,
+              MonitoringLifecycleService,
+              SensingWindowService,
+          )
+
+          assert metadata.version("ace-core") == "0.6.0"
+          assert MeasuredImpactService is not None
+          assert MeasuredImpactDispositionService is not None
           assert MonitoringLifecycleService is not None
           assert SensingWindowService is not None
+          PY
+
+      - name: Install the exact public Core reference action adapter
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            "https://github.com/augmented-cognition-engine/core/releases/download/v${ACE_CORE_VERSION}/${REFERENCE_ADAPTER_WHEEL}" \
+            --output "/tmp/${REFERENCE_ADAPTER_WHEEL}"
+          printf '%s  %s\n' "${REFERENCE_ADAPTER_SHA256}" "/tmp/${REFERENCE_ADAPTER_WHEEL}" | sha256sum --check --strict
+          uv pip install --python .venv/bin/python "/tmp/${REFERENCE_ADAPTER_WHEEL}"
+          uv run --no-sync python - <<'PY'
+          import importlib.metadata as metadata
+
+          from ace_reference_workspace_action import ADAPTER_ARTIFACT
+
+          assert metadata.version("ace-reference-workspace-action") == "0.2.0"
+          assert ADAPTER_ARTIFACT.implementation_version == "0.1.0"
           PY
 
       - name: Confirm the synced interpreter is Python 3.12
@@ -152,7 +176,7 @@ jobs:
           from packaging.utils import canonicalize_name
 
           wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
-          dist_info = "ace_domain_world_intelligence-0.9.0.dist-info/"
+          dist_info = "ace_domain_world_intelligence-0.10.0.dist-info/"
           adapter_import_package = "ace_world_federal_register_source"
           adapter_distribution = "ace-ext-world-federal-register-source"
 
@@ -251,14 +275,14 @@ jobs:
           assert len(requires_dist) == 1, requires_dist
           requirement = Requirement(requires_dist[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.5.0,<0.6"), requires_dist
+          assert requirement.specifier == SpecifierSet(">=0.6.0,<0.7"), requires_dist
           assert canonicalize_name(adapter_distribution) not in {
               canonicalize_name(Requirement(entry).name) for entry in requires_dist
           }
           print("inspected wheel:", wheel_path.name, "with", len(payload), "data resources")
           PY
 
-      - name: Prove the wheel installs against public ace-core 0.5.0 in an isolated environment
+      - name: Prove the wheel installs against public ace-core 0.6.0 in an isolated environment
         run: |
           set -euo pipefail
           ISOLATED="$(mktemp -d)"
