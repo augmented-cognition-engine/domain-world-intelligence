@@ -141,6 +141,7 @@ jobs:
           adapter_distribution = "ace-ext-world-federal-register-source"
 
           world = "domain_packs/world_intelligence/"
+          ai = "domain_packs/world_intelligence_ai/"
           federal = "domain_packs/world_intelligence_federal_register/"
           monitor = "domain_packs/world_intelligence_federal_register_monitor/"
           expected_payload = sorted(
@@ -172,6 +173,13 @@ jobs:
                   world + "conformance/p2b_status_case_brief_manifest.json",
                   world + "conformance/p2b_supersession_impact_expected.json",
                   world + "conformance/p2b_supersession_impact_manifest.json",
+                  ai + "manifest.json",
+                  ai + "modules/detection.json",
+                  ai + "modules/ontology.json",
+                  ai + "modules/personas.json",
+                  ai + "modules/source_mapping.json",
+                  ai + "modules/synthesis.json",
+                  ai + "conformance/ai_command_center_live_input.json",
                   federal + "manifest.json",
                   federal + "modules/ontology.json",
                   federal + "modules/source_mapping.json",

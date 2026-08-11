@@ -1,0 +1,100 @@
+{
+  "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
+  "metadata": {
+    "pack_id": "world_intelligence_ai",
+    "version": "0.1.0",
+    "display_name": "ACE World Intelligence — AI Command Center",
+    "description": "Additive declarative command-center pack for attributable official AI-policy progression."
+  },
+  "compatibility": {
+    "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
+    "intelligence_contract": "ace.intelligence.runtime/v1alpha1"
+  },
+  "resources": [
+    {
+      "resource_id": "world_ai_ontology",
+      "path": "modules/ontology.json",
+      "media_type": "application/json",
+      "digest": "sha256:91634cd631eadad6fd3e9709e587b02f46d268ab94d8e7c96c6fd7b61996536d"
+    },
+    {
+      "resource_id": "world_ai_source_mapping",
+      "path": "modules/source_mapping.json",
+      "media_type": "application/json",
+      "digest": "sha256:bf89df268b3208dc70164d2179cd216d7a7bf8eaed97fedbc09272d6f8b7db3f"
+    },
+    {
+      "resource_id": "world_ai_detection",
+      "path": "modules/detection.json",
+      "media_type": "application/json",
+      "digest": "sha256:c78406b1688bcf7da77fae17a20996838a5b037df1229dd623374e06cd9d7c15"
+    },
+    {
+      "resource_id": "world_ai_synthesis",
+      "path": "modules/synthesis.json",
+      "media_type": "application/json",
+      "digest": "sha256:685fc268a92fb2170fc1e1b110348ac1abe6f329b3db5c16b1124a3fc4aede8e"
+    },
+    {
+      "resource_id": "world_ai_personas",
+      "path": "modules/personas.json",
+      "media_type": "application/json",
+      "digest": "sha256:bd297981b84c138a70359557ca9509fbc40402aee7b604ecf184eaa896a87cc9"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "world_ai_ontology",
+      "contract": "ace.intelligence.ontology/v1alpha1",
+      "resource_id": "world_ai_ontology",
+      "depends_on": []
+    },
+    {
+      "module_id": "world_ai_source_mapping",
+      "contract": "ace.intelligence.source-mapping/v1alpha1",
+      "resource_id": "world_ai_source_mapping",
+      "depends_on": ["world_ai_ontology"]
+    },
+    {
+      "module_id": "world_ai_detection",
+      "contract": "ace.intelligence.detection/v1alpha2",
+      "resource_id": "world_ai_detection",
+      "depends_on": ["world_ai_ontology"]
+    },
+    {
+      "module_id": "world_ai_synthesis",
+      "contract": "ace.intelligence.synthesis/v1alpha2",
+      "resource_id": "world_ai_synthesis",
+      "depends_on": []
+    },
+    {
+      "module_id": "world_ai_personas",
+      "contract": "ace.intelligence.personas/v1alpha1",
+      "resource_id": "world_ai_personas",
+      "depends_on": ["world_ai_detection", "world_ai_synthesis"]
+    }
+  ],
+  "capability_requirements": [
+    {
+      "requirement_id": "ai_policy_federal_register_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    },
+    {
+      "requirement_id": "ai_policy_white_house_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    }
+  ],
+  "authority_requests": [
+    {
+      "request_id": "read_ai_policy_federal_register_document",
+      "authority": "source_read"
+    },
+    {
+      "request_id": "read_ai_policy_white_house_release",
+      "authority": "source_read"
+    }
+  ],
+  "overlay_slots": []
+}

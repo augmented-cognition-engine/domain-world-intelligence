@@ -1,0 +1,21 @@
+{
+  "contract": "ace.intelligence.synthesis/v1alpha2",
+  "module_id": "world_ai_synthesis",
+  "brief_templates": [
+    {
+      "template_id": "ai_policy_reality_brief",
+      "brief_type": "world_intelligence",
+      "display_name": "AI Policy Reality Brief",
+      "objective": "Explain the exact official-source progression while keeping cited records, bounded inference, unknowns, and source-lineage limits distinct.",
+      "required_sections": [
+        "what_changed",
+        "established_records",
+        "why_it_matters",
+        "unknowns",
+        "limitations"
+      ],
+      "recommendation_required": false,
+      "claim_policy": "citation_or_explicit_inference"
+    }
+  ]
+}

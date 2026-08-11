@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ace-ext-world-federal-register-source"
 version = "0.2.0"
-description = "Read-only Federal Register source adapter for ACE World Intelligence"
+description = "Read-only official-source adapters for ACE World Intelligence"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"

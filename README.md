@@ -159,12 +159,37 @@ source, artifact, URI, network attestations, and closed payload. ACE then admits
 receipt, source snapshot, visibly LIVE Observation, LIVE Entity Snapshot, and admission receipt as
 one atomic transaction. Exact replay and fresh-service restart replay perform no second capture.
 
+The adapter's additive 0.2.0 network boundary is now implemented and opt-in. On 2026-08-10 it
+completed one credential-free, redirect-free, DNS-pinned retrieval from the exact reviewed API URI:
+HTTP 200 `application/json`, 4,227 characters, body SHA-256
+`62e5f5da8f712542926093e897366cb49916afd92c4233e12d2a791581cf6571`. That is acquisition
+evidence only. The deterministic governed P2C admission remains recorded-transport conformance;
+the external capture has not been promoted to a Signal, Shift, Case, Brief, or legal conclusion.
+
 The conformance transport is a recorded, network-free response from the reviewed official API URI;
 it proves the governed LIVE contract and deterministic admission, not that the test suite performed
 a live network request. FederalRegister.gov is explicitly labeled as not the official legal edition,
 and the corresponding `govinfo.gov` PDF is retained as the official-format verification reference.
-No Signal, Shift, Brief, Decision, Outcome, feedback, delivery, publishing, persuasion, or external
-action is created.
+That frozen P2C packet creates no Signal, Shift, Brief, Decision, Outcome, feedback, delivery,
+publishing, persuasion, or external action.
+
+The additive AI Command Center packet now closes the next bounded journey without mixing it into
+P2C. Its JSON-only five-module pack maps two exact official publication lineages to one stable AI
+policy entity: Federal Register document `2026-11415` for Executive Order 14409 and the White House
+GOLD EAGLE release of 2026-07-14. The latter reports later implementation activity rather than
+republishing the order. Recorded, network-free transports admit both as visibly LIVE records, then
+the public categorical bridge derives `directive_issued → implementation_reported`, one Shift, and
+one routed Signal. A LIVE four-member Case freezes both exact observations and the derivation; a
+LIVE Reality Brief cites both source snapshots across five claims. This proves two independent
+publication roots, not independent non-government corroboration, legal effect, implementation
+completeness, policy success, or current network freshness.
+
+The accepted stable identities are `pack_ir:0679116c6b5e02cd021b085ba2d80cf2`,
+`shift:d6164dce0b01e64bf8fa74bead718f77`,
+`signal:2c76e695b4b6d36af3f56fee5fdc1b20`,
+`case:5a11b2d54ce1a8402bb038415e533cbc`, and
+`brief:d7d240147e48c3aef6a4a8e7ec481121`. The proof store contains 16 LIVE records and zero
+PREPARED records; the synthetic PREPARED packet remains byte-frozen and is not reused.
 
 P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
 declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
@@ -227,10 +252,10 @@ boundary:
 - installing `ace-domain-world-intelligence` never installs it;
 - it is **not** published by this repository's release workflow, which builds and uploads the root
   sdist and wheel only;
-- it contains no network client — it accepts only an injected, separately reviewed transport, and
-  validates the exact artifact identity, source type, HTTPS URI, empty redirect chain, absence of
-  credentials, exact HTTP 200 `application/json`, bounded strict JSON, globally routable address
-  attestations, DNS-rebinding protection, and monotonic operation times;
+- its network client is opt-in and limited to the exact reviewed Federal Register URI; it validates
+  the artifact identity, source type, HTTPS URI, empty redirect chain, absence of credentials,
+  expected content type, bounded payload, globally routable address attestations, DNS-rebinding
+  protection, and monotonic operation times;
 - to exercise it, put it on the path explicitly. Omit it and the P2C modules skip rather than fail.
 
 Rebuild the connector reproducibly:
@@ -249,11 +274,11 @@ With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
 [Develop from a source checkout](#develop-from-a-source-checkout):
 
 ```bash
-# Complete domain suite, including every frozen packet and the P2C2 product journey: 83 passed
+# Complete domain suite, including every frozen packet, P2C2, and the AI command-center journey: 87 passed
 export PYTHONPATH="$PYTHONPATH:$ACE/adapters/reference_workspace_action/src"
 $PY -m pytest -q
 
-# Connector fail-closed unit suite: 26 passed
+# Connector fail-closed unit suite: 62 passed
 $PY -m pytest adapters/federal_register_source/tests -q
 
 # Individual acceptance harnesses
@@ -264,6 +289,7 @@ $PY scripts/p2b_case_brief.py
 $PY scripts/p2b_status_case_brief.py
 $PY scripts/p2b_independent_case_brief.py
 $PY scripts/p2c_federal_register_live_acceptance.py
+$PY -m scripts.ai_command_center_live_acceptance
 
 # Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
 WORKSPACE=$(mktemp -d)
@@ -280,9 +306,10 @@ uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-
 uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 26 passed
 ```
 
-Verified totals as of 2026-08-10 with public `ace-core==0.5.0` from PyPI and the independently
-packaged reference adapter from the Core `v0.5.0` GitHub release: domain suite `83 passed`,
-connector suite `26 passed`. The
+The released 0.9.0 baseline, measured with public `ace-core==0.5.0` from PyPI and the independently
+packaged reference adapter from the Core `v0.5.0` GitHub release, was `83 passed` for the domain
+suite and `26 passed` for the connector. With the AI command-center candidate integrated over that
+baseline, the same environment passes `87` domain and `62` connector tests. The
 public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 
@@ -300,8 +327,12 @@ and the independent-corroboration proof in
 [`docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md`](docs/audits/world-intelligence-p2b-independent-case-brief-2026-08-07.md).
 The governed official-source admission proof is recorded in
 [`docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md`](docs/audits/world-intelligence-p2c-federal-register-live-2026-08-07.md).
+The opt-in external transport observation is recorded in
+[`docs/audits/world-intelligence-p2c-network-transport-2026-08-10.md`](docs/audits/world-intelligence-p2c-network-transport-2026-08-10.md).
 The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
+The two-lineage LIVE Shift → Signal → Case → cited Brief proof is recorded in
+[`docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md`](docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
@@ -324,13 +355,17 @@ content autonomously. Every LIVE capture demonstrated here is one explicitly req
 read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
 workspace export followed by separate verification and promotion.
 
+Next: exercise P2D multi-source conflict and append-only correction with LIVE inputs while keeping
+publication-lineage independence distinct from claimant independence. The packet may not add
+publishing, delivery, persuasion, or other external-action authority.
+
 ## Roadmap and project status
 
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
-and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is a separately
-reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE inputs. Neither
-step may add autonomous publishing, delivery, persuasion, or action authority to a Domain Pack.
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is P2D
+multi-source conflict/correction with LIVE inputs. It may not add autonomous publishing, delivery,
+persuasion, or action authority to a Domain Pack.
 
 ## Community and security
 
