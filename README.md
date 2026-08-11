@@ -248,6 +248,19 @@ of `1.0` and `0.0` across two matched pairs and another non-effective proposal.
 This freezes a World product rule over one recorded pair. It is not live revision, a general
 semantic-equivalence engine, population stability, calibration, causality, or human benefit.
 
+P2C9 freezes one exact probabilistic scoring boundary over that recorded correction. After the
+original Observation is admitted but before the correction is available, treatment and control
+record probabilities of `0.75` and `0.25` for the same explicit-correction event and complete the
+same reviewed workflow. Only then is the exact correction Observation admitted. Independent
+reviews derive the binary result and single-event Brier quality contributions of `0.9375` and
+`0.4375`; the two-pair difference is useful and still emits only a non-effective proposal.
+
+The forecast artifacts contain no correction identity or result material, and every reviewed
+forecast Action completes before the result becomes available. The probabilities are declared
+fixture inputs, not ACE outputs. This is exact forecast/result scoring, not a historically
+contemporaneous forecast, model-skill finding, empirical calibration curve, population reliability
+estimate, causal claim, or human-benefit finding.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -342,11 +355,12 @@ $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 # Stacked candidate: explicit reject/no-action review of the exact proposal
 $PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
 
-# Stacked candidates: correctness, attention, correction delay, and revision stability
+# Stacked candidates: correctness, attention, correction delay, revision stability, and forecast scoring
 $PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
 $PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
 $PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
 $PY -m scripts.p2c8_correction_revision_stability_outcome "$WORKSPACE"
+$PY -m scripts.p2c9_forecast_calibration_outcome "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -383,6 +397,8 @@ The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 The source-checkout measured-feedback candidate is recorded in
 [`docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md`](docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md).
+The latest withheld-result forecast-scoring candidate is recorded in
+[`docs/audits/world-intelligence-p2c9-forecast-calibration-outcome-2026-08-10.md`](docs/audits/world-intelligence-p2c9-forecast-calibration-outcome-2026-08-10.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
@@ -417,8 +433,10 @@ control, and valid silence under one frozen recorded-source challenge. P2C7 adds
 one explicit recorded correction pair, preserves the prior record, and measures frozen-replay
 detection delay against a product target. P2C8 measures exact unaffected-claim identity
 preservation across real Brief contracts while holding correction semantics, source coverage, and
-claim count constant. The next bounded measurement work is calibration, another independently
-sourced correction event, or independent Market reproduction.
+claim count constant. P2C9 adds an exact withheld-result forecast record and derives a single-event
+Brier contribution while explicitly withholding any population-calibration or model-skill claim.
+The next bounded measurement work is another independently sourced correction event or independent
+Market reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.

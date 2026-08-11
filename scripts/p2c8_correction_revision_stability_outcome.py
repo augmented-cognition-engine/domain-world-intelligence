@@ -573,11 +573,20 @@ def _install_policy(state: dict[str, Any]):
     return criterion_head, binding
 
 
-async def run_correction_revision_stability_outcome(workspace_root: Path) -> dict[str, Any]:
+async def run_correction_revision_stability_outcome(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+    before_correction=None,
+) -> dict[str, Any]:
     """Run P2C8 over exact prior, stable revision, and drift-control Briefs."""
 
-    state: dict[str, Any] = {}
-    prior_packet = await run_correction_detection_delay_outcome(workspace_root, state_sink=state)
+    state: dict[str, Any] = {} if state_sink is None else state_sink
+    prior_packet = await run_correction_detection_delay_outcome(
+        workspace_root,
+        state_sink=state,
+        before_correction=before_correction,
+    )
     environment = state["environment"]
     material = _build_briefs(state)
     prior_ref = await _append_brief(state, brief=material["prior"], role="prior")
