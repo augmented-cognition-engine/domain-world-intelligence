@@ -29,15 +29,18 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
 See the [P2D audit](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
 
-## Next — user-owned live orientation
+## Candidate — user-owned live orientation
 
-- The P2E consumer packet now constructs exact public ACE 0.5.0 Monitor, PersonaBinding, and
-  record-only Subscription contracts over the accepted P2D activation.
-- Six frozen owner-requested windows define no-change suppression, always-visible corrections,
-  pause/resume, terminal revocation, and zero-acquisition guards. This is conformance material, not
-  an executed scheduler or sensing loop.
-- `WI-CR-007` (owner-authorized lifecycle) and `WI-CR-008` (bounded sensing-window disposition)
-  remain open; World does not implement either platform invariant privately.
+- The P2E consumer packet constructs exact public Monitor, PersonaBinding, and record-only
+  Subscription contracts over the accepted P2D activation and consumes the generic owner lifecycle
+  and sensing-window services merged in Core #94.
+- Six explicit owner-requested windows now append and exactly replay no-change suppression,
+  always-visible corrections, pause/resume, terminal revocation, and zero-acquisition guards. This
+  grants no scheduler or autonomous sensing authority.
+- `WI-CR-007` (owner-authorized lifecycle) and `WI-CR-008` (bounded sensing-window disposition) are
+  closed for merged-source acceptance. Public-index Core reproduction remains open.
+- The composed evidence preserves four captured official-source Observations through three Shifts,
+  three Signals, two Cases, and the original cited Reality Briefs: 62 LIVE records, zero PREPARED.
 - Add a separately reviewed, opt-in production transport without bundling it into the Domain Pack.
 - Turn one-shot governed sensing into explicit user-owned monitors and subscriptions.
 - Preserve source independence, correction visibility, attention ownership, suppression, and

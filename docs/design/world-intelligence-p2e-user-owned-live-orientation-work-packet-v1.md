@@ -1,22 +1,25 @@
 # P2E work packet — user-owned LIVE orientation
 
-**Status:** frozen consumer-acceptance packet
+**Status:** merged-platform consumer candidate; public Core artifact replay pending
 
 **Mode:** LIVE only; PREPARED material is excluded
 
-**Runtime status:** partially materialized; lifecycle and sensing windows remain contract-blocked
+**Runtime status:** six lifecycle-governed sensing windows materialized and exactly replayed
 
 ## Purpose
 
 P2E turns the P2D one-shot planetary-defense proof into an explicit user-owned sensing intent
 without moving universal lifecycle or sensing-window semantics into the World domain. The packet
-freezes the smallest acceptable platform boundary before implementation.
+now consumes the generic implementation merged in Core
+[#94](https://github.com/augmented-cognition-engine/core/pull/94) at
+`f0d2191ba7cf2d33ccfc3c821422786929be8349`.
 
-Released `ace-core==0.5.0` already exposes inert, domain-neutral `MonitorV1Alpha1`,
-`PersonaBindingV1Alpha1`, and `SubscriptionV1Alpha1` contracts. P2E constructs and pins all three
-through those public APIs. The Subscription selects `record_only`, so it grants no delivery effect.
-The public contracts do not yet provide an owner-authorized pause/resume/revoke lifecycle or a
-bounded sensing-window receipt; those narrower gaps remain explicit below.
+Released `ace-core==0.5.0` exposes inert, domain-neutral `MonitorV1Alpha1`,
+`PersonaBindingV1Alpha1`, and `SubscriptionV1Alpha1` contracts. Merged Core source adds the public
+owner lifecycle and bounded sensing-window contracts and application services. P2E constructs,
+materializes, and pins those resources against a checkout-free wheel whose source tree is identical
+to the merged commit. The Subscription remains `record_only`, so the new receipts grant no delivery
+effect. Public-index Core installation remains a later release receipt rather than a claim here.
 
 The scenario reuses the exact P2D NASA/ESA publication lineages, pack activation, historical Brief,
 corrected Brief, and correction semantics. It adds no new factual claim and performs no network
@@ -60,27 +63,27 @@ scheduler, timer, daemon, delivery channel, publication, or external-action auth
 - Same-lineage before/after publications never manufacture corroboration.
 - P2D historical artifacts remain immutable and reopen with the accepted identities.
 
-## Public-platform contract requests
+## Closed public-platform contract requests
 
 ### WI-CR-007 — owner-enforced Monitor and Subscription lifecycle
 
-ACE Intelligence already has domain-neutral immutable Monitor, PersonaBinding, and Subscription
-resources. It still needs append-only lifecycle transitions for create, pause, resume, and revoke.
-The platform must authorize transitions against the bound principal, preserve the stable logical
-intent across revisions, enforce terminal revocation, and provide idempotent replay. World
-contributes only the subject, source requirements, persona, and policy references.
+Closed by Core #94. ACE Intelligence now has append-only lifecycle transitions for create, pause,
+resume, and revoke. The application service authorizes transitions against the bound principal,
+preserves a stable logical intent and append-once sequence, enforces terminal revocation, and
+provides exact restart replay. World contributes only the subject, source requirements, persona,
+and policy references.
 
 ### WI-CR-008 — bounded sensing-window disposition
 
-ACE Intelligence needs a domain-neutral, append-only sensing-window receipt that records the
-authorizing Monitor/Subscription revisions, requested interval, source transaction references,
-accepted new resources, and exactly one disposition: routed material change or an explicit
-suppression reason. Paused and revoked windows must prove zero acquisition. Correction material may
-not be collapsed into `no_material_change`.
+Closed by Core #94. ACE Intelligence now has a domain-neutral, append-only sensing-window receipt
+that records the authorizing Monitor/Subscription revisions, requested interval, source transaction
+references, accepted new resources, and exactly one routed-or-suppressed disposition. P2E proves
+paused and revoked windows contain zero acquisition and correction material cannot collapse into
+`no_material_change`.
 
-Neither remaining request belongs in a Domain Pack. Until public contracts close both requests,
-P2E claims only the three inert public intent contracts—not lifecycle execution or sensing-window
-runtime materialization.
+Neither implementation lives in the Domain Pack. World imports the generic contracts and services
+without adding World vocabulary to Core. `WI-CR-007` and `WI-CR-008` are closed for merged-source
+consumer acceptance; public-artifact reproduction remains explicitly pending.
 
 ## Fail-closed vectors
 
@@ -93,8 +96,13 @@ hidden delivery, autonomous scheduling, historical rewriting, and replay diverge
 - The positive packet validates with zero violations and an exact replay identity.
 - All ten negative vectors fail with their pinned first violation.
 - The accepted P2D pack and Brief identities remain unchanged.
-- The three static public contracts construct with exact pinned identities; lifecycle and sensing
-  runtime materialization remain visibly false and both narrowed requests remain open.
+- The three static public contracts construct with exact pinned identities; five lifecycle
+  transitions and six sensing-window receipts append exactly and replay after fresh service
+  construction.
+- Captured NASA/ESA LIVE Observations remain source-linked through three Shifts, three Signals, two
+  Cases, and the original cited Reality Brief identities.
+- The composed ledger contains 62 LIVE records—44 P2D records plus 18 monitoring records—and zero
+  PREPARED records.
 - The Domain Pack stays JSON-only and gains no authority request beyond source read.
 - No network, scheduler, delivery, publication, persuasion, Decision, Outcome, or external action is
   executed or implied.

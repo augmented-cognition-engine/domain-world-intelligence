@@ -5,7 +5,8 @@
     {
       "request_id": "WI-CR-007",
       "title": "Owner-enforced Monitor and Subscription lifecycle",
-      "status": "open",
+      "status": "closed",
+      "resolution": "Merged Core PR #94 adds the public owner-authorized append-only lifecycle service and immutable transition receipts. P2E materializes create, pause, resume, and terminal subscription revocation with exact restart replay.",
       "motivation": "Released ACE Intelligence already exposes inert Monitor, PersonaBinding, and Subscription resources, which P2E consumes exactly. It has no public lifecycle service that authorizes pause, resume, and terminal revocation against the bound principal while preserving one stable logical intent.",
       "requested_contract_shape": "Append-only create, pause, resume, and revoke transitions over the existing domain-neutral Monitor, PersonaBinding, and Subscription contracts. Enforce the bound principal, product/mode/activation scope, stable logical intent, terminal revocation, exact authorization, and idempotent replay without World vocabulary.",
       "acceptance_probe": "ace.intelligence publicly exports an owner-authorized Monitor/Subscription lifecycle service and immutable transition receipt over the existing v1alpha1 contracts.",
@@ -19,7 +20,8 @@
     {
       "request_id": "WI-CR-008",
       "title": "Bounded sensing-window disposition and suppression",
-      "status": "open",
+      "status": "closed",
+      "resolution": "Merged Core PR #94 adds the public bounded sensing-window service and typed routed/suppressed receipts. P2E materializes all six windows, including replay-only no-change and zero-acquisition paused/revoked guards.",
       "motivation": "Released ACE Intelligence has no public receipt that binds one requested sensing window to Monitor/Subscription revisions, source transactions, accepted new resources, and exactly one routed-or-suppressed disposition. World must not implement hidden scheduling, duplicate suppression, or correction visibility privately.",
       "requested_contract_shape": "A domain-neutral append-only sensing-window receipt with requested interval, authorizing Monitor and Subscription revisions, source transaction refs, accepted/replayed resources, and a routed material-change or explicit suppression disposition. Paused/revoked windows prove zero acquisition; correction material cannot be classified as no_material_change.",
       "acceptance_probe": "ace.intelligence publicly exports a sensing-window receipt and service with typed routed/suppressed dispositions, explicit suppression reasons, zero-acquisition guards, and exact replay.",

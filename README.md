@@ -215,15 +215,18 @@ The accepted P2D identities are `pack_ir:bb400cc0652622b43c01504e651110e0`, hist
 contains 44 LIVE records and zero PREPARED records. Separate official publication roots do not prove
 independent measurements: both agencies describe a shared international observation ecosystem.
 
-P2E freezes the next user-owned LIVE-orientation boundary without claiming a scheduler or sensing
-runtime. Public ACE 0.5.0 contracts construct one exact Monitor
+P2E materializes the next user-owned LIVE-orientation boundary without claiming a scheduler or
+autonomous sensing runtime. Public ACE 0.5.0 contracts construct one exact Monitor
 (`monitor:bbb0e5ab246c6d1f08f7669226db6873`), principal/persona binding
 (`persona_binding:1349e5c7f78270dd5c8e267b582a1399`), and record-only Subscription
 (`subscription:3bb149effa91c5fdd224780ae0a455ee`) over the accepted planetary-defense activation. Six
-explicitly requested windows freeze initial orientation, no-change suppression, both visible
-corrections, owner pause/resume, and terminal revocation. Lifecycle execution and sensing-window
-receipts remain open generic platform requests `WI-CR-007` and `WI-CR-008`; World supplies no
-private substitute and adds no runtime record, network request, delivery, schedule, or action.
+explicitly requested windows append and exactly replay initial orientation, no-change suppression,
+both visible corrections, owner pause/resume, and terminal revocation through the generic services
+merged in Core #94. `WI-CR-007` and `WI-CR-008` are closed for merged-source acceptance. The
+composed path preserves four captured NASA/ESA Observations through three Shifts, three Signals, two
+Cases, and the original cited Reality Briefs: 62 LIVE records and zero PREPARED records. World adds
+no private substitute, network request, delivery, schedule, or action. Public-index reproduction of
+the new Core contracts remains pending a versioned Core release.
 
 P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
 declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
@@ -349,11 +352,12 @@ public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
 The merged P2D baseline passed `90` domain tests, `80` connector tests, and all `7`
 release-contract tests. Its wheel contained exactly 55 JSON resources, nine from the
-planetary-defense pack, and no executable code. The verified P2E candidate passes `101` domain,
+planetary-defense pack, and no executable code. The verified P2E runtime candidate passes `102` domain,
 `80` connector, and all `7` release-contract tests. Its wheel contains exactly 59 JSON resources,
 13 from the planetary-defense pack, including exactly four P2E conformance resources and no
-executable payload. A clean install with public `ace-core==0.5.0` reproduces the pinned Monitor,
-PersonaBinding, and record-only Subscription identities without importing either checkout.
+executable payload. A checkout-free install of the Core #94 candidate wheel reproduces the pinned
+Monitor, PersonaBinding, Subscription, five lifecycle transitions, six sensing receipts, and full
+captured LIVE lineage from `site-packages` without importing the Core checkout.
 
 The exact identities, negative cases, and artifact proofs are recorded in
 [`docs/audits/world-intelligence-p2a-2026-08-06.md`](docs/audits/world-intelligence-p2a-2026-08-06.md)

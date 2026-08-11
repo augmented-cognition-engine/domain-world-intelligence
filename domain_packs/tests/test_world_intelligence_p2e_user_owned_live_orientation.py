@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import ace.application
 import ace.intelligence
 from ace.intelligence import SubscriptionDeliveryDisposition
 
@@ -16,6 +17,7 @@ from scripts.p2e_user_owned_live_orientation_acceptance import (
     packet_identity,
     run_negative_cases,
     run_positive,
+    run_runtime_positive,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -26,14 +28,26 @@ def _load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_p2e_positive_projection_is_exact_and_contract_blocked() -> None:
+def test_p2e_positive_projection_is_exact_and_runtime_materialized() -> None:
     expected = _load(EXPECTED_PATH)
     assert run_positive() == expected["expected_projection"]
-    assert expected["expected_projection"]["runtime_materialization_claimed"] is False
-    assert expected["expected_projection"]["open_contract_requests"] == [
-        "WI-CR-007",
-        "WI-CR-008",
-    ]
+    assert expected["expected_projection"]["runtime_materialization_claimed"] is True
+    assert expected["expected_projection"]["open_contract_requests"] == []
+
+
+async def test_p2e_materializes_exact_live_lineage_through_cited_reality_briefs() -> None:
+    expected = _load(EXPECTED_PATH)["expected_runtime"]
+    result = await run_runtime_positive()
+
+    assert result == expected
+    assert result["official_publication_roots"] == ["ESA", "NASA"]
+    assert len(result["source_observation_ids"]) == 4
+    assert len(result["shift_ids"]) == len(result["signal_ids"]) == 3
+    assert len(result["case_ids"]) == len(result["reality_brief_ids"]) == 2
+    assert result["reality_brief_citation_counts"] == [2, 4]
+    assert result["all_lineage_records_persisted"] is True
+    assert result["prepared_record_count"] == 0
+    assert result["prepared_live_separated"] is True
 
 
 def test_p2e_packet_identity_replays_exactly() -> None:
@@ -132,24 +146,25 @@ def _public_intelligence_source() -> str:
 
 def test_wi_cr_007_platform_gap_user_owned_monitor_subscription() -> None:
     requests = {item["request_id"]: item for item in _load(REQUESTS_PATH)["requests"]}
-    assert requests["WI-CR-007"]["status"] == "open"
+    assert requests["WI-CR-007"]["status"] == "closed"
     assert hasattr(ace.intelligence, "MonitorV1Alpha1")
     assert hasattr(ace.intelligence, "PersonaBindingV1Alpha1")
     assert hasattr(ace.intelligence, "SubscriptionV1Alpha1")
-    assert not hasattr(ace.intelligence, "MonitorLifecycleService")
-    assert not hasattr(ace.intelligence, "MonitorLifecycleTransitionV1Alpha1")
-    assert not hasattr(ace.intelligence, "SubscriptionLifecycleTransitionV1Alpha1")
+    assert hasattr(ace.application, "MonitoringLifecycleService")
+    assert hasattr(ace.intelligence, "MonitoringLifecycleRequestV1Alpha1")
+    assert hasattr(ace.intelligence, "MonitoringLifecycleReceiptV1Alpha1")
     source = _public_intelligence_source()
     assert "ace.intelligence.monitor/v1alpha1" in source
     assert "ace.intelligence.subscription/v1alpha1" in source
-    assert "monitor-lifecycle" not in source
-    assert "terminal revocation" not in source
+    assert "ace.intelligence.monitoring-lifecycle-receipt/v1alpha1" in source
+    assert "MonitoringLifecycleState.REVOKED" in source
 
 
 def test_wi_cr_008_platform_gap_sensing_window_disposition() -> None:
     requests = {item["request_id"]: item for item in _load(REQUESTS_PATH)["requests"]}
-    assert requests["WI-CR-008"]["status"] == "open"
-    assert not hasattr(ace.intelligence, "SensingWindowReceiptV1Alpha1")
+    assert requests["WI-CR-008"]["status"] == "closed"
+    assert hasattr(ace.application, "SensingWindowService")
+    assert hasattr(ace.intelligence, "SensingWindowReceiptV1Alpha1")
     source = _public_intelligence_source()
-    assert "sensing-window-receipt" not in source
-    assert "subscription_revoked" not in source
+    assert "ace.intelligence.sensing-window-receipt/v1alpha1" in source
+    assert "subscription_revoked" in source

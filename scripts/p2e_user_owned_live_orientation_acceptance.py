@@ -8,6 +8,7 @@ missing generic platform contracts visible instead of simulating them in World.
 
 from __future__ import annotations
 
+import asyncio
 import copy
 import hashlib
 import json
@@ -15,14 +16,31 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from ace.application import (
+    LIVE_MONITORING_RECORD_SPACE,
+    MonitoringLifecycleService,
+    SensingWindowService,
+)
+from ace.core import AuthenticatedRuntimeContextV1Alpha1
 from ace.intelligence import (
     CompiledPackRefV1,
+    ExactMaterialReferenceV1Alpha1,
     MonitorDisposition,
+    MonitoringLifecycleAction,
+    MonitoringLifecycleRequestV1Alpha1,
+    MonitoringTargetKind,
     MonitorV1Alpha1,
     PersonaBindingV1Alpha1,
+    SensingWindowDisposition,
+    SensingWindowEvaluationV1Alpha1,
+    SensingWindowMaterialKind,
+    SensingWindowRequestV1Alpha1,
+    SensingWindowSuppressionReason,
     SubscriptionDeliveryDisposition,
     SubscriptionV1Alpha1,
 )
+
+from scripts.p2d_live_conflict_correction import execute_acceptance
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PACK_ROOT = REPO_ROOT / "domain_packs" / "world_intelligence_planetary_defense"
@@ -114,18 +132,25 @@ def build_static_intent_contracts(
 
 def _lifecycle_state(packet: dict[str, Any], requested_at: datetime) -> tuple[str, str]:
     monitor_state = "absent"
-    subscription_state = "active"
+    subscription_state = "absent"
     for event in sorted(packet["lifecycle"], key=lambda item: _time(item["effective_at"])):
         if _time(event["effective_at"]) > requested_at:
             break
-        if event["event_type"] == "created":
-            monitor_state = "active"
-        elif event["event_type"] == "paused":
-            monitor_state = "paused"
-        elif event["event_type"] == "resumed":
-            monitor_state = "active"
-        elif event["event_type"] == "revoked":
-            subscription_state = "revoked"
+        target = event["target_kind"]
+        if target == "monitor":
+            if event["event_type"] in {"created", "resumed"}:
+                monitor_state = "active"
+            elif event["event_type"] == "paused":
+                monitor_state = "paused"
+            elif event["event_type"] == "revoked":
+                monitor_state = "revoked"
+        elif target == "subscription":
+            if event["event_type"] in {"created", "resumed"}:
+                subscription_state = "active"
+            elif event["event_type"] == "paused":
+                subscription_state = "paused"
+            elif event["event_type"] == "revoked":
+                subscription_state = "revoked"
     return monitor_state, subscription_state
 
 
@@ -180,7 +205,19 @@ def validate_packet(
 
     lifecycle_times = [_time(event["effective_at"]) for event in packet["lifecycle"]]
     window_times = [_time(window["requested_at"]) for window in packet["sensing_windows"]]
-    if lifecycle_times != sorted(lifecycle_times) or window_times != sorted(window_times):
+    if (
+        lifecycle_times != sorted(lifecycle_times)
+        or window_times != sorted(window_times)
+        or any(
+            not (
+                _time(window["requested_at"])
+                <= _time(window["window_started_at"])
+                < _time(window["window_ended_at"])
+                <= _time(window["evaluated_at"])
+            )
+            for window in packet["sensing_windows"]
+        )
+    ):
         violations.append("temporal_incoherence")
 
     for window in packet["sensing_windows"]:
@@ -302,6 +339,257 @@ def run_positive() -> dict[str, Any]:
     return projection(packet, expected)
 
 
+def _exact(reference: str | None, digest: str | None) -> ExactMaterialReferenceV1Alpha1:
+    return ExactMaterialReferenceV1Alpha1(reference=str(reference), digest=str(digest))
+
+
+def _resource_exact(resource: Any) -> ExactMaterialReferenceV1Alpha1:
+    return _exact(resource.resource_id, resource.resource_digest)
+
+
+def _source_request_exact(request: Any) -> ExactMaterialReferenceV1Alpha1:
+    return _exact(request.request_id, request.request_digest)
+
+
+def _source_transaction_exact(admission: Any) -> ExactMaterialReferenceV1Alpha1:
+    return _exact(admission.admission_receipt.receipt_id, admission.admission_receipt.receipt_digest)
+
+
+async def run_runtime_positive() -> dict[str, Any]:
+    """Materialize P2E over the exact captured P2D LIVE record graph."""
+
+    packet = _load(INPUT_PATH)
+    p2d = await execute_acceptance()
+    monitor, persona_binding, subscription = build_static_intent_contracts(packet)
+    owner_ref = packet["ownership"]["owner_ref"]
+    context = AuthenticatedRuntimeContextV1Alpha1(
+        product_id=packet["product_id"],
+        actor_ref=owner_ref,
+        authentication_receipt_ref="authentication_receipt:world-planetary-defense-p2e-owner",
+        authentication_receipt_digest="sha256:" + "e" * 64,
+        authenticated_at=p2d.environment.context.authenticated_at,
+        expires_at=p2d.environment.context.expires_at,
+    )
+    targets = {"monitor": monitor, "subscription": subscription}
+    target_kinds = {
+        "monitor": MonitoringTargetKind.MONITOR,
+        "subscription": MonitoringTargetKind.SUBSCRIPTION,
+    }
+    target_references = {
+        "monitor": _exact(monitor.monitor_ref, monitor.monitor_digest),
+        "subscription": _exact(subscription.subscription_ref, subscription.subscription_digest),
+    }
+    binding_reference = _exact(persona_binding.binding_ref, persona_binding.binding_digest)
+    action_by_event = {
+        "created": MonitoringLifecycleAction.CREATE,
+        "paused": MonitoringLifecycleAction.PAUSE,
+        "resumed": MonitoringLifecycleAction.RESUME,
+        "revoked": MonitoringLifecycleAction.REVOKE,
+    }
+    lifecycle_service = MonitoringLifecycleService(store=p2d.environment.store)
+    lifecycle_heads: dict[str, Any] = {}
+    lifecycle_sequences = {"monitor": 0, "subscription": 0}
+    lifecycle_receipts = []
+    lifecycle_replays = []
+    for event in packet["lifecycle"]:
+        target_name = event["target_kind"]
+        lifecycle_sequences[target_name] += 1
+        prior = lifecycle_heads.get(target_name)
+        request = MonitoringLifecycleRequestV1Alpha1(
+            transition_key=event["event_id"],
+            product_id=packet["product_id"],
+            authenticated_context=context,
+            target_kind=target_kinds[target_name],
+            target=target_references[target_name],
+            persona_binding=binding_reference,
+            action=action_by_event[event["event_type"]],
+            sequence=lifecycle_sequences[target_name],
+            prior_receipt=prior.reference() if prior is not None else None,
+            requested_at=_time(event["effective_at"]),
+        )
+        admission = await lifecycle_service.transition(
+            request=request,
+            persona_binding=persona_binding,
+            target=targets[target_name],
+            applied_at=_time(event["effective_at"]),
+        )
+        replay = await MonitoringLifecycleService(store=p2d.environment.store).transition(
+            request=request,
+            persona_binding=persona_binding,
+            target=targets[target_name],
+            applied_at=_time(event["effective_at"]),
+        )
+        lifecycle_heads[target_name] = admission.receipt
+        lifecycle_receipts.append(admission.receipt)
+        lifecycle_replays.append(replay.replayed and replay.receipt == admission.receipt)
+
+    def lifecycle_at(
+        target_kind: MonitoringTargetKind,
+        available_at: datetime,
+    ) -> ExactMaterialReferenceV1Alpha1:
+        candidates = [
+            receipt
+            for receipt in lifecycle_receipts
+            if receipt.target_kind is target_kind and receipt.applied_at <= available_at
+        ]
+        return max(candidates, key=lambda item: item.sequence).reference()
+
+    routed_by_window = {
+        "sensing_window:w1-initial-orientation": (
+            p2d.admissions["esa_initial"].observation,
+            p2d.admissions["nasa_initial"].observation,
+            p2d.divergence.shift,
+            p2d.divergence.signal,
+            p2d.historical_case,
+            p2d.historical_brief,
+        ),
+        "sensing_window:w3-nasa-correction": (p2d.admissions["nasa_revised"].observation,),
+        "sensing_window:w5-esa-correction-after-resume": (
+            p2d.admissions["esa_revised"].observation,
+            p2d.nasa_revision.shift,
+            p2d.nasa_revision.signal,
+            p2d.esa_revision.shift,
+            p2d.esa_revision.signal,
+            p2d.corrected_case,
+            p2d.corrected_brief,
+        ),
+    }
+    material_kinds = {
+        "none": SensingWindowMaterialKind.NONE,
+        "initial_divergence": SensingWindowMaterialKind.MATERIAL_CHANGE,
+        CORRECTION_KIND: SensingWindowMaterialKind.CORRECTION,
+    }
+    dispositions = {
+        "routed": SensingWindowDisposition.ROUTED,
+        "suppressed": SensingWindowDisposition.SUPPRESSED,
+    }
+    suppression_reasons = {item.value: item for item in SensingWindowSuppressionReason}
+    sensing_service = SensingWindowService(store=p2d.environment.store)
+    window_receipts = []
+    window_replays = []
+    for window in packet["sensing_windows"]:
+        window_started_at = _time(window["window_started_at"])
+        request = SensingWindowRequestV1Alpha1(
+            window_key=window["window_id"],
+            product_id=packet["product_id"],
+            authenticated_context=context,
+            monitor_lifecycle=lifecycle_at(MonitoringTargetKind.MONITOR, window_started_at),
+            subscription_lifecycle=lifecycle_at(MonitoringTargetKind.SUBSCRIPTION, window_started_at),
+            requested_at=_time(window["requested_at"]),
+            window_started_at=window_started_at,
+            window_ended_at=_time(window["window_ended_at"]),
+        )
+        candidate_keys = tuple(window["candidate_source_keys"])
+        accepted_keys = tuple(window["accepted_new_source_keys"])
+        replayed_keys = tuple(window["replayed_source_keys"])
+        if len(candidate_keys) != window["acquisition_request_count"]:
+            raise AssertionError("frozen sensing-window acquisition count crossed its candidate requests")
+        evaluation = SensingWindowEvaluationV1Alpha1(
+            request=request.reference(),
+            acquisition_requests=tuple(_source_request_exact(p2d.environment.requests[key]) for key in candidate_keys),
+            source_transactions=tuple(_source_transaction_exact(p2d.admissions[key]) for key in candidate_keys),
+            accepted_resources=tuple(_resource_exact(p2d.admissions[key].observation) for key in accepted_keys),
+            replayed_resources=tuple(_resource_exact(p2d.admissions[key].observation) for key in replayed_keys),
+            routed_resources=tuple(_resource_exact(item) for item in routed_by_window.get(window["window_id"], ())),
+            material_kind=material_kinds[window["material_kind"]],
+            disposition=dispositions[window["disposition"]],
+            suppression_reason=(
+                suppression_reasons[window["suppression_reason"]] if window["suppression_reason"] is not None else None
+            ),
+            correction_visible=window["correction_visible"],
+            evaluated_at=_time(window["evaluated_at"]),
+        )
+        admission = await sensing_service.record(request=request, evaluation=evaluation)
+        replay = await SensingWindowService(store=p2d.environment.store).record(
+            request=request,
+            evaluation=evaluation,
+        )
+        window_receipts.append(admission.receipt)
+        window_replays.append(replay.replayed and replay.receipt == admission.receipt)
+
+    live_records = tuple(
+        record
+        for record in p2d.environment.store.records.values()
+        if record.record_space in {"live", LIVE_MONITORING_RECORD_SPACE}
+    )
+    prepared_records = tuple(
+        record for record in p2d.environment.store.records.values() if record.record_space == "prepared"
+    )
+    monitoring_records = tuple(
+        record
+        for record in p2d.environment.store.records.values()
+        if record.record_space == LIVE_MONITORING_RECORD_SPACE
+    )
+    lineage_resources = (
+        *(p2d.admissions[key].observation for key in ("esa_initial", "nasa_initial", "nasa_revised", "esa_revised")),
+        p2d.divergence.shift,
+        p2d.nasa_revision.shift,
+        p2d.esa_revision.shift,
+        p2d.divergence.signal,
+        p2d.nasa_revision.signal,
+        p2d.esa_revision.signal,
+        p2d.historical_case,
+        p2d.corrected_case,
+        p2d.historical_brief,
+        p2d.corrected_brief,
+    )
+    p2d_record_keys = {
+        record.record_key for record in p2d.environment.store.records.values() if record.record_space == "live"
+    }
+    return {
+        "contract": "ace.world-intelligence.p2e-user-owned-live-orientation-runtime/v1alpha1",
+        "mode": "LIVE",
+        "lifecycle_receipt_ids": [str(item.receipt_id) for item in lifecycle_receipts],
+        "sensing_window_receipt_ids": [str(item.receipt_id) for item in window_receipts],
+        "all_lifecycle_replays_exact": all(lifecycle_replays),
+        "all_window_replays_exact": all(window_replays),
+        "monitoring_record_count": len(monitoring_records),
+        "p2d_live_record_count": p2d.projection["separation"]["live_record_count"],
+        "composed_live_record_count": len(live_records),
+        "prepared_record_count": len(prepared_records),
+        "official_publication_roots": p2d.projection["source"]["independent_claimant_roots"],
+        "source_observation_ids": [
+            str(p2d.admissions[key].observation.resource_id)
+            for key in ("esa_initial", "nasa_initial", "nasa_revised", "esa_revised")
+        ],
+        "shift_ids": [
+            str(item.resource_id) for item in (p2d.divergence.shift, p2d.nasa_revision.shift, p2d.esa_revision.shift)
+        ],
+        "signal_ids": [
+            str(item.resource_id) for item in (p2d.divergence.signal, p2d.nasa_revision.signal, p2d.esa_revision.signal)
+        ],
+        "case_ids": [str(p2d.historical_case.resource_id), str(p2d.corrected_case.resource_id)],
+        "reality_brief_ids": [
+            str(p2d.historical_brief.resource_id),
+            str(p2d.corrected_brief.resource_id),
+        ],
+        "reality_brief_citation_counts": [
+            len(p2d.historical_brief.citations),
+            len(p2d.corrected_brief.citations),
+        ],
+        "correction_windows_visible": all(
+            receipt.correction_visible
+            for receipt in window_receipts
+            if receipt.material_kind is SensingWindowMaterialKind.CORRECTION
+        ),
+        "owner_guarded_zero_acquisition_windows": sum(
+            receipt.suppression_reason
+            in {
+                SensingWindowSuppressionReason.OWNER_PAUSED,
+                SensingWindowSuppressionReason.SUBSCRIPTION_REVOKED,
+            }
+            and not receipt.acquisition_requests
+            and not receipt.source_transactions
+            for receipt in window_receipts
+        ),
+        "scheduler_authority": any(receipt.scheduler_authority for receipt in window_receipts),
+        "delivery_authority": any(receipt.delivery_authority for receipt in window_receipts),
+        "external_action_authority": any(receipt.external_action_authority for receipt in window_receipts),
+        "all_lineage_records_persisted": all(str(item.resource_id) in p2d_record_keys for item in lineage_resources),
+        "prepared_live_separated": len(prepared_records) == 0,
+    }
+
+
 def _mutated_packet(case_id: str) -> dict[str, Any]:
     packet = copy.deepcopy(_load(INPUT_PATH))
     windows = packet["sensing_windows"]
@@ -329,7 +617,7 @@ def _mutated_packet(case_id: str) -> dict[str, Any]:
     elif case_id == "history_rewrite":
         packet["prerequisites"]["historical_brief_id"] = "brief:rewritten"
     elif case_id == "divergent_replay":
-        windows[1]["requested_at"] = "2026-08-11T16:07:01+00:00"
+        windows[1]["requested_at"] = "2026-08-11T18:06:01+00:00"
     else:
         raise KeyError(case_id)
     return packet
@@ -358,6 +646,7 @@ def main() -> None:
                 "contract": "ace.world-intelligence.p2e-user-owned-live-orientation-proof/v1alpha1",
                 "packet_identity": packet_identity(packet, expected),
                 "projection": projection(packet, expected),
+                "runtime": asyncio.run(run_runtime_positive()),
                 "negative_vectors": run_negative_cases(),
             },
             indent=2,

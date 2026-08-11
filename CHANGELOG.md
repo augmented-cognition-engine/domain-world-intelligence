@@ -15,13 +15,15 @@ noted here only where the boundary between them changes.
 - **P2E user-owned LIVE-orientation consumer packet.** Public ACE 0.5.0 Monitor,
   PersonaBinding, and record-only Subscription contracts now bind the accepted planetary-defense
   pack, exact activation, one fixture principal, and the pack persona with pinned identities.
-- **Repeated-window ownership and suppression boundary.** Six frozen owner-requested windows cover
-  initial orientation, exact no-change suppression, two always-visible corrections, zero
-  acquisition while paused, resume, and zero acquisition after Subscription revocation. Eleven
-  negative mutations fail closed.
-- **Narrow platform requests.** `WI-CR-007` requests owner-authorized lifecycle over the existing
-  inert Monitor/Subscription contracts; `WI-CR-008` requests append-only sensing-window
-  route-or-suppression receipts. No private World implementation simulates either capability.
+- **Repeated-window ownership and suppression runtime.** Six explicit owner-requested windows append
+  and exactly replay initial orientation, exact no-change suppression, two always-visible
+  corrections, zero acquisition while paused, resume, and zero acquisition after Subscription
+  revocation. Eleven negative mutations fail closed.
+- **Closed narrow platform requests.** Merged Core #94 closes `WI-CR-007` with owner-authorized
+  append-only lifecycle and closes `WI-CR-008` with bounded sensing-window route-or-suppression
+  receipts. World consumes the generic public seams and adds no private implementation.
+- **Composed captured LIVE lineage.** The four NASA/ESA Observations remain linked through three
+  Shifts, three Signals, two Cases, and the original 2-citation and 4-citation Reality Briefs.
 
 - **P2D LIVE conflict and correction.** Four exact NASA/ESA planetary-defense publications become
   LIVE Observations, one dated cross-source divergence and two same-source downward-revision Shifts,
@@ -36,9 +38,9 @@ noted here only where the boundary between them changes.
 
 ### Boundaries
 
-- P2E constructs three inert public intent contracts but performs no runtime lifecycle, sensing
-  loop, network request, scheduling, delivery, publication, or external action. Its P2D prerequisite
-  remains 44 LIVE records and zero PREPARED records; P2E appends no runtime records.
+- P2E appends five lifecycle transitions and six sensing receipts without a network request,
+  scheduler, autonomous loop, delivery, publication, or external action. Its P2D prerequisite
+  remains 44 LIVE records; the composed ledger is 62 LIVE records and zero PREPARED records.
 - The new six-module pack is inert JSON only. The P2D proof contains 44 LIVE records and zero
   PREPARED records, performs no network request, and creates no action, delivery, publication,
   persuasion, monitor, or schedule.

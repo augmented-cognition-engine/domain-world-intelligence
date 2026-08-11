@@ -193,6 +193,22 @@ class P2DEnvironment:
         )
 
 
+@dataclass(frozen=True, slots=True)
+class P2DExecution:
+    """Exact P2D projection plus the LIVE material used by later consumer proofs."""
+
+    projection: dict[str, Any]
+    environment: P2DEnvironment
+    admissions: dict[str, Any]
+    divergence: Any
+    nasa_revision: Any
+    esa_revision: Any
+    historical_case: CaseV1Alpha1
+    historical_brief: Any
+    corrected_case: CaseV1Alpha1
+    corrected_brief: Any
+
+
 def _artifact(claimant: dict[str, Any]) -> CapabilityArtifactIdentityV1Alpha1:
     implementation_id = {
         "NASA": NASA_PLANETARY_DEFENSE_IMPLEMENTATION_ID,
@@ -1135,7 +1151,9 @@ def _negative_vectors(*, nasa_assertion, nasa_revised, nasa_initial, esa_initial
     return results
 
 
-async def run_acceptance() -> dict[str, Any]:
+async def execute_acceptance() -> P2DExecution:
+    """Execute P2D and retain its exact LIVE objects for composed acceptance."""
+
     environment = await build_environment()
     authorizer = ExactAppendAuthorizer()
     binding = bind_committed_activation(
@@ -1446,7 +1464,7 @@ async def run_acceptance() -> dict[str, Any]:
     prepared_records = tuple(
         record for record in environment.store.records.values() if record.record_space == "prepared"
     )
-    return {
+    projection = {
         "contract": "ace.world-intelligence.p2d-live-conflict-correction-proof/v1alpha1",
         "pack": {
             "compiled_pack_id": environment.pack.compiled_pack_id,
@@ -1550,6 +1568,24 @@ async def run_acceptance() -> dict[str, Any]:
             "external_action": False,
         },
     }
+    return P2DExecution(
+        projection=projection,
+        environment=environment,
+        admissions=admissions,
+        divergence=divergence,
+        nasa_revision=nasa_revision,
+        esa_revision=esa_revision,
+        historical_case=historical_case,
+        historical_brief=historical_brief,
+        corrected_case=corrected_case,
+        corrected_brief=corrected_brief,
+    )
+
+
+async def run_acceptance() -> dict[str, Any]:
+    """Return the stable public P2D acceptance projection."""
+
+    return (await execute_acceptance()).projection
 
 
 def main() -> None:
