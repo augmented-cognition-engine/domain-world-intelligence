@@ -62,6 +62,9 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   source-adapter, and World wheels, rejects a Core checkout on the runtime path, and freezes a
   canonical machine-readable P2C10 result. It remains candidate artifact evidence pending combined
   release gates and publication.
+- A separate direct-to-main convergence candidate replays the measured stack on the live World
+  baseline that includes the AI Command Center lineage proof, rebuilds exact artifacts, and passes
+  the combined journey. It does not merge the review stack or advance release status.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)

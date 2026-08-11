@@ -12,17 +12,17 @@
       },
       "source_adapter_wheel": {
         "filename": "ace_ext_world_federal_register_source-0.2.0-py3-none-any.whl",
-        "sha256": "sha256:bee0161c6a02b2d82b698d72365e401e7c58af633c8f0e774e513619866a90d6"
+        "sha256": "sha256:1b80cc598b467a8ab0f47aabb5f01bd0cb1c7709b48aa02352a0ef802988b4fe"
       },
       "world_wheel": {
         "filename": "ace_domain_world_intelligence-0.9.0-py3-none-any.whl",
-        "sha256": "sha256:61abbd08bfedb2dc23cdd0eab8b9a0454b7d7a911ba150e4308e12d9e1cfa534"
+        "sha256": "sha256:a067b3106772437d2dcfee890dc7d89005d3f7afd9e6dc0cbed027327bea9cae"
       }
     },
     "core_commit": "433e3d16c5458c975557dcd1552824fb959d4d12",
     "core_distribution_version": "0.5.0",
     "source_adapter_distribution_version": "0.2.0",
-    "world_commit": "7fec49b163fd4c50964576a45511c8645e856f3d",
+    "world_commit": "87625d55c717a9c649d4f44a06d1767b52fed255",
     "world_distribution_version": "0.9.0"
   },
   "claim_boundary": {
