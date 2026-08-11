@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from collections.abc import Awaitable, Callable
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Literal, Self
@@ -548,6 +549,11 @@ async def run_correction_detection_delay_outcome(
     workspace_root: Path,
     *,
     state_sink: dict[str, Any] | None = None,
+    before_correction: Callable[
+        [dict[str, Any], dict[str, Any], ObservationV1Alpha1, ImmutableRecordReferenceV1],
+        Awaitable[None],
+    ]
+    | None = None,
 ) -> dict[str, Any]:
     """Run P2C7 over an exact recorded official correction pair."""
 
@@ -556,6 +562,8 @@ async def run_correction_detection_delay_outcome(
     environment = state["environment"]
     fixture = load_correction_fixture()
     original, original_ref = await _append_source_observation(state, fixture=fixture, role="original")
+    if before_correction is not None:
+        await before_correction(state, fixture, original, original_ref)
     correction, correction_ref = await _append_source_observation(state, fixture=fixture, role="correction")
     replay = fixture["recorded_replay"]
     treatment_artifact, treatment_ref, treatment_content = await _append_correction_artifact(
