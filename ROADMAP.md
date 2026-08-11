@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3–P2C7 measured feedback and product-owned outcomes
+## Candidate — P2C3–P2C8 measured feedback and product-owned outcomes
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -41,6 +41,11 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   reviewed workflow, but their replay delays are 300 and 21600 seconds against a product-owned
   600-second target. Exact reviews and Outcomes expose the source pair, rule, delay, score, and
   limitations without claiming live network-arrival performance.
+- A fifth frozen criterion creates actual prior and revised Brief contracts over that correction.
+  Treatment and control have the same exact sources, replacement claim, claim count, and reviewed
+  workflow, but treatment preserves both unaffected claim identities while the paraphrase-drift
+  control preserves neither. Exact reviews expose the affected, replacement, stable, preserved,
+  drifted, and unexpected claim sets without claiming general semantic equivalence.
 - This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
@@ -55,7 +60,10 @@ freezes contradiction recall, false-alert rate, equal alert volume, and valid si
 claiming live conflict detection or population performance. The stacked
 [P2C7 work packet](docs/design/world-intelligence-p2c7-correction-detection-delay-outcome-work-packet-v1.md)
 freezes exact correction linkage, prior-record preservation, and recorded-replay detection delay
-without claiming live monitoring or network-arrival latency.
+without claiming live monitoring or network-arrival latency. The stacked
+[P2C8 work packet](docs/design/world-intelligence-p2c8-correction-revision-stability-outcome-work-packet-v1.md)
+freezes correction-induced Brief revision stability without claiming live revision, population
+performance, or a general semantic-equivalence engine.
 
 ## Next — trustworthy live orientation
 
