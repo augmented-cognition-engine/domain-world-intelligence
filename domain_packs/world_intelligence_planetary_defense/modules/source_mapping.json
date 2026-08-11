@@ -1,0 +1,106 @@
+{
+  "contract": "ace.intelligence.source-mapping/v1alpha1",
+  "module_id": "world_planetary_defense_source_mapping",
+  "mappings": [
+    {
+      "mapping_id": "nasa_2024_yr4_2025_02_07",
+      "source_definition_ref": "source_definition:nasa-2024-yr4-2025-02-07",
+      "source_type_ref": "nasa_planetary_defense_publication",
+      "capability_requirement_id": "nasa_planetary_defense_snapshot",
+      "authority_request_id": "read_nasa_planetary_defense_publication",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_planetary_defense_estimate",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_mappings": [
+        {"attribute_id": "assessment_note", "source_pointer": "/assessment_note", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "assessment_subject", "source_pointer": "/assessment_subject", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "claimant_office", "source_pointer": "/claimant_office", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "claimant_org", "source_pointer": "/claimant_org", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "estimate_status", "source_pointer": "/estimate_status", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "impact_probability_percent", "source_pointer": "/impact_probability_percent", "transform": "decimal_text_to_number"},
+        {"attribute_id": "object_name", "source_pointer": "/object_name", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "predecessor_lineage_id", "source_pointer": "/predecessor_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "target_date", "source_pointer": "/target_date", "transform": "copy", "min_length": 10, "max_length": 10}
+      ],
+      "static_confidence": 1.0
+    },
+    {
+      "mapping_id": "nasa_2024_yr4_2025_02_24",
+      "source_definition_ref": "source_definition:nasa-2024-yr4-2025-02-24",
+      "source_type_ref": "nasa_planetary_defense_publication",
+      "capability_requirement_id": "nasa_planetary_defense_snapshot",
+      "authority_request_id": "read_nasa_planetary_defense_publication",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_planetary_defense_estimate",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_mappings": [
+        {"attribute_id": "assessment_note", "source_pointer": "/assessment_note", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "assessment_subject", "source_pointer": "/assessment_subject", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "claimant_office", "source_pointer": "/claimant_office", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "claimant_org", "source_pointer": "/claimant_org", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "estimate_status", "source_pointer": "/estimate_status", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "impact_probability_percent", "source_pointer": "/impact_probability_percent", "transform": "decimal_text_to_number"},
+        {"attribute_id": "object_name", "source_pointer": "/object_name", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "predecessor_lineage_id", "source_pointer": "/predecessor_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "target_date", "source_pointer": "/target_date", "transform": "copy", "min_length": 10, "max_length": 10}
+      ],
+      "static_confidence": 1.0
+    },
+    {
+      "mapping_id": "esa_2024_yr4_2025_02_06",
+      "source_definition_ref": "source_definition:esa-2024-yr4-2025-02-06",
+      "source_type_ref": "esa_planetary_defence_publication",
+      "capability_requirement_id": "esa_planetary_defence_snapshot",
+      "authority_request_id": "read_esa_planetary_defence_publication",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_planetary_defense_estimate",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_mappings": [
+        {"attribute_id": "assessment_note", "source_pointer": "/assessment_note", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "assessment_subject", "source_pointer": "/assessment_subject", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "claimant_office", "source_pointer": "/claimant_office", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "claimant_org", "source_pointer": "/claimant_org", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "estimate_status", "source_pointer": "/estimate_status", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "impact_probability_percent", "source_pointer": "/impact_probability_percent", "transform": "decimal_text_to_number"},
+        {"attribute_id": "object_name", "source_pointer": "/object_name", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "predecessor_lineage_id", "source_pointer": "/predecessor_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "target_date", "source_pointer": "/target_date", "transform": "copy", "min_length": 10, "max_length": 10}
+      ],
+      "static_confidence": 1.0
+    },
+    {
+      "mapping_id": "esa_2024_yr4_2025_02_25",
+      "source_definition_ref": "source_definition:esa-2024-yr4-2025-02-25",
+      "source_type_ref": "esa_planetary_defence_publication",
+      "capability_requirement_id": "esa_planetary_defence_snapshot",
+      "authority_request_id": "read_esa_planetary_defence_publication",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_planetary_defense_estimate",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_mappings": [
+        {"attribute_id": "assessment_note", "source_pointer": "/assessment_note", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "assessment_subject", "source_pointer": "/assessment_subject", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "claimant_office", "source_pointer": "/claimant_office", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "claimant_org", "source_pointer": "/claimant_org", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "estimate_status", "source_pointer": "/estimate_status", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "impact_probability_percent", "source_pointer": "/impact_probability_percent", "transform": "decimal_text_to_number"},
+        {"attribute_id": "object_name", "source_pointer": "/object_name", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "predecessor_lineage_id", "source_pointer": "/predecessor_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "target_date", "source_pointer": "/target_date", "transform": "copy", "min_length": 10, "max_length": 10}
+      ],
+      "static_confidence": 1.0
+    }
+  ]
+}

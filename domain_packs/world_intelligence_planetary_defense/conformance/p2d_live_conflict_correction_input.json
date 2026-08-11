@@ -1,0 +1,163 @@
+{
+  "contract": "ace.world-intelligence.p2d-live-conflict-correction-input/v1alpha1",
+  "fixture_id": "planetary_defense_2024_yr4_live_revision",
+  "fixture_version": "0.1.0",
+  "product_id": "product:world-planetary-defense",
+  "actor_ref": "actor:world-planetary-defense-researcher",
+  "activation_key": "world_intelligence_planetary_defense_live",
+  "entity_ref": "entity:planetary-defense/2024-yr4-earth-impact-2032",
+  "entity_type_id": "planetary_defense_risk_estimate",
+  "subject_binding_id": "published_planetary_defense_estimate",
+  "authentication": {
+    "receipt_ref": "authentication_receipt:world-planetary-defense-p2d",
+    "receipt_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "authenticated_at": "2026-08-11T17:50:00Z",
+    "expires_at": "2026-08-11T20:30:00Z"
+  },
+  "activation": {
+    "overlay_id": "world_planetary_defense_p2d_conformance",
+    "overlay_version": "0.1.0",
+    "approval_receipt_ref": "approval_receipt:world-planetary-defense-p2d",
+    "compilation_receipt_ref": "compilation_receipt:world-planetary-defense-p2d",
+    "conformance_receipt_ref": "conformance_receipt:world-planetary-defense-p2d",
+    "occurred_at": "2026-08-11T17:55:00Z",
+    "committed_at": "2026-08-11T17:56:00Z"
+  },
+  "claimants": [
+    {
+      "claimant_org": "NASA",
+      "source_type_ref": "nasa_planetary_defense_publication",
+      "capability_requirement_id": "nasa_planetary_defense_snapshot",
+      "authority_request_id": "read_nasa_planetary_defense_publication",
+      "configuration_ref": "config:nasa-planetary-defense-2024-yr4",
+      "configuration_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "grant_ref": "authority_grant:world-nasa-planetary-defense-read",
+      "grant_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "artifact_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "claimant_org": "ESA",
+      "source_type_ref": "esa_planetary_defence_publication",
+      "capability_requirement_id": "esa_planetary_defence_snapshot",
+      "authority_request_id": "read_esa_planetary_defence_publication",
+      "configuration_ref": "config:esa-planetary-defence-2024-yr4",
+      "configuration_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "grant_ref": "authority_grant:world-esa-planetary-defence-read",
+      "grant_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    }
+  ],
+  "sources": [
+    {
+      "source_key": "esa_initial",
+      "claimant_org": "ESA",
+      "mapping_id": "esa_2024_yr4_2025_02_06",
+      "source_definition_ref": "source_definition:esa-2024-yr4-2025-02-06",
+      "idempotency_key": "live-source:planetary-defense:esa:2025-02-06",
+      "requested_at": "2026-08-11T18:00:00Z",
+      "capture_started_at": "2026-08-11T18:00:01Z",
+      "observed_at": "2026-08-11T18:00:02Z",
+      "captured_at": "2026-08-11T18:00:03Z",
+      "rechecked_at": "2026-08-11T18:00:04Z",
+      "admitted_at": "2026-08-11T18:00:05Z",
+      "requested_uri": "https://blogs.esa.int/rocketscience/2025/02/06/2024-yr4-flyby-geometry-or-1-8-of-what/comment-page-1/",
+      "locator": "css:article",
+      "media_type": "text/html",
+      "response_body": "<!doctype html><html><head><meta property=\"og:title\" content=\"2024 YR4 flyby geometry, or 1.8% of What?\"><meta property=\"article:published_time\" content=\"2025-02-06T00:00:00+00:00\"><link rel=\"canonical\" href=\"https://blogs.esa.int/rocketscience/2025/02/06/2024-yr4-flyby-geometry-or-1-8-of-what/comment-page-1/\"></head><body><article><h1>2024 YR4 flyby geometry, or 1.8% of What?</h1><p>The risk of 2024 YR4 impacting Earth on 22 December 2032 is 1.8% and the numerical value is expected to evolve as additional observations are reported.</p></article></body></html>"
+    },
+    {
+      "source_key": "nasa_initial",
+      "claimant_org": "NASA",
+      "mapping_id": "nasa_2024_yr4_2025_02_07",
+      "source_definition_ref": "source_definition:nasa-2024-yr4-2025-02-07",
+      "idempotency_key": "live-source:planetary-defense:nasa:2025-02-07",
+      "requested_at": "2026-08-11T18:01:00Z",
+      "capture_started_at": "2026-08-11T18:01:01Z",
+      "observed_at": "2026-08-11T18:01:02Z",
+      "captured_at": "2026-08-11T18:01:03Z",
+      "rechecked_at": "2026-08-11T18:01:04Z",
+      "admitted_at": "2026-08-11T18:01:05Z",
+      "requested_uri": "https://science.nasa.gov/blogs/planetary-defense/2025/02/07/nasa-continues-to-monitor-orbit-of-near-earth-asteroid-2024-yr4/",
+      "locator": "css:article",
+      "media_type": "text/html",
+      "response_body": "<!doctype html><html><head><meta property=\"og:title\" content=\"NASA Continues to Monitor Orbit of Near-Earth Asteroid 2024 YR4\"><meta property=\"article:published_time\" content=\"2025-02-07T00:00:00+00:00\"><link rel=\"canonical\" href=\"https://science.nasa.gov/blogs/planetary-defense/2025/02/07/nasa-continues-to-monitor-orbit-of-near-earth-asteroid-2024-yr4/\"></head><body><article><h1>NASA Continues to Monitor Orbit of Near-Earth Asteroid 2024 YR4</h1><p>Additional observations indicate an impact probability of 2.3% with Earth on Dec. 22, 2032.</p></article></body></html>"
+    },
+    {
+      "source_key": "nasa_revised",
+      "claimant_org": "NASA",
+      "mapping_id": "nasa_2024_yr4_2025_02_24",
+      "source_definition_ref": "source_definition:nasa-2024-yr4-2025-02-24",
+      "idempotency_key": "live-source:planetary-defense:nasa:2025-02-24",
+      "requested_at": "2026-08-11T18:10:00Z",
+      "capture_started_at": "2026-08-11T18:10:01Z",
+      "observed_at": "2026-08-11T18:10:02Z",
+      "captured_at": "2026-08-11T18:10:03Z",
+      "rechecked_at": "2026-08-11T18:10:04Z",
+      "admitted_at": "2026-08-11T18:10:05Z",
+      "requested_uri": "https://science.nasa.gov/blogs/planetary-defense/2025/02/24/latest-calculations-conclude-asteroid-2024-yr4-now-poses-no-significant-threat-to-earth-in-2032-and-beyond/",
+      "locator": "css:article",
+      "media_type": "text/html",
+      "response_body": "<!doctype html><html><head><meta property=\"og:title\" content=\"Latest Calculations Conclude Asteroid 2024 YR4 Now Poses No Significant Threat to Earth in 2032 and Beyond\"><meta property=\"article:published_time\" content=\"2025-02-24T00:00:00+00:00\"><link rel=\"canonical\" href=\"https://science.nasa.gov/blogs/planetary-defense/2025/02/24/latest-calculations-conclude-asteroid-2024-yr4-now-poses-no-significant-threat-to-earth-in-2032-and-beyond/\"></head><body><article><h1>Latest Calculations Conclude Asteroid 2024 YR4 Now Poses No Significant Threat to Earth in 2032 and Beyond</h1><p>NASA updated the impact probability on Dec. 22, 2032 to 0.004% and found no significant potential for an Earth impact for the next century.</p></article></body></html>"
+    },
+    {
+      "source_key": "esa_revised",
+      "claimant_org": "ESA",
+      "mapping_id": "esa_2024_yr4_2025_02_25",
+      "source_definition_ref": "source_definition:esa-2024-yr4-2025-02-25",
+      "idempotency_key": "live-source:planetary-defense:esa:2025-02-25",
+      "requested_at": "2026-08-11T18:11:00Z",
+      "capture_started_at": "2026-08-11T18:11:01Z",
+      "observed_at": "2026-08-11T18:11:02Z",
+      "captured_at": "2026-08-11T18:11:03Z",
+      "rechecked_at": "2026-08-11T18:11:04Z",
+      "admitted_at": "2026-08-11T18:11:05Z",
+      "requested_uri": "https://www.esa.int/ESA_Multimedia/Images/2025/02/Asteroid_2024_YR4_impact_risk_rises_and_falls",
+      "locator": "css:article",
+      "media_type": "text/html",
+      "response_body": "<!doctype html><html><head><meta property=\"og:title\" content=\"Asteroid 2024 YR4 impact risk rises and falls\"><meta property=\"article:published_time\" content=\"2025-02-25T00:00:00+00:00\"><link rel=\"canonical\" href=\"https://www.esa.int/ESA_Multimedia/Images/2025/02/Asteroid_2024_YR4_impact_risk_rises_and_falls\"></head><body><article><h1>Asteroid 2024 YR4 impact risk rises and falls</h1><p>On 25 February the risk that 2024 YR4 might impact Earth on 22 December 2032 was 0.001%, down from as high as 2.8% a few days beforehand.</p></article></body></html>"
+    }
+  ],
+  "derivations": {
+    "divergence": {
+      "detector_id": "cross_source_impact_estimate_divergence",
+      "baseline_source_key": "esa_initial",
+      "current_source_key": "nasa_initial",
+      "derivation_key": "live-derivation:planetary-defense:initial-divergence",
+      "detected_at": "2026-08-11T18:02:00Z",
+      "attention_evaluated_at": "2026-08-11T18:02:01Z",
+      "requested_at": "2026-08-11T18:02:02Z"
+    },
+    "nasa_revision": {
+      "detector_id": "same_source_impact_estimate_revision",
+      "baseline_source_key": "nasa_initial",
+      "current_source_key": "nasa_revised",
+      "derivation_key": "live-derivation:planetary-defense:nasa-revision",
+      "detected_at": "2026-08-11T18:14:00Z",
+      "attention_evaluated_at": "2026-08-11T18:14:01Z",
+      "requested_at": "2026-08-11T18:14:02Z"
+    },
+    "esa_revision": {
+      "detector_id": "same_source_impact_estimate_revision",
+      "baseline_source_key": "esa_initial",
+      "current_source_key": "esa_revised",
+      "derivation_key": "live-derivation:planetary-defense:esa-revision",
+      "detected_at": "2026-08-11T18:15:00Z",
+      "attention_evaluated_at": "2026-08-11T18:15:01Z",
+      "requested_at": "2026-08-11T18:15:02Z"
+    }
+  },
+  "historical": {
+    "case_assembled_at": "2026-08-11T18:03:00Z",
+    "brief_as_of": "2026-08-11T18:03:00Z",
+    "brief_generated_at": "2026-08-11T18:04:00Z",
+    "status_generated_at": "2026-08-11T18:04:01Z"
+  },
+  "correction": {
+    "asserted_at": "2026-08-11T18:12:00Z",
+    "impact_generated_at": "2026-08-11T18:13:00Z",
+    "case_assembled_at": "2026-08-11T18:16:00Z",
+    "brief_as_of": "2026-08-11T18:16:00Z",
+    "brief_generated_at": "2026-08-11T18:17:00Z",
+    "status_generated_at": "2026-08-11T18:17:01Z"
+  }
+}

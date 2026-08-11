@@ -1,0 +1,31 @@
+{
+  "contract": "ace.intelligence.detection/v1alpha2",
+  "module_id": "world_planetary_defense_detection",
+  "numeric_delta_rules": [
+    {
+      "detector_id": "cross_source_impact_estimate_divergence",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_id": "impact_probability_percent",
+      "baseline": "prior_snapshot",
+      "context_attribute_ids": ["assessment_subject", "object_name", "target_date"],
+      "metric": "percent_change",
+      "threshold": 20.0,
+      "direction": "any",
+      "shift_type": "official_estimate_divergence",
+      "signal_type": "planetary_defense_estimate_divergence"
+    },
+    {
+      "detector_id": "same_source_impact_estimate_revision",
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "attribute_id": "impact_probability_percent",
+      "baseline": "prior_snapshot",
+      "context_attribute_ids": ["assessment_subject", "claimant_org", "object_name", "target_date"],
+      "metric": "percent_change",
+      "threshold": 90.0,
+      "direction": "decrease",
+      "shift_type": "official_estimate_downward_revision",
+      "signal_type": "planetary_defense_estimate_revision"
+    }
+  ],
+  "categorical_transition_rules": []
+}

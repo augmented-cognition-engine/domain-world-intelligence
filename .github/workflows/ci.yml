@@ -142,6 +142,7 @@ jobs:
 
           world = "domain_packs/world_intelligence/"
           ai = "domain_packs/world_intelligence_ai/"
+          planetary = "domain_packs/world_intelligence_planetary_defense/"
           federal = "domain_packs/world_intelligence_federal_register/"
           monitor = "domain_packs/world_intelligence_federal_register_monitor/"
           expected_payload = sorted(
@@ -180,6 +181,15 @@ jobs:
                   ai + "modules/source_mapping.json",
                   ai + "modules/synthesis.json",
                   ai + "conformance/ai_command_center_live_input.json",
+                  planetary + "manifest.json",
+                  planetary + "modules/detection.json",
+                  planetary + "modules/epistemic_status.json",
+                  planetary + "modules/ontology.json",
+                  planetary + "modules/personas.json",
+                  planetary + "modules/source_mapping.json",
+                  planetary + "modules/synthesis.json",
+                  planetary + "conformance/p2d_live_conflict_correction_input.json",
+                  planetary + "conformance/p2d_live_expected.json",
                   federal + "manifest.json",
                   federal + "modules/ontology.json",
                   federal + "modules/source_mapping.json",

@@ -1,0 +1,27 @@
+{
+  "contract": "ace.intelligence.personas/v1alpha1",
+  "module_id": "world_planetary_defense_personas",
+  "personas": [
+    {
+      "persona_id": "planetary_defense_researcher",
+      "display_name": "Planetary Defense Researcher",
+      "description": "Inspects exact claimant lineages, dated estimates, revisions, dependency impact, citations, and uncertainty."
+    }
+  ],
+  "signal_routing_rules": [
+    {
+      "routing_rule_id": "route_planetary_defense_divergence",
+      "signal_type": "planetary_defense_estimate_divergence",
+      "persona_ids": ["planetary_defense_researcher"],
+      "minimum_confidence": 0.8,
+      "brief_template_id": "planetary_defense_reality_brief"
+    },
+    {
+      "routing_rule_id": "route_planetary_defense_revision",
+      "signal_type": "planetary_defense_estimate_revision",
+      "persona_ids": ["planetary_defense_researcher"],
+      "minimum_confidence": 0.8,
+      "brief_template_id": "planetary_defense_reality_brief"
+    }
+  ]
+}

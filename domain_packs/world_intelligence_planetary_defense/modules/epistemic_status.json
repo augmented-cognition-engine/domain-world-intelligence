@@ -1,0 +1,68 @@
+{
+  "contract": "ace.intelligence.epistemic-status/v1alpha2",
+  "module_id": "world_planetary_defense_epistemic_status",
+  "status_sets": [
+    {
+      "status_set_id": "planetary_defense_reality_status",
+      "display_name": "Planetary Defense Reality Brief epistemic statuses",
+      "brief_template_ids": ["planetary_defense_reality_brief"],
+      "require_status_for_every_claim": true,
+      "statuses": [
+        {
+          "status_id": "admitted_record",
+          "display_name": "Admitted record",
+          "definition": "Directly established by one or more exact admitted official-source Observations.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 1
+        },
+        {
+          "status_id": "attributed_claim",
+          "display_name": "Attributed claim",
+          "definition": "A dated estimate asserted by exactly one named official publication and not upgraded beyond that attribution.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 1,
+          "max_support_count": 1
+        },
+        {
+          "status_id": "corroborated",
+          "display_name": "Corroborated",
+          "definition": "Supported by at least two admitted Observations spanning at least two distinct derivation families.",
+          "allowed_grounding_kinds": ["cited"],
+          "allowed_support_kinds": ["observation"],
+          "min_support_count": 2,
+          "min_distinct_derivation_families": 2,
+          "proves_source_family_independence": true
+        },
+        {
+          "status_id": "disputed",
+          "display_name": "Dated divergence",
+          "definition": "Materially different dated estimates occur across admitted source records; this is not a truth verdict.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": ["observation", "shift"],
+          "min_support_count": 2,
+          "requires_uncertainty": true
+        },
+        {
+          "status_id": "ace_inference",
+          "display_name": "ACE inference",
+          "definition": "An explicitly bounded interpretation linked to the exact LIVE resources used.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": ["case", "observation", "shift", "signal"],
+          "min_support_count": 1,
+          "requires_uncertainty": true
+        },
+        {
+          "status_id": "unknown",
+          "display_name": "Unknown",
+          "definition": "Not resolved by the admitted publications and stated as an open question against exact LIVE resources.",
+          "allowed_grounding_kinds": ["inference"],
+          "allowed_support_kinds": ["case", "observation", "shift", "signal"],
+          "min_support_count": 1,
+          "requires_uncertainty": true
+        }
+      ]
+    }
+  ]
+}
