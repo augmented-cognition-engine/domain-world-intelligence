@@ -483,6 +483,10 @@ bind their exact built-artifact hashes and byte-reproducible
 [`convergence-v1.json`](artifacts/measured-intelligence/convergence-v1.json). The live-main packet
 also proves coexistence with the separately merged AI Command Center lineage work without changing
 the measured-feedback contract or silently applying its proposal.
+The additive
+[P2D main reconciliation audit](docs/audits/world-measured-intelligence-p2d-main-reconciliation-2026-08-11.md)
+records source-level coexistence with the later merged LIVE correction packet without relabeling the
+earlier artifact hashes.
 The LIVE conflict, correction, supersession, and per-claim status proof is recorded in
 [`docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md`](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
 
