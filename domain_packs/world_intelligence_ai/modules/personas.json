@@ -1,0 +1,20 @@
+{
+  "contract": "ace.intelligence.personas/v1alpha1",
+  "module_id": "world_ai_personas",
+  "personas": [
+    {
+      "persona_id": "ai_policy_researcher",
+      "display_name": "AI Policy Researcher",
+      "description": "Inspects exact official records, distinct publication lineages, bounded inferences, and unresolved implementation questions."
+    }
+  ],
+  "signal_routing_rules": [
+    {
+      "routing_rule_id": "route_official_ai_policy_development",
+      "signal_type": "official_ai_policy_development",
+      "persona_ids": ["ai_policy_researcher"],
+      "minimum_confidence": 0.8,
+      "brief_template_id": "ai_policy_reality_brief"
+    }
+  ]
+}

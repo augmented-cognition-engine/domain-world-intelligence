@@ -1,0 +1,19 @@
+{
+  "contract": "ace.intelligence.detection/v1alpha2",
+  "module_id": "world_ai_detection",
+  "numeric_delta_rules": [],
+  "categorical_transition_rules": [
+    {
+      "detector_id": "ai_policy_implementation_progression",
+      "entity_type_id": "ai_policy_record",
+      "attribute_id": "development_stage",
+      "baseline": "prior_snapshot",
+      "context_attribute_ids": ["executive_order_number", "policy_topic"],
+      "transitions": [
+        {"from_value": "directive_issued", "to_value": "implementation_reported"}
+      ],
+      "shift_type": "official_ai_policy_progression",
+      "signal_type": "official_ai_policy_development"
+    }
+  ]
+}

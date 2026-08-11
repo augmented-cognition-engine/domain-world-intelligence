@@ -1,0 +1,30 @@
+{
+  "contract": "ace.intelligence.ontology/v1alpha1",
+  "module_id": "world_ai_ontology",
+  "entity_types": [
+    {
+      "entity_type_id": "ai_policy_record",
+      "display_name": "AI Policy Record",
+      "attributes": [
+        {"attribute_id": "document_title", "value_type": "string", "required": true},
+        {"attribute_id": "document_number", "value_type": "string", "required": true},
+        {"attribute_id": "executive_order_number", "value_type": "string", "required": true},
+        {"attribute_id": "document_type", "value_type": "string", "required": true},
+        {"attribute_id": "publication_date", "value_type": "string", "required": true},
+        {"attribute_id": "agency_name", "value_type": "string", "required": true},
+        {"attribute_id": "policy_topic", "value_type": "string", "required": true},
+        {"attribute_id": "policy_status", "value_type": "string", "required": true},
+        {"attribute_id": "development_stage", "value_type": "string", "required": true},
+        {"attribute_id": "source_lineage_id", "value_type": "string", "required": true},
+        {"attribute_id": "source_uri", "value_type": "string", "required": true},
+        {"attribute_id": "linked_policy_ref", "value_type": "string", "required": true},
+        {"attribute_id": "initiative_name", "value_type": "string", "required": true},
+        {"attribute_id": "federal_register_url", "value_type": "string", "required": true},
+        {"attribute_id": "official_pdf_url", "value_type": "string", "required": true},
+        {"attribute_id": "legal_status_notice", "value_type": "string", "required": true},
+        {"attribute_id": "verification_reference", "value_type": "string", "required": true}
+      ]
+    }
+  ],
+  "relation_types": []
+}

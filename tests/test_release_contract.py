@@ -41,6 +41,8 @@ EXPECTED_ACE_CORE_SPECIFIER = ">=0.5.0,<0.6"
 DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence",
     REPO_ROOT / "domain_packs" / "world_intelligence_federal_register",
+    REPO_ROOT / "domain_packs" / "world_intelligence_federal_register_monitor",
+    REPO_ROOT / "domain_packs" / "world_intelligence_ai",
 )
 
 
@@ -205,6 +207,7 @@ def test_root_distribution_mapping_stays_inert_and_data_only() -> None:
     package_data = setuptools_config["package-data"]
     assert set(package_data) == {
         "domain_packs.world_intelligence",
+        "domain_packs.world_intelligence_ai",
         "domain_packs.world_intelligence_federal_register",
         "domain_packs.world_intelligence_federal_register_monitor",
     }

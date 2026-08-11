@@ -1,0 +1,90 @@
+{
+  "contract": "ace.world-intelligence.ai-command-center-live-input/v1alpha1",
+  "fixture_id": "ai_policy_eo_14409_to_gold_eagle",
+  "fixture_version": "0.1.0",
+  "product_id": "product:world-ai-command-center",
+  "actor_ref": "actor:world-ai-analyst",
+  "activation_key": "world_intelligence_ai_command_center",
+  "entity_ref": "entity:ai-policy/executive-order-14409",
+  "entity_type_id": "ai_policy_record",
+  "subject_binding_id": "published_ai_policy_record",
+  "authentication": {
+    "receipt_ref": "authentication_receipt:world-ai-command-center",
+    "receipt_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "authenticated_at": "2026-08-10T19:45:00Z",
+    "expires_at": "2026-08-10T22:30:00Z"
+  },
+  "activation": {
+    "overlay_id": "world_ai_command_center_conformance",
+    "overlay_version": "0.1.0",
+    "approval_receipt_ref": "approval_receipt:world-ai-command-center",
+    "compilation_receipt_ref": "compilation_receipt:world-ai-command-center",
+    "conformance_receipt_ref": "conformance_receipt:world-ai-command-center",
+    "occurred_at": "2026-08-10T19:40:00Z",
+    "committed_at": "2026-08-10T19:41:00Z"
+  },
+  "sources": [
+    {
+      "lineage_kind": "federal_register",
+      "mapping_id": "ai_policy_record_snapshot",
+      "source_definition_ref": "source_definition:ai-policy-eo-14409",
+      "source_type_ref": "federal_register_ai_policy_document",
+      "capability_requirement_id": "ai_policy_federal_register_snapshot",
+      "authority_request_id": "read_ai_policy_federal_register_document",
+      "configuration_ref": "config:ai-policy-eo-14409",
+      "configuration_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "grant_ref": "authority_grant:world-ai-federal-register-read",
+      "grant_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "artifact_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "idempotency_key": "live-source:ai-policy:federal-register:2026-11415",
+      "requested_at": "2026-08-10T20:00:00Z",
+      "capture_started_at": "2026-08-10T20:00:01Z",
+      "observed_at": "2026-08-10T20:00:02Z",
+      "captured_at": "2026-08-10T20:00:03Z",
+      "rechecked_at": "2026-08-10T20:00:04Z",
+      "admitted_at": "2026-08-10T20:00:05Z",
+      "requested_uri": "https://www.federalregister.gov/api/v1/documents/2026-11415.json",
+      "locator": "json-pointer:/document_number",
+      "media_type": "application/json",
+      "response_body": "{\"title\":\"Promoting Advanced Artificial Intelligence Innovation and Security\",\"document_number\":\"2026-11415\",\"executive_order_number\":\"14409\",\"type\":\"Presidential Document\",\"publication_date\":\"2026-06-05\",\"agencies\":[{\"name\":\"Executive Office of the President\",\"id\":538}],\"html_url\":\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\",\"pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\"}"
+    },
+    {
+      "lineage_kind": "white_house_release",
+      "mapping_id": "ai_policy_implementation_snapshot",
+      "source_definition_ref": "source_definition:white-house-gold-eagle-2026-07-14",
+      "source_type_ref": "white_house_ai_policy_release",
+      "capability_requirement_id": "ai_policy_white_house_snapshot",
+      "authority_request_id": "read_ai_policy_white_house_release",
+      "configuration_ref": "config:white-house-gold-eagle-2026-07-14",
+      "configuration_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "grant_ref": "authority_grant:world-ai-white-house-read",
+      "grant_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "idempotency_key": "live-source:ai-policy:white-house:gold-eagle-2026-07-14",
+      "requested_at": "2026-08-10T20:01:00Z",
+      "capture_started_at": "2026-08-10T20:01:01Z",
+      "observed_at": "2026-08-10T20:01:02Z",
+      "captured_at": "2026-08-10T20:01:03Z",
+      "rechecked_at": "2026-08-10T20:01:04Z",
+      "admitted_at": "2026-08-10T20:01:05Z",
+      "requested_uri": "https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/",
+      "locator": "css:article",
+      "media_type": "text/html",
+      "response_body": "<!doctype html><html><head><meta property=\"og:title\" content=\"White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination\"><meta property=\"article:published_time\" content=\"2026-07-14T12:00:00+00:00\"><link rel=\"canonical\" href=\"https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/\"></head><body><article><h1>White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination</h1><p>GOLD EAGLE, established in Executive Order 14409, has already begun to intake and prioritize identified cybersecurity vulnerabilities.</p></article></body></html>"
+    }
+  ],
+  "derivation": {
+    "detector_id": "ai_policy_implementation_progression",
+    "derivation_key": "live-derivation:ai-policy:eo-14409-to-gold-eagle",
+    "detected_at": "2026-08-10T20:02:00Z",
+    "attention_evaluated_at": "2026-08-10T20:02:01Z",
+    "requested_at": "2026-08-10T20:02:02Z"
+  },
+  "case": {
+    "assembled_at": "2026-08-10T20:03:00Z"
+  },
+  "brief": {
+    "as_of": "2026-08-10T20:03:00Z",
+    "generated_at": "2026-08-10T20:04:00Z"
+  }
+}
