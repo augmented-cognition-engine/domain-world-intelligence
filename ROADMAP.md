@@ -16,13 +16,25 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Next — trustworthy live orientation
+## Candidate — trustworthy LIVE correction
+
+- Four dated NASA/ESA publications become exact LIVE Observations over one stable risk-estimate
+  entity through separately reviewed, recorded official-source adapters.
+- A cross-source estimate divergence and two same-source downward revisions produce configured
+  Shifts, routed Signals, immutable Cases, and cited historical and corrected Reality Briefs.
+- Explicit supersession assertions and additive dependency-impact projections preserve earlier
+  artifacts, exact citations, per-claim epistemic status, claimant-family independence, correction
+  visibility, and PREPARED/LIVE separation.
+- The packet performs no network request, external action, delivery, publication, or monitoring.
+
+See the [P2D audit](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
+
+## Next — user-owned live orientation
 
 - Add a separately reviewed, opt-in production transport without bundling it into the Domain Pack.
-- Exercise multi-source conflict, correction, and supersession against LIVE admitted records.
 - Turn one-shot governed sensing into explicit user-owned monitors and subscriptions.
-- Preserve source independence, per-claim epistemic status, exact citations, correction visibility,
-  and PREPARED/LIVE separation.
+- Preserve source independence, correction visibility, attention ownership, suppression, and
+  PREPARED/LIVE separation across repeated sensing windows.
 
 ## Later — measured personal and public sensemaking
 

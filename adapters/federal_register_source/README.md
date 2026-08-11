@@ -29,6 +29,14 @@ no White House network transport is enabled by this package. The source is a pub
 independent of the Federal Register API record, but it is not independent non-government
 corroboration.
 
+P2D adds exact recorded-transport profiles for two NASA and two ESA planetary-defense pages about
+asteroid 2024 YR4. The adapter accepts only the four reviewed canonical URIs, titles, publication
+dates, claimant types, target date, and probability statements. Decimal estimates remain exact text
+at the capture boundary and are converted to numeric attributes only by the inert source-mapping
+declaration. These profiles have no enabled network transport. NASA and ESA are separate official
+claimant publication roots; the connector does not claim their underlying observations or models
+are independent.
+
 ## License
 
 Apache-2.0 under the repository [`LICENSE`](../../LICENSE) and [`NOTICE`](../../NOTICE).

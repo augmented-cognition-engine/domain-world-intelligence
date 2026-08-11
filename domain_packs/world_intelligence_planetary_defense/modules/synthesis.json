@@ -1,0 +1,24 @@
+{
+  "contract": "ace.intelligence.synthesis/v1alpha2",
+  "module_id": "world_planetary_defense_synthesis",
+  "brief_templates": [
+    {
+      "template_id": "planetary_defense_reality_brief",
+      "brief_type": "world_intelligence",
+      "display_name": "Planetary Defense Reality Brief",
+      "objective": "Explain dated official estimates, source divergence, later revisions, exact supersession impact, and remaining uncertainty without treating dependency as falsehood.",
+      "required_sections": [
+        "what_changed",
+        "established_records",
+        "source_comparison",
+        "where_sources_conflict",
+        "current_orientation",
+        "correction_visibility",
+        "unknowns",
+        "limitations"
+      ],
+      "recommendation_required": false,
+      "claim_policy": "citation_or_explicit_inference"
+    }
+  ]
+}

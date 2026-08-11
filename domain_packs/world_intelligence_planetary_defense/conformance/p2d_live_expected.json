@@ -1,0 +1,62 @@
+{
+  "contract": "ace.world-intelligence.p2d-live-conflict-correction-expected/v1alpha1",
+  "pack": {
+    "compiled_pack_id": "pack_ir:bb400cc0652622b43c01504e651110e0",
+    "pack_digest": "sha256:bb400cc0652622b43c01504e651110e09bc651d5003bbbfebe00afca213dbb29",
+    "module_count": 6
+  },
+  "source": {
+    "lineages": {
+      "esa_initial": "esa_pdo:2024_yr4:2025-02-06",
+      "esa_revised": "esa_pdo:2024_yr4:2025-02-25",
+      "nasa_initial": "nasa_pdco:2024_yr4:2025-02-07",
+      "nasa_revised": "nasa_pdco:2024_yr4:2025-02-24"
+    },
+    "probabilities": {
+      "esa_initial": 1.8,
+      "esa_revised": 0.001,
+      "nasa_initial": 2.3,
+      "nasa_revised": 0.004
+    }
+  },
+  "historical": {
+    "case_id": "case:9f2a90fa065e26aba4792c8cdd24647d",
+    "brief_id": "brief:c3549af0262b100ca65024ee19cbae6e",
+    "status_projection_id": "brief_derivation_family_status_projection:617cbe6102c82b13dcbe35735d685355",
+    "citation_count": 2,
+    "claim_count": 8,
+    "family_count": 2
+  },
+  "correction": {
+    "impact_projection_ids": [
+      "supersession_impact_projection:8c397e0253ddbfce3a7045d2b4c9db81",
+      "supersession_impact_projection:4c475c4dc1054e5a3d3c62699964fc9e"
+    ],
+    "impact_counts": {"ESA": 5, "NASA": 5},
+    "impacted_claim_counts": {"ESA": 7, "NASA": 7},
+    "unaffected_counts": {"ESA": 2, "NASA": 2}
+  },
+  "corrected": {
+    "case_id": "case:7298a4c57828df679d03b2ed6493b437",
+    "brief_id": "brief:806d69d8e41f83f93ee3dc10f58f0d16",
+    "status_projection_id": "brief_derivation_family_status_projection:2acb48dd15e625c4b729ecef484b0209",
+    "citation_count": 4,
+    "claim_count": 8,
+    "case_member_count": 12,
+    "family_count": 4,
+    "claim_statuses": [
+      "ace_inference",
+      "admitted_record",
+      "admitted_record",
+      "disputed",
+      "corroborated",
+      "ace_inference",
+      "unknown",
+      "admitted_record"
+    ]
+  },
+  "separation": {
+    "live_record_count": 44,
+    "prepared_record_count": 0
+  }
+}
