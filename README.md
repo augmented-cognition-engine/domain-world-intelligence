@@ -15,13 +15,13 @@ graph, state store, authority system, detector engine, or feedback loop.
 [Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
 [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
-- **Distribution:** `ace-domain-world-intelligence` 0.9.0
-- **Requires:** Python 3.12 and `ace-core>=0.5.0,<0.6`
+- **Distribution:** `ace-domain-world-intelligence` 0.10.0
+- **Requires:** Python 3.12 and `ace-core>=0.6.0,<0.7`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Release:** public. The
-  [`v0.9.0` GitHub Release](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.9.0)
-  and [`0.9.0 PyPI distribution`](https://pypi.org/project/ace-domain-world-intelligence/0.9.0/)
-  are public. See the [`0.9.0 release packet`](docs/releases/world-intelligence-p2c2-v0.9.0.md).
+- **Release identity:**
+  [`v0.10.0`](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.10.0)
+  and [`0.10.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.10.0/).
+  Public-artifact closeout is recorded separately from the immutable source tag.
 
 ## What you install, and what you get
 
@@ -29,7 +29,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (public on PyPI, 0.5.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, and governed bounded action. |
+| **ACE Core** | `ace-core` (public on PyPI, 0.6.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, governed bounded action, and append-only measured-impact receipts. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
 | **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
 
@@ -40,22 +40,22 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-0.9.0 is published on PyPI. Install it on Python 3.12 with either command below; a public clean
-install resolves `ace-domain-world-intelligence==0.9.0` and `ace-core==0.5.0`.
+Install 0.10.0 on Python 3.12 with either command below; a public clean install resolves
+`ace-domain-world-intelligence==0.10.0` and `ace-core==0.6.0`.
 
 With `uv`:
 
 ```bash
-uv add "ace-domain-world-intelligence==0.9.0"
+uv add "ace-domain-world-intelligence==0.10.0"
 ```
 
 With `pip`:
 
 ```bash
-pip install "ace-domain-world-intelligence==0.9.0"
+pip install "ace-domain-world-intelligence==0.10.0"
 ```
 
-Either command also brings in `ace-core>=0.5.0,<0.6`, which is already public. It does **not** bring
+Either command also brings in `ace-core>=0.6.0,<0.7`. It does **not** bring
 in the Federal Register connector; that is a deliberate boundary, not an omission.
 
 Resolve the pack data from the installed distribution:
@@ -241,7 +241,7 @@ action authority; the export is provided by Core's separately packaged reference
 source responses are exact official public records under recorded transport, so P2C2 proves the
 complete deterministic product journey but still does not claim network freshness at test time.
 
-P2C3 is a source-checkout candidate over that unchanged public journey. It compares two exact
+P2C3 compares two exact
 reviewed exports of the cited Brief with two reviewed exports of a World-owned source-only control.
 The frozen product measure is the fraction of the two required admitted Observation identities
 preserved in each exported artifact: treatment scores `1.0, 1.0`; control scores `0.0, 0.0`. Under
@@ -250,10 +250,9 @@ classifies the exact result as `useful` and appends a `promote` proposal that is
 non-selectable, and requires separate human review. Historical replay performs no reauthorization.
 
 That measure is structural citation coverage. It is not a human-benefit measure, causal estimate,
-general Brief-quality score, or network-freshness proof. The proposal is not applied. P2C3 now
-resolves from the merged experimental Core source introduced through
-[PR #88](https://github.com/augmented-cognition-engine/core/pull/88), but no 0.6 artifact is
-published. World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
+general Brief-quality score, or network-freshness proof. The proposal is not applied. World 0.10.0
+binds this journey to the public `ace-core>=0.6.0,<0.7` contract without moving World vocabulary,
+source policy, or connector code into Core.
 
 P2C4 submits that exact proposal to a separate governed review path. A named, authenticated World
 reviewer records `reject` with `no_action`: the bounded `useful` classification and `promote`
@@ -441,7 +440,7 @@ $PY -m scripts.p2c9_forecast_calibration_outcome "$WORKSPACE"
 $PY -m scripts.p2c10_independent_correction_reproduction "$WORKSPACE"
 ```
 
-The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
+The 0.10.0 gates are reproducible through the locked environment, as CI does. The
 P2C2 action test runs when the independently packaged Core reference adapter is installed:
 
 ```bash

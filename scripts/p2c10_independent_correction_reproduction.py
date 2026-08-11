@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Literal, Self
 
@@ -581,9 +581,11 @@ async def run_independent_correction_reproduction(workspace_root: Path) -> dict[
     prior_packet = await run_forecast_calibration_outcome(workspace_root, state_sink=state)
     environment = state["environment"]
     fixture = load_bls_correction_fixture()
+    state["clock"].set(_time(fixture["recorded_at"]) + timedelta(seconds=1))
     original, original_ref = await _append_source_observation(state, fixture=fixture, role="original")
     correction, correction_ref = await _append_source_observation(state, fixture=fixture, role="correction")
     criterion_head, impact_binding = _install_policy(state)
+    state["clock"].set(CRITERION_FROZEN_AT + timedelta(seconds=1))
     treatment_artifact, treatment_ref, treatment_content = await _append_artifact(
         state,
         fixture=fixture,

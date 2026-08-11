@@ -10,7 +10,25 @@ noted here only where the boundary between them changes.
 
 ## Unreleased
 
+## [0.10.0] — 2026-08-11
+
+Measured Intelligence release line. The inert root distribution binds the World public-data
+journey to `ace-core>=0.6.0,<0.7`; public tag, registry, and clean-install identities are verified
+by the separate released-artifact closeout.
+
 ### Added
+
+- **P2C3–P2C10 measured World outcomes.** Exact official-record Briefs and World-owned controls
+  traverse material use, Decision, reviewed Action, observed result, Outcome, matched conditions,
+  cutoff, append-only evaluation, and non-effective governance proposal. Frozen criteria cover
+  structural citation coverage, independently reviewed citation correctness, contradiction recall
+  and false-alert rate, valid silence, correction detection delay, revision stability, forecast
+  scoring, and an independent BLS correction family.
+- **Explicit governed disposition.** A named authorized reviewer rejects the bounded structural
+  coverage promotion with `no_action`; the useful classification and proposal remain immutable and
+  no governed head changes.
+- **Public Core 0.6 boundary.** CI and the root wheel resolve the versioned measured-impact and
+  owner-governed monitoring contracts from public `ace-core==0.6.0`, never a Core checkout.
 
 - **P2E user-owned LIVE-orientation consumer packet.** Public ACE 0.5.0 Monitor,
   PersonaBinding, and record-only Subscription contracts now bind the accepted planetary-defense
@@ -38,6 +56,10 @@ noted here only where the boundary between them changes.
 
 ### Boundaries
 
+- The measured results are frozen, small, recorded-source product checks. They do not establish
+  causal, population, human-benefit, live-freshness, or general model-quality claims, and no
+  proposal applies itself.
+
 - P2E appends five lifecycle transitions and six sensing receipts without a network request,
   scheduler, autonomous loop, delivery, publication, or external action. Its P2D prerequisite
   remains 44 LIVE records; the composed ledger is 62 LIVE records and zero PREPARED records.
@@ -48,6 +70,11 @@ noted here only where the boundary between them changes.
   Same-lineage supersessions collapse to their predecessor and do not manufacture corroboration.
 
 ### Repository consistency
+
+- Bumped the inert root distribution to 0.10.0 with `ace-core>=0.6.0,<0.7`.
+- Bumped the separately packaged official-source adapter distribution to 0.3.0 under the same Core
+  window while preserving its accepted 0.1.0 implementation identities. The root package still
+  excludes all connector code and never installs it transitively.
 
 - Added the full Apache-2.0 license, NOTICE, security policy, contribution guide, Code of Conduct,
   and a root domain roadmap.
