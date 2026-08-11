@@ -1,0 +1,25 @@
+{
+  "contract": "ace.intelligence.ontology/v1alpha1",
+  "module_id": "world_planetary_defense_ontology",
+  "entity_types": [
+    {
+      "entity_type_id": "planetary_defense_risk_estimate",
+      "display_name": "Planetary Defense Risk Estimate",
+      "attributes": [
+        {"attribute_id": "assessment_note", "value_type": "string", "required": true},
+        {"attribute_id": "assessment_subject", "value_type": "string", "required": true},
+        {"attribute_id": "claimant_office", "value_type": "string", "required": true},
+        {"attribute_id": "claimant_org", "value_type": "string", "required": true},
+        {"attribute_id": "estimate_status", "value_type": "string", "required": true},
+        {"attribute_id": "impact_probability_percent", "value_type": "number", "required": true},
+        {"attribute_id": "object_name", "value_type": "string", "required": true},
+        {"attribute_id": "predecessor_lineage_id", "value_type": "string", "required": true},
+        {"attribute_id": "publication_date", "value_type": "string", "required": true},
+        {"attribute_id": "source_lineage_id", "value_type": "string", "required": true},
+        {"attribute_id": "source_uri", "value_type": "string", "required": true},
+        {"attribute_id": "target_date", "value_type": "string", "required": true}
+      ]
+    }
+  ],
+  "relation_types": []
+}

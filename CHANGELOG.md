@@ -10,6 +10,27 @@ noted here only where the boundary between them changes.
 
 ## Unreleased
 
+### Added
+
+- **P2D LIVE conflict and correction.** Four exact NASA/ESA planetary-defense publications become
+  LIVE Observations, one dated cross-source divergence and two same-source downward-revision Shifts,
+  three routed Signals, immutable historical and corrected Cases, and cited Reality Briefs with
+  family-aware per-claim epistemic status.
+- **Additive LIVE supersession impact.** Two explicit same-source supersession assertions append
+  exact dependency projections over the historical closure. Each reaches five resources and seven
+  Brief claims, discloses two unaffected resources, and leaves the historical Brief byte-identical.
+- **Exact official-source connector profiles.** The separately packaged connector now validates the
+  four reviewed NASA/ESA canonical pages under recorded, network-free transport. Eighteen focused
+  adapter cases cover accepted material and fail-closed boundary violations.
+
+### Boundaries
+
+- The new six-module pack is inert JSON only. The P2D proof contains 44 LIVE records and zero
+  PREPARED records, performs no network request, and creates no action, delivery, publication,
+  persuasion, monitor, or schedule.
+- NASA and ESA are independent claimant publication roots, not proven independent measurements.
+  Same-lineage supersessions collapse to their predecessor and do not manufacture corroboration.
+
 ### Repository consistency
 
 - Added the full Apache-2.0 license, NOTICE, security policy, contribution guide, Code of Conduct,

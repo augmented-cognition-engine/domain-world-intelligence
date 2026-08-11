@@ -191,6 +191,30 @@ The accepted stable identities are `pack_ir:0679116c6b5e02cd021b085ba2d80cf2`,
 `brief:d7d240147e48c3aef6a4a8e7ec481121`. The proof store contains 16 LIVE records and zero
 PREPARED records; the synthetic PREPARED packet remains byte-frozen and is not reused.
 
+P2D adds the first complete LIVE conflict-and-correction packet. A separate inert six-module pack
+maps four dated publications about asteroid 2024 YR4 from two official claimant roots: NASA's 2.3%
+and later 0.004% Earth-impact estimates, and ESA's 1.8% and later 0.001% estimates. Recorded,
+network-free captures become four exact LIVE source transactions. The configured numeric bridge
+first routes the dated NASA/ESA estimate divergence into a historical Case and two-citation Reality
+Brief, then routes both same-source downward revisions into a corrected Case and four-citation
+Brief.
+
+The later records do not rewrite the earlier ones. Two explicit LIVE supersession Observations name
+the exact same-source predecessors, and two additive impact projections enumerate five affected
+resources and seven affected historical Brief claims apiece while disclosing two unaffected
+resources. Impact means dependency, not falsehood. The original Brief reopens byte-identically
+after both corrections. Its status projection has two source families; the corrected projection has
+four raw-observation roots, but each same-lineage supersession collapses to its predecessor and adds
+no corroboration. The corrected `corroborated` claim is supported by exactly two claimant families,
+NASA and ESA—not by treating before/after records as independent.
+
+The accepted P2D identities are `pack_ir:bb400cc0652622b43c01504e651110e0`, historical
+`brief:c3549af0262b100ca65024ee19cbae6e`, corrected
+`brief:806d69d8e41f83f93ee3dc10f58f0d16`, and corrected status projection
+`brief_derivation_family_status_projection:2acb48dd15e625c4b729ecef484b0209`. The proof store
+contains 44 LIVE records and zero PREPARED records. Separate official publication roots do not prove
+independent measurements: both agencies describe a shared international observation ecosystem.
+
 P2C2 completes that sensing path across the Core + Intelligence + Domain boundaries. A new
 declarative monitor pack admits two exact FCC records — document `2026-15932` published August 6
 and document `2026-16197` published August 7 — as successive LIVE snapshots of one stable monitor
@@ -274,11 +298,11 @@ With `$REPO`, `$ACE`, `$PYTHONPATH`, and `$PY` exported as in
 [Develop from a source checkout](#develop-from-a-source-checkout):
 
 ```bash
-# Complete domain suite, including every frozen packet, P2C2, and the AI command-center journey: 87 passed
+# Complete domain suite, including P2C2, AI Command Center, and P2D correction: 90 passed
 export PYTHONPATH="$PYTHONPATH:$ACE/adapters/reference_workspace_action/src"
 $PY -m pytest -q
 
-# Connector fail-closed unit suite: 62 passed
+# Connector fail-closed unit suite: 80 passed
 $PY -m pytest adapters/federal_register_source/tests -q
 
 # Individual acceptance harnesses
@@ -290,6 +314,7 @@ $PY scripts/p2b_status_case_brief.py
 $PY scripts/p2b_independent_case_brief.py
 $PY scripts/p2c_federal_register_live_acceptance.py
 $PY -m scripts.ai_command_center_live_acceptance
+$PY -m scripts.p2d_live_conflict_correction
 
 # Complete official-record -> Shift -> Signal -> Brief -> reviewed export journey
 WORKSPACE=$(mktemp -d)
@@ -303,7 +328,7 @@ P2C2 action test runs when the independently packaged Core reference adapter is 
 uv sync --frozen --no-install-project
 uv run --no-sync python -m pytest                         # released + candidate-compatible gates
 uv run --no-sync python -m pytest tests/test_release_contract.py  # publishable-identity gate
-uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 26 passed
+uv run --no-sync python -m pytest adapters/federal_register_source/tests  # connector: 80 passed
 ```
 
 The released 0.9.0 baseline, measured with public `ace-core==0.5.0` from PyPI and the independently
@@ -312,6 +337,9 @@ suite and `26 passed` for the connector. With the AI command-center candidate in
 baseline, the same environment passes `87` domain and `62` connector tests. The
 public demo reproduces `case:412426eee708d56f6bda931ccf9e5d8b` and
 `brief:25d8232c9bfa27050bdcb160fb75f06c`, and its two artifacts are byte-identical across runs.
+With P2D integrated, the source-tree candidate passes `90` domain tests, `80` connector tests, and
+all `7` release-contract tests. Its locally built wheel contains exactly 55 JSON resources, nine
+from the planetary-defense pack, and no executable code.
 
 The exact identities, negative cases, and artifact proofs are recorded in
 [`docs/audits/world-intelligence-p2a-2026-08-06.md`](docs/audits/world-intelligence-p2a-2026-08-06.md)
@@ -333,6 +361,8 @@ The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 The two-lineage LIVE Shift → Signal → Case → cited Brief proof is recorded in
 [`docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md`](docs/audits/world-intelligence-ai-command-center-live-2026-08-10.md).
+The LIVE conflict, correction, supersession, and per-claim status proof is recorded in
+[`docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md`](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
@@ -355,16 +385,16 @@ content autonomously. Every LIVE capture demonstrated here is one explicitly req
 read-only retrieval. P2C2's only effect is an explicitly authorized and reviewed create-only local
 workspace export followed by separate verification and promotion.
 
-Next: exercise P2D multi-source conflict and append-only correction with LIVE inputs while keeping
-publication-lineage independence distinct from claimant independence. The packet may not add
-publishing, delivery, persuasion, or other external-action authority.
+Next: turn one-shot governed sensing into explicit user-owned monitors and subscriptions while
+preserving correction visibility, suppression controls, and source-family independence. That work
+may not add publishing, delivery, persuasion, or other external-action authority to a Domain Pack.
 
 ## Roadmap and project status
 
 The [World Intelligence roadmap](ROADMAP.md) owns current domain direction. Detailed packet history
 remains in [`docs/world-intelligence-roadmap-status-2026-08-06.md`](docs/world-intelligence-roadmap-status-2026-08-06.md),
-and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is P2D
-multi-source conflict/correction with LIVE inputs. It may not add autonomous publishing, delivery,
+and release history is in [`CHANGELOG.md`](CHANGELOG.md). The next bounded work is explicit
+user-owned monitoring and subscription state. It may not add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
 
 ## Community and security

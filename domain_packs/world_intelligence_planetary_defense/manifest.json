@@ -1,0 +1,112 @@
+{
+  "contract": "ace.intelligence.domain-pack-manifest/v1alpha1",
+  "metadata": {
+    "pack_id": "world_intelligence_planetary_defense",
+    "version": "0.1.0",
+    "display_name": "ACE World Intelligence — Planetary Defense",
+    "description": "Additive declarative pack for dated official risk-estimate divergence, revision, correction visibility, and exact epistemic status."
+  },
+  "compatibility": {
+    "compiler_contract": "ace.intelligence.pack-compiler/v1alpha1",
+    "intelligence_contract": "ace.intelligence.runtime/v1alpha1"
+  },
+  "resources": [
+    {
+      "resource_id": "world_planetary_defense_ontology",
+      "path": "modules/ontology.json",
+      "media_type": "application/json",
+      "digest": "sha256:16042b900889e4bfb6aeced69e5a6fbc00874e405439254e41e505f69729e1ab"
+    },
+    {
+      "resource_id": "world_planetary_defense_source_mapping",
+      "path": "modules/source_mapping.json",
+      "media_type": "application/json",
+      "digest": "sha256:a4bdfe3837a4acf637e9a0c4c4eae1ff6bc03f4fb27b501949b1c11fcb9ddbbf"
+    },
+    {
+      "resource_id": "world_planetary_defense_detection",
+      "path": "modules/detection.json",
+      "media_type": "application/json",
+      "digest": "sha256:30ea5209dabc08b2b03ca1570d99d9be8b2f5a736cf3c2c0a984ee278d3f11ba"
+    },
+    {
+      "resource_id": "world_planetary_defense_synthesis",
+      "path": "modules/synthesis.json",
+      "media_type": "application/json",
+      "digest": "sha256:a904e1fb3bd16951d198cd67707d807ae88132f874814f5a6974faf6bafe5aa1"
+    },
+    {
+      "resource_id": "world_planetary_defense_personas",
+      "path": "modules/personas.json",
+      "media_type": "application/json",
+      "digest": "sha256:b19dcbb1e645ead035ab9d7da0a59bba184ed75dbfb238035912c43825f038c0"
+    },
+    {
+      "resource_id": "world_planetary_defense_epistemic_status",
+      "path": "modules/epistemic_status.json",
+      "media_type": "application/json",
+      "digest": "sha256:470d62ad4f07a25ba2f718acacd167426fb14fb358ea8c20de48103cd5f60b96"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "world_planetary_defense_ontology",
+      "contract": "ace.intelligence.ontology/v1alpha1",
+      "resource_id": "world_planetary_defense_ontology",
+      "depends_on": []
+    },
+    {
+      "module_id": "world_planetary_defense_source_mapping",
+      "contract": "ace.intelligence.source-mapping/v1alpha1",
+      "resource_id": "world_planetary_defense_source_mapping",
+      "depends_on": ["world_planetary_defense_ontology"]
+    },
+    {
+      "module_id": "world_planetary_defense_detection",
+      "contract": "ace.intelligence.detection/v1alpha2",
+      "resource_id": "world_planetary_defense_detection",
+      "depends_on": ["world_planetary_defense_ontology"]
+    },
+    {
+      "module_id": "world_planetary_defense_synthesis",
+      "contract": "ace.intelligence.synthesis/v1alpha2",
+      "resource_id": "world_planetary_defense_synthesis",
+      "depends_on": []
+    },
+    {
+      "module_id": "world_planetary_defense_personas",
+      "contract": "ace.intelligence.personas/v1alpha1",
+      "resource_id": "world_planetary_defense_personas",
+      "depends_on": ["world_planetary_defense_detection", "world_planetary_defense_synthesis"]
+    },
+    {
+      "module_id": "world_planetary_defense_epistemic_status",
+      "contract": "ace.intelligence.epistemic-status/v1alpha2",
+      "resource_id": "world_planetary_defense_epistemic_status",
+      "depends_on": ["world_planetary_defense_synthesis"]
+    }
+  ],
+  "capability_requirements": [
+    {
+      "requirement_id": "nasa_planetary_defense_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    },
+    {
+      "requirement_id": "esa_planetary_defence_snapshot",
+      "capability": "source_snapshot",
+      "contract": "ace.source.snapshot/v1alpha1"
+    }
+  ],
+  "authority_requests": [
+    {
+      "request_id": "read_nasa_planetary_defense_publication",
+      "authority": "source_read"
+    },
+    {
+      "request_id": "read_esa_planetary_defence_publication",
+      "authority": "source_read"
+    }
+  ],
+  "overlay_slots": []
+}
