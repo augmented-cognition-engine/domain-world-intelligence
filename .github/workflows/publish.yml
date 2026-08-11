@@ -115,10 +115,14 @@ jobs:
           echo "tag ${TAG} matches the root project version"
 
       - name: Build the root distribution only
+        env:
+          EXPECTED_SDIST: ${{ steps.version.outputs.sdist }}
         run: |
           set -euo pipefail
+          export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
           rm -rf dist
           uv build --out-dir dist
+          python scripts/normalize_sdist.py "dist/${EXPECTED_SDIST}" --epoch "${SOURCE_DATE_EPOCH}"
           # uv creates this output-directory marker; it is not publishable.
           rm -f dist/.gitignore
 

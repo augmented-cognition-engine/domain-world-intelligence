@@ -131,10 +131,18 @@ jobs:
       - name: Build the root distribution
         run: |
           set -euo pipefail
+          export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
           rm -rf dist
           uv build --out-dir dist
+          python scripts/normalize_sdist.py "dist/${ROOT_SDIST}" --epoch "${SOURCE_DATE_EPOCH}"
           # uv creates this output-directory marker; it is not a release artifact.
           rm -f dist/.gitignore
+
+          reproducible="$(mktemp -d)"
+          uv build --out-dir "${reproducible}"
+          python scripts/normalize_sdist.py "${reproducible}/${ROOT_SDIST}" --epoch "${SOURCE_DATE_EPOCH}"
+          cmp "dist/${ROOT_WHEEL}" "${reproducible}/${ROOT_WHEEL}"
+          cmp "dist/${ROOT_SDIST}" "${reproducible}/${ROOT_SDIST}"
 
       - name: Confirm the build produced exactly the root sdist and wheel
         run: |

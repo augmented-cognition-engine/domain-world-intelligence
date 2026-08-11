@@ -15,6 +15,9 @@ instead of silently skipping.
 
 from __future__ import annotations
 
+import gzip
+import io
+import tarfile
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -23,6 +26,8 @@ from packaging.requirements import Requirement
 from packaging.specifiers import SpecifierSet
 from packaging.utils import canonicalize_name
 from packaging.version import Version
+
+from scripts.normalize_sdist import normalize_sdist
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT_PYPROJECT = REPO_ROOT / "pyproject.toml"
@@ -202,12 +207,55 @@ def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate
     assert "ACE_CORE_CANDIDATE_SHA" not in ci
     assert "eaa51ea704e9162363a4483d1f7d7779778b953ed2a2d80b67dfb332e1cd3f62" in ci
     assert "ace_reference_workspace_action-0.2.0-py3-none-any.whl" in ci
+    assert 'python scripts/normalize_sdist.py "dist/${ROOT_SDIST}"' in ci
+    assert 'cmp "dist/${ROOT_WHEEL}" "${reproducible}/${ROOT_WHEEL}"' in ci
+    assert 'cmp "dist/${ROOT_SDIST}" "${reproducible}/${ROOT_SDIST}"' in ci
 
     assert "default: v0.10.0" in publish
     assert "packages-dir: dist" in publish
     assert "release-source-adapter:" in publish
     assert "ace_ext_world_federal_register_source-0.3.0-py3-none-any.whl" in publish
     assert 'gh release upload "${TAG}" dist/source-adapter/*' in publish
+    assert 'python scripts/normalize_sdist.py "dist/${EXPECTED_SDIST}"' in publish
+
+
+def test_source_archive_normalizer_removes_build_time_metadata(tmp_path: Path) -> None:
+    def build_unstable_archive(path: Path, *, build_time: int) -> None:
+        with (
+            path.open("wb") as raw,
+            gzip.GzipFile(filename=path.name, mode="wb", fileobj=raw, mtime=build_time) as compressed,
+            tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as archive,
+        ):
+            for name, payload in (("example/data.json", b"{}\n"), ("example/PKG-INFO", b"Version: 0.10.0\n")):
+                member = tarfile.TarInfo(name)
+                member.size = len(payload)
+                member.mtime = build_time
+                member.uid = build_time
+                member.gid = build_time
+                member.uname = "builder"
+                member.gname = "builder"
+                archive.addfile(member, io.BytesIO(payload))
+
+    first = tmp_path / "first.tar.gz"
+    second = tmp_path / "second.tar.gz"
+    build_unstable_archive(first, build_time=1_700_000_001)
+    build_unstable_archive(second, build_time=1_700_000_099)
+    assert first.read_bytes() != second.read_bytes()
+
+    epoch = 1_700_000_000
+    normalize_sdist(first, epoch=epoch)
+    normalize_sdist(second, epoch=epoch)
+    assert first.read_bytes() == second.read_bytes()
+    assert int.from_bytes(first.read_bytes()[4:8], byteorder="little") == epoch
+
+    with tarfile.open(first, mode="r:gz") as archive:
+        members = archive.getmembers()
+    assert [member.name for member in members] == sorted(member.name for member in members)
+    assert {member.mtime for member in members} == {epoch}
+    assert {member.uid for member in members} == {0}
+    assert {member.gid for member in members} == {0}
+    assert {member.uname for member in members} == {""}
+    assert {member.gname for member in members} == {""}
 
 
 def test_root_distribution_mapping_stays_inert_and_data_only() -> None:
