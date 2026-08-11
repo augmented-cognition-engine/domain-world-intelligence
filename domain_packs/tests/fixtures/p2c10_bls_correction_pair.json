@@ -1,0 +1,30 @@
+{
+  "fixture_id": "bls-jolts-may-2025-minus-sign-correction",
+  "network_access": false,
+  "recorded_at": "2026-08-10T23:50:00Z",
+  "source_policy": {
+    "publisher": "U.S. Bureau of Labor Statistics",
+    "source_family": "bls_public_errata",
+    "release_uri": "https://www.bls.gov/news.release/archives/jolts_07012025.htm",
+    "errata_uri": "https://www.bls.gov/errata/",
+    "recorded_replay": true,
+    "historical_original_form_derived_from_erratum": true,
+    "statistical_validity_claimed": false
+  },
+  "original": {
+    "record_id": "USDL-25-1087",
+    "release_date": "2025-07-01",
+    "published_at": "2025-07-01T14:00:00Z",
+    "release_uri": "https://www.bls.gov/news.release/archives/jolts_07012025.htm",
+    "reported_sentence_without_required_minus_sign": "The number of job openings decreased in federal government (39,000)."
+  },
+  "correction": {
+    "record_id": "bls-errata-2025-07-01-jolts",
+    "corrects_record_id": "USDL-25-1087",
+    "date_added": "2025-07-01",
+    "corrected_at": "2025-07-02T14:00:00Z",
+    "errata_uri": "https://www.bls.gov/errata/",
+    "correction_description": "The following sentence requires correction to add a missing minus sign.",
+    "corrected_sentence": "The number of job openings decreased in federal government (−39,000)."
+  }
+}
