@@ -58,9 +58,10 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   bounded two-pair difference useful, and leaves the proposal non-effective and unapplied.
 - This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
-- The additive convergence packet hashes built Core, reference-adapter, and World wheels, rejects
-  a Core checkout on the runtime path, and freezes a canonical machine-readable P2C10 result. It
-  remains candidate artifact evidence pending combined release gates and publication.
+- The additive convergence packet hashes built Core, reference-action-adapter, World
+  source-adapter, and World wheels, rejects a Core checkout on the runtime path, and freezes a
+  canonical machine-readable P2C10 result. It remains candidate artifact evidence pending combined
+  release gates and publication.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)
