@@ -4,25 +4,25 @@
     "artifacts": {
       "action_adapter_wheel": {
         "filename": "ace_reference_workspace_action-0.1.0-py3-none-any.whl",
-        "sha256": "sha256:9c600d4b3e0d19525f1e04629bd231d8d6913d2ad11bc63fa2858e7da396f8f1"
+        "sha256": "sha256:31463fbcfe2a9c62b5cc9abe0a67814cd7fdd36de3c9f6ec47835d7be080ed5a"
       },
       "core_wheel": {
         "filename": "ace_core-0.5.0-py3-none-any.whl",
-        "sha256": "sha256:29752aa751570286794ff2abd1071a43f622883d4778e161687e10363f76f6c3"
+        "sha256": "sha256:662c4197f3ff0cf7dc1e64b0f8bc6bc705c8a1d6373a8468d9cb1d2df3d8c214"
       },
       "source_adapter_wheel": {
         "filename": "ace_ext_world_federal_register_source-0.2.0-py3-none-any.whl",
-        "sha256": "sha256:1b80cc598b467a8ab0f47aabb5f01bd0cb1c7709b48aa02352a0ef802988b4fe"
+        "sha256": "sha256:4841a02b46fba867d8bac092cd2eab1a45e71537d364fda389192857313e049c"
       },
       "world_wheel": {
         "filename": "ace_domain_world_intelligence-0.9.0-py3-none-any.whl",
-        "sha256": "sha256:a067b3106772437d2dcfee890dc7d89005d3f7afd9e6dc0cbed027327bea9cae"
+        "sha256": "sha256:8470b903c165e6897159172c918245fbc7bae7470ce6ad82dbb940776417c049"
       }
     },
-    "core_commit": "433e3d16c5458c975557dcd1552824fb959d4d12",
+    "core_commit": "7013de62ae7320c51c3de9e9a03b049e768e4d84",
     "core_distribution_version": "0.5.0",
     "source_adapter_distribution_version": "0.2.0",
-    "world_commit": "87625d55c717a9c649d4f44a06d1767b52fed255",
+    "world_commit": "cb7b6fdb2b9fe4dd3c34df8afc1368c86d026710",
     "world_distribution_version": "0.9.0"
   },
   "claim_boundary": {

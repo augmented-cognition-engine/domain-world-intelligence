@@ -237,9 +237,10 @@ classifies the exact result as `useful` and appends a `promote` proposal that is
 non-selectable, and requires separate human review. Historical replay performs no reauthorization.
 
 That measure is structural citation coverage. It is not a human-benefit measure, causal estimate,
-general Brief-quality score, or network-freshness proof. The proposal is not applied. P2C3 depends
-on the unreleased Core candidate in [PR #88](https://github.com/augmented-cognition-engine/core/pull/88),
-so World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
+general Brief-quality score, or network-freshness proof. The proposal is not applied. P2C3 now
+resolves from the merged experimental Core source introduced through
+[PR #88](https://github.com/augmented-cognition-engine/core/pull/88), but no 0.6 artifact is
+published. World 0.9.0 and its `ace-core>=0.5.0,<0.6` release contract remain unchanged.
 
 P2C4 submits that exact proposal to a separate governed review path. A named, authenticated World
 reviewer records `reject` with `no_action`: the bounded `useful` classification and `promote`
@@ -487,6 +488,10 @@ The additive
 [P2D main reconciliation audit](docs/audits/world-measured-intelligence-p2d-main-reconciliation-2026-08-11.md)
 records source-level coexistence with the later merged LIVE correction packet without relabeling the
 earlier artifact hashes.
+The subsequent
+[merged-Core convergence audit](docs/audits/world-measured-intelligence-merged-core-convergence-2026-08-11.md)
+rebuilds all four candidate wheels from exact merged Core and World sources and freezes the updated
+byte-reproducible canonical result. It remains draft artifact evidence, not a release or SI4 pass.
 The LIVE conflict, correction, supersession, and per-claim status proof is recorded in
 [`docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md`](docs/audits/world-intelligence-p2d-live-conflict-correction-2026-08-11.md).
 

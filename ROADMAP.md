@@ -65,6 +65,9 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 - A separate direct-to-main convergence candidate replays the measured stack on the live World
   baseline that includes the AI Command Center lineage proof, rebuilds exact artifacts, and passes
   the combined journey. It does not merge the review stack or advance release status.
+- The follow-on merged-Core artifact receipt rebuilds that unchanged World result against exact
+  Core `main` commit `7013de62ae7320c51c3de9e9a03b049e768e4d84`. The bounded result remains
+  `useful` with a non-effective proposal; World PR #17 and ACE 0.6.0 remain unreleased candidates.
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)
