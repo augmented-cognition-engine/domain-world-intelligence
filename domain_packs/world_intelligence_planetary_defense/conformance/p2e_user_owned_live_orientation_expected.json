@@ -1,0 +1,88 @@
+{
+  "contract": "ace.world-intelligence.p2e-user-owned-live-orientation-expected/v1alpha1",
+  "packet_identity": "sha256:e35f892af752db6dc4e6bf0cd6f6c5e9f7f4b74749f952ccb7effee701ad9d9e",
+  "expected_projection": {
+    "mode": "LIVE",
+    "window_count": 6,
+    "routed_window_count": 3,
+    "suppressed_window_count": 3,
+    "suppression_reasons": [
+      "no_material_change",
+      "owner_paused",
+      "subscription_revoked"
+    ],
+    "owner_guarded_zero_acquisition_windows": 2,
+    "correction_window_count": 2,
+    "visible_correction_window_count": 2,
+    "publication_family_count": 2,
+    "p2d_live_record_count": 44,
+    "prepared_record_count": 0,
+    "static_intent_contracts_constructed": true,
+    "runtime_materialization_claimed": true,
+    "open_contract_requests": [],
+    "negative_vector_count": 11,
+    "network_access": false,
+    "scheduler_authorized": false,
+    "delivery_authorized": false,
+    "external_action": false,
+    "violations": []
+  },
+  "expected_runtime": {
+    "contract": "ace.world-intelligence.p2e-user-owned-live-orientation-runtime/v1alpha1",
+    "mode": "LIVE",
+    "lifecycle_receipt_ids": [
+      "monitoring_lifecycle:eef2dbd9e85996690c38b8c74edf4fc8",
+      "monitoring_lifecycle:d225aa0d2f906562eb17851ec05f3b30",
+      "monitoring_lifecycle:81c8c122cc5235ab2b84cfb3c7b22019",
+      "monitoring_lifecycle:6a0cd45354dd0cf2e0e15cb08691d17f",
+      "monitoring_lifecycle:93594a7ca00a197dd80ab7d54351321d"
+    ],
+    "sensing_window_receipt_ids": [
+      "sensing_window:8635dbae2c7bd7e64e143c342a99b6a9",
+      "sensing_window:695409908d2f3277bd0ad8fdf4cb73c7",
+      "sensing_window:0cf4c37c45703d64363687664cf3db4e",
+      "sensing_window:e6a89b0f366b16de38b39fedf9cf459b",
+      "sensing_window:dbc36f77ce5117ef0e0e5cbefb3e7e95",
+      "sensing_window:909f717e822d2b5e3d2b414b462a2086"
+    ],
+    "all_lifecycle_replays_exact": true,
+    "all_window_replays_exact": true,
+    "monitoring_record_count": 18,
+    "p2d_live_record_count": 44,
+    "composed_live_record_count": 62,
+    "prepared_record_count": 0,
+    "official_publication_roots": ["ESA", "NASA"],
+    "source_observation_ids": [
+      "observation:af15bd030df7010eb7228ea155ab9cb8",
+      "observation:b833f0a930c3503c7ca8b61a748ef942",
+      "observation:dc110cf23f3fd4e50e9a3a7c94e0660e",
+      "observation:828d0fb5e6e1560847e2b61560aa0d71"
+    ],
+    "shift_ids": [
+      "shift:5de2922c755b0878673074d1ac6eedc8",
+      "shift:aa3e085039db29ce564f2c4a11a78386",
+      "shift:d94f3e62487cdaef3b904761d76260b8"
+    ],
+    "signal_ids": [
+      "signal:8798d2ceff3a293a5edb4acf59376627",
+      "signal:b898c5fc7f3751a84e2b68b788100234",
+      "signal:1b1c88646144cc8a0c637850ccd769b2"
+    ],
+    "case_ids": [
+      "case:9f2a90fa065e26aba4792c8cdd24647d",
+      "case:7298a4c57828df679d03b2ed6493b437"
+    ],
+    "reality_brief_ids": [
+      "brief:c3549af0262b100ca65024ee19cbae6e",
+      "brief:806d69d8e41f83f93ee3dc10f58f0d16"
+    ],
+    "reality_brief_citation_counts": [2, 4],
+    "correction_windows_visible": true,
+    "owner_guarded_zero_acquisition_windows": 2,
+    "scheduler_authority": false,
+    "delivery_authority": false,
+    "external_action_authority": false,
+    "all_lineage_records_persisted": true,
+    "prepared_live_separated": true
+  }
+}

@@ -23,6 +23,10 @@ env:
   ROOT_WHEEL: "ace_domain_world_intelligence-0.9.0-py3-none-any.whl"
   ROOT_SDIST: "ace_domain_world_intelligence-0.9.0.tar.gz"
   ACE_CORE_VERSION: "0.5.0"
+  # P2E consumes the monitoring API merged after the public 0.5.0 artifact.
+  # Keep source acceptance on the exact reviewed commit until a versioned Core
+  # release carries the same tree; the isolated wheel gate below stays public.
+  ACE_CORE_CANDIDATE_SHA: "f0d2191ba7cf2d33ccfc3c821422786929be8349"
   RELEASE_CONTRACT_TEST: "tests/test_release_contract.py"
   ADAPTER_TEST_SUITE: "adapters/federal_register_source/tests"
   # Keep the repository's proof scripts and separately packaged connector ahead
@@ -52,6 +56,18 @@ jobs:
         # domain_packs namespace location and invalidate importlib.resources
         # checks. The wheel is installed separately below in a clean venv.
         run: uv sync --frozen --no-install-project
+
+      - name: Install the exact merged Core monitoring candidate
+        run: |
+          set -euo pipefail
+          uv pip install --python .venv/bin/python --reinstall \
+            "ace-core @ git+https://github.com/augmented-cognition-engine/core.git@${ACE_CORE_CANDIDATE_SHA}"
+          uv run --no-sync python - <<'PY'
+          from ace.application import MonitoringLifecycleService, SensingWindowService
+
+          assert MonitoringLifecycleService is not None
+          assert SensingWindowService is not None
+          PY
 
       - name: Confirm the synced interpreter is Python 3.12
         run: |
@@ -190,6 +206,10 @@ jobs:
                   planetary + "modules/synthesis.json",
                   planetary + "conformance/p2d_live_conflict_correction_input.json",
                   planetary + "conformance/p2d_live_expected.json",
+                  planetary + "conformance/p2e_contract_requests.json",
+                  planetary + "conformance/p2e_negative_cases.json",
+                  planetary + "conformance/p2e_user_owned_live_orientation_expected.json",
+                  planetary + "conformance/p2e_user_owned_live_orientation_input.json",
                   federal + "manifest.json",
                   federal + "modules/ontology.json",
                   federal + "modules/source_mapping.json",
