@@ -65,7 +65,6 @@ def validate_core_runtime_outside_checkouts(
 def _stable_source_coordinate(reference: dict[str, Any]) -> dict[str, str]:
     return {
         "record_key": reference["record_key"],
-        "material_hash": reference["material_hash"],
         "payload_contract": reference["payload_contract"],
     }
 
@@ -158,7 +157,12 @@ def build_public_projection(
             "original": _stable_source_coordinate(original),
             "correction": _stable_source_coordinate(correction),
         },
-        "product_policy": result["review_policy"],
+        "product_policy": {
+            "policy_id": result["review_policy"]["policy_id"],
+            "policy_version": result["review_policy"]["policy_version"],
+            "reviewer_ref": result["review_policy"]["reviewer_ref"],
+            "score_rule": result["review_policy"]["score_rule"],
+        },
         "matched_comparison": {
             "treatment": _stable_artifact_projection(result["artifacts"]["treatment"]),
             "control": _stable_artifact_projection(result["artifacts"]["control"]),
