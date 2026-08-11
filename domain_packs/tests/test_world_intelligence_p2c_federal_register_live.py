@@ -70,12 +70,8 @@ async def test_official_format_reference_and_legal_status_survive_mapping() -> N
     projection, _, _ = await run_acceptance()
     attributes = projection["mapped_result"]["attributes"]
 
-    assert attributes["official_pdf_url"] == (
-        "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf"
-    )
-    assert attributes["legal_status_notice"] == (
-        "FederalRegister.gov is not the official legal edition."
-    )
+    assert attributes["official_pdf_url"] == ("https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf")
+    assert attributes["legal_status_notice"] == ("FederalRegister.gov is not the official legal edition.")
     assert attributes["verification_reference"] == (
         "The govinfo.gov PDF is the official-format verification reference."
     )
@@ -84,9 +80,7 @@ async def test_official_format_reference_and_legal_status_survive_mapping() -> N
 def test_additive_live_pack_compiles_without_mutating_frozen_world_pack() -> None:
     compiled = compile_live_pack()
     assert compiled.compiled_pack_id == "pack_ir:1847032fc5301bba9b6f85d3d091400d"
-    assert compiled.pack_digest == (
-        "sha256:1847032fc5301bba9b6f85d3d091400dfc3e2679496e2932d4345bddfb799d1f"
-    )
+    assert compiled.pack_digest == ("sha256:1847032fc5301bba9b6f85d3d091400dfc3e2679496e2932d4345bddfb799d1f")
 
     frozen = {
         "manifest.json": "3969f9215e0132f90628160b94b7a6638b243452a96a3cc9d15e910163253a97",
@@ -103,8 +97,6 @@ def test_additive_pack_and_fixture_are_declarative_and_network_free() -> None:
     pack_root = REPO_ROOT / "domain_packs" / "world_intelligence_federal_register"
     suffixes = {path.suffix for path in pack_root.rglob("*") if path.is_file()}
     assert suffixes == {".json"}
-    fixture = json.loads(
-        (pack_root / "conformance" / "p2c_live_source_input.json").read_text()
-    )
+    fixture = json.loads((pack_root / "conformance" / "p2c_live_source_input.json").read_text())
     assert fixture["transport_fixture"]["fixture_only"] is True
     assert fixture["transport_fixture"]["network_access"] is False

@@ -5,17 +5,17 @@ import json
 from datetime import datetime
 from pathlib import Path
 
+import ace.intelligence
 from ace.intelligence.contracts.resources import ClaimGroundingKind
 from ace.intelligence.packs import compile_pack_document
 
-import ace.intelligence
-from scripts.p2b_case_brief import WORLD_EPISTEMIC_STATUSES
 from scripts.p2a_compile_acceptance import (
     _encoded,
     _pack_material,
     _replace_resource,
     compile_world_pack,
 )
+from scripts.p2b_case_brief import WORLD_EPISTEMIC_STATUSES
 from scripts.p2b_scenario_acceptance import (
     EPISTEMIC_STATUSES,
     SUPPORT_REQUIRED_STATUSES,
@@ -313,7 +313,7 @@ def test_platform_gap_categorical_state_change_detection():
             ],
             "shift_type": "claim_support_shift",
             "signal_type": "claim_conflict",
-        }
+        },
     ]
     detection_module = next(item for item in manifest["modules"] if item["module_id"] == "world_detection")
     detection_module["contract"] = "ace.intelligence.detection/v1alpha2"
@@ -341,17 +341,11 @@ def test_wi_cr_002_is_closed_by_a_domain_neutral_status_capability():
     """
 
     grounding_kinds = {member.value for member in ClaimGroundingKind}
-    assert grounding_kinds == {"cited", "inference"}, (
-        "ACE must not learn World status vocabulary"
-    )
+    assert grounding_kinds == {"cited", "inference"}, "ACE must not learn World status vocabulary"
 
     epistemic = _load(PACK_ROOT / "modules" / "epistemic_status.json")
     assert epistemic["contract"] == "ace.intelligence.epistemic-status/v1alpha1"
-    declared = {
-        status["status_id"]
-        for status_set in epistemic["status_sets"]
-        for status in status_set["statuses"]
-    }
+    declared = {status["status_id"] for status_set in epistemic["status_sets"] for status in status_set["statuses"]}
     assert declared == set(WORLD_EPISTEMIC_STATUSES)
 
     # The generic carrier exists in the platform and is per statement.

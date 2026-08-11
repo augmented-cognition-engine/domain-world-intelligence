@@ -2,7 +2,7 @@
   "artifacts": [
     {
       "path": "scripts/p2b_status_case_brief.py",
-      "sha256": "b71b7a2f6a2b1036491cd84821c0fc32a708c9a5df804dc4c5d581369e4214f4"
+      "sha256": "d79f2777162dce6db9f344774eb9ed5b7520170b735a76e931789209ea4d6a4e"
     },
     {
       "path": "domain_packs/world_intelligence/modules/epistemic_status.json",
@@ -14,7 +14,7 @@
     },
     {
       "path": "domain_packs/tests/test_world_intelligence_p2b_status_case_brief.py",
-      "sha256": "1d2ba2a7d4ad4d5cb3ce1b46f8f2d87209f39a139fe657f8d47f4f20e8efe0d6"
+      "sha256": "d4751f263cad930dd6c4e373bd1799cd67eac7636486be7c118f6b094959b36b"
     }
   ],
   "brief": {

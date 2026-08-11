@@ -57,6 +57,11 @@ benefit.
 - `artifacts/measured-intelligence/convergence-v1.json`
 - this work packet, its audit, and restrained README/roadmap references
 
+The release-hygiene subpacket may mechanically format the existing acceptance scripts/tests, mark
+their shebang-bearing files executable, annotate the two intentional fail-closed broad catches,
+use Python 3.12's native `Z` timestamp parsing, and refresh exact manifest hashes for changed bytes.
+It may not alter a fixture, expected outcome, product rule, or public identity.
+
 Rollback removes those additive files and references. No durable history or released artifact is
 rewritten.
 

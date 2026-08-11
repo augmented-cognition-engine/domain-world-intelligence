@@ -84,8 +84,7 @@ def test_corroborated_does_not_claim_source_family_independence():
     assert projection["proven"]["corroborated_proves_source_family_independence"] is False
 
     corroborated = [
-        item for item in projection["status_projection"]["statuses_per_claim"]
-        if item["status_id"] == "corroborated"
+        item for item in projection["status_projection"]["statuses_per_claim"] if item["status_id"] == "corroborated"
     ]
     assert corroborated, "the frozen scenario must exercise the corroborated status"
     for item in corroborated:

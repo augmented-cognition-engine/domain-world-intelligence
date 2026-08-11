@@ -192,19 +192,9 @@ class OfficialRecordBriefProvider:
         self.calls += 1
         instruction = json.loads(request.instruction_json)
         observations = tuple(
-            sorted(
-                item.record_key
-                for item in request.context_items
-                if item.record_kind == "observation"
-            )
+            sorted(item.record_key for item in request.context_items if item.record_kind == "observation")
         )
-        inferred = tuple(
-            sorted(
-                item.record_key
-                for item in request.context_items
-                if item.record_kind != "observation"
-            )
-        )
+        inferred = tuple(sorted(item.record_key for item in request.context_items if item.record_kind != "observation"))
         statements = {
             "what_changed": (
                 f"The monitored FCC publication changed from Federal Register document "
@@ -219,9 +209,7 @@ class OfficialRecordBriefProvider:
                 "These records alone do not establish the proposal's eventual disposition, "
                 "implementation, or practical impact."
             ),
-            "watchpoints": (
-                "Watch for later official notices, rules, corrections, or linked docket material."
-            ),
+            "watchpoints": ("Watch for later official notices, rules, corrections, or linked docket material."),
             "limitations": (
                 "This proof uses two exact recorded Federal Register API responses and does not "
                 "claim live network freshness beyond their stated publication dates."
@@ -252,9 +240,7 @@ class OfficialRecordBriefProvider:
                         "when additional official evidence is admitted."
                     ),
                 )
-            sections.append(
-                BriefDraftSectionV1Alpha1(section_id=section_id, claims=(claim,))
-            )
+            sections.append(BriefDraftSectionV1Alpha1(section_id=section_id, claims=(claim,)))
         draft = BriefSynthesisDraftV1Alpha1(
             brief_type=instruction["brief_type"],
             persona_ids=tuple(item["persona_id"] for item in instruction["personas"]),
@@ -275,9 +261,7 @@ class OfficialRecordBriefProvider:
                 duration_ms=2,
             ),
             structured_json=canonical_json(draft.model_dump(mode="json")),
-            referenced_context_ids=tuple(
-                str(item.context_id) for item in request.context_items
-            ),
+            referenced_context_ids=tuple(str(item.context_id) for item in request.context_items),
         )
 
 
@@ -286,8 +270,7 @@ def _context(base: AuthenticatedRuntimeContextV1Alpha1, actor_ref: str):
         product_id=base.product_id,
         actor_ref=actor_ref,
         authentication_receipt_ref=f"authentication_receipt:{actor_ref.split(':')[-1]}",
-        authentication_receipt_digest="sha256:"
-        + hashlib.sha256(actor_ref.encode()).hexdigest(),
+        authentication_receipt_digest="sha256:" + hashlib.sha256(actor_ref.encode()).hexdigest(),
         authenticated_at=base.authenticated_at,
         expires_at=base.expires_at,
     )
@@ -319,9 +302,7 @@ def _bindings(environment, clock):
         configuration_ref=execution_head.state_id,
         authority="reason",
         grant_ref="authority_grant:world-official-record-reason",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            execution_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(execution_head),
     )
     append = GovernedOperationBindingV1Alpha1(
         product_id=product_id,
@@ -329,9 +310,7 @@ def _bindings(environment, clock):
         configuration_ref=append_head.state_id,
         authority="append_immutable_records",
         grant_ref="authority_grant:world-live-append",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            append_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(append_head),
     )
     action = GovernedOperationBindingV1Alpha1(
         product_id=product_id,
@@ -339,17 +318,10 @@ def _bindings(environment, clock):
         configuration_ref=action_head.state_id,
         authority="execute_action",
         grant_ref="authority_grant:world-reviewed-export",
-        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(
-            action_head
-        ),
+        state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(action_head),
     )
-    heads = {
-        (item.state_kind, item.state_id): item
-        for item in (execution_head, append_head, action_head)
-    }
-    for index, artifact in enumerate(
-        (REASONING_ARTIFACT, APPEND_ARTIFACT, ADAPTER_ARTIFACT), start=20
-    ):
+    heads = {(item.state_kind, item.state_id): item for item in (execution_head, append_head, action_head)}
+    for index, artifact in enumerate((REASONING_ARTIFACT, APPEND_ARTIFACT, ADAPTER_ARTIFACT), start=20):
         state_id = capability_state_ref_for_artifact(artifact)
         item = _head(product_id, "capability_state", state_id, index)
         heads[item.state_kind, item.state_id] = item
@@ -379,9 +351,7 @@ def _activation_precondition(environment):
     )
 
 
-async def _record_decision(
-    *, environment, reasoning, append_binding, brief_admission, decided_at
-):
+async def _record_decision(*, environment, reasoning, append_binding, brief_admission, decided_at):
     brief_record = brief_admission.transaction_receipt.records[0]
     intent = DecisionIntentV1Alpha1(
         product_id=environment.fixture["product_id"],
@@ -392,9 +362,7 @@ async def _record_decision(
         disposition=DecisionDisposition.ACCEPT,
         action_disposition=DecisionActionDisposition.AUTHORIZE_ACTION,
         action_type=ACTION_TYPE,
-        rationale=(
-            "Approve export of the exact cited Reality Brief to the bounded review workspace."
-        ),
+        rationale=("Approve export of the exact cited Reality Brief to the bounded review workspace."),
         decided_at=decided_at,
     )
     authorization = await reasoning.authorize_action(
@@ -450,9 +418,7 @@ async def run_acceptance(
     binding = environment.committed_activation
     prepared_binding = environment.pack
     clock = MutableClock(_time("2026-08-07T18:01:03Z"))
-    execution_binding, append_binding, action_binding, runtime = _bindings(
-        environment, clock
-    )
+    execution_binding, append_binding, action_binding, runtime = _bindings(environment, clock)
     baseline_data = baseline.entity_snapshot.attributes.parsed_value()
     current_data = current.entity_snapshot.attributes.parsed_value()
     provider = OfficialRecordBriefProvider(
@@ -465,9 +431,7 @@ async def run_acceptance(
         provider=provider,
         clock=clock,
     )
-    activation_binding = bind_committed_activation(
-        pack=prepared_binding, committed=binding
-    )
+    activation_binding = bind_committed_activation(pack=prepared_binding, committed=binding)
     derivation_fixture = environment.fixture["derivation"]
     baseline_ref = resource_reference(baseline.entity_snapshot).model_copy(
         update={
@@ -497,9 +461,7 @@ async def run_acceptance(
         baseline=baseline_ref,
         current=current_ref,
         detected_at=_time(derivation_fixture["detected_at"]),
-        attention_evaluated_at=_time(
-            derivation_fixture["attention_evaluated_at"]
-        ),
+        attention_evaluated_at=_time(derivation_fixture["attention_evaluated_at"]),
         requested_at=_time(derivation_fixture["requested_at"]),
     )
     bridge = LiveIntelligenceBridgeService(
@@ -644,8 +606,7 @@ async def run_acceptance(
             "disposition": outcome.result.disposition.value,
             "replayed_without_second_effect": action_replay.replayed,
             "export_path": str(target),
-            "export_digest": "sha256:"
-            + hashlib.sha256(written.encode("utf-8")).hexdigest(),
+            "export_digest": "sha256:" + hashlib.sha256(written.encode("utf-8")).hexdigest(),
         },
         "scope": {
             "official_public_records": True,

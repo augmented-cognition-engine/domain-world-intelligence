@@ -26,16 +26,12 @@ ADAPTER_IMPLEMENTATION_VERSION = "0.1.0"
 
 FEDERAL_REGISTER_SOURCE_TYPE = "federal_register_document"
 DOCUMENT_NUMBER = "2026-16197"
-FEDERAL_REGISTER_DOCUMENT_URI = (
-    "https://www.federalregister.gov/api/v1/documents/2026-16197.json"
-)
+FEDERAL_REGISTER_DOCUMENT_URI = "https://www.federalregister.gov/api/v1/documents/2026-16197.json"
 FEDERAL_REGISTER_HTML_URI = (
     "https://www.federalregister.gov/documents/2026/08/07/2026-16197/"
     "protecting-against-national-security-threats-to-the-communications-supply-chain-through-the"
 )
-OFFICIAL_PDF_URI = (
-    "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf"
-)
+OFFICIAL_PDF_URI = "https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf"
 FEDERAL_REGISTER_LOCATOR = "json-pointer:/document_number"
 PUBLICATION_DATE = "2026-08-07"
 AGENCY_NAME = "Federal Communications Commission"
@@ -46,9 +42,7 @@ DOCUMENT_TITLE = (
 )
 
 LEGAL_STATUS_NOTICE = "FederalRegister.gov is not the official legal edition."
-VERIFICATION_REFERENCE = (
-    "The govinfo.gov PDF is the official-format verification reference."
-)
+VERIFICATION_REFERENCE = "The govinfo.gov PDF is the official-format verification reference."
 
 MAX_RESPONSE_BODY_CHARS = 32_768
 MAX_TITLE_CHARS = 1_000
@@ -127,10 +121,7 @@ def _text(value: object, *, name: str, maximum: int) -> str:
     if type(value) is not str or not 1 <= len(value) <= maximum:
         raise _fail(f"{name} must be text with length 1..{maximum}")
     if any(
-        ord(character) < 0x20
-        or ord(character) == 0x7F
-        or 0xD800 <= ord(character) <= 0xDFFF
-        for character in value
+        ord(character) < 0x20 or ord(character) == 0x7F or 0xD800 <= ord(character) <= 0xDFFF for character in value
     ):
         raise _fail(f"{name} contains controls, DEL, or a lone surrogate")
     return value
@@ -186,13 +177,9 @@ def _canonical_document_payload(
         raise _fail("Federal Register response must be one JSON object")
 
     title = _text(payload.get("title"), name="title", maximum=MAX_TITLE_CHARS)
-    document_number = _text(
-        payload.get("document_number"), name="document_number", maximum=32
-    )
+    document_number = _text(payload.get("document_number"), name="document_number", maximum=32)
     document_type = _text(payload.get("type"), name="type", maximum=128)
-    publication_date = _text(
-        payload.get("publication_date"), name="publication_date", maximum=10
-    )
+    publication_date = _text(payload.get("publication_date"), name="publication_date", maximum=10)
     html_url = _text(payload.get("html_url"), name="html_url", maximum=2_048)
     official_pdf_url = _text(payload.get("pdf_url"), name="pdf_url", maximum=2_048)
     agencies = payload.get("agencies")
@@ -234,11 +221,7 @@ def _validated_addresses(values: object, *, name: str) -> tuple[str, ...]:
     if type(values) is not tuple or not 1 <= len(values) <= 32:
         raise _fail(f"{name} must attest 1..32 addresses")
     try:
-        normalized = tuple(
-            validate_public_ip_literal(value, name=name)
-            for value in values
-            if type(value) is str
-        )
+        normalized = tuple(validate_public_ip_literal(value, name=name) for value in values if type(value) is str)
     except ValueError as exc:
         raise _fail(f"{name} must contain globally routable unicast literals") from exc
     if len(normalized) != len(values) or len(set(normalized)) != len(normalized):
@@ -280,9 +263,7 @@ class FederalRegisterSourceAdapter:
         request: SourceAdapterCaptureRequestV1Alpha1,
     ) -> CapturedSourceMaterialV1Alpha1:
         try:
-            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(
-                request.model_dump(mode="python")
-            )
+            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(request.model_dump(mode="python"))
         except (AttributeError, TypeError, ValueError) as exc:
             raise _fail("source-adapter request failed exact public-contract revalidation") from exc
         if validated.adapter_artifact != self.artifact_identity:
@@ -338,9 +319,7 @@ class FederalRegisterSourceAdapter:
             raise _fail("retrieval result must be exact HTTP 200 application/json material")
 
         resolved = _validated_addresses(result.resolved_ip_addresses, name="resolved_ip_addresses")
-        connected = _validated_addresses(
-            result.connected_ip_addresses, name="connected_ip_addresses"
-        )
+        connected = _validated_addresses(result.connected_ip_addresses, name="connected_ip_addresses")
         if connected != resolved:
             raise _fail("every resolved and connected address must remain exactly attested")
 

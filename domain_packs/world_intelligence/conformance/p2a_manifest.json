@@ -14,7 +14,7 @@
     },
     {
       "path": "scripts/p2a_compile_acceptance.py",
-      "sha256": "f2d861da1a413b1ba2a0af93fdc591426e184db7797d777f1c87a539d0691452"
+      "sha256": "dca04d750438aabe03c155d9aadd314bb1e897513010e5db78fd239ee87ec272"
     }
   ],
   "contract": "ace.world-intelligence.p2a-manifest/v1alpha1",
