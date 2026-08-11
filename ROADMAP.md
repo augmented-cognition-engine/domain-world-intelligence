@@ -16,13 +16,13 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Release candidate — 0.10.0 P2C3–P2C10 measured feedback and artifact convergence
+## Passed — 0.10.0 P2C3–P2C10 measured feedback and artifact convergence
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
 - Exact material-use receipts, Decisions, reviewed Actions, terminal results, observed Outcomes,
   conditions, and cutoff feed the domain-neutral Core + Intelligence measured-impact contract.
-- The candidate classifies the bounded result as useful and appends only a non-effective,
+- The released packet classifies the bounded result as useful and appends only a non-effective,
   non-selectable promote proposal; exact replay performs no reauthorization.
 - A separate authenticated and authorized World reviewer rejects broader promotion with an exact
   `no_action` Core Decision. The useful evaluation and promote proposal remain unchanged, and no
@@ -60,14 +60,17 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   network-freshness proof, population result, or applied governance change.
 - The additive convergence packet hashes built Core, reference-action-adapter, World
   source-adapter, and World wheels, rejects a Core checkout on the runtime path, and freezes a
-  canonical machine-readable P2C10 result. It remains candidate artifact evidence pending exact
-  World 0.10.0 publication and public-index reproduction.
+  canonical machine-readable P2C10 result. The exact public World tag reproduced the bounded
+  projection twice with public Core and both hash-verified adapter assets loaded from
+  `site-packages`.
 - The direct-to-main convergence packet is merged through World PR #17. The 0.10.0 release gate
   reruns that unchanged measured stack against public `ace-core==0.6.0`, rebuilds exact artifacts,
   and rejects either repository checkout on the public runtime path.
 - The bounded result remains `useful` under the declared World criteria with a non-effective,
-  unapplied proposal. Public package identities and clean-install evidence are recorded separately
-  before this section may advance to passed.
+  unapplied proposal. A cache-free public-index install resolved World 0.10.0 and Core 0.6.0 while
+  leaving both optional adapters absent.
+
+See the [0.10.0 released-artifact record](docs/releases/world-intelligence-v0.10.0.md).
 
 See the [P2C3 candidate work packet](docs/design/world-intelligence-p2c3-measured-feedback-work-packet-v1.md).
 The follow-on [P2C4 work packet](docs/design/world-intelligence-p2c4-reviewed-impact-disposition-work-packet-v1.md)
