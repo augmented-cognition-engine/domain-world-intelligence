@@ -261,6 +261,20 @@ fixture inputs, not ACE outputs. This is exact forecast/result scoring, not a hi
 contemporaneous forecast, model-skill finding, empirical calibration curve, population reliability
 estimate, causal claim, or human-benefit finding.
 
+P2C10 independently reproduces correction-quality measurement over the U.S. Bureau of Labor
+Statistics public errata family. The recorded July 1, 2025 JOLTS release `USDL-25-1087` and BLS's
+July 2 correction are admitted as distinct immutable Observations. Treatment and control preserve
+both source identities, the exact correction link, two reviewed Actions each, and the same matched
+conditions; treatment renders the required minus sign in `−39,000`, while control retains the
+reported pre-correction form. Exact reviews score `1.0` and `0.0`, so the unchanged domain-neutral
+contract classifies the bounded two-pair difference as useful and emits only a non-effective
+proposal.
+
+The historical wrong form is derived from BLS's explicit statement that the sentence required a
+missing minus sign; the currently archived release is already corrected. This is recorded replay
+over one correction, not live monitoring, statistical validation of JOLTS, population correction
+performance, causality, or human benefit. No Domain Pack, connector, or Core contract changes.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -361,6 +375,7 @@ $PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
 $PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
 $PY -m scripts.p2c8_correction_revision_stability_outcome "$WORKSPACE"
 $PY -m scripts.p2c9_forecast_calibration_outcome "$WORKSPACE"
+$PY -m scripts.p2c10_independent_correction_reproduction "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -397,8 +412,8 @@ The complete governed product-journey evidence is recorded in
 [`docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md`](docs/audits/world-intelligence-p2c2-governed-reality-brief-2026-08-10.md).
 The source-checkout measured-feedback candidate is recorded in
 [`docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md`](docs/audits/world-intelligence-p2c3-measured-feedback-2026-08-10.md).
-The latest withheld-result forecast-scoring candidate is recorded in
-[`docs/audits/world-intelligence-p2c9-forecast-calibration-outcome-2026-08-10.md`](docs/audits/world-intelligence-p2c9-forecast-calibration-outcome-2026-08-10.md).
+The latest independent-source correction candidate is recorded in
+[`docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md`](docs/audits/world-intelligence-p2c10-independent-correction-reproduction-2026-08-10.md).
 
 Release-level scope and evidence are recorded in
 [`docs/releases/world-intelligence-p2c2-v0.9.0.md`](docs/releases/world-intelligence-p2c2-v0.9.0.md),
@@ -435,8 +450,9 @@ detection delay against a product target. P2C8 measures exact unaffected-claim i
 preservation across real Brief contracts while holding correction semantics, source coverage, and
 claim count constant. P2C9 adds an exact withheld-result forecast record and derives a single-event
 Brier contribution while explicitly withholding any population-calibration or model-skill claim.
-The next bounded measurement work is another independently sourced correction event or independent
-Market reproduction.
+P2C10 reproduces correction-quality measurement over an independently sourced BLS erratum without
+changing the shared contracts. The next bounded measurement work is independent Market
+reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.

@@ -16,7 +16,7 @@ source code into the platform.
 
 See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
 
-## Candidate — P2C3–P2C9 measured feedback and product-owned outcomes
+## Candidate — P2C3–P2C10 measured feedback and product-owned outcomes
 
 - The exact 0.9.0 Brief and a World-owned source-only control pass through two matched reviewed
   export pairs under one frozen structural citation-coverage criterion.
@@ -51,6 +51,11 @@ See the [0.9.0 release record](docs/releases/world-intelligence-p2c2-v0.9.0.md).
   resolves the binary event; exact reviews derive single-event Brier quality of `0.9375` and
   `0.4375`. This proves forecast/result scoring and leakage-resistant record order, not historical
   contemporaneity, probability generation by ACE, model skill, or population calibration.
+- A seventh frozen criterion repeats correction-quality measurement over the independent BLS public
+  errata source family. Treatment and control retain the same release, correction, correction link,
+  source coverage, reviewed workflow, and matched conditions; only treatment renders the exact
+  corrected minus sign. The unchanged shared contract derives `1.0` versus `0.0`, classifies the
+  bounded two-pair difference useful, and leaves the proposal non-effective and unapplied.
 - This is source-checkout evidence against stacked Core candidates, not a released World capability, human
   benefit finding, causal claim, network-freshness proof, or applied governance change.
 
@@ -72,6 +77,10 @@ performance, or a general semantic-equivalence engine. The stacked
 [P2C9 work packet](docs/design/world-intelligence-p2c9-forecast-calibration-outcome-work-packet-v1.md)
 freezes an exact forecast/result scoring boundary without claiming a historical forecast, model
 skill, or population calibration.
+The stacked
+[P2C10 work packet](docs/design/world-intelligence-p2c10-independent-correction-reproduction-work-packet-v1.md)
+freezes independent BLS correction reproduction without claiming live monitoring, statistical
+validity, population correction performance, causality, or human benefit.
 
 ## Next — trustworthy live orientation
 

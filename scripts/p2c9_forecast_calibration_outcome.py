@@ -551,10 +551,14 @@ async def _record_review_outcome(
     )
 
 
-async def run_forecast_calibration_outcome(workspace_root: Path) -> dict[str, Any]:
+async def run_forecast_calibration_outcome(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run P2C9 over a withheld exact correction result and declared probabilities."""
 
-    state: dict[str, Any] = {}
+    state: dict[str, Any] = {} if state_sink is None else state_sink
     prior_packet = await run_correction_revision_stability_outcome(
         workspace_root,
         state_sink=state,
