@@ -33,16 +33,12 @@ AI_POLICY_PUBLICATION_DATE = "2026-06-05"
 AI_POLICY_AGENCY_NAME = "Executive Office of the President"
 AI_POLICY_DOCUMENT_TYPE = "Presidential Document"
 AI_POLICY_TITLE = "Promoting Advanced Artificial Intelligence Innovation and Security"
-AI_POLICY_DOCUMENT_URI = (
-    "https://www.federalregister.gov/api/v1/documents/2026-11415.json"
-)
+AI_POLICY_DOCUMENT_URI = "https://www.federalregister.gov/api/v1/documents/2026-11415.json"
 AI_POLICY_HTML_URI = (
     "https://www.federalregister.gov/documents/2026/06/05/2026-11415/"
     "promoting-advanced-artificial-intelligence-innovation-and-security"
 )
-AI_POLICY_OFFICIAL_PDF_URI = (
-    "https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf"
-)
+AI_POLICY_OFFICIAL_PDF_URI = "https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf"
 AI_POLICY_LOCATOR = "json-pointer:/document_number"
 AI_POLICY_LINEAGE_ID = "federal_register:2026-11415"
 AI_POLICY_LINKED_POLICY_REF = "executive_order:14409"
@@ -104,26 +100,20 @@ def _canonical_ai_policy_payload(response_body: object, *, max_chars: int) -> st
         raise _fail("AI-policy response must be one JSON object")
 
     title = _ai_text(payload.get("title"), name="title", maximum=1_000)
-    document_number = _ai_text(
-        payload.get("document_number"), name="document_number", maximum=32
-    )
+    document_number = _ai_text(payload.get("document_number"), name="document_number", maximum=32)
     executive_order_number = _ai_text(
         payload.get("executive_order_number"),
         name="executive_order_number",
         maximum=32,
     )
     document_type = _ai_text(payload.get("type"), name="type", maximum=128)
-    publication_date = _ai_text(
-        payload.get("publication_date"), name="publication_date", maximum=10
-    )
+    publication_date = _ai_text(payload.get("publication_date"), name="publication_date", maximum=10)
     html_url = _ai_text(payload.get("html_url"), name="html_url", maximum=2_048)
     pdf_url = _ai_text(payload.get("pdf_url"), name="pdf_url", maximum=2_048)
     agencies = payload.get("agencies")
     if type(agencies) is not list or len(agencies) != 1 or type(agencies[0]) is not dict:
         raise _fail("agencies must contain exactly one agency object")
-    agency_name = _ai_text(
-        agencies[0].get("name"), name="agencies[0].name", maximum=256
-    )
+    agency_name = _ai_text(agencies[0].get("name"), name="agencies[0].name", maximum=256)
 
     exact = {
         "title": (title, AI_POLICY_TITLE),
@@ -191,9 +181,7 @@ class AIPolicyFederalRegisterSourceAdapter:
         request: SourceAdapterCaptureRequestV1Alpha1,
     ) -> CapturedSourceMaterialV1Alpha1:
         try:
-            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(
-                request.model_dump(mode="python")
-            )
+            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(request.model_dump(mode="python"))
         except (AttributeError, TypeError, ValueError) as exc:
             raise _fail("source-adapter request failed exact public-contract revalidation") from exc
         if validated.adapter_artifact != self.artifact_identity:
@@ -247,12 +235,8 @@ class AIPolicyFederalRegisterSourceAdapter:
         if result.status_code != 200 or result.media_type != "application/json":
             raise _fail("retrieval result must be exact HTTP 200 application/json material")
 
-        resolved = _ai_addresses(
-            result.resolved_ip_addresses, name="resolved_ip_addresses"
-        )
-        connected = _ai_addresses(
-            result.connected_ip_addresses, name="connected_ip_addresses"
-        )
+        resolved = _ai_addresses(result.resolved_ip_addresses, name="resolved_ip_addresses")
+        connected = _ai_addresses(result.connected_ip_addresses, name="connected_ip_addresses")
         if connected != resolved:
             raise _fail("every resolved and connected address must remain exactly attested")
         observed_at = _ai_time(result.observed_at, name="observed_at")
@@ -264,9 +248,7 @@ class AIPolicyFederalRegisterSourceAdapter:
             result.response_body,
             max_chars=transport_request.max_response_chars,
         )
-        payload_digest = "sha256:" + hashlib.sha256(
-            payload_json.encode("utf-8")
-        ).hexdigest()
+        payload_digest = "sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
         return CapturedSourceMaterialV1Alpha1(
             capture_request_ref=str(validated.request_id),
             capture_request_digest=str(validated.request_digest),

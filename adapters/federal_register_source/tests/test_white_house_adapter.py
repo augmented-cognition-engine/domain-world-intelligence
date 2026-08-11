@@ -122,21 +122,17 @@ async def test_exact_white_house_release_becomes_closed_inert_material() -> None
         ),
         "initiative_name": "GOLD EAGLE",
         "legal_status_notice": (
-            "WhiteHouse.gov announces implementation; it is not the legal edition of "
-            "Executive Order 14409."
+            "WhiteHouse.gov announces implementation; it is not the legal edition of Executive Order 14409."
         ),
         "linked_policy_ref": "executive_order:14409",
-        "official_pdf_url": (
-            "https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf"
-        ),
+        "official_pdf_url": ("https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf"),
         "policy_status": "implementation_reported",
         "policy_topic": "artificial_intelligence",
         "publication_date": "2026-07-14",
         "source_lineage_id": "white_house_release:gold_eagle_2026_07_14",
         "source_uri": WHITE_HOUSE_RELEASE_URI,
         "verification_reference": (
-            "The release names Executive Order 14409; the govinfo PDF remains the "
-            "official-format order reference."
+            "The release names Executive Order 14409; the govinfo PDF remains the official-format order reference."
         ),
     }
     assert capture.source_published_at == datetime(2026, 7, 14, tzinfo=UTC)

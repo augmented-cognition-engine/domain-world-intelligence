@@ -77,14 +77,9 @@ def _resolve_public_addresses(host: str, port: int) -> tuple[str, ...]:
     if not addresses:
         raise FederalRegisterNetworkTransportError("DNS returned no addresses")
     try:
-        return tuple(
-            validate_public_ip_literal(address, name="resolved_ip_address")
-            for address in addresses
-        )
+        return tuple(validate_public_ip_literal(address, name="resolved_ip_address") for address in addresses)
     except ValueError as exc:
-        raise FederalRegisterNetworkTransportError(
-            "DNS returned a non-public or otherwise prohibited address"
-        ) from exc
+        raise FederalRegisterNetworkTransportError("DNS returned a non-public or otherwise prohibited address") from exc
 
 
 def _connection(host: str, address: str, timeout: float) -> http.client.HTTPSConnection:
@@ -111,9 +106,7 @@ class OptInFederalRegisterNetworkTransport:
         clock: Clock = _utc_now,
     ) -> None:
         if type(enabled) is not bool or enabled is not True:
-            raise FederalRegisterNetworkTransportError(
-                "public network capture requires explicit enabled=True opt-in"
-            )
+            raise FederalRegisterNetworkTransportError("public network capture requires explicit enabled=True opt-in")
         if (
             type(timeout_seconds) not in {int, float}
             or isinstance(timeout_seconds, bool)
@@ -138,13 +131,9 @@ class OptInFederalRegisterNetworkTransport:
                 "authorized_uri must be one exact credential-free Federal Register API document"
             )
         if type(source_type_ref) is not str or not source_type_ref:
-            raise FederalRegisterNetworkTransportError(
-                "source_type_ref must be non-empty text"
-            )
+            raise FederalRegisterNetworkTransportError("source_type_ref must be non-empty text")
         if type(locator) is not str or not locator.startswith("json-pointer:/"):
-            raise FederalRegisterNetworkTransportError(
-                "locator must be one explicit JSON pointer"
-            )
+            raise FederalRegisterNetworkTransportError("locator must be one explicit JSON pointer")
         self._authorized_uri = authorized_uri
         self._source_type_ref = source_type_ref
         self._locator = locator
@@ -176,16 +165,9 @@ class OptInFederalRegisterNetworkTransport:
             or request.public_network_only is not True
             or request.dns_rebinding_protection_required is not True
         ):
-            raise FederalRegisterNetworkTransportError(
-                "network request crossed the reviewed source or security policy"
-            )
-        if (
-            type(request.max_response_chars) is not int
-            or not 1 <= request.max_response_chars <= 32_768
-        ):
-            raise FederalRegisterNetworkTransportError(
-                "max_response_chars crossed the reviewed 1..32768 bound"
-            )
+            raise FederalRegisterNetworkTransportError("network request crossed the reviewed source or security policy")
+        if type(request.max_response_chars) is not int or not 1 <= request.max_response_chars <= 32_768:
+            raise FederalRegisterNetworkTransportError("max_response_chars crossed the reviewed 1..32768 bound")
 
         parsed = urlsplit(request.requested_uri)
         if (
@@ -196,18 +178,13 @@ class OptInFederalRegisterNetworkTransport:
             or parsed.password is not None
             or parsed.fragment
         ):
-            raise FederalRegisterNetworkTransportError(
-                "reviewed source URI must remain exact credential-free HTTPS"
-            )
+            raise FederalRegisterNetworkTransportError("reviewed source URI must remain exact credential-free HTTPS")
         path = parsed.path + (f"?{parsed.query}" if parsed.query else "")
         addresses = tuple(self._resolver(parsed.hostname, 443))
         if not addresses:
             raise FederalRegisterNetworkTransportError("DNS returned no addresses")
         try:
-            validated = tuple(
-                validate_public_ip_literal(address, name="resolved_ip_address")
-                for address in addresses
-            )
+            validated = tuple(validate_public_ip_literal(address, name="resolved_ip_address") for address in addresses)
         except ValueError as exc:
             raise FederalRegisterNetworkTransportError(
                 "DNS returned a non-public or otherwise prohibited address"
@@ -232,9 +209,7 @@ class OptInFederalRegisterNetworkTransport:
                     },
                 )
                 response = connection.getresponse()
-                content_encoding = (
-                    response.getheader("Content-Encoding") or "identity"
-                ).lower()
+                content_encoding = (response.getheader("Content-Encoding") or "identity").lower()
                 if content_encoding not in {"", "identity"}:
                     raise FederalRegisterNetworkTransportError(
                         "compressed response crossed the bounded identity encoding policy"
@@ -249,31 +224,18 @@ class OptInFederalRegisterNetworkTransport:
                             "response Content-Length was not an integer"
                         ) from exc
                     if declared_length < 0 or declared_length > maximum_bytes:
-                        raise FederalRegisterNetworkTransportError(
-                            "response exceeded the bounded byte limit"
-                        )
+                        raise FederalRegisterNetworkTransportError("response exceeded the bounded byte limit")
                 body_bytes = response.read(maximum_bytes + 1)
                 if len(body_bytes) > maximum_bytes:
-                    raise FederalRegisterNetworkTransportError(
-                        "response exceeded the bounded byte limit"
-                    )
+                    raise FederalRegisterNetworkTransportError("response exceeded the bounded byte limit")
                 try:
                     body = body_bytes.decode("utf-8", errors="strict")
                 except UnicodeDecodeError as exc:
-                    raise FederalRegisterNetworkTransportError(
-                        "response was not strict UTF-8"
-                    ) from exc
+                    raise FederalRegisterNetworkTransportError("response was not strict UTF-8") from exc
                 if len(body) > request.max_response_chars:
-                    raise FederalRegisterNetworkTransportError(
-                        "response exceeded the bounded character limit"
-                    )
+                    raise FederalRegisterNetworkTransportError("response exceeded the bounded character limit")
                 captured_at = self._clock()
-                media_type = (
-                    (response.getheader("Content-Type") or "")
-                    .split(";", 1)[0]
-                    .strip()
-                    .lower()
-                )
+                media_type = (response.getheader("Content-Type") or "").split(";", 1)[0].strip().lower()
                 return FederalRegisterRetrievalResult(
                     source_type_ref=request.source_type_ref,
                     requested_uri=request.requested_uri,
@@ -301,9 +263,7 @@ class OptInFederalRegisterNetworkTransport:
             finally:
                 connection.close()
         summary = ", ".join(errors) if errors else "no connection attempt completed"
-        raise FederalRegisterNetworkTransportError(
-            f"all validated public source addresses failed: {summary}"
-        )
+        raise FederalRegisterNetworkTransportError(f"all validated public source addresses failed: {summary}")
 
 
 __all__ = [

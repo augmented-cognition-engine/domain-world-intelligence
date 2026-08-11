@@ -122,9 +122,7 @@ async def test_ai_policy_document_becomes_closed_attributable_metadata() -> None
         "publication_date": "2026-06-05",
         "source_lineage_id": "federal_register:2026-11415",
         "source_uri": AI_POLICY_HTML_URI,
-        "verification_reference": (
-            "The govinfo.gov PDF is the official-format verification reference."
-        ),
+        "verification_reference": ("The govinfo.gov PDF is the official-format verification reference."),
     }
     assert "abstract" not in capture.captured_payload_json
     assert capture.requested_uri == capture.effective_uri == AI_POLICY_DOCUMENT_URI
