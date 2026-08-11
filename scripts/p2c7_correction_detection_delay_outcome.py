@@ -544,10 +544,14 @@ async def _record_review_outcome(
     )
 
 
-async def run_correction_detection_delay_outcome(workspace_root: Path) -> dict[str, Any]:
+async def run_correction_detection_delay_outcome(
+    workspace_root: Path,
+    *,
+    state_sink: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """Run P2C7 over an exact recorded official correction pair."""
 
-    state: dict[str, Any] = {}
+    state: dict[str, Any] = {} if state_sink is None else state_sink
     prior = await run_contradiction_attention_outcome(workspace_root, state_sink=state)
     environment = state["environment"]
     fixture = load_correction_fixture()
@@ -745,6 +749,20 @@ async def run_correction_detection_delay_outcome(workspace_root: Path) -> dict[s
         raise AssertionError("treatment did not preserve the exact five-minute replay delay")
     if {item.detection_delay_seconds for item in control_reviews} != {21_600}:
         raise AssertionError("control did not preserve the exact six-hour replay delay")
+
+    state.update(
+        {
+            "p2c7_fixture": fixture,
+            "p2c7_original_observation": original,
+            "p2c7_original_observation_ref": original_ref,
+            "p2c7_correction_observation": correction,
+            "p2c7_correction_observation_ref": correction_ref,
+            "p2c7_treatment_artifact": treatment_artifact,
+            "p2c7_treatment_artifact_ref": treatment_ref,
+            "p2c7_control_artifact": control_artifact,
+            "p2c7_control_artifact_ref": control_ref,
+        }
+    )
 
     return {
         "contract": "ace.world-intelligence.correction-detection-delay-outcome/v1alpha1",

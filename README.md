@@ -238,6 +238,16 @@ The recorded availability and detection instants are test coordinates. The suite
 network access and does not establish live monitoring, network-arrival latency, population delay
 performance, legal truth, calibration, general Brief quality, causality, or human benefit.
 
+P2C8 creates actual prior, treatment, and control `BriefV1Alpha1` records over that same source
+pair. Both revisions remove the stale instruction claim, add the same exact correction claim,
+retain three claims, and cite the same original/correction sources. Treatment preserves the exact
+identities of both unaffected claims; the paraphrase-drift control preserves neither. Independent
+reviews record every expected, preserved, drifted, and unexpected claim identity, producing scores
+of `1.0` and `0.0` across two matched pairs and another non-effective proposal.
+
+This freezes a World product rule over one recorded pair. It is not live revision, a general
+semantic-equivalence engine, population stability, calibration, causality, or human benefit.
+
 ## What the public World proof demonstrates
 
 Generate a self-contained visual Reality Brief and its exact machine-readable backing data:
@@ -332,10 +342,11 @@ $PY -m scripts.p2c3_measured_feedback "$WORKSPACE"
 # Stacked candidate: explicit reject/no-action review of the exact proposal
 $PY -m scripts.p2c4_reviewed_impact_disposition "$WORKSPACE"
 
-# Stacked candidates: exact citation correctness, contradiction attention, and correction delay
+# Stacked candidates: correctness, attention, correction delay, and revision stability
 $PY -m scripts.p2c5_citation_correctness_outcome "$WORKSPACE"
 $PY -m scripts.p2c6_contradiction_attention_outcome "$WORKSPACE"
 $PY -m scripts.p2c7_correction_detection_delay_outcome "$WORKSPACE"
+$PY -m scripts.p2c8_correction_revision_stability_outcome "$WORKSPACE"
 ```
 
 The released 0.9.0 gates are reproducible through the locked environment, as CI does. The
@@ -404,9 +415,10 @@ adds an independently reviewed citation-correctness Outcome and a citation-prese
 negative control. P2C6 adds exact contradiction recall, false-alert rate, equal alert-volume
 control, and valid silence under one frozen recorded-source challenge. P2C7 adds exact handling of
 one explicit recorded correction pair, preserves the prior record, and measures frozen-replay
-detection delay against a product target. The next bounded measurement work is
-calibration/revision stability, another independently sourced correction event, or independent
-Market reproduction.
+detection delay against a product target. P2C8 measures exact unaffected-claim identity
+preservation across real Brief contracts while holding correction semantics, source coverage, and
+claim count constant. The next bounded measurement work is calibration, another independently
+sourced correction event, or independent Market reproduction.
 Separately reviewed opt-in network transport and P2D multi-source conflict/correction with LIVE
 inputs remain independent work. None of these steps may add autonomous publishing, delivery,
 persuasion, or action authority to a Domain Pack.
