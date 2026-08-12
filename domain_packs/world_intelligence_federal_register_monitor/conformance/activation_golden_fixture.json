@@ -1,0 +1,29 @@
+{
+  "contract": "ace.intelligence.domain-pack-golden-fixture/v1",
+  "fixture_id": "world_federal_register_activation",
+  "fixture_version": "0.1.0",
+  "observations": [
+    {
+      "case_id": "fcc_official_publication_change",
+      "entity_type_id": "federal_register_agency_monitor",
+      "entity_ref": "entity:monitor/fcc-latest-federal-register-publication",
+      "baseline_attributes_json": "{\"agency_name\":\"Federal Communications Commission\",\"document_number\":\"2026-15932\",\"document_type\":\"Notice\",\"federal_register_url\":\"https://www.federalregister.gov/documents/2026/08/06/2026-15932/information-collection-being-reviewed-by-the-federal-communications-commission\",\"legal_status_notice\":\"FederalRegister.gov is not the official legal edition.\",\"official_pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-08-06/pdf/2026-15932.pdf\",\"publication_date\":\"2026-08-06\",\"title\":\"Information Collection Being Reviewed by the Federal Communications Commission\",\"verification_reference\":\"govinfo:FR-2026-08-06-2026-15932\"}",
+      "current_attributes_json": "{\"agency_name\":\"Federal Communications Commission\",\"document_number\":\"2026-16197\",\"document_type\":\"Proposed Rule\",\"federal_register_url\":\"https://www.federalregister.gov/documents/2026/08/07/2026-16197/protecting-against-national-security-threats-to-the-communications-supply-chain-through-the\",\"legal_status_notice\":\"FederalRegister.gov is not the official legal edition.\",\"official_pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-08-07/pdf/2026-16197.pdf\",\"publication_date\":\"2026-08-07\",\"title\":\"Protecting Against National Security Threats to the Communications Supply Chain Through the Equipment Authorization Program\",\"verification_reference\":\"govinfo:FR-2026-08-07-2026-16197\"}",
+      "baseline_as_of": "2026-08-06T18:00:05Z",
+      "current_as_of": "2026-08-07T18:00:05Z",
+      "confidence": 1.0,
+      "expected": [
+        {
+          "detector_id": "fcc_latest_publication_change",
+          "entity_ref": "entity:monitor/fcc-latest-federal-register-publication",
+          "material": true,
+          "shift_type": "official_publication_change",
+          "signal_type": "official_publication",
+          "routing_rule_ids": ["route_official_publication"],
+          "persona_ids": ["general_reader", "public_researcher"],
+          "template_ids": ["official_record_change_brief"]
+        }
+      ]
+    }
+  ]
+}
