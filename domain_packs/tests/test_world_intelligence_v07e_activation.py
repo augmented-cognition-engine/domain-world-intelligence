@@ -7,9 +7,24 @@ import pytest
 
 def _has_candidate() -> bool:
     try:
-        return importlib.metadata.version("ace-core") == "0.6.0"
-    except importlib.metadata.PackageNotFoundError:
+        if importlib.metadata.version("ace-core") != "0.6.0":
+            return False
+
+        from ace.application import BriefingAgent, DomainActivationPlanAdmissionService
+        from ace.application.domain_activation_plan_contracts import (
+            DomainActivationRevisionV1Alpha2,
+        )
+    except (ImportError, importlib.metadata.PackageNotFoundError):
         return False
+
+    return all(
+        contract is not None
+        for contract in (
+            BriefingAgent,
+            DomainActivationPlanAdmissionService,
+            DomainActivationRevisionV1Alpha2,
+        )
+    )
 
 
 @pytest.mark.asyncio
