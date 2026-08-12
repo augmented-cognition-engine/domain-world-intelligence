@@ -253,6 +253,7 @@ jobs:
                   monitor + "modules/personas.json",
                   monitor + "modules/source_mapping.json",
                   monitor + "modules/synthesis.json",
+                  monitor + "conformance/activation_golden_fixture.json",
                   monitor + "conformance/p2c2_monitor_input.json",
               ]
           )
