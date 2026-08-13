@@ -2,9 +2,16 @@
   "contract": "ace.intelligence.onboarding-profile/v1alpha1",
   "profile_id": "intelligence_onboarding_profile:world-ai-command-center",
   "topic_id": "artificial_intelligence",
+  "domain_label": "World Intelligence",
+  "topic_label": "Artificial intelligence",
   "display_name": "AI Command Center",
   "prompt": "What do you need to stay ahead of?",
   "description": "Build a continuously updated, evidence-grounded picture of the AI landscape without reading every release, filing, benchmark, policy, or news feed.",
+  "starter_prompts": [
+    "Help me decide which AI models and providers fit our real workloads.",
+    "Keep me ahead of meaningful AI capability, cost, policy, and adoption shifts.",
+    "Show me which AI investments, claims, and competitive moves are becoming real advantage."
+  ],
   "outcomes": [
     {
       "outcome_id": "build_or_buy_ai",
@@ -120,6 +127,68 @@
       "recommended_intelligence_ids": [],
       "recommended_topic_labels": [],
       "recommended_intelligence_labels": []
+    }
+  ],
+  "source_groups": [
+    {
+      "source_group_id": "official_records",
+      "label": "Official policy and filings",
+      "description": "Primary records that establish rules, government action, company disclosures, and implementation activity.",
+      "evidence_role": "authoritative_record",
+      "source_ids": ["us_federal_register_ai_policy", "white_house_ai_policy", "sec_edgar", "eu_ai_office", "nist_ai_rmf", "cisa_known_exploited_vulnerabilities"],
+      "source_labels": ["Federal Register", "White House", "SEC EDGAR", "EU AI Office", "NIST", "CISA"],
+      "access_label": "Public · no credentials",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "provider_releases",
+      "label": "Models and provider releases",
+      "description": "First-party launches, model cards, changelogs, and product claims from the organizations building the frontier.",
+      "evidence_role": "first_party_claim",
+      "source_ids": ["openai_news", "openai_model_release_notes", "anthropic_news", "anthropic_model_docs", "google_deepmind_news", "google_deepmind_model_cards", "gemini_api_release_notes", "meta_ai_blog"],
+      "source_labels": ["OpenAI", "Anthropic", "Google DeepMind", "Google AI", "Meta AI"],
+      "access_label": "Public · no credentials",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "independent_evaluations",
+      "label": "Independent evaluations",
+      "description": "Third-party benchmarks and measurements that test whether capability and safety claims reproduce outside provider labs.",
+      "evidence_role": "independent_measurement",
+      "source_ids": ["stanford_helm", "lmsys_chatbot_arena", "metr_evaluations", "epoch_ai", "swe_bench"],
+      "source_labels": ["Stanford HELM", "LM Arena", "METR", "Epoch AI", "SWE-bench"],
+      "access_label": "Public · reviewed datasets",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "open_ecosystem",
+      "label": "Open research and projects",
+      "description": "Papers, repositories, releases, and model activity that reveal momentum before it becomes a commercial announcement.",
+      "evidence_role": "leading_indicator",
+      "source_ids": ["arxiv_ai_research", "github_releases", "hugging_face_hub", "meta_llama_releases"],
+      "source_labels": ["arXiv", "GitHub", "Hugging Face", "Meta Llama"],
+      "access_label": "Public · optional token",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "economics_and_operations",
+      "label": "Economics and operations",
+      "description": "Pricing, availability, infrastructure, procurement, and investment records that show whether AI is becoming cheaper, reliable, and deployable.",
+      "evidence_role": "operational_telemetry",
+      "source_ids": ["openai_api_pricing", "anthropic_api_pricing", "google_gemini_api_pricing", "openai_status", "anthropic_status", "usaspending_awards", "nvidia_investor_relations", "nvidia_ai_infrastructure_news"],
+      "source_labels": ["Provider pricing", "Platform status", "USAspending", "NVIDIA IR", "Infrastructure news"],
+      "access_label": "Public · mixed feeds",
+      "default_selected": true
+    },
+    {
+      "source_group_id": "private_organizational",
+      "label": "Your organization",
+      "description": "Optional customer-owned usage, cost, reliability, procurement, and outcome evidence inside your authority boundary.",
+      "evidence_role": "private_organizational",
+      "source_ids": ["customer_ai_telemetry"],
+      "source_labels": ["Usage and outcomes"],
+      "access_label": "Private · permission required",
+      "default_selected": false
     }
   ],
   "cadences": [
