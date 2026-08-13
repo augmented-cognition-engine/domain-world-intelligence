@@ -18,7 +18,7 @@ def test_ai_command_center_onboarding_profile_is_outcome_led_and_non_authorizing
     watch_ids = {watch["watch_id"] for watch in catalog["watch_areas"]}
     intelligence_ids = {item["signal_id"] for item in catalog["signature_intelligence"]}
 
-    assert profile["contract"] == "ace.domain-pack.intelligence-onboarding-profile/v1alpha1"
+    assert profile["contract"] == "ace.intelligence.onboarding-profile/v1alpha1"
     assert profile["topic_id"] == catalog["topic_id"]
     assert profile["prompt"] == "What do you need to stay ahead of?"
     assert len(profile["outcomes"]) == 6

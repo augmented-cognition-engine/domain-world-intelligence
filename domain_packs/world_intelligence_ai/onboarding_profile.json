@@ -1,5 +1,5 @@
 {
-  "contract": "ace.domain-pack.intelligence-onboarding-profile/v1alpha1",
+  "contract": "ace.intelligence.onboarding-profile/v1alpha1",
   "profile_id": "intelligence_onboarding_profile:world-ai-command-center",
   "topic_id": "artificial_intelligence",
   "display_name": "AI Command Center",
