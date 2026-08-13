@@ -10,7 +10,7 @@ on:
         description: "Exact release tag to publish (must match the root project version)"
         required: true
         type: string
-        default: v0.10.0
+        default: v0.11.0
 
 permissions:
   contents: read
@@ -241,7 +241,7 @@ jobs:
           export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
           uv build --wheel --out-dir dist/source-adapter adapters/federal_register_source
           rm -f dist/source-adapter/.gitignore
-          expected="ace_ext_world_federal_register_source-0.3.0-py3-none-any.whl"
+          expected="ace_ext_world_federal_register_source-0.4.0-py3-none-any.whl"
           entries="$(find dist/source-adapter -maxdepth 1 -type f -printf '%f\n')"
           if [ "${entries}" != "${expected}" ]; then
             echo "::error::unexpected adapter artifacts: ${entries}"
