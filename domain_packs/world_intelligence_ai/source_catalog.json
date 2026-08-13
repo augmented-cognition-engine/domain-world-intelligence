@@ -1,0 +1,203 @@
+{
+  "contract": "ace.world-intelligence.ai-source-catalog/v1alpha1",
+  "topic_id": "artificial_intelligence",
+  "display_name": "AI Command Center",
+  "purpose": "A reviewed portfolio of primary sources an onboarding agent can propose for an AI intelligence deployment.",
+  "selection_policy": {
+    "primary_sources_first": true,
+    "publisher_roots_must_remain_distinct": true,
+    "republication_does_not_count_as_corroboration": true,
+    "proposed_sources_are_not_admitted_evidence": true,
+    "human_review_required_before_connection": true
+  },
+  "watch_areas": [
+    {
+      "watch_id": "models_and_capabilities",
+      "display_name": "Models & capabilities",
+      "question": "What materially changed in model capability, availability, evaluation, or product form?",
+      "sources": [
+        {
+          "source_id": "openai_news",
+          "publisher": "OpenAI",
+          "uri": "https://openai.com/news/",
+          "source_class": "provider_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "anthropic_news",
+          "publisher": "Anthropic",
+          "uri": "https://www.anthropic.com/news",
+          "source_class": "provider_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "google_deepmind_news",
+          "publisher": "Google DeepMind",
+          "uri": "https://deepmind.google/blog/",
+          "source_class": "provider_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "google_deepmind_model_cards",
+          "publisher": "Google DeepMind",
+          "uri": "https://deepmind.google/models/model-cards/",
+          "source_class": "provider_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "weekly"
+        },
+        {
+          "source_id": "meta_ai_blog",
+          "publisher": "Meta AI",
+          "uri": "https://ai.meta.com/blog/",
+          "source_class": "provider_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        }
+      ]
+    },
+    {
+      "watch_id": "economics_and_pricing",
+      "display_name": "Economics & pricing",
+      "question": "How are token prices, inference economics, context limits, and commercial terms changing?",
+      "sources": [
+        {
+          "source_id": "openai_api_pricing",
+          "publisher": "OpenAI",
+          "uri": "https://openai.com/api/pricing/",
+          "source_class": "provider_commercial_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "anthropic_api_pricing",
+          "publisher": "Anthropic",
+          "uri": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+          "source_class": "provider_commercial_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "google_gemini_api_pricing",
+          "publisher": "Google",
+          "uri": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_class": "provider_commercial_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        }
+      ]
+    },
+    {
+      "watch_id": "safety_and_security",
+      "display_name": "Safety & security",
+      "question": "What new model risks, safeguards, incidents, or evaluation evidence should change operating posture?",
+      "sources": [
+        {
+          "source_id": "nist_ai_rmf",
+          "publisher": "NIST",
+          "uri": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "source_class": "government_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "weekly"
+        },
+        {
+          "source_id": "nist_airc",
+          "publisher": "NIST",
+          "uri": "https://airc.nist.gov/",
+          "source_class": "government_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "weekly"
+        },
+        {
+          "source_id": "provider_model_cards",
+          "publisher": "Configured model providers",
+          "uri_template": "provider://model-cards",
+          "source_class": "provider_primary_template",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        }
+      ]
+    },
+    {
+      "watch_id": "policy_and_regulation",
+      "display_name": "Policy & regulation",
+      "question": "Which proposals, directives, rules, and implementation actions materially change the AI operating environment?",
+      "sources": [
+        {
+          "source_id": "us_federal_register_ai_policy",
+          "publisher": "Office of the Federal Register",
+          "uri": "https://www.federalregister.gov/",
+          "source_class": "government_primary",
+          "connection_state": "connected",
+          "source_definition_ref": "source_definition:ai-policy-eo-14409",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "white_house_ai_policy",
+          "publisher": "The White House",
+          "uri": "https://www.whitehouse.gov/",
+          "source_class": "government_primary",
+          "connection_state": "connected",
+          "source_definition_ref": "source_definition:white-house-gold-eagle-2026-07-14",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "eu_ai_office",
+          "publisher": "European Commission",
+          "uri": "https://digital-strategy.ec.europa.eu/en/policies/ai-office",
+          "source_class": "government_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "weekly"
+        }
+      ]
+    },
+    {
+      "watch_id": "capital_and_company_moves",
+      "display_name": "Capital & company moves",
+      "question": "What do capital allocation, filings, partnerships, acquisitions, and infrastructure commitments reveal?",
+      "sources": [
+        {
+          "source_id": "sec_edgar_company_filings",
+          "publisher": "U.S. Securities and Exchange Commission",
+          "uri": "https://www.sec.gov/edgar/search-and-access",
+          "source_class": "regulatory_filing_primary",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        },
+        {
+          "source_id": "company_investor_relations",
+          "publisher": "Configured public companies",
+          "uri_template": "company://investor-relations",
+          "source_class": "company_primary_template",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        }
+      ]
+    },
+    {
+      "watch_id": "adoption_and_executive_signals",
+      "display_name": "Adoption & executive signals",
+      "question": "What are leaders committing to, deploying, reversing, or measuring in the real economy?",
+      "sources": [
+        {
+          "source_id": "company_earnings_materials",
+          "publisher": "Configured public companies",
+          "uri_template": "company://earnings-materials",
+          "source_class": "company_primary_template",
+          "connection_state": "proposed",
+          "refresh_cadence": "quarterly_event_driven"
+        },
+        {
+          "source_id": "company_executive_communications",
+          "publisher": "Configured organizations",
+          "uri_template": "company://executive-communications",
+          "source_class": "company_primary_template",
+          "connection_state": "proposed",
+          "refresh_cadence": "daily"
+        }
+      ]
+    }
+  ]
+}

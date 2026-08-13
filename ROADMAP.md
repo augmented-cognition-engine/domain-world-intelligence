@@ -22,13 +22,18 @@ public installation contract to the now-released Core 0.8 line.
 
 - Treat Atrium as the one shared command center; World contributes configuration and governed
   resources, not a separate application.
-- Project the accepted recorded-source AI policy journey into the public Core 0.8 resource-plane
-  page consumed by Atrium.
+- Make artificial intelligence the flagship World topic across six watch areas: models and
+  capabilities, economics and pricing, safety and security, policy and regulation, capital and
+  company moves, and adoption and executive signals.
+- Give source onboarding a reviewed multi-source portfolio while keeping `proposed`, `connected`,
+  and `admitted` as distinct states. Only admitted captures count as Atrium evidence.
+- Project the accepted recorded-source AI policy journey plus its owner-scoped Monitor and
+  Subscription into the public Core 0.8 resource-plane page consumed by Atrium.
 - Demonstrate `official sources -> Observation -> Shift -> Signal -> Case -> cited Brief` with
   explicit evidence lineage, recorded-transport labeling, and no autonomous publication.
-- Next, migrate the released World package compatibility window to public Core 0.8 and admit the
-  monitor, subscription, and onboarding-agent records needed for the full
-  `Connect -> Map -> Watch -> Brief` demo.
+- Next, migrate the released World package compatibility window to public Core 0.8, connect one
+  primary source in each remaining watch area, and admit the onboarding-agent records needed for
+  the full `Connect -> Map -> Watch -> Brief` demo.
 
 See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 

@@ -17,6 +17,12 @@ assembled. World does not ship a competing dashboard. The first AI Command Cente
 the accepted official-source journey through the public ACE 0.8 Intelligence resource plane; see
 [the demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 
+The flagship topic is **artificial intelligence**: model and capability releases, token economics,
+safety and security, policy and regulation, capital and company moves, and adoption and executive
+signals. Its reviewed [source portfolio](domain_packs/world_intelligence_ai/source_catalog.json)
+separates sources that are already connected from sources the onboarding experience may propose.
+A proposed source is never counted as evidence until ACE admits a real capture from it.
+
 [Install](#install) · [Architecture](#what-you-install-and-what-you-get) ·
 [Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
 [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)

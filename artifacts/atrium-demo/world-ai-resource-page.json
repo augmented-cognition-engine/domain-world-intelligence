@@ -1,6 +1,6 @@
 {
   "actor_ref": "actor:world-ai-analyst",
-  "as_of": "2026-08-10T20:03:00Z",
+  "as_of": "2026-08-10T20:04:31Z",
   "authority_use": {
     "actor_ref": "actor:world-ai-analyst",
     "authenticated_context": {
@@ -20,8 +20,8 @@
     "grant_ref": "authority_grant:world-ai-atrium-read",
     "operation": "query_intelligence_resources",
     "product_id": "product:world-ai-command-center",
-    "receipt_digest": "sha256:6aa30101136acecb01bf868b45ecab320cbf86b37f62778f6b98f2cbfed6ed61",
-    "receipt_id": "authority_use_receipt:6aa30101136acecb01bf868b45ecab32",
+    "receipt_digest": "sha256:c3c1b1024d0e1c77d1b9111afcb1a862e244c4498939ac39e03905466b584818",
+    "receipt_id": "authority_use_receipt:c3c1b1024d0e1c77d1b9111afcb1a862",
     "state_head_precondition": {
       "commit_receipt_id": "authority_receipt:world-ai-atrium-read",
       "contract": "ace.core.governed-state-head-precondition/v1alpha1",
@@ -31,10 +31,10 @@
       "state_id": "authority_grant:world-ai-atrium-read",
       "state_kind": "authority_grant"
     },
-    "use_subject_digest": "sha256:60e663f5d1dc8986187771c816c19a44d65cb09e3388b3b8bfae3bca0604e168",
-    "use_subject_ref": "resource_query:60e663f5d1dc8986187771c816c19a44"
+    "use_subject_digest": "sha256:b214ad816d1064b214542545b4c73feec9664d7bb164accc628ce418ce360e46",
+    "use_subject_ref": "resource_query:b214ad816d1064b214542545b4c73fee"
   },
-  "available_at": "2026-08-10T20:04:00Z",
+  "available_at": "2026-08-10T20:04:31Z",
   "contract": "ace.intelligence.resource-plane-page/v1alpha1",
   "degraded_reason_refs": [
     "degraded_reason:unsupported-conflict",
@@ -47,7 +47,9 @@
     "contract": "ace.world-intelligence.atrium-demo/v1alpha1",
     "network_freshness_claimed": false,
     "recorded_transport": true,
-    "source_proof_contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha1"
+    "source_catalog": "domain_packs/world_intelligence_ai/source_catalog.json",
+    "source_proof_contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha1",
+    "topic_id": "artificial_intelligence"
   },
   "evaluated_at": "2026-08-10T20:05:00Z",
   "items": [
@@ -564,13 +566,71 @@
       "summary": "ACE detected a configured progression from an issued AI directive to a later official report of implementation activity. The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities. The configured official-source change meets the threshold for researcher attention because it moves from directive publication to reported activity. The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction. The two citations are separate official publication lineages, but both are U.S. government records and do not constitute independent non-government corroboration.",
       "supersedes": null,
       "title": "AI Policy Reality Brief"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"action\":\"create\",\"applied_at\":\"2026-08-10T20:04:30Z\",\"contract\":\"ace.intelligence.monitoring-lifecycle-receipt/v1alpha1\",\"lifecycle\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:16fd104bda848e7747d5e7adb2a4b7c2e5bf0a6c2773b534acd355865ea980e2\",\"reference\":\"monitoring_intent:16fd104bda848e7747d5e7adb2a4b7c2\"},\"owner_ref\":\"actor:world-ai-analyst\",\"persona_binding\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:5f27702f9e249be525cd9193b4e8b9a2f633f9645a806e02b80a42a1f059d65f\",\"reference\":\"persona_binding:5f27702f9e249be525cd9193b4e8b9a2\"},\"prior_receipt\":null,\"product_id\":\"product:world-ai-command-center\",\"receipt_digest\":\"sha256:3df1b3f0f875dd77bb464348d28efd204c561095cd902f459980a54dcd890a7d\",\"receipt_id\":\"monitoring_lifecycle:3df1b3f0f875dd77bb464348d28efd20\",\"request\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:9ad97b1df0994a744d2c66332828fa40dc25a95b97fbc28c4040e41b74f751f3\",\"reference\":\"monitoring_lifecycle_request:9ad97b1df0994a744d2c66332828fa40\"},\"sequence\":1,\"state_after\":\"active\",\"state_before\":null,\"target\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:1ba95054adaf9b6b6efce5ce0a693beae43846dd076a9afae6e5ca39f9a60485\",\"reference\":\"monitor:1ba95054adaf9b6b6efce5ce0a693bea\"},\"target_kind\":\"monitor\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:04:30Z",
+        "available_at": "2026-08-10T20:04:30Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.monitoring-lifecycle-receipt/v1alpha1",
+        "resource_digest": "sha256:3df1b3f0f875dd77bb464348d28efd204c561095cd902f459980a54dcd890a7d",
+        "resource_id": "monitoring_intent:16fd104bda848e7747d5e7adb2a4b7c2",
+        "resource_kind": "monitor",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "monitor:1ba95054adaf9b6b6efce5ce0a693bea",
+        "persona_binding:5f27702f9e249be525cd9193b4e8b9a2"
+      ],
+      "summary": "Monitor lifecycle is active.",
+      "supersedes": null,
+      "title": "Monitor: monitor:1ba95054adaf9b6b6efce5ce0a693bea"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"action\":\"create\",\"applied_at\":\"2026-08-10T20:04:31Z\",\"contract\":\"ace.intelligence.monitoring-lifecycle-receipt/v1alpha1\",\"lifecycle\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:d786f5921530f41b2b84b2d742efc9e4ad912414b1b78964e0ae8d4f058c0491\",\"reference\":\"monitoring_intent:d786f5921530f41b2b84b2d742efc9e4\"},\"owner_ref\":\"actor:world-ai-analyst\",\"persona_binding\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:5f27702f9e249be525cd9193b4e8b9a2f633f9645a806e02b80a42a1f059d65f\",\"reference\":\"persona_binding:5f27702f9e249be525cd9193b4e8b9a2\"},\"prior_receipt\":null,\"product_id\":\"product:world-ai-command-center\",\"receipt_digest\":\"sha256:3d5d92c84fd247663b372a90e9700e15eafd659890a2133beb62a6aa9ad16ded\",\"receipt_id\":\"monitoring_lifecycle:3d5d92c84fd247663b372a90e9700e15\",\"request\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:ab5a103dcff9cd48027e37da711dab1520aa5ee8dee77ef3adc8bde6d106990a\",\"reference\":\"monitoring_lifecycle_request:ab5a103dcff9cd48027e37da711dab15\"},\"sequence\":1,\"state_after\":\"active\",\"state_before\":null,\"target\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:bdca6306431d9b1c7062c0b029570d2a147a0e830bb6e79834d5061a502ea15f\",\"reference\":\"subscription:bdca6306431d9b1c7062c0b029570d2a\"},\"target_kind\":\"subscription\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:04:31Z",
+        "available_at": "2026-08-10T20:04:31Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.monitoring-lifecycle-receipt/v1alpha1",
+        "resource_digest": "sha256:3d5d92c84fd247663b372a90e9700e15eafd659890a2133beb62a6aa9ad16ded",
+        "resource_id": "monitoring_intent:d786f5921530f41b2b84b2d742efc9e4",
+        "resource_kind": "subscription",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "persona_binding:5f27702f9e249be525cd9193b4e8b9a2",
+        "subscription:bdca6306431d9b1c7062c0b029570d2a"
+      ],
+      "summary": "Subscription lifecycle is active.",
+      "supersedes": null,
+      "title": "Subscription: subscription:bdca6306431d9b1c7062c0b029570d2a"
     }
   ],
   "next_cursor": null,
-  "page_digest": "sha256:ea49e6e01d661d581006228735241050de2a5ad59befbde8702762e0f65a4a63",
-  "page_id": "resource_page:ea49e6e01d661d581006228735241050",
+  "page_digest": "sha256:cbd57985c62d0df97bf936297326fa7106c0c648bb4cc0e0d4732ba5460e3f7a",
+  "page_id": "resource_page:cbd57985c62d0df97bf936297326fa71",
   "product_id": "product:world-ai-command-center",
-  "query_digest": "sha256:60e663f5d1dc8986187771c816c19a44d65cb09e3388b3b8bfae3bca0604e168",
-  "query_id": "resource_query:60e663f5d1dc8986187771c816c19a44",
+  "query_digest": "sha256:b214ad816d1064b214542545b4c73feec9664d7bb164accc628ce418ce360e46",
+  "query_id": "resource_query:b214ad816d1064b214542545b4c73fee",
   "state": "degraded"
 }
