@@ -29,7 +29,9 @@ From a source checkout, launch the current AI Command Center in Core's Atrium wi
 This is a loopback-only replay of the exact immutable resource page. It does not pose as a live
 network refresh, grant authority, or install a World-specific dashboard.
 
-The 0.11.0 release supplies a non-authorizing AI onboarding profile and World-owned
+The 0.12.0 candidate expands the non-authorizing AI onboarding profile with an outcome-led
+World/Artificial Intelligence identity, starter questions, and six reviewed evidence groups over
+32 exact source identities. It keeps private evidence opt-in and supplies World-owned
 strategies for the public Connection, Ontology, Intelligence, and Briefing agents. It produces an
 exact eight-revision `Connect -> Map -> Watch -> Brief` session, lands at
 `first_briefing_ready`, and projects seven admitted source lineages from seven publisher roots into
@@ -59,16 +61,17 @@ and patents, executive promise tracking, and adoption-versus-trust gaps.
 [Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
 [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
-- **Distribution:** `ace-domain-world-intelligence` 0.11.0
-- **Requires:** Python 3.12 and `ace-core>=0.8.1,<0.9`
+- **Candidate distribution:** `ace-domain-world-intelligence` 0.12.0
+- **Requires:** Python 3.12 and `ace-core>=0.8.2,<0.9`
 - **Artifact boundary:** JSON-only, data-only, inert
 - **Release identity:**
+  0.12.0 is a candidate. The latest published artifacts remain
   [`v0.11.0`](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.11.0)
   and [`0.11.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.11.0/).
-  The candidate evidence is in
-  [`docs/releases/world-intelligence-v0.11.0-candidate.md`](docs/releases/world-intelligence-v0.11.0-candidate.md).
+  Candidate evidence is in
+  [`docs/releases/world-intelligence-v0.12.0-candidate.md`](docs/releases/world-intelligence-v0.12.0-candidate.md).
 
-Released ACE Core 0.8.1 projects World’s complete recorded evidence-to-outcome loop and durable
+Published Core 0.8.2 is the paired runtime that projects World’s complete recorded evidence-to-outcome loop and durable
 onboarding state through the single governed resource plane. See the
 [Intelligence OS evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
 
@@ -78,7 +81,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (0.8.1 current) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, governed bounded action, and append-only measured-impact receipts. |
+| **ACE Core** | `ace-core` (0.8.2 published) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, governed bounded action, and append-only measured-impact receipts. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
 | **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
 
@@ -89,22 +92,22 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-Install 0.11.0 on Python 3.12 with either command below; a public clean install resolves
-`ace-domain-world-intelligence==0.11.0` and `ace-core==0.8.1`.
+After publication, install 0.12.0 on Python 3.12 with either command below; the release gate must
+resolve `ace-domain-world-intelligence==0.12.0` and `ace-core==0.8.2` from public indexes.
 
 With `uv`:
 
 ```bash
-uv add "ace-domain-world-intelligence==0.11.0"
+uv add "ace-domain-world-intelligence==0.12.0"
 ```
 
 With `pip`:
 
 ```bash
-pip install "ace-domain-world-intelligence==0.11.0"
+pip install "ace-domain-world-intelligence==0.12.0"
 ```
 
-Either command also brings in `ace-core>=0.8.1,<0.9`. It does **not** bring
+Either command also brings in `ace-core>=0.8.2,<0.9`. It does **not** bring
 in the Federal Register connector; that is a deliberate boundary, not an omission.
 
 Resolve the pack data from the installed distribution:
@@ -489,9 +492,9 @@ $PY -m scripts.p2c9_forecast_calibration_outcome "$WORKSPACE"
 $PY -m scripts.p2c10_independent_correction_reproduction "$WORKSPACE"
 ```
 
-The 0.11.0 release gate reruns the complete historical World proof plus the AI Command Center,
+The 0.12.0 release gate reruns the complete historical World proof plus the AI Command Center,
 durable onboarding, reviewed-source, package, and installed-artifact checks against public Core
-0.8.1. The P2C2 action test runs when the independently packaged Core reference adapter is
+0.8.2. The P2C2 action test runs when the independently packaged Core reference adapter is
 installed:
 
 ```bash

@@ -8,6 +8,29 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
+## [0.12.0] — candidate
+
+### Added
+
+- Expanded the World AI onboarding profile with outcome-led domain/topic labels, three starter
+  questions, and six reviewed evidence groups covering 32 exact source identities.
+- Made public, independent, and owned/private evidence choices explicit; private sources remain
+  opt-in and profile selection grants no connection, monitoring, or activation authority.
+- Bound World as one discoverable Intelligence experience in Atrium's generic catalog without
+  adding World vocabulary or a domain branch to ACE Core.
+
+### Changed
+
+- Move the inert root distribution to `ace-core>=0.8.2,<0.9`, the first Core patch that publishes
+  the multi-profile Intelligence Catalog contract.
+- Reuse the unchanged Core 0.8.1 reference action adapter artifact for historical action proof;
+  the adapter remains separately packaged and compatible across the Core 0.8 line.
+
+### Boundaries
+
+- This release adds declarative onboarding metadata only. It does not authorize a source, claim
+  network freshness, create a monitor, activate an agent, or publish a Brief.
+
 ## [0.11.0] — 2026-08-13
 
 ### Added
