@@ -4,6 +4,19 @@ World Intelligence versions independently from ACE Core. It validates the shared
 Intelligence platform through public-issue sensemaking without moving World vocabulary, policy, or
 source code into the platform.
 
+## Candidate — ACE 0.8 Intelligence OS proof
+
+- Reuses the released recorded-source, governed Brief, reviewed Action, Outcome, and measured-
+  feedback journey; it does not create a second runtime or a release-only demonstration.
+- Adds one exact LIVE Case over the same monitored development closure.
+- Reopens Observation, Entity, Signal, Shift, Case, Brief, Decision, Action, Outcome, Feedback,
+  Source, and Connection identities through the single governed public resource plane.
+- Preserves the non-effective proposal boundary and explicitly labels the source-only evaluation
+  control as an unsupported public subject instead of inventing provenance.
+
+See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
+World package compatibility remains on the released Core 0.6 line until Core 0.8 is public.
+
 ## Passed — 0.9.0 governed Reality Brief into reviewed action
 
 - Two exact official records become attributable LIVE Observations and stable entity snapshots.

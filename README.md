@@ -23,6 +23,11 @@ graph, state store, authority system, detector engine, or feedback loop.
   and [`0.10.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.10.0/).
   See the [`0.10.0 released-artifact record`](docs/releases/world-intelligence-v0.10.0.md).
 
+The unreleased ACE 0.8 candidate also projects World’s complete recorded evidence-to-outcome loop
+through the single governed resource plane. That proof is additive and does not change the public
+0.10.0 installation contract; see the
+[candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
+
 ## What you install, and what you get
 
 The product is split into three layers, and this repository owns only the third.
