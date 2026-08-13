@@ -35,9 +35,14 @@ public installation contract to the now-released Core 0.8 line.
   Subscription into the public Core 0.8 resource-plane page consumed by Atrium.
 - Demonstrate `official sources -> Observation -> Shift -> Signal -> Case -> cited Brief` with
   explicit evidence lineage, recorded-transport labeling, and no autonomous publication.
-- Next, migrate the released World package compatibility window to public Core 0.8, connect one
-  primary source in each remaining watch area, and admit the onboarding-agent records needed for
-  the full `Connect -> Map -> Watch -> Brief` demo.
+- **Candidate:** project the declarative onboarding profile and eight exact Builder session
+  revisions through Core's one resource plane. Four World-owned strategies now run the public
+  Connection, Ontology, Intelligence, and Briefing agents over the same two admitted official
+  lineages and reopen at `first_briefing_ready`; no Core test fixture, network request, or second
+  runtime is used.
+- Next, land the paired Core resource projection, migrate the released World package compatibility
+  window, reproduce from installed artifacts, and connect one governed primary source in each
+  remaining watch area.
 
 See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 

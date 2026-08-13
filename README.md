@@ -17,6 +17,12 @@ assembled. World does not ship a competing dashboard. The first AI Command Cente
 the accepted official-source journey through the public ACE 0.8 Intelligence resource plane; see
 [the demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 
+The active paired candidate also supplies a non-authorizing AI onboarding profile and World-owned
+strategies for the public Connection, Ontology, Intelligence, and Briefing agents. It produces an
+exact eight-revision `Connect -> Map -> Watch -> Brief` session over the two admitted official
+lineages and lands at `first_briefing_ready`; Atrium renders that durable state rather than a fake
+progress animation. This candidate is not yet part of the released 0.10.0 installation contract.
+
 The flagship topic is **artificial intelligence**. Its reviewed
 [source universe](domain_packs/world_intelligence_ai/source_catalog.json) spans models, independent
 evaluations, economics, reliability, open research, security, policy, capital, compute, talent,

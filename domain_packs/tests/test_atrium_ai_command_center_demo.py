@@ -67,10 +67,13 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
     monitoring_items = [
         item for item in page["items"] if item["reference"]["resource_kind"] in {"monitor", "subscription"}
     ]
+    builder_items = [
+        item for item in page["items"] if item["reference"]["resource_kind"] == "builder_session"
+    ]
 
     assert page["product_id"] == "product:world-ai-command-center"
     assert page["next_cursor"] is None
-    assert len(page["items"]) == 14
+    assert len(page["items"]) == 23
     assert {
         "source",
         "connection",
@@ -82,6 +85,8 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
         "brief",
         "monitor",
         "subscription",
+        "builder_profile",
+        "builder_session",
     } <= kinds
     assert {item["summary"] for item in monitoring_items} == {
         "Monitor lifecycle is active.",
@@ -95,4 +100,20 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
         "autonomous_publication": False,
         "topic_id": "artificial_intelligence",
         "source_catalog": "domain_packs/world_intelligence_ai/source_catalog.json",
+        "builder_profile_id": "intelligence_onboarding_profile:world-ai-command-center",
+        "builder_session_id": "intelligence_builder_session:29a1f1a93d178d269e2ec927064cb164",
+        "builder_stage": "first_briefing_ready",
+        "builder_agent_roles": ["connection", "ontology", "intelligence", "briefing"],
     }
+    assert [item["reference"]["revision"] for item in builder_items] == list(range(1, 9))
+    assert [json.loads(item["payload"]["value_json"])["stage"] for item in builder_items] == [
+        "goal_selected",
+        "sources_connecting",
+        "sources_ready",
+        "concept_model_proposed",
+        "concept_model_approved",
+        "intelligence_model_proposed",
+        "intelligence_model_approved",
+        "first_briefing_ready",
+    ]
+    assert all(item["availability"] == "available" for item in builder_items)

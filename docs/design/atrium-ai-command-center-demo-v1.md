@@ -53,16 +53,16 @@ journey:
 
 `Federal Register + White House -> Observation -> Shift -> Signal -> Case -> cited Brief`
 
-Generate the exact Atrium input with public ACE Core 0.8:
+Generate the exact Atrium input from the paired Core and World candidate checkouts:
 
 ```bash
-uv sync
-uv pip install --no-deps "ace-core==0.8.0"
-uv run --no-sync python -m scripts.atrium_ai_command_center_demo
+export CORE=/path/to/ace-core
+PYTHONPATH="$PWD:$CORE" uv run python -m scripts.atrium_ai_command_center_demo
 ```
 
-The explicit Core replacement is temporary: released World 0.10.0 still pins
-Core 0.6. The active compatibility packet will remove this extra step.
+Released World 0.10.0 still pins Core 0.6, while the new profile/session projection is stacked on
+the current Core checkout. Installed-artifact reproduction remains a landing gate; this source
+command is not a public package compatibility claim.
 
 The resulting `artifacts/atrium-demo/world-ai-resource-page.json` is the public
 Intelligence resource-plane page Atrium consumes. It contains no new UI-specific
@@ -83,10 +83,20 @@ autonomous publication.
 7. Ask ACE a question and receive only answers supported by the visible resource plane.
 8. Open a downstream investigation without allowing the domain to act autonomously.
 
-## Next increment
+## Candidate live Builder trace
 
-Project the declarative onboarding profile through a versioned, non-authorizing Core presentation
-contract, then admit the onboarding-agent records so the same screen can demonstrate
-`Connect -> Map -> Watch -> Brief` from a clean install. Add one governed primary
-connection in each remaining watch area, then replace recorded captures with an
-opt-in refresh while retaining the frozen page as a deterministic fallback.
+The candidate now projects the declarative profile through Core's non-authorizing presentation
+contract and runs the public Builder services through eight durable revisions:
+
+`goal selected -> sources connecting -> sources ready -> concepts proposed -> concepts approved -> watches proposed -> watches approved -> first Brief ready`
+
+World owns the registered recorded-source provider plus the concept, watch, and briefing
+strategies. Core owns session identity, exact artifact handoffs, approval resolution, persistence,
+replay, and the resource projection. The two source samples point to the same already-admitted
+Federal Register and White House source snapshots used by the Reality Brief. The Briefing Agent
+states that these first-party lineages support different evidence roles and do not independently
+establish downstream outcomes.
+
+Next, reproduce the paired candidates from installed wheels, add one governed primary connection
+in each remaining watch area, and replace recorded captures with opt-in refresh while retaining the
+frozen page as a deterministic fallback.

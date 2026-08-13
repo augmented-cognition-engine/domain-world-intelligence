@@ -20,6 +20,8 @@ from ace.application import (
     AgentResourceProjectionReader,
     CompositeIntelligenceResourceProjectionReader,
     DecisionOutcomeFeedbackResourceProjectionReader,
+    IntelligenceBuilderPresentationService,
+    IntelligenceBuilderResourceProjectionReader,
     IntelligenceLedgerResourceProjectionReader,
     IntelligenceResourcePlaneService,
     LiveSourceResourceProjectionReader,
@@ -30,6 +32,7 @@ from ace.core import GovernedStateHeadPreconditionV1Alpha1
 from ace.core.runtime_use import AuthorityUseReceiptV1Alpha1
 from ace.intelligence import (
     ExactMaterialReferenceV1Alpha1,
+    IntelligenceOnboardingProfileV1Alpha1,
     IntelligenceResourceKind,
     IntelligenceResourceQueryV1Alpha1,
     MonitorDisposition,
@@ -43,9 +46,11 @@ from ace.intelligence import (
 )
 
 from scripts.ai_command_center_live_acceptance import run_acceptance
+from scripts.world_ai_builder_journey import run_world_ai_builder_journey
 
 READ_GRANT = "authority_grant:world-ai-atrium-read"
 READ_KINDS = tuple(IntelligenceResourceKind)
+REPOSITORY_ROOT = Path(__file__).parents[1]
 
 
 class ExactReadAuthority:
@@ -82,6 +87,7 @@ class ExactReadAuthority:
 
 def _reader(store):
     return CompositeIntelligenceResourceProjectionReader(
+        IntelligenceBuilderResourceProjectionReader(store=store, degrade_unsupported=False),
         ActionResourceProjectionReader(store=store, degrade_unsupported=False),
         AgentMemoryResourceProjectionReader(store=store, degrade_unsupported=False),
         AgentResourceProjectionReader(store=store, degrade_unsupported=False),
@@ -174,6 +180,22 @@ async def build_atrium_page() -> dict[str, Any]:
     proof = await run_acceptance(state_sink=state)
     environment = state["environment"]
     await _admit_ai_policy_watch(environment)
+    profile = IntelligenceOnboardingProfileV1Alpha1.model_validate_json(
+        (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/onboarding_profile.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    await IntelligenceBuilderPresentationService(store=environment.store).admit_profile(
+        product_id=environment.context.product_id,
+        profile=profile,
+        admitted_at=datetime(2026, 8, 10, 20, 4, 34, tzinfo=UTC),
+    )
+    builder = await run_world_ai_builder_journey(
+        environment=environment,
+        baseline=state["baseline"],
+        current=state["current"],
+        started_at=datetime(2026, 8, 10, 20, 4, 35, tzinfo=UTC),
+    )
     records = tuple(environment.store.records.values())
     evaluated_at = datetime(2026, 8, 10, 20, 5, tzinfo=UTC)
     request = IntelligenceResourceQueryV1Alpha1(
@@ -199,6 +221,10 @@ async def build_atrium_page() -> dict[str, Any]:
         "autonomous_publication": False,
         "topic_id": "artificial_intelligence",
         "source_catalog": "domain_packs/world_intelligence_ai/source_catalog.json",
+        "builder_profile_id": profile.profile_id,
+        "builder_session_id": builder.session.revision.session_id,
+        "builder_stage": builder.session.revision.stage.value,
+        "builder_agent_roles": ["connection", "ontology", "intelligence", "briefing"],
     }
     return payload
 
