@@ -22,11 +22,15 @@ public installation contract to the now-released Core 0.8 line.
 
 - Treat Atrium as the one shared command center; World contributes configuration and governed
   resources, not a separate application.
-- Make artificial intelligence the flagship World topic across six watch areas: models and
-  capabilities, economics and pricing, safety and security, policy and regulation, capital and
-  company moves, and adoption and executive signals.
+- Make artificial intelligence the flagship World topic across twelve watch areas spanning the
+  technical frontier, economics, reliability, open research, security, policy, capital, compute,
+  talent, patents, procurement, adoption, and executive narratives.
 - Give source onboarding a reviewed multi-source portfolio while keeping `proposed`, `connected`,
   and `admitted` as distinct states. Only admitted captures count as Atrium evidence.
+- Demonstrate cross-source signature intelligence rather than feed aggregation: capability per
+  dollar, claim-versus-reality, research-to-product diffusion, capital-to-capability conversion,
+  infrastructure bottlenecks, policy implementation gaps, strategy-before-announcement, executive
+  promise tracking, and adoption-versus-trust gaps.
 - Project the accepted recorded-source AI policy journey plus its owner-scoped Monitor and
   Subscription into the public Core 0.8 resource-plane page consumed by Atrium.
 - Demonstrate `official sources -> Observation -> Shift -> Signal -> Case -> cited Brief` with

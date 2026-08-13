@@ -20,22 +20,45 @@ def test_ai_command_center_source_catalog_is_broad_but_honest() -> None:
         (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/source_catalog.json").read_text(encoding="utf-8")
     )
     watch_areas = catalog["watch_areas"]
-    sources = [source for area in watch_areas for source in area["sources"]]
+    sources = catalog["sources"]
+    source_ids = {source["source_id"] for source in sources}
+    referenced_source_ids = {source_id for area in watch_areas for source_id in area["source_ids"]}
 
     assert catalog["topic_id"] == "artificial_intelligence"
     assert {area["watch_id"] for area in watch_areas} == {
         "models_and_capabilities",
+        "benchmarks_and_independent_evals",
         "economics_and_pricing",
-        "safety_and_security",
-        "policy_and_regulation",
+        "reliability_and_platform_health",
+        "open_ecosystem_and_research",
+        "safety_security_and_incidents",
+        "policy_regulation_and_governance",
         "capital_and_company_moves",
-        "adoption_and_executive_signals",
+        "compute_chips_and_infrastructure",
+        "talent_patents_and_research",
+        "adoption_procurement_and_outcomes",
+        "narratives_executives_and_public_attention",
     }
-    assert len(sources) >= 15
+    assert len(sources) >= 60
+    assert len(source_ids) == len(sources)
+    assert referenced_source_ids == source_ids
+    assert all(source["evidence_role"] in catalog["evidence_roles"] for source in sources)
+    assert all(source["demo_wave"] in catalog["demo_waves"] for source in sources)
     assert {source["connection_state"] for source in sources} == {"connected", "proposed"}
     assert sum(source["connection_state"] == "connected" for source in sources) == 2
     assert all("uri" in source or "uri_template" in source for source in sources)
     assert catalog["selection_policy"]["proposed_sources_are_not_admitted_evidence"] is True
+    assert {signal["signal_id"] for signal in catalog["signature_intelligence"]} == {
+        "capability_cost_frontier",
+        "claim_vs_reality",
+        "research_to_product_diffusion",
+        "capital_to_capability_conversion",
+        "infrastructure_bottleneck",
+        "regulation_implementation_gap",
+        "strategy_before_announcement",
+        "executive_promise_tracker",
+        "adoption_trust_gap",
+    }
 
 
 def test_world_ai_command_center_projects_a_real_atrium_page() -> None:

@@ -6,19 +6,40 @@ personas, and admitted evidence. It does not ship a competing dashboard.
 
 The flagship topic is artificial intelligence because it changes quickly and
 crosses product, economic, security, policy, capital, and adoption decisions.
-The v1 source portfolio therefore organizes onboarding around six watch areas:
+The source universe organizes onboarding around twelve watch areas:
 
 1. models and capabilities;
-2. economics and pricing;
-3. safety and security;
-4. policy and regulation;
-5. capital and company moves; and
-6. adoption and executive signals.
+2. benchmarks and independent evaluations;
+3. economics and pricing;
+4. reliability and platform health;
+5. open ecosystem and research;
+6. safety, security, and incidents;
+7. policy, regulation, and governance;
+8. capital and company moves;
+9. compute, chips, and infrastructure;
+10. talent, patents, and research;
+11. adoption, procurement, and outcomes; and
+12. narratives, executives, and public attention.
 
 The portfolio is declarative and reviewed. Its `connected` sources describe
 implemented source definitions. Its `proposed` sources are onboarding choices,
 not evidence, connections, corroboration, or freshness claims. Atrium counts
 only captures admitted through the governed resource plane.
+
+## What makes the demonstration intelligence
+
+The experience should not ask leaders to read more feeds. It should combine
+otherwise separate evidence into decision-relevant shifts:
+
+- capability-per-dollar frontier movement;
+- provider claims versus independent evaluation and observed reliability;
+- research-to-product diffusion;
+- capital-to-capability conversion;
+- compute, energy, and grid bottlenecks;
+- policy announcement versus implementation and procurement;
+- strategy visible in hiring, patents, grants, permits, and spending before announcement;
+- executive commitments versus later funding, delivery, revision, or abandonment; and
+- adoption growth versus trust, safety, reliability, and measured outcomes.
 
 The first demonstrable resource page uses the accepted two-lineage AI policy
 journey:
@@ -46,7 +67,7 @@ autonomous publication.
 ## Demo journey
 
 1. Open Atrium oriented to `World AI Command Center`.
-2. See the six-area coverage model, two admitted source roots, and one active watch.
+2. See the twelve-area coverage model, two admitted source roots, and one active watch.
 3. Inspect the detected policy progression and exact evidence lineage.
 4. Ask ACE a question and receive only answers supported by the visible resource plane.
 5. Open a downstream investigation without allowing the domain to act autonomously.
