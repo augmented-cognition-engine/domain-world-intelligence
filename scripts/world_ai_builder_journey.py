@@ -65,6 +65,103 @@ from ace.intelligence import CanonicalJsonValueV1Alpha1
 SOURCE_APPROVAL = "approval:world-ai-builder-sources"
 CONCEPT_APPROVAL = "approval:world-ai-builder-concepts"
 WATCH_APPROVAL = "approval:world-ai-builder-watches"
+SUPPORTED_RECORDED_SOURCE_OPTION_IDS = (
+    "federal_register_ai_policy",
+    "white_house_ai_policy",
+)
+SUPPORTED_OUTCOME_IDS = frozenset(
+    {
+        "build_or_buy_ai",
+        "strategy_and_investment",
+        "frontier_research_and_products",
+        "policy_safety_and_operational_risk",
+        "competitive_landscape",
+        "custom_picture",
+    }
+)
+
+
+@dataclass(frozen=True, slots=True)
+class WorldAIBuilderPlan:
+    """Reviewed World-owned inputs for the recorded AI builder journey.
+
+    The plan does not grant source, monitor, delivery, or publication authority.
+    This recorded proof requires both admitted official lineages because the
+    public builder contract requires at least two authorized observations and
+    the demonstrated shift is the delta between those exact records.
+    """
+
+    contract: str = "ace.world-intelligence.ai-builder-plan/v1alpha1"
+    subject: str = "AI policy"
+    goal_ref: str = "goal:track-material-ai-change"
+    outcome_id: str = "policy_safety_and_operational_risk"
+    user_intent: str = "Watch official AI policy progression and keep evidence-role limits visible."
+    audience_constraint: str = (
+        "Orient an executive without treating first-party claims as independent validation."
+    )
+    cadence: ProposedCadence = ProposedCadence.DAILY
+    source_option_ids: tuple[str, ...] = SUPPORTED_RECORDED_SOURCE_OPTION_IDS
+
+    def __post_init__(self) -> None:
+        for field_name in ("subject", "goal_ref", "outcome_id", "user_intent", "audience_constraint"):
+            value = getattr(self, field_name)
+            if not value or value != value.strip():
+                raise ValueError(f"{field_name} must be non-empty and have no surrounding whitespace")
+        if self.contract != "ace.world-intelligence.ai-builder-plan/v1alpha1":
+            raise ValueError("World AI builder plan contract is not supported")
+        if not self.goal_ref.startswith("goal:"):
+            raise ValueError("goal_ref must use the goal: namespace")
+        if self.outcome_id not in SUPPORTED_OUTCOME_IDS:
+            raise ValueError(f"Unsupported World AI outcome: {self.outcome_id}")
+        if self.source_option_ids != SUPPORTED_RECORDED_SOURCE_OPTION_IDS:
+            raise ValueError(
+                "The recorded AI policy progression requires the exact reviewed Federal Register "
+                "and White House source selections"
+            )
+
+    @property
+    def concept_intent(self) -> str:
+        if self == WorldAIBuilderPlan():
+            return "Track material AI policy progression across distinct official source roles."
+        return (
+            f"Map the admitted concepts for {self.subject} under the {self.outcome_id} outcome "
+            "across distinct official source roles."
+        )
+
+
+DEFAULT_WORLD_AI_BUILDER_PLAN = WorldAIBuilderPlan()
+
+
+def _outcome_attention(plan: WorldAIBuilderPlan) -> tuple[str, str]:
+    if plan.outcome_id == "policy_safety_and_operational_risk":
+        return (
+            "Review operational exposure and seek independent outcome evidence.",
+            "Which implementation dependencies now affect the organization?",
+        )
+    if plan.outcome_id == "strategy_and_investment":
+        return (
+            "Assess whether the reported implementation changes investment timing, partner dependencies, or strategic exposure.",
+            "Which strategic assumptions now depend on this implementation milestone?",
+        )
+    if plan.outcome_id == "build_or_buy_ai":
+        return (
+            "Review whether the reported implementation changes build, buy, provider, or control requirements.",
+            "Which build-or-buy requirements change if this implementation milestone is material?",
+        )
+    if plan.outcome_id == "frontier_research_and_products":
+        return (
+            "Track whether the implementation milestone changes research priorities or product constraints.",
+            "Which research or product assumptions should be tested next?",
+        )
+    if plan.outcome_id == "competitive_landscape":
+        return (
+            "Compare how exposed organizations and providers respond to the implementation milestone.",
+            "Which competitive positions strengthen or weaken if implementation continues?",
+        )
+    return (
+        f"Review the reported implementation against the approved goal for {plan.subject}.",
+        f"What decision about {plan.subject} should this evidence inform next?",
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -435,6 +532,9 @@ class WorldAIIntelligenceStrategy:
 
 
 class WorldAIBriefingStrategy:
+    def __init__(self, *, plan: WorldAIBuilderPlan = DEFAULT_WORLD_AI_BUILDER_PLAN) -> None:
+        self.plan = plan
+
     async def synthesize(
         self,
         *,
@@ -447,6 +547,7 @@ class WorldAIBriefingStrategy:
         generated_at,
     ):
         as_of = max(item.as_of for item in observations.observations)
+        recommended_attention, decision_question = _outcome_attention(self.plan)
         derivation = BriefingDerivationV1(
             session_id=session.session_id,
             correlation_id=session.correlation_id,
@@ -463,7 +564,7 @@ class WorldAIBriefingStrategy:
         )
         return FirstBriefingPreviewV1(
             derivation=derivation,
-            title="AI policy moved from directive to reported implementation",
+            title=f"{self.plan.subject} moved from directive to reported implementation",
             executive_summary=(
                 "Two admitted official lineages show Executive Order 14409 followed by a White House report of "
                 "GOLD EAGLE implementation. The evidence supports a material policy progression, while independent "
@@ -493,8 +594,8 @@ class WorldAIBriefingStrategy:
                     citation_ids=("federal_register_stage", "white_house_stage"),
                     confidence=0.95,
                     uncertainty="The implementation report is a first-party claim and is not independent outcome evidence.",
-                    recommended_attention="Review operational exposure and seek independent outcome evidence.",
-                    decision_question="Which implementation dependencies now affect the organization?",
+                    recommended_attention=recommended_attention,
+                    decision_question=decision_question,
                     materiality_rule_id="official_implementation_milestone",
                 ),
                 BriefingItemV1(
@@ -594,7 +695,14 @@ def _authorized_observations(*, session, source_profile, materials, admitted_at)
     )
 
 
-async def run_world_ai_builder_journey(*, environment, baseline, current, started_at: datetime):
+async def run_world_ai_builder_journey(
+    *,
+    environment,
+    baseline,
+    current,
+    started_at: datetime,
+    plan: WorldAIBuilderPlan = DEFAULT_WORLD_AI_BUILDER_PLAN,
+):
     """Run and reopen exact Connect -> Map -> Watch -> first Brief state."""
 
     materials = (
@@ -609,20 +717,20 @@ async def run_world_ai_builder_journey(*, environment, baseline, current, starte
     started = await sessions.start(
         product_id=environment.context.product_id,
         correlation_id="correlation:world-ai-command-center-onboarding",
-        goal_ref="goal:track-material-ai-change",
+        goal_ref=plan.goal_ref,
         actor_ref=actor,
         occurred_at=started_at,
     )
     catalog = await connection.discover()
     selections = tuple(
         SourceScopeSelectionV1(
-            option_id=option.option_id,
+            option_id=option_id,
             permissions=("read_public_record",),
             scopes=("development_stage", "source_lineage"),
             effects=(ConnectionEffect.CONNECTION_TEST, ConnectionEffect.BOUNDED_SAMPLE),
             sample_records=1,
         )
-        for option in catalog.options
+        for option_id in plan.source_option_ids
     )
     scope = await connection.propose_scope(
         started.revision,
@@ -645,7 +753,7 @@ async def run_world_ai_builder_journey(*, environment, baseline, current, starte
     mapped = await ontology.propose(
         connected.session.revision,
         source_profile=connected.profile,
-        user_intent="Track material AI policy progression across distinct official source roles.",
+        user_intent=plan.concept_intent,
         actor_ref="agent:world-ai-ontology",
         occurred_at=started_at + timedelta(seconds=3),
     )
@@ -683,9 +791,9 @@ async def run_world_ai_builder_journey(*, environment, baseline, current, starte
         concept_model=mapped.proposal.proposal,
         concept_disposition=concept.disposition,
         observations=evidence,
-        user_intent="Watch official AI policy progression and keep evidence-role limits visible.",
-        audience_constraints=("Orient an executive without treating first-party claims as independent validation.",),
-        cadence_constraints=(ProposedCadence.DAILY,),
+        user_intent=plan.user_intent,
+        audience_constraints=(plan.audience_constraint,),
+        cadence_constraints=(plan.cadence,),
         actor_ref="agent:world-ai-intelligence",
         occurred_at=started_at + timedelta(seconds=6),
     )
@@ -698,7 +806,10 @@ async def run_world_ai_builder_journey(*, environment, baseline, current, starte
         actor_ref=actor,
         occurred_at=started_at + timedelta(seconds=7),
     )
-    briefing = await BriefingAgent(sessions=sessions, strategy=WorldAIBriefingStrategy()).create_first_brief(
+    briefing = await BriefingAgent(
+        sessions=sessions,
+        strategy=WorldAIBriefingStrategy(plan=plan),
+    ).create_first_brief(
         watch.session.revision,
         concept_model=mapped.proposal.proposal,
         concept_disposition=concept.disposition,
@@ -720,4 +831,9 @@ async def run_world_ai_builder_journey(*, environment, baseline, current, starte
     return briefing.briefing
 
 
-__all__ = ["run_world_ai_builder_journey"]
+__all__ = [
+    "DEFAULT_WORLD_AI_BUILDER_PLAN",
+    "SUPPORTED_RECORDED_SOURCE_OPTION_IDS",
+    "WorldAIBuilderPlan",
+    "run_world_ai_builder_journey",
+]

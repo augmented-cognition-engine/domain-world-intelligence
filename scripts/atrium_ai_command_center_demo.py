@@ -46,10 +46,27 @@ from ace.intelligence import (
 )
 
 from scripts.ai_command_center_live_acceptance import run_acceptance
-from scripts.world_ai_builder_journey import run_world_ai_builder_journey
+from scripts.world_ai_builder_journey import (
+    DEFAULT_WORLD_AI_BUILDER_PLAN,
+    WorldAIBuilderPlan,
+    run_world_ai_builder_journey,
+)
 
 READ_GRANT = "authority_grant:world-ai-atrium-read"
-READ_KINDS = tuple(IntelligenceResourceKind)
+READ_KINDS = (
+    IntelligenceResourceKind.CONNECTION,
+    IntelligenceResourceKind.SOURCE,
+    IntelligenceResourceKind.ENTITY,
+    IntelligenceResourceKind.OBSERVATION,
+    IntelligenceResourceKind.SIGNAL,
+    IntelligenceResourceKind.SHIFT,
+    IntelligenceResourceKind.CASE,
+    IntelligenceResourceKind.BRIEF,
+    IntelligenceResourceKind.MONITOR,
+    IntelligenceResourceKind.SUBSCRIPTION,
+    IntelligenceResourceKind.BUILDER_PROFILE,
+    IntelligenceResourceKind.BUILDER_SESSION,
+)
 REPOSITORY_ROOT = Path(__file__).parents[1]
 
 
@@ -175,7 +192,10 @@ async def _admit_ai_policy_watch(environment) -> None:
         )
 
 
-async def build_atrium_page() -> dict[str, Any]:
+async def build_atrium_page(
+    *,
+    builder_plan: WorldAIBuilderPlan = DEFAULT_WORLD_AI_BUILDER_PLAN,
+) -> dict[str, Any]:
     state: dict[str, Any] = {}
     proof = await run_acceptance(state_sink=state)
     environment = state["environment"]
@@ -195,6 +215,7 @@ async def build_atrium_page() -> dict[str, Any]:
         baseline=state["baseline"],
         current=state["current"],
         started_at=datetime(2026, 8, 10, 20, 4, 35, tzinfo=UTC),
+        plan=builder_plan,
     )
     records = tuple(environment.store.records.values())
     evaluated_at = datetime(2026, 8, 10, 20, 5, tzinfo=UTC)
