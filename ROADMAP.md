@@ -17,13 +17,13 @@ source code into the platform.
 See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
 World 0.11.0 moves the public installation contract to the released Core 0.8.1 line.
 
-## Candidate — 0.12.0 Intelligence Catalog onboarding
+## Passed — 0.12.0 Intelligence Catalog onboarding
 
 World 0.12.0 moves the installable root pack to Core 0.8.2 and contributes the Artificial
 Intelligence experience to Atrium's generic catalog. The profile declares starter questions and
 six evidence groups over 32 exact source identities, keeps private evidence opt-in, and grants no
-connection, monitor, activation, or publication authority. Publication remains gated on the real
-public Core 0.8.2 artifact and a checkout-free install; no Git or path dependency may satisfy it.
+connection, monitor, activation, or publication authority. The release and checkout-free public
+install passed against Core 0.8.2 with no Git or path dependency.
 
 Every first-class Brief and decision-facing Signal, Shift, Case, Decision, Action, Outcome, or
 Feedback record must make **What / Why / How / When** visually scannable. Domain-authored Briefs
