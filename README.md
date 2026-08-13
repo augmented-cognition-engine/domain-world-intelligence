@@ -61,14 +61,13 @@ and patents, executive promise tracking, and adoption-versus-trust gaps.
 [Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
 [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
-- **Candidate distribution:** `ace-domain-world-intelligence` 0.12.0
+- **Distribution:** `ace-domain-world-intelligence` 0.12.0
 - **Requires:** Python 3.12 and `ace-core>=0.8.2,<0.9`
 - **Artifact boundary:** JSON-only, data-only, inert
-- **Release identity:**
-  0.12.0 is a candidate. The latest published artifacts remain
-  [`v0.11.0`](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.11.0)
-  and [`0.11.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.11.0/).
-  Candidate evidence is in
+- **Release identity:** public
+  [`v0.12.0`](https://github.com/augmented-cognition-engine/domain-world-intelligence/releases/tag/v0.12.0)
+  and [`0.12.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.12.0/).
+  Release evidence is in
   [`docs/releases/world-intelligence-v0.12.0-candidate.md`](docs/releases/world-intelligence-v0.12.0-candidate.md).
 
 Published Core 0.8.2 is the paired runtime that projects World’s complete recorded evidence-to-outcome loop and durable
@@ -92,8 +91,8 @@ install a separately reviewed connector — see [Connector boundary](#connector-
 
 ### Install
 
-After publication, install 0.12.0 on Python 3.12 with either command below; the release gate must
-resolve `ace-domain-world-intelligence==0.12.0` and `ace-core==0.8.2` from public indexes.
+Install 0.12.0 on Python 3.12 with either command below. A public clean install resolves
+`ace-domain-world-intelligence==0.12.0` and `ace-core==0.8.2` from PyPI.
 
 With `uv`:
 
