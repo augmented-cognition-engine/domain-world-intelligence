@@ -4,7 +4,7 @@ World Intelligence versions independently from ACE Core. It validates the shared
 Intelligence platform through public-issue sensemaking without moving World vocabulary, policy, or
 source code into the platform.
 
-## Candidate — ACE 0.8 Intelligence OS proof
+## Passed — ACE 0.8 Intelligence OS proof
 
 - Reuses the released recorded-source, governed Brief, reviewed Action, Outcome, and measured-
   feedback journey; it does not create a second runtime or a release-only demonstration.
@@ -15,7 +15,22 @@ source code into the platform.
   control as an unsupported public subject instead of inventing provenance.
 
 See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
-World package compatibility remains on the released Core 0.6 line until Core 0.8 is public.
+World 0.10.0 package compatibility remains on Core 0.6. The next World release will move that
+public installation contract to the now-released Core 0.8 line.
+
+## Active — Atrium AI Command Center demonstration
+
+- Treat Atrium as the one shared command center; World contributes configuration and governed
+  resources, not a separate application.
+- Project the accepted recorded-source AI policy journey into the public Core 0.8 resource-plane
+  page consumed by Atrium.
+- Demonstrate `official sources -> Observation -> Shift -> Signal -> Case -> cited Brief` with
+  explicit evidence lineage, recorded-transport labeling, and no autonomous publication.
+- Next, migrate the released World package compatibility window to public Core 0.8 and admit the
+  monitor, subscription, and onboarding-agent records needed for the full
+  `Connect -> Map -> Watch -> Brief` demo.
+
+See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 
 ## Passed — 0.9.0 governed Reality Brief into reviewed action
 
