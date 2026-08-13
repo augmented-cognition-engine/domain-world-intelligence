@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ace-app-world-ai-builder"
+version = "0.1.0"
+description = "Trusted recorded World AI Builder executor for ACE"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+dependencies = [
+  "ace-core>=0.8.2,<1.1",
+  "ace-domain-world-intelligence>=0.12,<1",
+]
+
+[project.urls]
+Repository = "https://github.com/augmented-cognition-engine/domain-world-intelligence"
+Issues = "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues"
+
+[dependency-groups]
+dev = ["build>=1.2", "pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.12", "setuptools>=69", "twine>=5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ace_world_ai_builder*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
