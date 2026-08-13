@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from datetime import UTC, datetime
 
 import pytest
+from ace.application.intelligence_build_execution import (
+    AuthorizedIntelligenceBuild,
+    IntelligenceBuildStartV1,
+)
 from ace.core import GovernedStateHeadPreconditionV1Alpha1
 from ace.core.runtime_use import AuthorityUseReceiptV1Alpha1
 from ace.intelligence import IntelligenceResourcePageState
@@ -21,28 +24,6 @@ from ace_world_ai_builder import (
 STARTED_AT = datetime(2026, 8, 10, 20, 4, 35, tzinfo=UTC)
 BUILD_GRANT = "authority_grant:world-ai-build"
 READ_GRANT = "authority_grant:world-ai-read"
-
-
-@dataclass(frozen=True, slots=True)
-class BuildRequest:
-    authority_grant_ref: str
-    client_request_id: str
-    profile_id: str
-    subject: str
-    outcome_id: str
-    source_group_ids: tuple[str, ...]
-    cadence_id: str
-    requested_at: datetime
-
-
-@dataclass(frozen=True, slots=True)
-class AuthorizedBuild:
-    build_id: str
-    request_digest: str
-    product_id: str
-    actor_ref: str
-    request: BuildRequest
-    authority_use: AuthorityUseReceiptV1Alpha1
 
 
 def _authority(
@@ -79,7 +60,7 @@ def _authority(
 
 
 def _build(*, context, source_group_ids=("official_records",), cadence_id="weekly_brief"):
-    request = BuildRequest(
+    request = IntelligenceBuildStartV1(
         authority_grant_ref=BUILD_GRANT,
         client_request_id="request:world-ai-builder-test",
         profile_id=WORLD_AI_PROFILE_ID,
@@ -91,7 +72,7 @@ def _build(*, context, source_group_ids=("official_records",), cadence_id="weekl
     )
     build_id = "intelligence_build:world-ai-builder-test"
     request_digest = "sha256:" + "7" * 64
-    return AuthorizedBuild(
+    return AuthorizedIntelligenceBuild(
         build_id=build_id,
         request_digest=request_digest,
         product_id=context.product_id,
@@ -183,3 +164,13 @@ async def test_executor_rejects_unimplemented_source_groups_before_preparing_con
     with pytest.raises(WorldAIBuilderExecutorError, match="supports only the reviewed official_records"):
         await executor.start(build)
     assert provider.builds == []
+
+
+async def test_discovered_executor_declares_exact_profile_and_fails_closed_without_host_context() -> None:
+    state = {}
+    await run_acceptance(state_sink=state)
+    executor = WorldAIBuilderExecutor()
+
+    assert executor.profile_id == WORLD_AI_PROFILE_ID
+    with pytest.raises(WorldAIBuilderExecutorError, match="trusted recorded-context provider"):
+        await executor.start(_build(context=state["environment"].context))

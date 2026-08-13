@@ -26,6 +26,10 @@ from ace.application import (
     MonitoringResourceProjectionReader,
 )
 from ace.application.intelligence_agent_contracts import ProposedCadence
+from ace.application.intelligence_build_execution import (
+    AuthorizedIntelligenceBuild,
+    IntelligenceBuildExecutor,
+)
 from ace.intelligence import (
     IntelligenceOnboardingProfileV1Alpha1,
     IntelligenceResourceKind,
@@ -72,25 +76,6 @@ class WorldAIBuilderExecutorError(RuntimeError):
     """A reviewed request cannot be executed by the recorded World adapter."""
 
 
-class AuthorizedIntelligenceBuildRequest(Protocol):
-    profile_id: str
-    subject: str
-    outcome_id: str
-    source_group_ids: tuple[str, ...]
-    cadence_id: str
-
-
-class AuthorizedIntelligenceBuildPort(Protocol):
-    """Structural public boundary consumed from the Core-authorized host."""
-
-    build_id: str
-    request_digest: str
-    product_id: str
-    actor_ref: str
-    request: AuthorizedIntelligenceBuildRequest
-    authority_use: Any
-
-
 @dataclass(frozen=True, slots=True)
 class WorldAIRecordedExecutionContext:
     """Trusted host material needed to run and project one recorded journey."""
@@ -104,7 +89,7 @@ class WorldAIRecordedExecutionContext:
 
 
 class WorldAIRecordedContextProvider(Protocol):
-    async def prepare(self, build: AuthorizedIntelligenceBuildPort) -> WorldAIRecordedExecutionContext: ...
+    async def prepare(self, build: AuthorizedIntelligenceBuild) -> WorldAIRecordedExecutionContext: ...
 
 
 def load_world_ai_onboarding_profile() -> IntelligenceOnboardingProfileV1Alpha1:
@@ -117,7 +102,7 @@ def load_world_ai_onboarding_profile() -> IntelligenceOnboardingProfileV1Alpha1:
     return IntelligenceOnboardingProfileV1Alpha1.model_validate_json(material)
 
 
-def plan_from_authorized_build(build: AuthorizedIntelligenceBuildPort) -> WorldAIBuilderPlan:
+def plan_from_authorized_build(build: AuthorizedIntelligenceBuild) -> WorldAIBuilderPlan:
     """Translate one exact Core request without broadening its source claims."""
 
     request = build.request
@@ -157,15 +142,26 @@ def _reader(store) -> CompositeIntelligenceResourceProjectionReader:
     )
 
 
-@dataclass(frozen=True, slots=True)
-class WorldAIBuilderExecutor:
+class WorldAIBuilderExecutor(IntelligenceBuildExecutor):
     """Core-compatible executor for one exact recorded World AI build."""
 
-    contexts: WorldAIRecordedContextProvider
-    onboarding_profile: IntelligenceOnboardingProfileV1Alpha1
+    profile_id = WORLD_AI_PROFILE_ID
 
-    async def start(self, build: AuthorizedIntelligenceBuildPort):
+    def __init__(
+        self,
+        *,
+        contexts: WorldAIRecordedContextProvider | None = None,
+        onboarding_profile: IntelligenceOnboardingProfileV1Alpha1 | None = None,
+    ) -> None:
+        self.contexts = contexts
+        self.onboarding_profile = onboarding_profile
+
+    async def start(self, build: AuthorizedIntelligenceBuild):
         plan = plan_from_authorized_build(build)
+        if self.contexts is None:
+            raise WorldAIBuilderExecutorError(
+                "World AI Builder requires a trusted recorded-context provider from the application host"
+            )
         prepared = await self.contexts.prepare(build)
         environment = prepared.environment
         context = environment.context
@@ -174,9 +170,10 @@ class WorldAIBuilderExecutor:
         if prepared.started_at.tzinfo is None or prepared.started_at.utcoffset() is None:
             raise WorldAIBuilderExecutorError("recorded execution time must include a timezone")
 
+        profile = self.onboarding_profile or load_world_ai_onboarding_profile()
         await IntelligenceBuilderPresentationService(store=environment.store).admit_profile(
             product_id=build.product_id,
-            profile=self.onboarding_profile,
+            profile=profile,
             admitted_at=prepared.started_at - timedelta(seconds=1),
         )
         await run_world_ai_builder_journey(
@@ -215,8 +212,6 @@ __all__ = [
     "READ_KINDS",
     "SUPPORTED_RECORDED_SOURCE_GROUP_IDS",
     "WORLD_AI_PROFILE_ID",
-    "AuthorizedIntelligenceBuildPort",
-    "AuthorizedIntelligenceBuildRequest",
     "WorldAIBuilderExecutor",
     "WorldAIBuilderExecutorError",
     "WorldAIRecordedContextProvider",

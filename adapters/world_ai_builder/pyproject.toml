@@ -18,6 +18,9 @@ dependencies = [
 Repository = "https://github.com/augmented-cognition-engine/domain-world-intelligence"
 Issues = "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues"
 
+[project.entry-points."ace.intelligence_builders"]
+world_ai_command_center = "ace_world_ai_builder:WorldAIBuilderExecutor"
+
 [dependency-groups]
 dev = ["build>=1.2", "pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.12", "setuptools>=69", "twine>=5"]
 

@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tomllib
 import zipfile
+from importlib.metadata import distribution
 from pathlib import Path
 
 from packaging.requirements import Requirement
@@ -23,7 +24,11 @@ def test_builder_executor_is_separate_from_the_inert_root_pack() -> None:
 
     assert adapter["name"] == "ace-app-world-ai-builder"
     assert adapter["version"] == "0.1.0"
-    assert "entry-points" not in adapter
+    assert adapter["entry-points"] == {
+        "ace.intelligence_builders": {
+            "world_ai_command_center": "ace_world_ai_builder:WorldAIBuilderExecutor",
+        }
+    }
     assert {Requirement(item).name for item in adapter["dependencies"]} == {
         "ace-core",
         "ace-domain-world-intelligence",
@@ -70,3 +75,21 @@ def test_builder_executor_wheel_contains_only_the_trusted_adapter_package(tmp_pa
     assert "ace_world_ai_builder/journey.py" in names
     assert not any(name.startswith("domain_packs/") for name in names)
     assert not any(name.startswith("scripts/") for name in names)
+    entry_points_file = next(name for name in names if name.endswith(".dist-info/entry_points.txt"))
+    with zipfile.ZipFile(wheel) as archive:
+        entry_points_text = archive.read(entry_points_file).decode("utf-8")
+    assert entry_points_text == (
+        "[ace.intelligence_builders]\n"
+        "world_ai_command_center = ace_world_ai_builder:WorldAIBuilderExecutor\n"
+    )
+
+
+def test_installed_entry_point_loads_exact_world_profile() -> None:
+    dist = distribution("ace-app-world-ai-builder")
+    points = [entry for entry in dist.entry_points if entry.group == "ace.intelligence_builders"]
+
+    assert [(entry.name, entry.value) for entry in points] == [
+        ("world_ai_command_center", "ace_world_ai_builder:WorldAIBuilderExecutor")
+    ]
+    executor = points[0].load()()
+    assert executor.profile_id == "intelligence_onboarding_profile:world-ai-command-center"
