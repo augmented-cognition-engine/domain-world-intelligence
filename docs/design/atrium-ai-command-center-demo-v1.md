@@ -48,10 +48,14 @@ otherwise separate evidence into decision-relevant shifts:
 - executive commitments versus later funding, delivery, revision, or abandonment; and
 - adoption growth versus trust, safety, reliability, and measured outcomes.
 
-The first demonstrable resource page uses the accepted two-lineage AI policy
-journey:
+The first cited Brief still uses the accepted two-lineage AI policy journey:
 
 `Federal Register + White House -> Observation -> Shift -> Signal -> Case -> cited Brief`
+
+Around that exact Brief closure, Atrium now admits five additional reviewed publications from
+OpenAI, Anthropic, Google DeepMind, NIST, and NVIDIA. Those records broaden the current picture
+across model capability, model disclosure, agent security, and capital/infrastructure. They remain
+attributable Observations until a configured detector and sufficient corroboration justify a Shift.
 
 Launch the exact resource page in Core's local Atrium from a World checkout:
 
@@ -84,7 +88,7 @@ autonomous publication.
    activation.
 3. See the onboarding agents assemble one inspectable `Connect -> Map -> Watch -> Brief` story.
 4. Open Atrium oriented to `World AI Command Center` with the first cited briefing already present.
-5. See the twelve-area coverage model, two admitted source roots, and one active watch.
+5. See the twelve-area coverage model, seven admitted source roots, and one active watch.
 6. Inspect the detected policy progression and exact evidence lineage.
 7. Ask ACE a question and receive only answers supported by the visible resource plane.
 8. Open a downstream investigation without allowing the domain to act autonomously.
@@ -98,11 +102,12 @@ contract and runs the public Builder services through eight durable revisions:
 
 World owns the registered recorded-source provider plus the concept, watch, and briefing
 strategies. Core owns session identity, exact artifact handoffs, approval resolution, persistence,
-replay, and the resource projection. The two source samples point to the same already-admitted
-Federal Register and White House source snapshots used by the Reality Brief. The Briefing Agent
+replay, and the resource projection. The Builder's first two source samples point to the same
+already-admitted Federal Register and White House source snapshots used by the Reality Brief. The
+resulting Atrium page also carries five reviewed contextual observations. The Briefing Agent
 states that these first-party lineages support different evidence roles and do not independently
 establish downstream outcomes.
 
-Next, reproduce the paired candidates from installed wheels, add one governed primary connection
-in each remaining watch area, and replace recorded captures with opt-in refresh while retaining the
-frozen page as a deterministic fallback.
+Next, reproduce the paired candidates from installed wheels, add independent measurement and
+pricing evidence, and replace recorded captures with opt-in refresh while retaining the frozen page
+as a deterministic fallback.

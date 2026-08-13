@@ -15,7 +15,8 @@ Atrium is the command center. World Intelligence configures what Atrium watches,
 evidence maps into concepts, what counts as a meaningful change, and how a cited Reality Brief is
 assembled. World does not ship a competing dashboard. The first AI Command Center artifact projects
 the accepted official-source journey through the public ACE 0.8 Intelligence resource plane; see
-[the demo design](docs/design/atrium-ai-command-center-demo-v1.md).
+[the demo design](docs/design/atrium-ai-command-center-demo-v1.md) and
+[the reviewed Wave 1 evidence](docs/evidence/atrium-ai-wave1-sources-v1.md).
 
 From a source checkout, launch the current AI Command Center in Core's Atrium with one command:
 
@@ -28,11 +29,14 @@ From a source checkout, launch the current AI Command Center in Core's Atrium wi
 This is a loopback-only replay of the exact immutable resource page. It does not pose as a live
 network refresh, grant authority, or install a World-specific dashboard.
 
-The active paired candidate also supplies a non-authorizing AI onboarding profile and World-owned
+The active candidate also supplies a non-authorizing AI onboarding profile and World-owned
 strategies for the public Connection, Ontology, Intelligence, and Briefing agents. It produces an
-exact eight-revision `Connect -> Map -> Watch -> Brief` session over the two admitted official
-lineages and lands at `first_briefing_ready`; Atrium renders that durable state rather than a fake
-progress animation. This candidate is not yet part of the released 0.10.0 installation contract.
+exact eight-revision `Connect -> Map -> Watch -> Brief` session, lands at
+`first_briefing_ready`, and projects seven admitted source lineages from seven publisher roots into
+Atrium. The first Brief remains grounded only in its exact two-record policy closure; five reviewed
+AI publications remain attributable context rather than invented conclusions. Atrium renders that
+durable state rather than a fake progress animation. This candidate is not yet part of the released
+0.10.0 installation contract.
 
 The flagship topic is **artificial intelligence**. Its reviewed
 [source universe](domain_packs/world_intelligence_ai/source_catalog.json) spans models, independent

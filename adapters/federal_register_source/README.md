@@ -1,9 +1,10 @@
-# ACE World Federal Register source adapter
+# ACE World reviewed public-source adapters
 
 This separately versioned package implements the public ACE source-adapter contract for exact
-reviewed AI Command Center sources: Federal Register API documents and one White House official
-release. It is executable host software, not Domain Pack content, and it has no ACE extension entry
-point.
+reviewed World sources: Federal Register API documents, one White House official release, bounded
+AI publication profiles, and planetary-defense publications. It is executable host software, not
+Domain Pack content, and it has no ACE extension entry point. The distribution name remains
+`ace-ext-world-federal-register-source` for compatibility.
 
 Version 0.3.0 updates the package compatibility boundary to `ace-core>=0.6.0,<0.7` while preserving
 the accepted 0.1.0 connector implementation identities. Version 0.2.0 added an explicitly enabled
@@ -30,6 +31,14 @@ artifact identity. Its accepted command-center conformance transport is recorded
 no White House network transport is enabled by this package. The source is a publication lineage
 independent of the Federal Register API record, but it is not independent non-government
 corroboration.
+
+The AI Command Center Wave 1 profiles add recorded, exact-URI captures for reviewed publications
+from OpenAI, Anthropic, Google DeepMind, NIST, and NVIDIA. One shared adapter implementation emits a
+common attributable publication envelope, while each profile retains its own artifact identity,
+publisher, URI, title, date, evidence role, and required source markers. These profiles have no
+enabled network transport. They become Sources, Connections, Entities, and Observations through
+governed admission; the connector does not convert a publisher claim into corroborated truth,
+Shift, Signal, recommendation, or action.
 
 P2D adds exact recorded-transport profiles for two NASA and two ESA planetary-defense pages about
 asteroid 2024 YR4. The adapter accepts only the four reviewed canonical URIs, titles, publication

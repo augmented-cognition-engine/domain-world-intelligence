@@ -20,9 +20,10 @@ public installation contract to the now-released Core 0.8 line.
 
 ## Active — Atrium AI Command Center demonstration
 
-The guided Builder and shared-Atrium binding passed through Core PR #145 and World PR #24. The
-current demo-polish packet makes that accepted 23-resource page launchable in Atrium with one
-source-checkout command and keeps the replay loopback-only, immutable, and non-authorizing.
+The guided Builder and shared-Atrium binding passed through Core PR #145 and World PR #24. World
+PR #25 made the accepted page launchable in Atrium with one source-checkout command while keeping
+the replay loopback-only, immutable, and non-authorizing. The current Wave 1 packet expands that
+page from two policy sources to seven admitted source lineages across seven publisher roots.
 
 - Treat Atrium as the one shared command center; World contributes configuration and governed
   resources, not a separate application.
@@ -44,10 +45,16 @@ source-checkout command and keeps the replay loopback-only, immutable, and non-a
   Connection, Ontology, Intelligence, and Briefing agents over the same two admitted official
   lineages and reopen at `first_briefing_ready`; no Core test fixture, network request, or second
   runtime is used.
-- Next, migrate the released World package compatibility window and connect one governed primary
-  source in each remaining watch area.
+- **Passed:** admit five reviewed public AI publications from OpenAI, Anthropic, Google DeepMind,
+  NIST, and NVIDIA through the same governed source-ingress path. They project as attributable
+  Sources, Connections, Entities, and Observations; they do not become corroborated Shifts or
+  recommendations merely because they are visible.
+- Next, migrate the released World package compatibility window, add opt-in refresh for the
+  reviewed source profiles, and connect independent measurement plus price/economics sources so
+  provider claims can be tested rather than merely collected.
 
-See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md).
+See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md)
+and [reviewed source Wave 1 evidence](docs/evidence/atrium-ai-wave1-sources-v1.md).
 
 ## Passed — 0.9.0 governed Reality Brief into reviewed action
 

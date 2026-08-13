@@ -24,6 +24,22 @@
         {"attribute_id": "legal_status_notice", "value_type": "string", "required": true},
         {"attribute_id": "verification_reference", "value_type": "string", "required": true}
       ]
+    },
+    {
+      "entity_type_id": "ai_development_record",
+      "display_name": "AI Development Record",
+      "attributes": [
+        {"attribute_id": "source_id", "value_type": "string", "required": true},
+        {"attribute_id": "publisher", "value_type": "string", "required": true},
+        {"attribute_id": "source_title", "value_type": "string", "required": true},
+        {"attribute_id": "publication_date", "value_type": "string", "required": true},
+        {"attribute_id": "topic_id", "value_type": "string", "required": true},
+        {"attribute_id": "watch_area", "value_type": "string", "required": true},
+        {"attribute_id": "evidence_role", "value_type": "string", "required": true},
+        {"attribute_id": "claim_summary", "value_type": "string", "required": true},
+        {"attribute_id": "source_lineage_id", "value_type": "string", "required": true},
+        {"attribute_id": "source_uri", "value_type": "string", "required": true}
+      ]
     }
   ],
   "relation_types": []

@@ -72,6 +72,10 @@ from ace_world_federal_register_source import (
     AI_POLICY_IMPLEMENTATION_VERSION,
     AI_POLICY_LOCATOR,
     AI_POLICY_SOURCE_TYPE,
+    REVIEWED_AI_PUBLICATION_IMPLEMENTATION_VERSION,
+    REVIEWED_AI_PUBLICATION_LOCATOR,
+    REVIEWED_AI_PUBLICATION_PROFILES,
+    REVIEWED_AI_PUBLICATION_SOURCE_TYPE,
     WHITE_HOUSE_IMPLEMENTATION_ID,
     WHITE_HOUSE_IMPLEMENTATION_VERSION,
     WHITE_HOUSE_LOCATOR,
@@ -79,6 +83,8 @@ from ace_world_federal_register_source import (
     WHITE_HOUSE_SOURCE_TYPE,
     AIPolicyFederalRegisterSourceAdapter,
     FederalRegisterRetrievalResult,
+    ReviewedAIPublicationRetrievalResult,
+    ReviewedAIPublicationSourceAdapter,
     WhiteHouseAIPolicySourceAdapter,
     WhiteHouseRetrievalResult,
 )
@@ -327,7 +333,7 @@ async def build_environment() -> CommandCenterEnvironment:
         expires_at=_time(fixture["authentication"]["expires_at"]),
     )
 
-    artifacts = (
+    policy_artifacts = (
         CapabilityArtifactIdentityV1Alpha1(
             capability="source_snapshot",
             contract="ace.source.snapshot/v1alpha1",
@@ -343,6 +349,18 @@ async def build_environment() -> CommandCenterEnvironment:
             artifact_digest=fixture["sources"][1]["artifact_digest"],
         ),
     )
+    reviewed_profiles_by_uri = {profile.source_uri: profile for profile in REVIEWED_AI_PUBLICATION_PROFILES}
+    reviewed_artifacts = tuple(
+        CapabilityArtifactIdentityV1Alpha1(
+            capability="source_snapshot",
+            contract="ace.source.snapshot/v1alpha1",
+            implementation_id=reviewed_profiles_by_uri[source["requested_uri"]].implementation_id,
+            implementation_version=REVIEWED_AI_PUBLICATION_IMPLEMENTATION_VERSION,
+            artifact_digest=source["artifact_digest"],
+        )
+        for source in fixture["sources"][2:]
+    )
+    artifacts = (*policy_artifacts, *reviewed_artifacts)
     overlay = compile_overlay(
         pack,
         OrganizationOverlayV1(
@@ -449,9 +467,9 @@ async def build_environment() -> CommandCenterEnvironment:
                 configuration_ref=source["configuration_ref"],
                 configuration_digest=source["configuration_digest"],
                 authorized_uri=source["requested_uri"],
-                subject_binding_id=fixture["subject_binding_id"],
-                entity_type_id=fixture["entity_type_id"],
-                entity_ref=fixture["entity_ref"],
+                subject_binding_id=source.get("subject_binding_id", fixture["subject_binding_id"]),
+                entity_type_id=source.get("entity_type_id", fixture["entity_type_id"]),
+                entity_ref=source.get("entity_ref", fixture["entity_ref"]),
                 state_head_precondition=GovernedStateHeadPreconditionV1Alpha1.from_head(source_head),
             )
         )
@@ -469,7 +487,7 @@ async def build_environment() -> CommandCenterEnvironment:
             )
         )
 
-    first, second = fixture["sources"]
+    first, second, *_ = fixture["sources"]
     federal_transport = RecordedTransport(
         FederalRegisterRetrievalResult(
             source_type_ref=AI_POLICY_SOURCE_TYPE,
@@ -506,7 +524,7 @@ async def build_environment() -> CommandCenterEnvironment:
             captured_at=_time(second["captured_at"]),
         )
     )
-    adapters = (
+    policy_adapters = (
         AIPolicyFederalRegisterSourceAdapter(
             transport=federal_transport,
             artifact_digest=artifacts[0].artifact_digest,
@@ -516,6 +534,41 @@ async def build_environment() -> CommandCenterEnvironment:
             artifact_digest=artifacts[1].artifact_digest,
         ),
     )
+    reviewed_transports = tuple(
+        RecordedTransport(
+            ReviewedAIPublicationRetrievalResult(
+                source_type_ref=REVIEWED_AI_PUBLICATION_SOURCE_TYPE,
+                requested_uri=source["requested_uri"],
+                effective_uri=source["requested_uri"],
+                status_code=200,
+                media_type=source["media_type"],
+                response_body=source["response_body"],
+                redirect_chain=(),
+                resolved_ip_addresses=("1.1.1.1",),
+                connected_ip_addresses=("1.1.1.1",),
+                dns_rebinding_protection_applied=True,
+                credentials_used=False,
+                locator=REVIEWED_AI_PUBLICATION_LOCATOR,
+                observed_at=_time(source["observed_at"]),
+                captured_at=_time(source["captured_at"]),
+            )
+        )
+        for source in fixture["sources"][2:]
+    )
+    reviewed_adapters = tuple(
+        ReviewedAIPublicationSourceAdapter(
+            profile=reviewed_profiles_by_uri[source["requested_uri"]],
+            transport=transport,
+            artifact_digest=artifact.artifact_digest,
+        )
+        for source, transport, artifact in zip(
+            fixture["sources"][2:],
+            reviewed_transports,
+            reviewed_artifacts,
+            strict=True,
+        )
+    )
+    adapters = (*policy_adapters, *reviewed_adapters)
 
     append_head = _head(
         product_id=product_id,
@@ -550,7 +603,7 @@ async def build_environment() -> CommandCenterEnvironment:
         registry=ExactAdapterRegistry(adapters),
         requests=tuple(requests),
         adapters=adapters,
-        transports=(federal_transport, white_house_transport),
+        transports=(federal_transport, white_house_transport, *reviewed_transports),
         append_binding=append_binding,
         activation_head=activation_head,
         append_head=append_head,
@@ -576,9 +629,9 @@ async def admit_sources(environment: CommandCenterEnvironment):
         if admission.replayed or not replay.replayed:
             raise AssertionError("LIVE source admission replay was not explicit")
         admissions.append(admission)
-    if [adapter.capture_calls for adapter in environment.adapters] != [1, 1]:
+    if [adapter.capture_calls for adapter in environment.adapters] != [1] * len(environment.adapters):
         raise AssertionError("each official source must be captured exactly once")
-    if [transport.calls for transport in environment.transports] != [1, 1]:
+    if [transport.calls for transport in environment.transports] != [1] * len(environment.transports):
         raise AssertionError("recorded transports were reacquired during replay")
     return tuple(admissions)
 
@@ -717,7 +770,7 @@ def _brief_draft(*, observations, shift, signal, case, policy):
 
 async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[str, Any]:
     environment = await build_environment()
-    baseline, current = await admit_sources(environment)
+    baseline, current, *context_admissions = await admit_sources(environment)
     authorizer = ExactAppendAuthorizer()
     binding = bind_committed_activation(
         pack=environment.pack,
@@ -856,6 +909,7 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
                 "environment": environment,
                 "baseline": baseline,
                 "current": current,
+                "context_admissions": tuple(context_admissions),
                 "derivation": derivation,
                 "case": case,
                 "brief": brief,
@@ -863,7 +917,7 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
         )
 
     return {
-        "contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha1",
+        "contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha2",
         "pack": {
             "compiled_pack_id": environment.pack.compiled_pack_id,
             "pack_digest": environment.pack.pack_digest,
@@ -871,9 +925,13 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
             "json_only": True,
         },
         "source": {
-            "modes": [item.observation.mode.value for item in (baseline, current)],
+            "modes": [
+                item.observation.mode.value
+                for item in (baseline, current, *context_admissions)
+            ],
             "lineages": [
-                item.entity_snapshot.attributes.parsed_value()["source_lineage_id"] for item in (baseline, current)
+                item.entity_snapshot.attributes.parsed_value()["source_lineage_id"]
+                for item in (baseline, current, *context_admissions)
             ],
             "stages": [
                 item.entity_snapshot.attributes.parsed_value()["development_stage"] for item in (baseline, current)
@@ -884,6 +942,16 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
                 == environment.fixture["entity_ref"]
             ),
             "capture_calls": [item.capture_calls for item in environment.adapters],
+            "context_watch_areas": sorted(
+                item.entity_snapshot.attributes.parsed_value()["watch_area"]
+                for item in context_admissions
+            ),
+            "publisher_count": len(
+                {
+                    item.entity_snapshot.attributes.parsed_value()["publisher"]
+                    for item in context_admissions
+                }
+            ),
             "recorded_transport": True,
             "network_access": False,
         },
