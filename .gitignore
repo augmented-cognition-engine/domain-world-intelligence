@@ -16,6 +16,10 @@ artifacts/public-demo/*
 !artifacts/public-demo/demo-data.json
 !artifacts/public-demo/index.html
 !artifacts/public-demo/*.png
+!artifacts/atrium-demo/
+artifacts/atrium-demo/*
+!artifacts/atrium-demo/world-ai-resource-page.json
+!artifacts/atrium-demo/world-ai-command-center.png
 !artifacts/measured-intelligence/
 artifacts/measured-intelligence/*
 !artifacts/measured-intelligence/convergence-v1.json

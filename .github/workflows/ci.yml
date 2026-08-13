@@ -223,6 +223,8 @@ jobs:
                   world + "conformance/p2b_supersession_impact_expected.json",
                   world + "conformance/p2b_supersession_impact_manifest.json",
                   ai + "manifest.json",
+                  ai + "onboarding_profile.json",
+                  ai + "source_catalog.json",
                   ai + "modules/detection.json",
                   ai + "modules/ontology.json",
                   ai + "modules/personas.json",

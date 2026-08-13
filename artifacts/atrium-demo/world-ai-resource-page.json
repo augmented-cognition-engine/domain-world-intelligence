@@ -1,0 +1,636 @@
+{
+  "actor_ref": "actor:world-ai-analyst",
+  "as_of": "2026-08-10T20:04:31Z",
+  "authority_use": {
+    "actor_ref": "actor:world-ai-analyst",
+    "authenticated_context": {
+      "actor_ref": "actor:world-ai-analyst",
+      "authenticated_at": "2026-08-10T19:45:00Z",
+      "authentication_receipt_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "authentication_receipt_ref": "authentication_receipt:world-ai-command-center",
+      "contract": "ace.core.authenticated-runtime-context/v1alpha1",
+      "expires_at": "2026-08-10T22:30:00Z",
+      "product_id": "product:world-ai-command-center"
+    },
+    "authority": "observe_read",
+    "contract": "ace.core.authority-use-receipt/v1alpha1",
+    "evaluated_at": "2026-08-10T20:05:00Z",
+    "expires_at": "2026-08-10T22:30:00Z",
+    "grant_hash": "9999999999999999999999999999999999999999999999999999999999999999",
+    "grant_ref": "authority_grant:world-ai-atrium-read",
+    "operation": "query_intelligence_resources",
+    "product_id": "product:world-ai-command-center",
+    "receipt_digest": "sha256:c3c1b1024d0e1c77d1b9111afcb1a862e244c4498939ac39e03905466b584818",
+    "receipt_id": "authority_use_receipt:c3c1b1024d0e1c77d1b9111afcb1a862",
+    "state_head_precondition": {
+      "commit_receipt_id": "authority_receipt:world-ai-atrium-read",
+      "contract": "ace.core.governed-state-head-precondition/v1alpha1",
+      "product_id": "product:world-ai-command-center",
+      "revision_id": "authority_revision:world-ai-atrium-read",
+      "sequence": 1,
+      "state_id": "authority_grant:world-ai-atrium-read",
+      "state_kind": "authority_grant"
+    },
+    "use_subject_digest": "sha256:b214ad816d1064b214542545b4c73feec9664d7bb164accc628ce418ce360e46",
+    "use_subject_ref": "resource_query:b214ad816d1064b214542545b4c73fee"
+  },
+  "available_at": "2026-08-10T20:04:31Z",
+  "contract": "ace.intelligence.resource-plane-page/v1alpha1",
+  "degraded_reason_refs": [
+    "degraded_reason:unsupported-conflict",
+    "degraded_reason:unsupported-semantic_revision",
+    "degraded_reason:unsupported-source_health",
+    "degraded_reason:unsupported-uncertainty"
+  ],
+  "demo": {
+    "autonomous_publication": false,
+    "contract": "ace.world-intelligence.atrium-demo/v1alpha1",
+    "network_freshness_claimed": false,
+    "recorded_transport": true,
+    "source_catalog": "domain_packs/world_intelligence_ai/source_catalog.json",
+    "source_proof_contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha1",
+    "topic_id": "artificial_intelligence"
+  },
+  "evaluated_at": "2026-08-10T20:05:00Z",
+  "items": [
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_receipt_digest\":\"sha256:953cdc68f400b2bed298ce24a66ccaa33d950e6b3c4b11e738bf40db3697baf6\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:953cdc68f400b2bed298ce24a66ccaa3\",\"actor_ref\":\"actor:world-ai-analyst\",\"adapter_artifact\":{\"artifact_digest\":\"sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"capability\":\"source_snapshot\",\"contract\":\"ace.source.snapshot/v1alpha1\",\"contract_version\":\"ace.core.capability-artifact-identity/v1alpha1\",\"implementation_id\":\"world_ai_policy_federal_register_source\",\"implementation_version\":\"0.1.0\"},\"admission_receipt_digest\":\"sha256:1fe4cecf0e6797484b322a6e98148278bfd8cf7e15f7ff261c521931b6f52d79\",\"admission_receipt_ref\":\"live_source_admission_receipt:1fe4cecf0e6797484b322a6e98148278\",\"admitted_at\":\"2026-08-10T20:00:05+00:00\",\"authority_use_receipt_digest\":\"sha256:e8727f4bc313568798a6c51ccb685b6cf19db606adc4905e438926a64701ba0a\",\"authority_use_receipt_ref\":\"authority_use_receipt:e8727f4bc313568798a6c51ccb685b6c\",\"capability_use_receipt_digest\":\"sha256:efcea26d3d9217bdeb91b1a152b61d7ec2051626879124fe639c14a7f5a0c42b\",\"capability_use_receipt_ref\":\"capability_use_receipt:efcea26d3d9217bdeb91b1a152b61d7e\",\"captured_at\":\"2026-08-10T20:00:03+00:00\",\"configuration_digest\":\"sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"configuration_ref\":\"config:ai-policy-eo-14409\",\"source_definition_ref\":\"source_definition:ai-policy-eo-14409\",\"source_type_ref\":\"federal_register_ai_policy_document\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:00:03Z",
+        "available_at": "2026-08-10T20:00:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.live-source-admission-receipt/v1alpha1",
+        "resource_digest": "sha256:1fe4cecf0e6797484b322a6e98148278bfd8cf7e15f7ff261c521931b6f52d79",
+        "resource_id": "connection:27c0424392af805f4207596cc8529c14",
+        "resource_kind": "connection",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "federal_register_ai_policy_document",
+        "source_definition:ai-policy-eo-14409"
+      ],
+      "summary": "Successful governed capture through world_ai_policy_federal_register_source.",
+      "supersedes": null,
+      "title": "Connection: source_definition:ai-policy-eo-14409"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:00:04Z\",\"attributes\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"agency_name\\\":\\\"Executive Office of the President\\\",\\\"development_stage\\\":\\\"directive_issued\\\",\\\"document_number\\\":\\\"2026-11415\\\",\\\"document_title\\\":\\\"Promoting Advanced Artificial Intelligence Innovation and Security\\\",\\\"document_type\\\":\\\"Presidential Document\\\",\\\"executive_order_number\\\":\\\"14409\\\",\\\"federal_register_url\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"initiative_name\\\":\\\"Executive Order 14409\\\",\\\"legal_status_notice\\\":\\\"FederalRegister.gov is not the official legal edition.\\\",\\\"linked_policy_ref\\\":\\\"executive_order:14409\\\",\\\"official_pdf_url\\\":\\\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\\\",\\\"policy_status\\\":\\\"issued\\\",\\\"policy_topic\\\":\\\"artificial_intelligence\\\",\\\"publication_date\\\":\\\"2026-06-05\\\",\\\"source_lineage_id\\\":\\\"federal_register:2026-11415\\\",\\\"source_uri\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"verification_reference\\\":\\\"The govinfo.gov PDF is the official-format verification reference.\\\"}\"},\"confidence\":1.0,\"contract\":\"ace.intelligence.entity-snapshot/v1alpha1\",\"entity_ref\":\"entity:ai-policy/executive-order-14409\",\"entity_type_ref\":\"ai_policy_record\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:00:04Z\",\"resource_available_at\":\"2026-08-10T20:00:04Z\",\"resource_digest\":\"sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8\",\"resource_id\":\"observation:a75b66f4d242ac1ecf8d0c6c295447ea\",\"resource_kind\":\"observation\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"projected_at\":\"2026-08-10T20:00:04Z\",\"resource_digest\":\"sha256:edfd6425fad76e082cafd6c033bc3844567b8d52c19214fbdaaa16602eef8499\",\"resource_id\":\"entity_snapshot:edfd6425fad76e082cafd6c033bc3844\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:00:04Z",
+          "available_at": "2026-08-10T20:00:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8",
+          "resource_id": "observation:a75b66f4d242ac1ecf8d0c6c295447ea",
+          "resource_kind": "observation",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:00:04Z",
+        "available_at": "2026-08-10T20:00:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+        "resource_digest": "sha256:edfd6425fad76e082cafd6c033bc3844567b8d52c19214fbdaaa16602eef8499",
+        "resource_id": "entity_snapshot:edfd6425fad76e082cafd6c033bc3844",
+        "resource_kind": "entity",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": null,
+      "supersedes": null,
+      "title": "entity:ai-policy/executive-order-14409"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_mode\":\"live\",\"acquisition_receipt_digest\":\"sha256:953cdc68f400b2bed298ce24a66ccaa33d950e6b3c4b11e738bf40db3697baf6\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:953cdc68f400b2bed298ce24a66ccaa3\",\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:00:04Z\",\"confidence\":1.0,\"contract\":\"ace.intelligence.observation/v1alpha1\",\"event_effective_at\":null,\"ingested_at\":\"2026-08-10T20:00:04Z\",\"lineage\":[],\"mode\":\"live\",\"observed_at\":\"2026-08-10T20:00:02Z\",\"payload\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"agency_name\\\":\\\"Executive Office of the President\\\",\\\"development_stage\\\":\\\"directive_issued\\\",\\\"document_number\\\":\\\"2026-11415\\\",\\\"document_title\\\":\\\"Promoting Advanced Artificial Intelligence Innovation and Security\\\",\\\"document_type\\\":\\\"Presidential Document\\\",\\\"executive_order_number\\\":\\\"14409\\\",\\\"federal_register_url\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"initiative_name\\\":\\\"Executive Order 14409\\\",\\\"legal_status_notice\\\":\\\"FederalRegister.gov is not the official legal edition.\\\",\\\"linked_policy_ref\\\":\\\"executive_order:14409\\\",\\\"official_pdf_url\\\":\\\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\\\",\\\"policy_status\\\":\\\"issued\\\",\\\"policy_topic\\\":\\\"artificial_intelligence\\\",\\\"publication_date\\\":\\\"2026-06-05\\\",\\\"source_lineage_id\\\":\\\"federal_register:2026-11415\\\",\\\"source_uri\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"verification_reference\\\":\\\"The govinfo.gov PDF is the official-format verification reference.\\\"}\"},\"product_id\":\"product:world-ai-command-center\",\"resource_digest\":\"sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8\",\"resource_id\":\"observation:a75b66f4d242ac1ecf8d0c6c295447ea\",\"source_digest\":\"sha256:0e91d304db7642ee38f31e3261adeb6802f9310949875c4f30efae073db83c26\",\"source_mapping\":{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"compiled_pack_id\":\"pack_ir:0679116c6b5e02cd021b085ba2d80cf2\",\"contract\":\"ace.intelligence.source-mapping-reference/v1alpha1\",\"mapping_digest\":\"sha256:82deaabb4618c039d876f4582fcc97260a89de259b32ddfaf1afc7933f330be8\",\"mapping_id\":\"ai_policy_record_snapshot\",\"module_digest\":\"sha256:49ef14654b182549abd0c5aab40d1b8e2ab6e787844adca43ea8ab91ef4fafcc\",\"module_id\":\"world_ai_source_mapping\",\"pack_digest\":\"sha256:0679116c6b5e02cd021b085ba2d80cf2d6f380a894f5ef0c9da89db588b7c124\"},\"source_published_at\":\"2026-06-05T00:00:00Z\",\"source_ref\":\"source_snapshot:0e91d304db7642ee38f31e3261adeb68\",\"subject_refs\":[\"entity:ai-policy/executive-order-14409\"]}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:00:04Z",
+        "available_at": "2026-08-10T20:00:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.observation/v1alpha1",
+        "resource_digest": "sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8",
+        "resource_id": "observation:a75b66f4d242ac1ecf8d0c6c295447ea",
+        "resource_kind": "observation",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": null,
+      "supersedes": null,
+      "title": "Observation from source_snapshot:0e91d304db7642ee38f31e3261adeb68"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_receipt_digest\":\"sha256:953cdc68f400b2bed298ce24a66ccaa33d950e6b3c4b11e738bf40db3697baf6\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:953cdc68f400b2bed298ce24a66ccaa3\",\"admission_receipt_digest\":\"sha256:1fe4cecf0e6797484b322a6e98148278bfd8cf7e15f7ff261c521931b6f52d79\",\"admission_receipt_ref\":\"live_source_admission_receipt:1fe4cecf0e6797484b322a6e98148278\",\"captured_payload_redacted\":true,\"event_effective_at\":null,\"ingested_at\":\"2026-08-10T20:00:04+00:00\",\"observed_at\":\"2026-08-10T20:00:02+00:00\",\"source_definition_ref\":\"source_definition:ai-policy-eo-14409\",\"source_published_at\":\"2026-06-05T00:00:00+00:00\",\"source_snapshot_digest\":\"sha256:0e91d304db7642ee38f31e3261adeb6802f9310949875c4f30efae073db83c26\",\"source_snapshot_ref\":\"source_snapshot:0e91d304db7642ee38f31e3261adeb68\",\"source_type_ref\":\"federal_register_ai_policy_document\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:00:03Z",
+          "available_at": "2026-08-10T20:00:05Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.live-source-admission-receipt/v1alpha1",
+          "resource_digest": "sha256:1fe4cecf0e6797484b322a6e98148278bfd8cf7e15f7ff261c521931b6f52d79",
+          "resource_id": "connection:27c0424392af805f4207596cc8529c14",
+          "resource_kind": "connection",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:00:04Z",
+        "available_at": "2026-08-10T20:00:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.core.canonical-source-snapshot/v1alpha1",
+        "resource_digest": "sha256:0e91d304db7642ee38f31e3261adeb6802f9310949875c4f30efae073db83c26",
+        "resource_id": "source_definition:ai-policy-eo-14409",
+        "resource_kind": "source",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "federal_register_ai_policy_document",
+        "source_definition:ai-policy-eo-14409"
+      ],
+      "summary": "Latest admitted federal_register_ai_policy_document capture metadata; captured payload is redacted.",
+      "supersedes": null,
+      "title": "Source: source_definition:ai-policy-eo-14409"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_receipt_digest\":\"sha256:b0e77ae528f1a7bb96ebe6b552cd690dde451786aa364fe03e619b207e87d75f\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:b0e77ae528f1a7bb96ebe6b552cd690d\",\"actor_ref\":\"actor:world-ai-analyst\",\"adapter_artifact\":{\"artifact_digest\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\",\"capability\":\"source_snapshot\",\"contract\":\"ace.source.snapshot/v1alpha1\",\"contract_version\":\"ace.core.capability-artifact-identity/v1alpha1\",\"implementation_id\":\"world_ai_policy_white_house_source\",\"implementation_version\":\"0.1.0\"},\"admission_receipt_digest\":\"sha256:9d47af1a01530bfd705a0e468d6a3ea2669c3ecb730f45114e7c4243f5887844\",\"admission_receipt_ref\":\"live_source_admission_receipt:9d47af1a01530bfd705a0e468d6a3ea2\",\"admitted_at\":\"2026-08-10T20:01:05+00:00\",\"authority_use_receipt_digest\":\"sha256:5ee4de718e3c0857f01f2904c9ae1bf64408cd1b0274855fe3396e34af0ddf2d\",\"authority_use_receipt_ref\":\"authority_use_receipt:5ee4de718e3c0857f01f2904c9ae1bf6\",\"capability_use_receipt_digest\":\"sha256:cef64ad834e309f74299e4f38beee2d07898f0ad3e9f170f7b59ac49ef920be7\",\"capability_use_receipt_ref\":\"capability_use_receipt:cef64ad834e309f74299e4f38beee2d0\",\"captured_at\":\"2026-08-10T20:01:03+00:00\",\"configuration_digest\":\"sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"configuration_ref\":\"config:white-house-gold-eagle-2026-07-14\",\"source_definition_ref\":\"source_definition:white-house-gold-eagle-2026-07-14\",\"source_type_ref\":\"white_house_ai_policy_release\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:01:03Z",
+        "available_at": "2026-08-10T20:01:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.live-source-admission-receipt/v1alpha1",
+        "resource_digest": "sha256:9d47af1a01530bfd705a0e468d6a3ea2669c3ecb730f45114e7c4243f5887844",
+        "resource_id": "connection:88704136e0fca2d8c07b86fa6d89f33c",
+        "resource_kind": "connection",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "source_definition:white-house-gold-eagle-2026-07-14",
+        "white_house_ai_policy_release"
+      ],
+      "summary": "Successful governed capture through world_ai_policy_white_house_source.",
+      "supersedes": null,
+      "title": "Connection: source_definition:white-house-gold-eagle-2026-07-14"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:01:04Z\",\"attributes\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"agency_name\\\":\\\"The White House\\\",\\\"development_stage\\\":\\\"implementation_reported\\\",\\\"document_number\\\":\\\"white-house-release-2026-07-14-gold-eagle\\\",\\\"document_title\\\":\\\"White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination\\\",\\\"document_type\\\":\\\"Official Release\\\",\\\"executive_order_number\\\":\\\"14409\\\",\\\"federal_register_url\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"initiative_name\\\":\\\"GOLD EAGLE\\\",\\\"legal_status_notice\\\":\\\"WhiteHouse.gov announces implementation; it is not the legal edition of Executive Order 14409.\\\",\\\"linked_policy_ref\\\":\\\"executive_order:14409\\\",\\\"official_pdf_url\\\":\\\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\\\",\\\"policy_status\\\":\\\"implementation_reported\\\",\\\"policy_topic\\\":\\\"artificial_intelligence\\\",\\\"publication_date\\\":\\\"2026-07-14\\\",\\\"source_lineage_id\\\":\\\"white_house_release:gold_eagle_2026_07_14\\\",\\\"source_uri\\\":\\\"https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/\\\",\\\"verification_reference\\\":\\\"The release names Executive Order 14409; the govinfo PDF remains the official-format order reference.\\\"}\"},\"confidence\":1.0,\"contract\":\"ace.intelligence.entity-snapshot/v1alpha1\",\"entity_ref\":\"entity:ai-policy/executive-order-14409\",\"entity_type_ref\":\"ai_policy_record\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:01:04Z\",\"resource_digest\":\"sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c\",\"resource_id\":\"observation:48b85bc36e6e241daa0b5a12012f81ba\",\"resource_kind\":\"observation\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"projected_at\":\"2026-08-10T20:01:04Z\",\"resource_digest\":\"sha256:4b8e7d48bb5fe83fc785c37e5c2109150af0c882c21db177bb09af07ebd8923d\",\"resource_id\":\"entity_snapshot:4b8e7d48bb5fe83fc785c37e5c210915\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:01:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c",
+          "resource_id": "observation:48b85bc36e6e241daa0b5a12012f81ba",
+          "resource_kind": "observation",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:01:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+        "resource_digest": "sha256:4b8e7d48bb5fe83fc785c37e5c2109150af0c882c21db177bb09af07ebd8923d",
+        "resource_id": "entity_snapshot:4b8e7d48bb5fe83fc785c37e5c210915",
+        "resource_kind": "entity",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": null,
+      "supersedes": null,
+      "title": "entity:ai-policy/executive-order-14409"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_mode\":\"live\",\"acquisition_receipt_digest\":\"sha256:b0e77ae528f1a7bb96ebe6b552cd690dde451786aa364fe03e619b207e87d75f\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:b0e77ae528f1a7bb96ebe6b552cd690d\",\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:01:04Z\",\"confidence\":1.0,\"contract\":\"ace.intelligence.observation/v1alpha1\",\"event_effective_at\":null,\"ingested_at\":\"2026-08-10T20:01:04Z\",\"lineage\":[],\"mode\":\"live\",\"observed_at\":\"2026-08-10T20:01:02Z\",\"payload\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"agency_name\\\":\\\"The White House\\\",\\\"development_stage\\\":\\\"implementation_reported\\\",\\\"document_number\\\":\\\"white-house-release-2026-07-14-gold-eagle\\\",\\\"document_title\\\":\\\"White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination\\\",\\\"document_type\\\":\\\"Official Release\\\",\\\"executive_order_number\\\":\\\"14409\\\",\\\"federal_register_url\\\":\\\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\\\",\\\"initiative_name\\\":\\\"GOLD EAGLE\\\",\\\"legal_status_notice\\\":\\\"WhiteHouse.gov announces implementation; it is not the legal edition of Executive Order 14409.\\\",\\\"linked_policy_ref\\\":\\\"executive_order:14409\\\",\\\"official_pdf_url\\\":\\\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\\\",\\\"policy_status\\\":\\\"implementation_reported\\\",\\\"policy_topic\\\":\\\"artificial_intelligence\\\",\\\"publication_date\\\":\\\"2026-07-14\\\",\\\"source_lineage_id\\\":\\\"white_house_release:gold_eagle_2026_07_14\\\",\\\"source_uri\\\":\\\"https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/\\\",\\\"verification_reference\\\":\\\"The release names Executive Order 14409; the govinfo PDF remains the official-format order reference.\\\"}\"},\"product_id\":\"product:world-ai-command-center\",\"resource_digest\":\"sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c\",\"resource_id\":\"observation:48b85bc36e6e241daa0b5a12012f81ba\",\"source_digest\":\"sha256:cd6f89c4e8e26591d0b2afb72df4774931b3210a2041caf9cc704cb1c4d8eb57\",\"source_mapping\":{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"compiled_pack_id\":\"pack_ir:0679116c6b5e02cd021b085ba2d80cf2\",\"contract\":\"ace.intelligence.source-mapping-reference/v1alpha1\",\"mapping_digest\":\"sha256:1fc827df386bb928520eb30917635d15c0d2608e795e747b1459074422bc7469\",\"mapping_id\":\"ai_policy_implementation_snapshot\",\"module_digest\":\"sha256:49ef14654b182549abd0c5aab40d1b8e2ab6e787844adca43ea8ab91ef4fafcc\",\"module_id\":\"world_ai_source_mapping\",\"pack_digest\":\"sha256:0679116c6b5e02cd021b085ba2d80cf2d6f380a894f5ef0c9da89db588b7c124\"},\"source_published_at\":\"2026-07-14T00:00:00Z\",\"source_ref\":\"source_snapshot:cd6f89c4e8e26591d0b2afb72df47749\",\"subject_refs\":[\"entity:ai-policy/executive-order-14409\"]}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:01:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.observation/v1alpha1",
+        "resource_digest": "sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c",
+        "resource_id": "observation:48b85bc36e6e241daa0b5a12012f81ba",
+        "resource_kind": "observation",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": null,
+      "supersedes": null,
+      "title": "Observation from source_snapshot:cd6f89c4e8e26591d0b2afb72df47749"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"acquisition_receipt_digest\":\"sha256:b0e77ae528f1a7bb96ebe6b552cd690dde451786aa364fe03e619b207e87d75f\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:b0e77ae528f1a7bb96ebe6b552cd690d\",\"admission_receipt_digest\":\"sha256:9d47af1a01530bfd705a0e468d6a3ea2669c3ecb730f45114e7c4243f5887844\",\"admission_receipt_ref\":\"live_source_admission_receipt:9d47af1a01530bfd705a0e468d6a3ea2\",\"captured_payload_redacted\":true,\"event_effective_at\":null,\"ingested_at\":\"2026-08-10T20:01:04+00:00\",\"observed_at\":\"2026-08-10T20:01:02+00:00\",\"source_definition_ref\":\"source_definition:white-house-gold-eagle-2026-07-14\",\"source_published_at\":\"2026-07-14T00:00:00+00:00\",\"source_snapshot_digest\":\"sha256:cd6f89c4e8e26591d0b2afb72df4774931b3210a2041caf9cc704cb1c4d8eb57\",\"source_snapshot_ref\":\"source_snapshot:cd6f89c4e8e26591d0b2afb72df47749\",\"source_type_ref\":\"white_house_ai_policy_release\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:03Z",
+          "available_at": "2026-08-10T20:01:05Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.live-source-admission-receipt/v1alpha1",
+          "resource_digest": "sha256:9d47af1a01530bfd705a0e468d6a3ea2669c3ecb730f45114e7c4243f5887844",
+          "resource_id": "connection:88704136e0fca2d8c07b86fa6d89f33c",
+          "resource_kind": "connection",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:01:05Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.core.canonical-source-snapshot/v1alpha1",
+        "resource_digest": "sha256:cd6f89c4e8e26591d0b2afb72df4774931b3210a2041caf9cc704cb1c4d8eb57",
+        "resource_id": "source_definition:white-house-gold-eagle-2026-07-14",
+        "resource_kind": "source",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "source_definition:white-house-gold-eagle-2026-07-14",
+        "white_house_ai_policy_release"
+      ],
+      "summary": "Latest admitted white_house_ai_policy_release capture metadata; captured payload is redacted.",
+      "supersedes": null,
+      "title": "Source: source_definition:white-house-gold-eagle-2026-07-14"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:01:04Z\",\"baseline\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"attribute_id\\\":\\\"development_stage\\\",\\\"value\\\":\\\"directive_issued\\\"}\"},\"baseline_as_of\":\"2026-08-10T20:00:04Z\",\"confidence\":1.0,\"contract\":\"ace.intelligence.shift/v1alpha1\",\"current\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"attribute_id\\\":\\\"development_stage\\\",\\\"value\\\":\\\"implementation_reported\\\"}\"},\"delta\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"comparison_context\\\":{\\\"executive_order_number\\\":\\\"14409\\\",\\\"policy_topic\\\":\\\"artificial_intelligence\\\"},\\\"detector_id\\\":\\\"ai_policy_implementation_progression\\\",\\\"from_value\\\":\\\"directive_issued\\\",\\\"to_value\\\":\\\"implementation_reported\\\"}\"},\"detected_at\":\"2026-08-10T20:02:00Z\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:01:04Z\",\"resource_digest\":\"sha256:4b8e7d48bb5fe83fc785c37e5c2109150af0c882c21db177bb09af07ebd8923d\",\"resource_id\":\"entity_snapshot:4b8e7d48bb5fe83fc785c37e5c210915\",\"resource_kind\":\"entity_snapshot\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:00:04Z\",\"resource_available_at\":\"2026-08-10T20:00:04Z\",\"resource_digest\":\"sha256:edfd6425fad76e082cafd6c033bc3844567b8d52c19214fbdaaa16602eef8499\",\"resource_id\":\"entity_snapshot:edfd6425fad76e082cafd6c033bc3844\",\"resource_kind\":\"entity_snapshot\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"resource_digest\":\"sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255\",\"resource_id\":\"shift:d6164dce0b01e64bf8fa74bead718f77\",\"shift_type_ref\":\"official_ai_policy_progression\",\"subject_refs\":[\"entity:ai-policy/executive-order-14409\"],\"summary\":\"The watched categorical attribute development_stage changed from directive_issued to implementation_reported.\",\"title\":\"Material transition detected\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:01:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+          "resource_digest": "sha256:4b8e7d48bb5fe83fc785c37e5c2109150af0c882c21db177bb09af07ebd8923d",
+          "resource_id": "entity_snapshot:4b8e7d48bb5fe83fc785c37e5c210915",
+          "resource_kind": "entity",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:00:04Z",
+          "available_at": "2026-08-10T20:00:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.entity-snapshot/v1alpha1",
+          "resource_digest": "sha256:edfd6425fad76e082cafd6c033bc3844567b8d52c19214fbdaaa16602eef8499",
+          "resource_id": "entity_snapshot:edfd6425fad76e082cafd6c033bc3844",
+          "resource_kind": "entity",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:02:00Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.shift/v1alpha1",
+        "resource_digest": "sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255",
+        "resource_id": "shift:d6164dce0b01e64bf8fa74bead718f77",
+        "resource_kind": "shift",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": "The watched categorical attribute development_stage changed from directive_issued to implementation_reported.",
+      "supersedes": null,
+      "title": "Material transition detected"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:01:04Z\",\"confidence\":1.0,\"contract\":\"ace.intelligence.signal/v1alpha1\",\"details\":{\"contract\":\"ace.intelligence.canonical-json-value/v1alpha1\",\"value_json\":\"{\\\"detector_id\\\":\\\"ai_policy_implementation_progression\\\",\\\"shift_ref\\\":\\\"shift:d6164dce0b01e64bf8fa74bead718f77\\\",\\\"shift_type\\\":\\\"official_ai_policy_progression\\\"}\"},\"detected_at\":\"2026-08-10T20:02:00Z\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:02:00Z\",\"resource_digest\":\"sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255\",\"resource_id\":\"shift:d6164dce0b01e64bf8fa74bead718f77\",\"resource_kind\":\"shift\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"resource_digest\":\"sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92\",\"resource_id\":\"signal:2c76e695b4b6d36af3f56fee5fdc1b20\",\"signal_type_ref\":\"official_ai_policy_development\",\"subject_refs\":[\"entity:ai-policy/executive-order-14409\"],\"summary\":\"The watched categorical attribute development_stage changed from directive_issued to implementation_reported.\",\"title\":\"Material transition requires attention\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:02:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.shift/v1alpha1",
+          "resource_digest": "sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255",
+          "resource_id": "shift:d6164dce0b01e64bf8fa74bead718f77",
+          "resource_kind": "shift",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:02:00Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.signal/v1alpha1",
+        "resource_digest": "sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92",
+        "resource_id": "signal:2c76e695b4b6d36af3f56fee5fdc1b20",
+        "resource_kind": "signal",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": "The watched categorical attribute development_stage changed from directive_issued to implementation_reported.",
+      "supersedes": null,
+      "title": "Material transition requires attention"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:01:04Z\",\"assembled_at\":\"2026-08-10T20:03:00Z\",\"case_type_ref\":\"case_type:ai_policy_progression\",\"contract\":\"ace.intelligence.case/v1alpha1\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:01:04Z\",\"resource_digest\":\"sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c\",\"resource_id\":\"observation:48b85bc36e6e241daa0b5a12012f81ba\",\"resource_kind\":\"observation\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:00:04Z\",\"resource_available_at\":\"2026-08-10T20:00:04Z\",\"resource_digest\":\"sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8\",\"resource_id\":\"observation:a75b66f4d242ac1ecf8d0c6c295447ea\",\"resource_kind\":\"observation\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:02:00Z\",\"resource_digest\":\"sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255\",\"resource_id\":\"shift:d6164dce0b01e64bf8fa74bead718f77\",\"resource_kind\":\"shift\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"derived_from\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:02:00Z\",\"resource_digest\":\"sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92\",\"resource_id\":\"signal:2c76e695b4b6d36af3f56fee5fdc1b20\",\"resource_kind\":\"signal\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"purpose\":\"Freeze the exact two-lineage official-source progression before cited synthesis.\",\"resource_digest\":\"sha256:5a11b2d54ce1a8402bb038415e533cbcc2a5c72a1d6512c22b66dc3dfce06f10\",\"resource_id\":\"case:5a11b2d54ce1a8402bb038415e533cbc\",\"subject_refs\":[\"entity:ai-policy/executive-order-14409\"],\"title\":\"Executive Order 14409 to reported GOLD EAGLE implementation\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:01:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c",
+          "resource_id": "observation:48b85bc36e6e241daa0b5a12012f81ba",
+          "resource_kind": "observation",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:00:04Z",
+          "available_at": "2026-08-10T20:00:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8",
+          "resource_id": "observation:a75b66f4d242ac1ecf8d0c6c295447ea",
+          "resource_kind": "observation",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:02:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.shift/v1alpha1",
+          "resource_digest": "sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255",
+          "resource_id": "shift:d6164dce0b01e64bf8fa74bead718f77",
+          "resource_kind": "shift",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:02:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.signal/v1alpha1",
+          "resource_digest": "sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92",
+          "resource_id": "signal:2c76e695b4b6d36af3f56fee5fdc1b20",
+          "resource_kind": "signal",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:01:04Z",
+        "available_at": "2026-08-10T20:03:00Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.case/v1alpha1",
+        "resource_digest": "sha256:5a11b2d54ce1a8402bb038415e533cbcc2a5c72a1d6512c22b66dc3dfce06f10",
+        "resource_id": "case:5a11b2d54ce1a8402bb038415e533cbc",
+        "resource_kind": "case",
+        "revision": 1
+      },
+      "subject_refs": [
+        "entity:ai-policy/executive-order-14409"
+      ],
+      "summary": "Freeze the exact two-lineage official-source progression before cited synthesis.",
+      "supersedes": null,
+      "title": "Executive Order 14409 to reported GOLD EAGLE implementation"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"activation_revision\":{\"activation_id\":\"domain_activation:e3ab74011dbac5b1027b852a54fec7d5\",\"activation_key\":\"world_intelligence_ai_command_center\",\"contract\":\"ace.intelligence.activation-revision-reference/v1alpha1\",\"product_id\":\"product:world-ai-command-center\",\"revision\":1,\"revision_digest\":\"sha256:94148d8d89c51c3170ecc52895b5499f7de6ed0202236b60110a7476789c71ea\",\"revision_id\":\"activation_revision:94148d8d89c51c3170ecc52895b5499f\"},\"as_of\":\"2026-08-10T20:03:00Z\",\"body_markdown\":\"# AI Policy Reality Brief\\n\\nACE detected a configured progression from an issued AI directive to a later official report of implementation activity\\\\. The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities\\\\. The configured official\\\\-source change meets the threshold for researcher attention because it moves from directive publication to reported activity\\\\. The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction\\\\. The two citations are separate official publication lineages, but both are U\\\\.S\\\\. government records and do not constitute independent non\\\\-government corroboration\\\\.\\n\\n## What Changed\\n\\n- ACE detected a configured progression from an issued AI directive to a later official report of implementation activity\\\\. (inference supports: case:5a11b2d54ce1a8402bb038415e533cbc; uncertainty: The progression classifies admitted publication metadata; it does not establish legal effect, operational completeness, or policy success\\\\.)\\n\\n## Established Records\\n\\n- The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities\\\\. (cited supports: observation:48b85bc36e6e241daa0b5a12012f81ba, observation:a75b66f4d242ac1ecf8d0c6c295447ea)\\n\\n## Why It Matters\\n\\n- The configured official\\\\-source change meets the threshold for researcher attention because it moves from directive publication to reported activity\\\\. (inference supports: signal:2c76e695b4b6d36af3f56fee5fdc1b20; uncertainty: Materiality is the declared routing policy, not a measured real\\\\-world impact\\\\.)\\n\\n## Unknowns\\n\\n- The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction\\\\. (inference supports: shift:d6164dce0b01e64bf8fa74bead718f77; uncertainty: Additional official and independent evidence may change this assessment\\\\.)\\n\\n## Limitations\\n\\n- The two citations are separate official publication lineages, but both are U\\\\.S\\\\. government records and do not constitute independent non\\\\-government corroboration\\\\. (cited supports: observation:48b85bc36e6e241daa0b5a12012f81ba, observation:a75b66f4d242ac1ecf8d0c6c295447ea)\\n\",\"brief_type_ref\":\"world_intelligence\",\"citations\":[{\"acquisition_mode\":\"live\",\"acquisition_receipt_digest\":\"sha256:953cdc68f400b2bed298ce24a66ccaa33d950e6b3c4b11e738bf40db3697baf6\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:953cdc68f400b2bed298ce24a66ccaa3\",\"citation_digest\":\"sha256:b433afab7e1e5869039912c9e243a5a11b330fcabdbce79d086c3eaf5d1f7b6d\",\"citation_id\":\"citation:b433afab7e1e5869039912c9e243a5a1\",\"contract\":\"ace.intelligence.citation/v1alpha1\",\"excerpt\":null,\"locator\":null,\"retrieved_at\":\"2026-08-10T20:00:04Z\",\"source_as_of\":\"2026-06-05T00:00:00Z\",\"source_digest\":\"sha256:0e91d304db7642ee38f31e3261adeb6802f9310949875c4f30efae073db83c26\",\"source_ref\":\"source_snapshot:0e91d304db7642ee38f31e3261adeb68\"},{\"acquisition_mode\":\"live\",\"acquisition_receipt_digest\":\"sha256:b0e77ae528f1a7bb96ebe6b552cd690dde451786aa364fe03e619b207e87d75f\",\"acquisition_receipt_ref\":\"source_acquisition_receipt:b0e77ae528f1a7bb96ebe6b552cd690d\",\"citation_digest\":\"sha256:cbe127ac67bcfb93fb380617b12d13b4a08ad67d9f2fed78ffb2d1e7bbfa7b17\",\"citation_id\":\"citation:cbe127ac67bcfb93fb380617b12d13b4\",\"contract\":\"ace.intelligence.citation/v1alpha1\",\"excerpt\":null,\"locator\":null,\"retrieved_at\":\"2026-08-10T20:01:04Z\",\"source_as_of\":\"2026-07-14T00:00:00Z\",\"source_digest\":\"sha256:cd6f89c4e8e26591d0b2afb72df4774931b3210a2041caf9cc704cb1c4d8eb57\",\"source_ref\":\"source_snapshot:cd6f89c4e8e26591d0b2afb72df47749\"}],\"claims\":[{\"citation_ids\":[],\"claim_digest\":\"sha256:3b15cc7c8d75a71582217f5cad0c4d74419e07c1834b432b1b5f02926b7149bb\",\"claim_id\":\"grounded_claim:3b15cc7c8d75a71582217f5cad0c4d74\",\"confidence\":0.9,\"contract\":\"ace.intelligence.grounded-claim/v1alpha1\",\"grounding_kind\":\"inference\",\"inference_basis_refs\":[\"case:5a11b2d54ce1a8402bb038415e533cbc\"],\"statement\":\"ACE detected a configured progression from an issued AI directive to a later official report of implementation activity.\",\"uncertainty\":\"The progression classifies admitted publication metadata; it does not establish legal effect, operational completeness, or policy success.\"},{\"citation_ids\":[\"citation:b433afab7e1e5869039912c9e243a5a1\",\"citation:cbe127ac67bcfb93fb380617b12d13b4\"],\"claim_digest\":\"sha256:5b3bea6b2b61cb4abdd591a2d02296ffd62ad0c7794187f402c16d5492cef172\",\"claim_id\":\"grounded_claim:5b3bea6b2b61cb4abdd591a2d02296ff\",\"confidence\":1.0,\"contract\":\"ace.intelligence.grounded-claim/v1alpha1\",\"grounding_kind\":\"cited\",\"inference_basis_refs\":[],\"statement\":\"The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities.\",\"uncertainty\":null},{\"citation_ids\":[],\"claim_digest\":\"sha256:8c80ab68f774518c31bc0b7be3b8e79307f3cdaddac4e1ca8ec565701e9d94b1\",\"claim_id\":\"grounded_claim:8c80ab68f774518c31bc0b7be3b8e793\",\"confidence\":0.85,\"contract\":\"ace.intelligence.grounded-claim/v1alpha1\",\"grounding_kind\":\"inference\",\"inference_basis_refs\":[\"signal:2c76e695b4b6d36af3f56fee5fdc1b20\"],\"statement\":\"The configured official-source change meets the threshold for researcher attention because it moves from directive publication to reported activity.\",\"uncertainty\":\"Materiality is the declared routing policy, not a measured real-world impact.\"},{\"citation_ids\":[],\"claim_digest\":\"sha256:dc62ba517601ff61843e7c6f2167493bc7aa1582e540958b5cf58767e4e5b1b3\",\"claim_id\":\"grounded_claim:dc62ba517601ff61843e7c6f2167493b\",\"confidence\":0.8,\"contract\":\"ace.intelligence.grounded-claim/v1alpha1\",\"grounding_kind\":\"inference\",\"inference_basis_refs\":[\"shift:d6164dce0b01e64bf8fa74bead718f77\"],\"statement\":\"The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction.\",\"uncertainty\":\"Additional official and independent evidence may change this assessment.\"},{\"citation_ids\":[\"citation:b433afab7e1e5869039912c9e243a5a1\",\"citation:cbe127ac67bcfb93fb380617b12d13b4\"],\"claim_digest\":\"sha256:1e5edc2ade1ce9723d680fe02bac351f6de866579db36c3d60f410731932c875\",\"claim_id\":\"grounded_claim:1e5edc2ade1ce9723d680fe02bac351f\",\"confidence\":1.0,\"contract\":\"ace.intelligence.grounded-claim/v1alpha1\",\"grounding_kind\":\"cited\",\"inference_basis_refs\":[],\"statement\":\"The two citations are separate official publication lineages, but both are U.S. government records and do not constitute independent non-government corroboration.\",\"uncertainty\":null}],\"contract\":\"ace.intelligence.brief/v1alpha1\",\"executive_summary\":\"ACE detected a configured progression from an issued AI directive to a later official report of implementation activity. The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities. The configured official-source change meets the threshold for researcher attention because it moves from directive publication to reported activity. The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction. The two citations are separate official publication lineages, but both are U.S. government records and do not constitute independent non-government corroboration.\",\"generated_at\":\"2026-08-10T20:04:00Z\",\"lineage\":[{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:03:00Z\",\"resource_digest\":\"sha256:5a11b2d54ce1a8402bb038415e533cbcc2a5c72a1d6512c22b66dc3dfce06f10\",\"resource_id\":\"case:5a11b2d54ce1a8402bb038415e533cbc\",\"resource_kind\":\"case\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:01:04Z\",\"resource_digest\":\"sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c\",\"resource_id\":\"observation:48b85bc36e6e241daa0b5a12012f81ba\",\"resource_kind\":\"observation\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:00:04Z\",\"resource_available_at\":\"2026-08-10T20:00:04Z\",\"resource_digest\":\"sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8\",\"resource_id\":\"observation:a75b66f4d242ac1ecf8d0c6c295447ea\",\"resource_kind\":\"observation\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:02:00Z\",\"resource_digest\":\"sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255\",\"resource_id\":\"shift:d6164dce0b01e64bf8fa74bead718f77\",\"resource_kind\":\"shift\"},{\"contract\":\"ace.intelligence.lineage-reference/v1alpha1\",\"relation\":\"supports\",\"resource_as_of\":\"2026-08-10T20:01:04Z\",\"resource_available_at\":\"2026-08-10T20:02:00Z\",\"resource_digest\":\"sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92\",\"resource_id\":\"signal:2c76e695b4b6d36af3f56fee5fdc1b20\",\"resource_kind\":\"signal\"}],\"mode\":\"live\",\"product_id\":\"product:world-ai-command-center\",\"resource_digest\":\"sha256:d7d240147e48c3aef6a4a8e7ec4811218cbb7022f064f1aa75dd1f0b9633d5cc\",\"resource_id\":\"brief:d7d240147e48c3aef6a4a8e7ec481121\",\"title\":\"AI Policy Reality Brief\"}"
+      },
+      "provenance": [
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:03:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.case/v1alpha1",
+          "resource_digest": "sha256:5a11b2d54ce1a8402bb038415e533cbcc2a5c72a1d6512c22b66dc3dfce06f10",
+          "resource_id": "case:5a11b2d54ce1a8402bb038415e533cbc",
+          "resource_kind": "case",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:01:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:48b85bc36e6e241daa0b5a12012f81ba9f2403fde4e332ed51751b19fe4bcc5c",
+          "resource_id": "observation:48b85bc36e6e241daa0b5a12012f81ba",
+          "resource_kind": "observation",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:00:04Z",
+          "available_at": "2026-08-10T20:00:04Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.observation/v1alpha1",
+          "resource_digest": "sha256:a75b66f4d242ac1ecf8d0c6c295447ea0172394b9c94f78d038a5ccefd849be8",
+          "resource_id": "observation:a75b66f4d242ac1ecf8d0c6c295447ea",
+          "resource_kind": "observation",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:02:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.shift/v1alpha1",
+          "resource_digest": "sha256:d6164dce0b01e64bf8fa74bead718f77373c99c0a5c09314282a0dabb67c6255",
+          "resource_id": "shift:d6164dce0b01e64bf8fa74bead718f77",
+          "resource_kind": "shift",
+          "revision": 1
+        },
+        {
+          "as_of": "2026-08-10T20:01:04Z",
+          "available_at": "2026-08-10T20:02:00Z",
+          "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+          "product_id": "product:world-ai-command-center",
+          "resource_contract": "ace.intelligence.signal/v1alpha1",
+          "resource_digest": "sha256:2c76e695b4b6d36af3f56fee5fdc1b20c757657d124f40488da5f7cb061b1a92",
+          "resource_id": "signal:2c76e695b4b6d36af3f56fee5fdc1b20",
+          "resource_kind": "signal",
+          "revision": 1
+        }
+      ],
+      "reference": {
+        "as_of": "2026-08-10T20:03:00Z",
+        "available_at": "2026-08-10T20:04:00Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.brief/v1alpha1",
+        "resource_digest": "sha256:d7d240147e48c3aef6a4a8e7ec4811218cbb7022f064f1aa75dd1f0b9633d5cc",
+        "resource_id": "brief:d7d240147e48c3aef6a4a8e7ec481121",
+        "resource_kind": "brief",
+        "revision": 1
+      },
+      "subject_refs": [],
+      "summary": "ACE detected a configured progression from an issued AI directive to a later official report of implementation activity. The Federal Register record identifies Executive Order 14409, and the later White House release states that GOLD EAGLE has begun intake and prioritization of identified cybersecurity vulnerabilities. The configured official-source change meets the threshold for researcher attention because it moves from directive publication to reported activity. The admitted records do not establish implementation scope, independent outcome verification, effectiveness, legal consequence, or later correction. The two citations are separate official publication lineages, but both are U.S. government records and do not constitute independent non-government corroboration.",
+      "supersedes": null,
+      "title": "AI Policy Reality Brief"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"action\":\"create\",\"applied_at\":\"2026-08-10T20:04:30Z\",\"contract\":\"ace.intelligence.monitoring-lifecycle-receipt/v1alpha1\",\"lifecycle\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:16fd104bda848e7747d5e7adb2a4b7c2e5bf0a6c2773b534acd355865ea980e2\",\"reference\":\"monitoring_intent:16fd104bda848e7747d5e7adb2a4b7c2\"},\"owner_ref\":\"actor:world-ai-analyst\",\"persona_binding\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:5f27702f9e249be525cd9193b4e8b9a2f633f9645a806e02b80a42a1f059d65f\",\"reference\":\"persona_binding:5f27702f9e249be525cd9193b4e8b9a2\"},\"prior_receipt\":null,\"product_id\":\"product:world-ai-command-center\",\"receipt_digest\":\"sha256:3df1b3f0f875dd77bb464348d28efd204c561095cd902f459980a54dcd890a7d\",\"receipt_id\":\"monitoring_lifecycle:3df1b3f0f875dd77bb464348d28efd20\",\"request\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:9ad97b1df0994a744d2c66332828fa40dc25a95b97fbc28c4040e41b74f751f3\",\"reference\":\"monitoring_lifecycle_request:9ad97b1df0994a744d2c66332828fa40\"},\"sequence\":1,\"state_after\":\"active\",\"state_before\":null,\"target\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:1ba95054adaf9b6b6efce5ce0a693beae43846dd076a9afae6e5ca39f9a60485\",\"reference\":\"monitor:1ba95054adaf9b6b6efce5ce0a693bea\"},\"target_kind\":\"monitor\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:04:30Z",
+        "available_at": "2026-08-10T20:04:30Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.monitoring-lifecycle-receipt/v1alpha1",
+        "resource_digest": "sha256:3df1b3f0f875dd77bb464348d28efd204c561095cd902f459980a54dcd890a7d",
+        "resource_id": "monitoring_intent:16fd104bda848e7747d5e7adb2a4b7c2",
+        "resource_kind": "monitor",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "monitor:1ba95054adaf9b6b6efce5ce0a693bea",
+        "persona_binding:5f27702f9e249be525cd9193b4e8b9a2"
+      ],
+      "summary": "Monitor lifecycle is active.",
+      "supersedes": null,
+      "title": "Monitor: monitor:1ba95054adaf9b6b6efce5ce0a693bea"
+    },
+    {
+      "availability": "available",
+      "contract": "ace.intelligence.resource-plane-record/v1alpha1",
+      "degraded_reason_refs": [],
+      "payload": {
+        "contract": "ace.intelligence.canonical-json-value/v1alpha1",
+        "value_json": "{\"action\":\"create\",\"applied_at\":\"2026-08-10T20:04:31Z\",\"contract\":\"ace.intelligence.monitoring-lifecycle-receipt/v1alpha1\",\"lifecycle\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:d786f5921530f41b2b84b2d742efc9e4ad912414b1b78964e0ae8d4f058c0491\",\"reference\":\"monitoring_intent:d786f5921530f41b2b84b2d742efc9e4\"},\"owner_ref\":\"actor:world-ai-analyst\",\"persona_binding\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:5f27702f9e249be525cd9193b4e8b9a2f633f9645a806e02b80a42a1f059d65f\",\"reference\":\"persona_binding:5f27702f9e249be525cd9193b4e8b9a2\"},\"prior_receipt\":null,\"product_id\":\"product:world-ai-command-center\",\"receipt_digest\":\"sha256:3d5d92c84fd247663b372a90e9700e15eafd659890a2133beb62a6aa9ad16ded\",\"receipt_id\":\"monitoring_lifecycle:3d5d92c84fd247663b372a90e9700e15\",\"request\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:ab5a103dcff9cd48027e37da711dab1520aa5ee8dee77ef3adc8bde6d106990a\",\"reference\":\"monitoring_lifecycle_request:ab5a103dcff9cd48027e37da711dab15\"},\"sequence\":1,\"state_after\":\"active\",\"state_before\":null,\"target\":{\"contract\":\"ace.intelligence.exact-material-reference/v1alpha1\",\"digest\":\"sha256:bdca6306431d9b1c7062c0b029570d2a147a0e830bb6e79834d5061a502ea15f\",\"reference\":\"subscription:bdca6306431d9b1c7062c0b029570d2a\"},\"target_kind\":\"subscription\"}"
+      },
+      "provenance": [],
+      "reference": {
+        "as_of": "2026-08-10T20:04:31Z",
+        "available_at": "2026-08-10T20:04:31Z",
+        "contract": "ace.intelligence.resource-plane-reference/v1alpha1",
+        "product_id": "product:world-ai-command-center",
+        "resource_contract": "ace.intelligence.monitoring-lifecycle-receipt/v1alpha1",
+        "resource_digest": "sha256:3d5d92c84fd247663b372a90e9700e15eafd659890a2133beb62a6aa9ad16ded",
+        "resource_id": "monitoring_intent:d786f5921530f41b2b84b2d742efc9e4",
+        "resource_kind": "subscription",
+        "revision": 1
+      },
+      "subject_refs": [
+        "actor:world-ai-analyst",
+        "persona_binding:5f27702f9e249be525cd9193b4e8b9a2",
+        "subscription:bdca6306431d9b1c7062c0b029570d2a"
+      ],
+      "summary": "Subscription lifecycle is active.",
+      "supersedes": null,
+      "title": "Subscription: subscription:bdca6306431d9b1c7062c0b029570d2a"
+    }
+  ],
+  "next_cursor": null,
+  "page_digest": "sha256:cbd57985c62d0df97bf936297326fa7106c0c648bb4cc0e0d4732ba5460e3f7a",
+  "page_id": "resource_page:cbd57985c62d0df97bf936297326fa71",
+  "product_id": "product:world-ai-command-center",
+  "query_digest": "sha256:b214ad816d1064b214542545b4c73feec9664d7bb164accc628ce418ce360e46",
+  "query_id": "resource_query:b214ad816d1064b214542545b4c73fee",
+  "state": "degraded"
+}

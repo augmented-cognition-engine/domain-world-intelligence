@@ -11,6 +11,24 @@ It supplies World vocabulary, source mappings, material-change policy, personas,
 connectors, fixtures, and product evidence. It does not implement a second reasoning runtime,
 graph, state store, authority system, detector engine, or feedback loop.
 
+Atrium is the command center. World Intelligence configures what Atrium watches, how public
+evidence maps into concepts, what counts as a meaningful change, and how a cited Reality Brief is
+assembled. World does not ship a competing dashboard. The first AI Command Center artifact projects
+the accepted official-source journey through the public ACE 0.8 Intelligence resource plane; see
+[the demo design](docs/design/atrium-ai-command-center-demo-v1.md).
+
+The flagship topic is **artificial intelligence**. Its reviewed
+[source universe](domain_packs/world_intelligence_ai/source_catalog.json) spans models, independent
+evaluations, economics, reliability, open research, security, policy, capital, compute, talent,
+patents, procurement, adoption, and executive narratives. It separates sources that are already
+connected from sources the onboarding experience may propose. A proposed source is never counted
+as evidence until ACE admits a real capture from it.
+
+The intended output is cross-source intelligence—not a larger news feed: capability per dollar,
+provider claims versus independent evaluations, research-to-product diffusion, capital-to-capability
+conversion, infrastructure bottlenecks, policy implementation gaps, strategy visible through hiring
+and patents, executive promise tracking, and adoption-versus-trust gaps.
+
 [Install](#install) · [Architecture](#what-you-install-and-what-you-get) ·
 [Proof](#what-the-public-world-proof-demonstrates) · [Roadmap](ROADMAP.md) ·
 [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
@@ -23,9 +41,10 @@ graph, state store, authority system, detector engine, or feedback loop.
   and [`0.10.0 on PyPI`](https://pypi.org/project/ace-domain-world-intelligence/0.10.0/).
   See the [`0.10.0 released-artifact record`](docs/releases/world-intelligence-v0.10.0.md).
 
-The unreleased ACE 0.8 candidate also projects World’s complete recorded evidence-to-outcome loop
-through the single governed resource plane. That proof is additive and does not change the public
-0.10.0 installation contract; see the
+Released ACE Core 0.8 also projects World’s complete recorded evidence-to-outcome loop through the
+single governed resource plane. The current World 0.10.0 distribution still pins Core 0.6 while its
+0.8 compatibility release is prepared; the additive proof does not change that installation
+contract. See the
 [candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
 
 ## What you install, and what you get
@@ -34,7 +53,7 @@ The product is split into three layers, and this repository owns only the third.
 
 | Layer | Distribution | What it is |
 |---|---|---|
-| **ACE Core** | `ace-core` (public on PyPI, 0.6.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, governed bounded action, and append-only measured-impact receipts. |
+| **ACE Core** | `ace-core` (0.8.0 current; World 0.10.0 resolves 0.6.0) | The runtime: identity, graph, immutable records, temporal validation, lineage, admission, replay, governed bounded action, and append-only measured-impact receipts. |
 | **ACE Intelligence** | shipped with ACE Core | The domain-neutral contracts: the pack compiler, activation binding, detection, Case, Brief synthesis, and epistemic-status validation that packs are checked against. |
 | **World Intelligence Domain Pack** | `ace-domain-world-intelligence` (this repository) | JSON declarations only — ontology, source mapping, detection, personas, synthesis, epistemic-status vocabulary, and frozen conformance fixtures. |
 

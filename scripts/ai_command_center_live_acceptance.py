@@ -715,7 +715,7 @@ def _brief_draft(*, observations, shift, signal, case, policy):
     )
 
 
-async def run_acceptance() -> dict[str, Any]:
+async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[str, Any]:
     environment = await build_environment()
     baseline, current = await admit_sources(environment)
     authorizer = ExactAppendAuthorizer()
@@ -849,6 +849,18 @@ async def run_acceptance() -> dict[str, Any]:
     )
     if stored_case is None or stored_brief is None:
         raise AssertionError("LIVE Case or Reality Brief was not durably reopened")
+
+    if state_sink is not None:
+        state_sink.update(
+            {
+                "environment": environment,
+                "baseline": baseline,
+                "current": current,
+                "derivation": derivation,
+                "case": case,
+                "brief": brief,
+            }
+        )
 
     return {
         "contract": "ace.world-intelligence.ai-command-center-live-proof/v1alpha1",
