@@ -6,6 +6,7 @@ from pathlib import Path
 
 import ace.application as ace_application
 import pytest
+from ace.intelligence import IntelligenceOnboardingProfileV1Alpha1
 
 if not hasattr(ace_application, "IntelligenceResourcePlaneService"):
     pytest.skip("ACE Core 0.8 resource plane is required", allow_module_level=True)
@@ -71,6 +72,15 @@ def test_ai_command_center_source_catalog_is_broad_but_honest() -> None:
 
 
 def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
+    required_profile_fields = {
+        "domain_label",
+        "topic_label",
+        "starter_prompts",
+        "source_groups",
+    }
+    if not required_profile_fields <= set(IntelligenceOnboardingProfileV1Alpha1.model_fields):
+        pytest.skip("the expanded ACE Core onboarding-profile contract is required for the Atrium projection")
+
     page = asyncio.run(build_atrium_page())
     kinds = {item["reference"]["resource_kind"] for item in page["items"]}
     monitoring_items = [
