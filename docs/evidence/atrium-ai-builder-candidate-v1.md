@@ -28,7 +28,8 @@ Brief strategies live in the World host script; the JSON Domain Pack remains ine
 The projected Atrium page contains 23 resources: two Connections, two Sources, two Observations,
 two Entity snapshots, one Shift, one Signal, one Case, one cited Brief, one Monitor, one
 Subscription, one Builder profile, and eight Builder session revisions. Exact replay/reopen and
-the paired Core projection remain required release gates.
+the paired Core projection passed through Core PR #145 and World PR #24. The post-landing showcase
+launcher reproduces the same page in the shared Atrium with one source-checkout command.
 
 ## Limitations
 

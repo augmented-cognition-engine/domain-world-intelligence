@@ -53,16 +53,22 @@ journey:
 
 `Federal Register + White House -> Observation -> Shift -> Signal -> Case -> cited Brief`
 
-Generate the exact Atrium input from the paired Core and World candidate checkouts:
+Launch the exact resource page in Core's local Atrium from a World checkout:
 
 ```bash
-export CORE=/path/to/ace-core
-PYTHONPATH="$PWD:$CORE" uv run python -m scripts.atrium_ai_command_center_demo
+/path/to/ace-core/.venv/bin/python \
+  -m scripts.launch_atrium_ai_command_center \
+  --core /path/to/ace-core
 ```
 
-Released World 0.10.0 still pins Core 0.6, while the new profile/session projection is stacked on
-the current Core checkout. Installed-artifact reproduction remains a landing gate; this source
-command is not a public package compatibility claim.
+The command generates the governed page, validates the exact Builder journey, starts the Core
+canvas on loopback, and opens `/atrium`. The Vite-only replay seam serves the immutable page to the
+shared Core UI. It creates no second store, connection, evidence admission, or runtime authority and
+is absent from the production canvas host. Use `--verify-only` to generate and validate without
+starting the browser.
+
+Released World 0.10.0 still pins Core 0.6, so this repository demo intentionally runs with an
+explicit current Core checkout. It is not a public package compatibility claim.
 
 The resulting `artifacts/atrium-demo/world-ai-resource-page.json` is the public
 Intelligence resource-plane page Atrium consumes. It contains no new UI-specific
