@@ -211,6 +211,7 @@ def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate
     assert 'python scripts/normalize_sdist.py "dist/${ROOT_SDIST}"' in ci
     assert 'cmp "dist/${ROOT_WHEEL}" "${reproducible}/${ROOT_WHEEL}"' in ci
     assert 'cmp "dist/${ROOT_SDIST}" "${reproducible}/${ROOT_SDIST}"' in ci
+    assert "--refresh-package ace-core" in ci
 
     assert "default: v0.12.0" in publish
     assert "packages-dir: dist" in publish

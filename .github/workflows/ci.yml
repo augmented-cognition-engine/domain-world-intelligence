@@ -307,7 +307,8 @@ jobs:
           # editable adapter path source) out of this resolution, so the wheel is
           # proven against the public PyPI release of ace-core and nothing local.
           uv venv --no-config --python 3.12 isolated-venv
-          uv pip install --no-config --python isolated-venv/bin/python \
+          uv pip install --no-config --refresh-package ace-core \
+            --python isolated-venv/bin/python \
             "./${ROOT_WHEEL}" "ace-core==${ACE_CORE_VERSION}"
           # Run with -I from outside the checkout so the repository's source tree
           # cannot shadow the installed distribution.
