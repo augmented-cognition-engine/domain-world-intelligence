@@ -4,7 +4,7 @@ requires-python = "==3.12.*"
 
 [[package]]
 name = "ace-core"
-version = "0.6.0"
+version = "0.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -52,14 +52,14 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4c/96/771518b7eab6363c68aa743130ff9eaba13c3b6b8cb8d5f274affc68765a/ace_core-0.6.0.tar.gz", hash = "sha256:a3f117a8b40f1f87826606a41542a77989ac537346538989c014953f59894e5e", size = 5051207, upload-time = "2026-08-11T21:06:39.631Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/1b/c51e98b8a132bff93b6dcfe33c295317e3d1a4ab9d126a8c461e4e9fb3bf/ace_core-0.8.1.tar.gz", hash = "sha256:e18f611083184413b5f52b24dfd1a837aaf7268456b7e4c0e5db3127df443158", size = 5512904, upload-time = "2026-08-13T18:18:33.981Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/ae/8738dd1354da8d377d3ba8836cad42ac19a9cf74787886ddcdd888a94283/ace_core-0.6.0-py3-none-any.whl", hash = "sha256:1dd6e28f43f8d0894aba11e16e95b6b66eb8198c233ef297425e3561285373b3", size = 5813448, upload-time = "2026-08-11T21:06:37.332Z" },
+    { url = "https://files.pythonhosted.org/packages/9e/9f/1ed78762de9027d1f7a0705c92101d0ff67561e9c52ff22ac9674eb3bd9a/ace_core-0.8.1-py3-none-any.whl", hash = "sha256:b1eaee37e0ce03a4c480b8d69845444f129d871a7f62f8592de9b10ecef08c31", size = 6391473, upload-time = "2026-08-13T18:18:32.111Z" },
 ]
 
 [[package]]
 name = "ace-domain-world-intelligence"
-version = "0.10.0"
+version = "0.11.0"
 source = { editable = "." }
 dependencies = [
     { name = "ace-core" },
@@ -74,7 +74,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.6.0,<0.7" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.1,<0.9" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -86,14 +86,14 @@ dev = [
 
 [[package]]
 name = "ace-ext-world-federal-register-source"
-version = "0.3.0"
+version = "0.4.0"
 source = { editable = "adapters/federal_register_source" }
 dependencies = [
     { name = "ace-core" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.6.0,<0.7" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.1,<0.9" }]
 
 [package.metadata.requires-dev]
 dev = [

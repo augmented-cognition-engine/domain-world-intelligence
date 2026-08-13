@@ -46,11 +46,7 @@ def test_ai_command_center_source_catalog_is_broad_but_honest() -> None:
     assert all(source["demo_wave"] in catalog["demo_waves"] for source in sources)
     assert {source["connection_state"] for source in sources} == {"connected", "proposed"}
     assert sum(source["connection_state"] == "connected" for source in sources) == 7
-    assert {
-        source["source_id"]
-        for source in sources
-        if source["connection_state"] == "connected"
-    } == {
+    assert {source["source_id"] for source in sources if source["connection_state"] == "connected"} == {
         "openai_news",
         "anthropic_news",
         "google_deepmind_model_cards",
@@ -80,9 +76,8 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
     monitoring_items = [
         item for item in page["items"] if item["reference"]["resource_kind"] in {"monitor", "subscription"}
     ]
-    builder_items = [
-        item for item in page["items"] if item["reference"]["resource_kind"] == "builder_session"
-    ]
+    builder_items = [item for item in page["items"] if item["reference"]["resource_kind"] == "builder_session"]
+    brief_item = next(item for item in page["items"] if item["reference"]["resource_kind"] == "brief")
 
     assert page["product_id"] == "product:world-ai-command-center"
     assert page["next_cursor"] is None
@@ -140,3 +135,11 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
         "first_briefing_ready",
     ]
     assert all(item["availability"] == "available" for item in builder_items)
+    assert brief_item["title"] == "AI Policy: Directive to Reported Implementation"
+    assert brief_item["summary"].startswith("Executive Order 14409 moved from publication to reported implementation:")
+    assert "This matters because the policy now has a reported operating mechanism" in brief_item["summary"]
+    assert "The change is supported by two admitted records" in brief_item["summary"]
+    assert (
+        "The White House reported the implementation activity on July 14, 2026—39 days later" in brief_item["summary"]
+    )
+    assert "No admitted source yet shows how many vulnerabilities entered the program" in brief_item["summary"]

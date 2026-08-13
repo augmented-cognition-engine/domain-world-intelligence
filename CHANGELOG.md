@@ -8,7 +8,7 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
-## Unreleased
+## [0.11.0] — 2026-08-13
 
 ### Added
 
@@ -21,12 +21,34 @@ noted here only where the boundary between them changes.
 - The shared Atrium page now reopens 43 resources: seven Sources, Connections, Entities, and
   Observations plus the original cited policy Shift, Signal, Case, Brief, Monitor, Subscription,
   Builder profile, and eight Builder revisions.
+- Added a non-authorizing onboarding profile and exact eight-revision
+  `Connect → Map → Watch → Brief` session using World-owned Connection, Ontology, Intelligence,
+  and Briefing strategies.
+- Added a loopback-only launcher for the immutable World AI resource page inside shared Atrium;
+  World does not ship a separate dashboard, state store, or authority path.
+- Reframed the flagship policy Brief around the decision-useful delta: what changed, why the move
+  from directive to reported operation matters, what evidence to watch next, and what remains
+  unknown.
+- Made **What / Why / How / When** the visual narrative grammar of the flagship Brief and its
+  supporting Case, Shift, and Signal. The Command Center leads with the exact domain-authored
+  change while shared type semantics, timing, and governed lineage keep supporting records useful
+  without inventing domain claims.
+
+### Changed
+
+- Moved the inert root distribution to `ace-core>=0.8.1,<0.9`, making the released package directly
+  compatible with the Intelligence OS resource plane and durable onboarding projection.
+- Bumped the separately packaged official-source adapter to 0.4.0 for the additive reviewed AI
+  publication adapter under the same Core compatibility window. The root distribution still
+  contains JSON only and never installs connector code transitively.
 
 ### Boundaries
 
 - The five new captures use deterministic recorded transports and make no network-freshness claim.
   They remain contextual Observations; only the original two-record policy closure supports the
   existing Shift, Signal, Case, and Brief.
+- Proposed sources remain proposals until separately admitted through a reviewed connector. The
+  release grants no autonomous refresh, recommendation, delivery, or publication authority.
 
 ## [0.10.0] — 2026-08-11
 

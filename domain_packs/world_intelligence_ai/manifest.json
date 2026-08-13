@@ -33,7 +33,7 @@
       "resource_id": "world_ai_synthesis",
       "path": "modules/synthesis.json",
       "media_type": "application/json",
-      "digest": "sha256:685fc268a92fb2170fc1e1b110348ac1abe6f329b3db5c16b1124a3fc4aede8e"
+      "digest": "sha256:d8b57407a389f31e18c114a78df9c696cf9561e260529cb11dbfc6b6cc592717"
     },
     {
       "resource_id": "world_ai_personas",

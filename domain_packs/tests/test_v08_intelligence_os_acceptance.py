@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 import ace.application as ace_application
+import pytest
 
 if not hasattr(ace_application, "IntelligenceResourcePlaneService"):
     pytest.skip(

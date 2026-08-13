@@ -703,8 +703,9 @@ def _brief_draft(*, observations, shift, signal, case, policy):
     sections = {
         "what_changed": BriefDraftClaimV1Alpha1(
             statement=(
-                "ACE detected a configured progression from an issued AI directive to a later "
-                "official report of implementation activity."
+                "Executive Order 14409 moved from publication to reported implementation: the "
+                "White House says GOLD EAGLE has begun accepting and prioritizing identified "
+                "cybersecurity vulnerabilities."
             ),
             grounding_kind=ClaimGroundingKind.INFERENCE,
             support_refs=(str(case.resource_id),),
@@ -714,11 +715,11 @@ def _brief_draft(*, observations, shift, signal, case, policy):
                 "legal effect, operational completeness, or policy success."
             ),
         ),
-        "established_records": BriefDraftClaimV1Alpha1(
+        "how_we_know": BriefDraftClaimV1Alpha1(
             statement=(
-                "The Federal Register record identifies Executive Order 14409, and the later "
-                "White House release states that GOLD EAGLE has begun intake and prioritization "
-                "of identified cybersecurity vulnerabilities."
+                "The change is supported by two admitted records: the published Federal Register "
+                "order and a later White House release connecting GOLD EAGLE to that order and "
+                "reporting that intake and prioritization had begun."
             ),
             grounding_kind=ClaimGroundingKind.CITED,
             support_refs=(baseline_id, current_id),
@@ -726,18 +727,29 @@ def _brief_draft(*, observations, shift, signal, case, policy):
         ),
         "why_it_matters": BriefDraftClaimV1Alpha1(
             statement=(
-                "The configured official-source change meets the threshold for researcher "
-                "attention because it moves from directive publication to reported activity."
+                "This matters because the policy now has a reported operating mechanism, not only "
+                "a directive. The next evidence to watch is implementation scope, prioritization "
+                "criteria, agency follow-through, and independently measured outcomes."
             ),
             grounding_kind=ClaimGroundingKind.INFERENCE,
             support_refs=(str(signal.resource_id),),
             confidence=0.85,
             uncertainty="Materiality is the declared routing policy, not a measured real-world impact.",
         ),
+        "when_it_changed": BriefDraftClaimV1Alpha1(
+            statement=(
+                "The directive was published on June 5, 2026. The White House reported the "
+                "implementation activity on July 14, 2026—39 days later."
+            ),
+            grounding_kind=ClaimGroundingKind.CITED,
+            support_refs=(baseline_id, current_id),
+            confidence=1.0,
+        ),
         "unknowns": BriefDraftClaimV1Alpha1(
             statement=(
-                "The admitted records do not establish implementation scope, independent outcome "
-                "verification, effectiveness, legal consequence, or later correction."
+                "No admitted source yet shows how many vulnerabilities entered the program, how "
+                "priorities were set, which agencies acted, or whether the activity improved "
+                "cybersecurity outcomes."
             ),
             grounding_kind=ClaimGroundingKind.INFERENCE,
             support_refs=(str(shift.resource_id),),
@@ -746,8 +758,9 @@ def _brief_draft(*, observations, shift, signal, case, policy):
         ),
         "limitations": BriefDraftClaimV1Alpha1(
             statement=(
-                "The two citations are separate official publication lineages, but both are U.S. "
-                "government records and do not constitute independent non-government corroboration."
+                "Both records are U.S. government publications. They establish what the government "
+                "issued and later reported, but they do not independently verify implementation or "
+                "results."
             ),
             grounding_kind=ClaimGroundingKind.CITED,
             support_refs=(baseline_id, current_id),
@@ -925,10 +938,7 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
             "json_only": True,
         },
         "source": {
-            "modes": [
-                item.observation.mode.value
-                for item in (baseline, current, *context_admissions)
-            ],
+            "modes": [item.observation.mode.value for item in (baseline, current, *context_admissions)],
             "lineages": [
                 item.entity_snapshot.attributes.parsed_value()["source_lineage_id"]
                 for item in (baseline, current, *context_admissions)
@@ -943,14 +953,10 @@ async def run_acceptance(*, state_sink: dict[str, Any] | None = None) -> dict[st
             ),
             "capture_calls": [item.capture_calls for item in environment.adapters],
             "context_watch_areas": sorted(
-                item.entity_snapshot.attributes.parsed_value()["watch_area"]
-                for item in context_admissions
+                item.entity_snapshot.attributes.parsed_value()["watch_area"] for item in context_admissions
             ),
             "publisher_count": len(
-                {
-                    item.entity_snapshot.attributes.parsed_value()["publisher"]
-                    for item in context_admissions
-                }
+                {item.entity_snapshot.attributes.parsed_value()["publisher"] for item in context_admissions}
             ),
             "recorded_transport": True,
             "network_access": False,

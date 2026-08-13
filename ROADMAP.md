@@ -15,10 +15,15 @@ source code into the platform.
   control as an unsupported public subject instead of inventing provenance.
 
 See the [ACE 0.8 candidate evidence](docs/evidence/intelligence-os-v0.8-core-candidate-v1.md).
-World 0.10.0 package compatibility remains on Core 0.6. The next World release will move that
-public installation contract to the now-released Core 0.8 line.
+World 0.11.0 moves the public installation contract to the released Core 0.8.1 line.
 
-## Active — Atrium AI Command Center demonstration
+Every first-class Brief and decision-facing Signal, Shift, Case, Decision, Action, Outcome, or
+Feedback record must make **What / Why / How / When** visually scannable. Domain-authored Briefs
+carry the specific claims; shared type semantics and governed lineage keep supporting records
+truthful. Unknowns, conflicts, and limitations remain mandatory, but they follow the intelligence
+instead of obscuring it.
+
+## Passed — 0.11.0 Atrium AI Command Center demonstration
 
 The guided Builder and shared-Atrium binding passed through Core PR #145 and World PR #24. World
 PR #25 made the accepted page launchable in Atrium with one source-checkout command while keeping
@@ -49,9 +54,9 @@ page from two policy sources to seven admitted source lineages across seven publ
   NIST, and NVIDIA through the same governed source-ingress path. They project as attributable
   Sources, Connections, Entities, and Observations; they do not become corroborated Shifts or
   recommendations merely because they are visible.
-- Next, migrate the released World package compatibility window, add opt-in refresh for the
-  reviewed source profiles, and connect independent measurement plus price/economics sources so
-  provider claims can be tested rather than merely collected.
+- Next, add opt-in refresh for the reviewed source profiles, make public GitHub project traction a
+  first-class capability signal, and connect independent measurement plus price/economics sources
+  so provider claims can be tested rather than merely collected.
 
 See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md)
 and [reviewed source Wave 1 evidence](docs/evidence/atrium-ai-wave1-sources-v1.md).

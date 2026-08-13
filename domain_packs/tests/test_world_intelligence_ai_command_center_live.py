@@ -42,7 +42,7 @@ async def test_reviewed_ai_source_wave_reaches_live_atrium_context_and_cited_pol
     assert result["intelligence"]["case_member_count"] == 4
     assert result["intelligence"]["brief_mode"] == "live"
     assert result["intelligence"]["citation_count"] == 2
-    assert result["intelligence"]["claim_count"] == 5
+    assert result["intelligence"]["claim_count"] == 6
     assert result["separation"]["prepared_record_count"] == 0
     assert result["separation"]["prepared_material_reused"] is False
     assert result["separation"]["autonomous_publication"] is False

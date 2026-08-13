@@ -11,9 +11,7 @@ def test_ai_command_center_onboarding_profile_is_outcome_led_and_non_authorizing
         (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/source_catalog.json").read_text(encoding="utf-8")
     )
     profile = json.loads(
-        (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/onboarding_profile.json").read_text(
-            encoding="utf-8"
-        )
+        (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/onboarding_profile.json").read_text(encoding="utf-8")
     )
     watch_ids = {watch["watch_id"] for watch in catalog["watch_areas"]}
     intelligence_ids = {item["signal_id"] for item in catalog["signature_intelligence"]}
@@ -30,14 +28,12 @@ def test_ai_command_center_onboarding_profile_is_outcome_led_and_non_authorizing
         "competitive_landscape",
         "custom_picture",
     }
+    assert all(set(outcome["recommended_watch_ids"]) <= watch_ids for outcome in profile["outcomes"])
+    assert all(set(outcome["recommended_intelligence_ids"]) <= intelligence_ids for outcome in profile["outcomes"])
     assert all(
-        set(outcome["recommended_watch_ids"]) <= watch_ids for outcome in profile["outcomes"]
-    )
-    assert all(
-        set(outcome["recommended_intelligence_ids"]) <= intelligence_ids
+        outcome["icon_hint"] in {"choice", "strategy", "research", "risk", "competition", "custom"}
         for outcome in profile["outcomes"]
     )
-    assert all(outcome["icon_hint"] in {"choice", "strategy", "research", "risk", "competition", "custom"} for outcome in profile["outcomes"])
     assert all("recommended_topic_labels" in outcome for outcome in profile["outcomes"])
     assert all("recommended_intelligence_labels" in outcome for outcome in profile["outcomes"])
     assert {cadence["cadence_id"] for cadence in profile["cadences"]} == {

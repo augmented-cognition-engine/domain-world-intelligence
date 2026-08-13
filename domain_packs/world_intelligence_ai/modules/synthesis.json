@@ -5,12 +5,13 @@
     {
       "template_id": "ai_policy_reality_brief",
       "brief_type": "world_intelligence",
-      "display_name": "AI Policy Reality Brief",
+      "display_name": "AI Policy: Directive to Reported Implementation",
       "objective": "Explain the exact official-source progression while keeping cited records, bounded inference, unknowns, and source-lineage limits distinct.",
       "required_sections": [
         "what_changed",
-        "established_records",
         "why_it_matters",
+        "how_we_know",
+        "when_it_changed",
         "unknowns",
         "limitations"
       ],

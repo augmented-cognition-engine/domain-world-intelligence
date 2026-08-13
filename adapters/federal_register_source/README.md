@@ -6,8 +6,9 @@ AI publication profiles, and planetary-defense publications. It is executable ho
 Domain Pack content, and it has no ACE extension entry point. The distribution name remains
 `ace-ext-world-federal-register-source` for compatibility.
 
-Version 0.3.0 updates the package compatibility boundary to `ace-core>=0.6.0,<0.7` while preserving
-the accepted 0.1.0 connector implementation identities. Version 0.2.0 added an explicitly enabled
+Version 0.4.0 updates the package compatibility boundary to `ace-core>=0.8.1,<0.9` and adds the
+reviewed AI publication adapter while preserving the accepted source-profile identities. Version
+0.3.0 moved the package to the Core 0.6 line. Version 0.2.0 added an explicitly enabled
 network transport for the one reviewed URI. It performs a
 direct TLS connection to a validated public address, preserves hostname certificate validation,
 does not consult ambient proxies or credential stores, follows no redirects, requests identity
