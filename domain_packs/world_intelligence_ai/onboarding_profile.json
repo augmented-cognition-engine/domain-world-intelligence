@@ -1,0 +1,155 @@
+{
+  "contract": "ace.domain-pack.intelligence-onboarding-profile/v1alpha1",
+  "profile_id": "intelligence_onboarding_profile:world-ai-command-center",
+  "topic_id": "artificial_intelligence",
+  "display_name": "AI Command Center",
+  "prompt": "What do you need to stay ahead of?",
+  "description": "Build a continuously updated, evidence-grounded picture of the AI landscape without reading every release, filing, benchmark, policy, or news feed.",
+  "outcomes": [
+    {
+      "outcome_id": "build_or_buy_ai",
+      "label": "Choose or buy AI",
+      "description": "Compare capability, cost, reliability, openness, and operational risk for real workloads.",
+      "icon_hint": "choice",
+      "recommended_watch_ids": [
+        "models_and_capabilities",
+        "benchmarks_and_independent_evals",
+        "economics_and_pricing",
+        "reliability_and_platform_health",
+        "open_ecosystem_and_research",
+        "safety_security_and_incidents"
+      ],
+      "recommended_intelligence_ids": [
+        "capability_cost_frontier",
+        "claim_vs_reality",
+        "adoption_trust_gap"
+      ],
+      "recommended_topic_labels": ["Models & capabilities", "Independent evaluations", "Economics & pricing", "Reliability", "Open ecosystem", "Safety & security"],
+      "recommended_intelligence_labels": ["Capability-per-dollar", "Claim versus reality", "Adoption versus trust"]
+    },
+    {
+      "outcome_id": "strategy_and_investment",
+      "label": "Set strategy or evaluate investments",
+      "description": "See which capital, infrastructure, talent, and adoption moves are becoming durable advantage.",
+      "icon_hint": "strategy",
+      "recommended_watch_ids": [
+        "capital_and_company_moves",
+        "compute_chips_and_infrastructure",
+        "talent_patents_and_research",
+        "adoption_procurement_and_outcomes",
+        "models_and_capabilities",
+        "narratives_executives_and_public_attention"
+      ],
+      "recommended_intelligence_ids": [
+        "capital_to_capability_conversion",
+        "infrastructure_bottleneck",
+        "strategy_before_announcement",
+        "executive_promise_tracker"
+      ],
+      "recommended_topic_labels": ["Capital & company moves", "Compute & infrastructure", "Talent & patents", "Adoption & outcomes", "Models & capabilities", "Executive narratives"],
+      "recommended_intelligence_labels": ["Capital-to-capability", "Infrastructure bottleneck", "Strategy before announcement", "Executive promise tracker"]
+    },
+    {
+      "outcome_id": "frontier_research_and_products",
+      "label": "Track frontier research and products",
+      "description": "Follow capability advances from papers and open repositories into evaluated, available products.",
+      "icon_hint": "research",
+      "recommended_watch_ids": [
+        "open_ecosystem_and_research",
+        "models_and_capabilities",
+        "benchmarks_and_independent_evals",
+        "talent_patents_and_research"
+      ],
+      "recommended_intelligence_ids": [
+        "research_to_product_diffusion",
+        "claim_vs_reality",
+        "capability_cost_frontier"
+      ],
+      "recommended_topic_labels": ["Open research", "Models & capabilities", "Independent evaluations", "Talent & patents"],
+      "recommended_intelligence_labels": ["Research-to-product diffusion", "Claim versus reality", "Capability-per-dollar"]
+    },
+    {
+      "outcome_id": "policy_safety_and_operational_risk",
+      "label": "Manage policy, safety, and operational risk",
+      "description": "Track enforceable rules, implementation gaps, incidents, safeguards, reliability, and concentration risk.",
+      "icon_hint": "risk",
+      "recommended_watch_ids": [
+        "policy_regulation_and_governance",
+        "safety_security_and_incidents",
+        "reliability_and_platform_health",
+        "adoption_procurement_and_outcomes"
+      ],
+      "recommended_intelligence_ids": [
+        "regulation_implementation_gap",
+        "adoption_trust_gap",
+        "claim_vs_reality"
+      ],
+      "recommended_topic_labels": ["Policy & governance", "Safety & incidents", "Reliability", "Adoption & outcomes"],
+      "recommended_intelligence_labels": ["Regulation-to-implementation", "Adoption versus trust", "Claim versus reality"]
+    },
+    {
+      "outcome_id": "competitive_landscape",
+      "label": "Understand the competitive landscape",
+      "description": "Compare labs, providers, platforms, and infrastructure players through claims, evidence, investment, and execution.",
+      "icon_hint": "competition",
+      "recommended_watch_ids": [
+        "models_and_capabilities",
+        "benchmarks_and_independent_evals",
+        "economics_and_pricing",
+        "capital_and_company_moves",
+        "compute_chips_and_infrastructure",
+        "talent_patents_and_research",
+        "narratives_executives_and_public_attention"
+      ],
+      "recommended_intelligence_ids": [
+        "capability_cost_frontier",
+        "claim_vs_reality",
+        "capital_to_capability_conversion",
+        "strategy_before_announcement",
+        "executive_promise_tracker"
+      ],
+      "recommended_topic_labels": ["Models & capabilities", "Independent evaluations", "Economics & pricing", "Capital", "Compute", "Talent", "Executive narratives"],
+      "recommended_intelligence_labels": ["Capability-per-dollar", "Claim versus reality", "Capital-to-capability", "Strategy before announcement", "Executive promise tracker"]
+    },
+    {
+      "outcome_id": "custom_picture",
+      "label": "Build a custom picture",
+      "description": "Choose the entities, questions, evidence, thresholds, and cadence that matter to your decision.",
+      "icon_hint": "custom",
+      "recommended_watch_ids": [],
+      "recommended_intelligence_ids": [],
+      "recommended_topic_labels": [],
+      "recommended_intelligence_labels": []
+    }
+  ],
+  "cadences": [
+    {
+      "cadence_id": "urgent_only",
+      "label": "Urgent only",
+      "description": "Interrupt me only for a material threshold, contradiction, or incident."
+    },
+    {
+      "cadence_id": "daily_pulse",
+      "label": "Daily pulse",
+      "description": "Give me a concise daily orientation plus urgent alerts."
+    },
+    {
+      "cadence_id": "weekly_brief",
+      "label": "Weekly briefing",
+      "description": "Synthesize the week's movement, open questions, and next catalysts."
+    }
+  ],
+  "default_cadence_id": "weekly_brief",
+  "first_value": {
+    "public_sources_first": true,
+    "private_sources_optional": true,
+    "completion_label": "Open my first briefing"
+  },
+  "guardrails": {
+    "declarative_only": true,
+    "authorizes_connections": false,
+    "authorizes_monitors": false,
+    "proposed_sources_are_not_connected": true,
+    "feedback_may_reweight_relevance_not_authority": true
+  }
+}

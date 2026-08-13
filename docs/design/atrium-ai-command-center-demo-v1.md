@@ -21,6 +21,13 @@ The source universe organizes onboarding around twelve watch areas:
 11. adoption, procurement, and outcomes; and
 12. narratives, executives, and public attention.
 
+The companion
+[`onboarding_profile.json`](../../domain_packs/world_intelligence_ai/onboarding_profile.json)
+keeps first use outcome-led. It asks whether the user needs to choose AI, set strategy, track the
+frontier, manage risk, understand competition, or build a custom picture; then recommends a bounded
+subset of these watch areas, intelligence products, and cadence. The profile is declarative and
+non-authorizing. It does not connect a source or activate a monitor.
+
 The portfolio is declarative and reviewed. Its `connected` sources describe
 implemented source definitions. Its `proposed` sources are onboarding choices,
 not evidence, connections, corroboration, or freshness claims. Atrium counts
@@ -66,15 +73,20 @@ autonomous publication.
 
 ## Demo journey
 
-1. Open Atrium oriented to `World AI Command Center`.
-2. See the twelve-area coverage model, two admitted source roots, and one active watch.
-3. Inspect the detected policy progression and exact evidence lineage.
-4. Ask ACE a question and receive only answers supported by the visible resource plane.
-5. Open a downstream investigation without allowing the domain to act autonomously.
+1. Choose an AI decision context and accept or edit ACE's recommended watch system.
+2. Review the public evidence roles, proposed connections, concepts, watches, and cadence before
+   activation.
+3. See the onboarding agents assemble one inspectable `Connect -> Map -> Watch -> Brief` story.
+4. Open Atrium oriented to `World AI Command Center` with the first cited briefing already present.
+5. See the twelve-area coverage model, two admitted source roots, and one active watch.
+6. Inspect the detected policy progression and exact evidence lineage.
+7. Ask ACE a question and receive only answers supported by the visible resource plane.
+8. Open a downstream investigation without allowing the domain to act autonomously.
 
 ## Next increment
 
-Admit the onboarding-agent records so the same screen can demonstrate
-`Connect -> Map -> Watch -> Brief` from an empty install. Add one governed primary
+Project the declarative onboarding profile through a versioned, non-authorizing Core presentation
+contract, then admit the onboarding-agent records so the same screen can demonstrate
+`Connect -> Map -> Watch -> Brief` from a clean install. Add one governed primary
 connection in each remaining watch area, then replace recorded captures with an
 opt-in refresh while retaining the frozen page as a deterministic fallback.
