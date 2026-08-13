@@ -17,6 +17,17 @@ assembled. World does not ship a competing dashboard. The first AI Command Cente
 the accepted official-source journey through the public ACE 0.8 Intelligence resource plane; see
 [the demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 
+From a source checkout, launch the current AI Command Center in Core's Atrium with one command:
+
+```bash
+/path/to/ace-core/.venv/bin/python \
+  -m scripts.launch_atrium_ai_command_center \
+  --core /path/to/ace-core
+```
+
+This is a loopback-only replay of the exact immutable resource page. It does not pose as a live
+network refresh, grant authority, or install a World-specific dashboard.
+
 The active paired candidate also supplies a non-authorizing AI onboarding profile and World-owned
 strategies for the public Connection, Ontology, Intelligence, and Briefing agents. It produces an
 exact eight-revision `Connect -> Map -> Watch -> Brief` session over the two admitted official

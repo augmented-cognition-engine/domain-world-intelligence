@@ -20,6 +20,10 @@ public installation contract to the now-released Core 0.8 line.
 
 ## Active — Atrium AI Command Center demonstration
 
+The guided Builder and shared-Atrium binding passed through Core PR #145 and World PR #24. The
+current demo-polish packet makes that accepted 23-resource page launchable in Atrium with one
+source-checkout command and keeps the replay loopback-only, immutable, and non-authorizing.
+
 - Treat Atrium as the one shared command center; World contributes configuration and governed
   resources, not a separate application.
 - Make artificial intelligence the flagship World topic across twelve watch areas spanning the
@@ -35,14 +39,13 @@ public installation contract to the now-released Core 0.8 line.
   Subscription into the public Core 0.8 resource-plane page consumed by Atrium.
 - Demonstrate `official sources -> Observation -> Shift -> Signal -> Case -> cited Brief` with
   explicit evidence lineage, recorded-transport labeling, and no autonomous publication.
-- **Candidate:** project the declarative onboarding profile and eight exact Builder session
+- **Passed:** project the declarative onboarding profile and eight exact Builder session
   revisions through Core's one resource plane. Four World-owned strategies now run the public
   Connection, Ontology, Intelligence, and Briefing agents over the same two admitted official
   lineages and reopen at `first_briefing_ready`; no Core test fixture, network request, or second
   runtime is used.
-- Next, land the paired Core resource projection, migrate the released World package compatibility
-  window, reproduce from installed artifacts, and connect one governed primary source in each
-  remaining watch area.
+- Next, migrate the released World package compatibility window and connect one governed primary
+  source in each remaining watch area.
 
 See the [Atrium AI Command Center demo design](docs/design/atrium-ai-command-center-demo-v1.md).
 
