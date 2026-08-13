@@ -17,12 +17,13 @@ env:
   # Pin every uv invocation to the only interpreter this project supports.
   UV_PYTHON: "3.12"
   ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
-  ROOT_VERSION: "0.11.0"
+  ROOT_VERSION: "0.12.0"
   # Exact expected build outputs. Never matched with a glob: the point of the
   # release gate is that we know precisely which files were produced.
-  ROOT_WHEEL: "ace_domain_world_intelligence-0.11.0-py3-none-any.whl"
-  ROOT_SDIST: "ace_domain_world_intelligence-0.11.0.tar.gz"
-  ACE_CORE_VERSION: "0.8.1"
+  ROOT_WHEEL: "ace_domain_world_intelligence-0.12.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_world_intelligence-0.12.0.tar.gz"
+  ACE_CORE_VERSION: "0.8.2"
+  REFERENCE_ADAPTER_RELEASE_VERSION: "0.8.1"
   REFERENCE_ADAPTER_VERSION: "0.4.0"
   REFERENCE_ADAPTER_WHEEL: "ace_reference_workspace_action-0.4.0-py3-none-any.whl"
   REFERENCE_ADAPTER_SHA256: "91d86b042041eda97c11be16b34967f192752c9c298e35bfd1bb44aaa1c5fbf9"
@@ -70,7 +71,7 @@ jobs:
               MonitoringLifecycleService,
               SensingWindowService,
           )
-          assert metadata.version("ace-core") == "0.8.1"
+          assert metadata.version("ace-core") == "0.8.2"
           assert IntelligenceBuilderPresentationService is not None
           assert IntelligenceResourcePlaneService is not None
           assert MeasuredImpactService is not None
@@ -83,7 +84,7 @@ jobs:
         run: |
           set -euo pipefail
           curl --fail --silent --show-error --location \
-            "https://github.com/augmented-cognition-engine/core/releases/download/v${ACE_CORE_VERSION}/${REFERENCE_ADAPTER_WHEEL}" \
+            "https://github.com/augmented-cognition-engine/core/releases/download/v${REFERENCE_ADAPTER_RELEASE_VERSION}/${REFERENCE_ADAPTER_WHEEL}" \
             --output "/tmp/${REFERENCE_ADAPTER_WHEEL}"
           printf '%s  %s\n' "${REFERENCE_ADAPTER_SHA256}" "/tmp/${REFERENCE_ADAPTER_WHEEL}" | sha256sum --check --strict
           uv pip install --python .venv/bin/python "/tmp/${REFERENCE_ADAPTER_WHEEL}"
@@ -187,7 +188,7 @@ jobs:
           from packaging.utils import canonicalize_name
 
           wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
-          dist_info = "ace_domain_world_intelligence-0.11.0.dist-info/"
+          dist_info = "ace_domain_world_intelligence-0.12.0.dist-info/"
           adapter_import_package = "ace_world_federal_register_source"
           adapter_distribution = "ace-ext-world-federal-register-source"
 
@@ -289,14 +290,14 @@ jobs:
           assert len(requires_dist) == 1, requires_dist
           requirement = Requirement(requires_dist[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.8.1,<0.9"), requires_dist
+          assert requirement.specifier == SpecifierSet(">=0.8.2,<0.9"), requires_dist
           assert canonicalize_name(adapter_distribution) not in {
               canonicalize_name(Requirement(entry).name) for entry in requires_dist
           }
           print("inspected wheel:", wheel_path.name, "with", len(payload), "data resources")
           PY
 
-      - name: Prove the wheel installs against public ace-core 0.8.1 in an isolated environment
+      - name: Prove the wheel installs against public ace-core 0.8.2 in an isolated environment
         run: |
           set -euo pipefail
           ISOLATED="$(mktemp -d)"
@@ -306,7 +307,8 @@ jobs:
           # editable adapter path source) out of this resolution, so the wheel is
           # proven against the public PyPI release of ace-core and nothing local.
           uv venv --no-config --python 3.12 isolated-venv
-          uv pip install --no-config --python isolated-venv/bin/python \
+          uv pip install --no-config --refresh-package ace-core \
+            --python isolated-venv/bin/python \
             "./${ROOT_WHEEL}" "ace-core==${ACE_CORE_VERSION}"
           # Run with -I from outside the checkout so the repository's source tree
           # cannot shadow the installed distribution.

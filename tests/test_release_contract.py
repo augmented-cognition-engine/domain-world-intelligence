@@ -1,4 +1,4 @@
-"""Release contract for the ACE World Intelligence 0.11.0 root distribution.
+"""Release contract for the ACE World Intelligence 0.12.0 root distribution.
 
 These assertions are the publishable-identity gate. They pin what a consumer of
 ``ace-domain-world-intelligence`` receives from PyPI: the exact version, the exact
@@ -38,10 +38,10 @@ ROOT_DISTRIBUTION = "ace-domain-world-intelligence"
 ADAPTER_DISTRIBUTION = "ace-ext-world-federal-register-source"
 ADAPTER_IMPORT_PACKAGE = "ace_world_federal_register_source"
 
-EXPECTED_ROOT_VERSION = "0.11.0"
+EXPECTED_ROOT_VERSION = "0.12.0"
 EXPECTED_REQUIRES_PYTHON = ">=3.12,<3.13"
-EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.8.1,<0.9"
-EXPECTED_ACE_CORE_SPECIFIER = ">=0.8.1,<0.9"
+EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.8.2,<0.9"
+EXPECTED_ACE_CORE_SPECIFIER = ">=0.8.2,<0.9"
 
 DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence",
@@ -142,9 +142,9 @@ def test_root_depends_only_on_the_ace_core_0_8_compatibility_window() -> None:
     assert requirement.marker is None
     assert requirement.url is None
     assert requirement.specifier == SpecifierSet(EXPECTED_ACE_CORE_SPECIFIER)
-    assert requirement.specifier.contains(Version("0.8.1"))
+    assert requirement.specifier.contains(Version("0.8.2"))
     assert requirement.specifier.contains(Version("0.8.9"))
-    assert not requirement.specifier.contains(Version("0.8.0"))
+    assert not requirement.specifier.contains(Version("0.8.1"))
     assert not requirement.specifier.contains(Version("0.9.0"))
 
 
@@ -158,7 +158,7 @@ def test_federal_register_adapter_is_a_separate_distribution() -> None:
     assert adapter["requires-python"] == EXPECTED_REQUIRES_PYTHON
     assert adapter["license"] == "Apache-2.0"
     assert adapter["readme"] == "README.md"
-    assert adapter["dependencies"] == [EXPECTED_ACE_CORE_REQUIREMENT]
+    assert adapter["dependencies"] == ["ace-core>=0.8.1,<0.9"]
     assert adapter["urls"] == {
         "Repository": "https://github.com/augmented-cognition-engine/domain-world-intelligence",
         "Issues": "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues",
@@ -202,16 +202,18 @@ def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate
     ci = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
     publish = (REPO_ROOT / ".github" / "workflows" / "publish.yml").read_text(encoding="utf-8")
 
-    assert 'ACE_CORE_VERSION: "0.8.1"' in ci
-    assert 'ROOT_VERSION: "0.11.0"' in ci
+    assert 'ACE_CORE_VERSION: "0.8.2"' in ci
+    assert 'REFERENCE_ADAPTER_RELEASE_VERSION: "0.8.1"' in ci
+    assert 'ROOT_VERSION: "0.12.0"' in ci
     assert "ACE_CORE_CANDIDATE_SHA" not in ci
     assert "91d86b042041eda97c11be16b34967f192752c9c298e35bfd1bb44aaa1c5fbf9" in ci
     assert "ace_reference_workspace_action-0.4.0-py3-none-any.whl" in ci
     assert 'python scripts/normalize_sdist.py "dist/${ROOT_SDIST}"' in ci
     assert 'cmp "dist/${ROOT_WHEEL}" "${reproducible}/${ROOT_WHEEL}"' in ci
     assert 'cmp "dist/${ROOT_SDIST}" "${reproducible}/${ROOT_SDIST}"' in ci
+    assert "--refresh-package ace-core" in ci
 
-    assert "default: v0.11.0" in publish
+    assert "default: v0.12.0" in publish
     assert "packages-dir: dist" in publish
     assert "release-source-adapter:" in publish
     assert "ace_ext_world_federal_register_source-0.4.0-py3-none-any.whl" in publish
@@ -226,7 +228,7 @@ def test_source_archive_normalizer_removes_build_time_metadata(tmp_path: Path) -
             gzip.GzipFile(filename=path.name, mode="wb", fileobj=raw, mtime=build_time) as compressed,
             tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as archive,
         ):
-            for name, payload in (("example/data.json", b"{}\n"), ("example/PKG-INFO", b"Version: 0.11.0\n")):
+            for name, payload in (("example/data.json", b"{}\n"), ("example/PKG-INFO", b"Version: 0.12.0\n")):
                 member = tarfile.TarInfo(name)
                 member.size = len(payload)
                 member.mtime = build_time
