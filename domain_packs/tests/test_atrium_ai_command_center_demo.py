@@ -90,6 +90,8 @@ def test_world_ai_command_center_projects_a_real_atrium_page() -> None:
     brief_item = next(item for item in page["items"] if item["reference"]["resource_kind"] == "brief")
 
     assert page["product_id"] == "product:world-ai-command-center"
+    assert page["state"] == "complete"
+    assert page["degraded_reason_refs"] == []
     assert page["next_cursor"] is None
     assert len(page["items"]) == 43
     assert {
