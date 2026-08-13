@@ -22,7 +22,7 @@ def _compile():
 def test_ai_topic_pack_compiles_as_inert_domain_configuration() -> None:
     compiled = _compile()
     assert compiled.metadata.pack_id == "world_intelligence_ai"
-    assert compiled.metadata.version == "0.1.0"
+    assert compiled.metadata.version == "0.2.0"
     assert {module.module_id for module in compiled.modules} == {
         "world_ai_detection",
         "world_ai_ontology",
@@ -36,14 +36,25 @@ def test_ai_topic_pack_is_json_only_and_source_specific() -> None:
     assert {path.suffix for path in PACK.rglob("*") if path.is_file()} == {".json"}
     mapping = json.loads((PACK / "modules/source_mapping.json").read_text())
     sources = mapping["mappings"]
-    assert [source["source_type_ref"] for source in sources] == [
+    assert [source["source_type_ref"] for source in sources[:2]] == [
         "federal_register_ai_policy_document",
         "white_house_ai_policy_release",
     ]
-    assert {source["entity_type_id"] for source in sources} == {"ai_policy_record"}
+    assert [source["source_type_ref"] for source in sources[2:]] == [
+        "reviewed_ai_publication",
+    ] * 5
+    assert {source["entity_type_id"] for source in sources} == {
+        "ai_policy_record",
+        "ai_development_record",
+    }
     assert {source["source_definition_ref"] for source in sources} == {
         "source_definition:ai-policy-eo-14409",
         "source_definition:white-house-gold-eagle-2026-07-14",
+        "source_definition:openai-gpt-5-6-release",
+        "source_definition:anthropic-claude-sonnet-5-release",
+        "source_definition:deepmind-gemini-3-6-model-cards",
+        "source_definition:nist-ai-agent-security-report",
+        "source_definition:nvidia-naver-ai-factory-investment",
     }
 
     manifest = json.loads((PACK / "manifest.json").read_text())

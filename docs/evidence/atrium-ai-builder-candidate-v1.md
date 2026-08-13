@@ -25,15 +25,16 @@ snapshots from the recorded acceptance store. It makes no network request, acqui
 and does not count any of the broader proposed catalog as evidence. The concept, watch, and first-
 Brief strategies live in the World host script; the JSON Domain Pack remains inert.
 
-The projected Atrium page contains 23 resources: two Connections, two Sources, two Observations,
-two Entity snapshots, one Shift, one Signal, one Case, one cited Brief, one Monitor, one
+The projected Atrium page now contains 43 resources: seven Connections, seven Sources, seven
+Observations, seven Entity snapshots, one Shift, one Signal, one Case, one cited Brief, one Monitor, one
 Subscription, one Builder profile, and eight Builder session revisions. Exact replay/reopen and
 the paired Core projection passed through Core PR #145 and World PR #24. The post-landing showcase
 launcher reproduces the same page in the shared Atrium with one source-checkout command.
 
 ## Limitations
 
-This candidate proves the guided product trace over two recorded official lineages. It does not
-prove current network freshness, independent corroboration of government implementation outcomes,
-general ontology induction, broad AI-landscape coverage, autonomous monitoring, delivery,
-publication, or beneficial decision impact.
+This candidate proves the guided product trace over seven recorded public lineages from seven
+publisher roots. The policy Brief remains grounded only in its two-source closure. The other five
+records are context, not corroborated conclusions. The candidate does not prove current network
+freshness, independent corroboration of provider or government claims, general ontology induction,
+autonomous monitoring, delivery, publication, or beneficial decision impact.

@@ -10,6 +10,24 @@ noted here only where the boundary between them changes.
 
 ## Unreleased
 
+### Added
+
+- Expanded the Atrium AI Command Center from two policy records to seven governed source lineages
+  across seven publisher roots. Five reviewed publication profiles cover OpenAI, Anthropic,
+  Google DeepMind, NIST, and NVIDIA.
+- Added a bounded profile-driven public-publication adapter. Each source keeps an exact artifact
+  identity, URI, publisher, title, date, evidence role, and required source markers while emitting
+  one common attributable observation envelope.
+- The shared Atrium page now reopens 43 resources: seven Sources, Connections, Entities, and
+  Observations plus the original cited policy Shift, Signal, Case, Brief, Monitor, Subscription,
+  Builder profile, and eight Builder revisions.
+
+### Boundaries
+
+- The five new captures use deterministic recorded transports and make no network-freshness claim.
+  They remain contextual Observations; only the original two-record policy closure supports the
+  existing Shift, Signal, Case, and Brief.
+
 ## [0.10.0] — 2026-08-11
 
 Measured Intelligence release line. The inert root distribution binds the World public-data

@@ -6,20 +6,33 @@ from scripts.ai_command_center_live_acceptance import run_acceptance
 
 
 @pytest.mark.asyncio
-async def test_two_official_lineages_reach_live_case_and_cited_reality_brief() -> None:
+async def test_reviewed_ai_source_wave_reaches_live_atrium_context_and_cited_policy_brief() -> None:
     result = await run_acceptance()
 
     assert result["pack"]["module_count"] == 5
     assert result["pack"]["json_only"] is True
     assert result["source"] == {
-        "modes": ["live", "live"],
+        "modes": ["live"] * 7,
         "lineages": [
             "federal_register:2026-11415",
             "white_house_release:gold_eagle_2026_07_14",
+            "reviewed_ai_publication:openai_gpt_5_6_release:2026-07-09",
+            "reviewed_ai_publication:anthropic_claude_sonnet_5_release:2026-06-30",
+            "reviewed_ai_publication:deepmind_gemini_3_6_model_cards:2026-07-21",
+            "reviewed_ai_publication:nist_ai_agent_security_report:2026-05-18",
+            "reviewed_ai_publication:nvidia_naver_ai_factory_investment:2026-07-24",
         ],
         "stages": ["directive_issued", "implementation_reported"],
         "stable_entity_ref": True,
-        "capture_calls": [1, 1],
+        "capture_calls": [1] * 7,
+        "context_watch_areas": [
+            "benchmarks_and_independent_evals",
+            "capital_and_company_moves",
+            "models_and_capabilities",
+            "models_and_capabilities",
+            "safety_security_and_incidents",
+        ],
+        "publisher_count": 5,
         "recorded_transport": True,
         "network_access": False,
     }
