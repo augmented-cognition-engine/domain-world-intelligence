@@ -31,6 +31,7 @@ time freshness, a live connector, external publication, or autonomous action.
 
 The temporary `ace-core>=0.8.2` lower bound permits candidate-wheel integration
 before Core assigns the release version; importing and discovering this adapter
-additionally requires the public Builder request from Core PR #154 and the
-durable executor/host-services registry from Core PR #159. Tighten the lower
-bound to the released Core version before publishing this distribution.
+additionally requires the public Builder request and durable executor/host-
+services registry merged on Core main at
+`0948db68af3f3915132baed35b40549e305a35ea`. Tighten the lower bound to the
+released Core version before publishing this distribution.
