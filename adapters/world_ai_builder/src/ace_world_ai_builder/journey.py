@@ -96,9 +96,7 @@ class WorldAIBuilderPlan:
     goal_ref: str = "goal:track-material-ai-change"
     outcome_id: str = "policy_safety_and_operational_risk"
     user_intent: str = "Watch official AI policy progression and keep evidence-role limits visible."
-    audience_constraint: str = (
-        "Orient an executive without treating first-party claims as independent validation."
-    )
+    audience_constraint: str = "Orient an executive without treating first-party claims as independent validation."
     cadence: ProposedCadence = ProposedCadence.DAILY
     source_option_ids: tuple[str, ...] = SUPPORTED_RECORDED_SOURCE_OPTION_IDS
 
@@ -194,6 +192,66 @@ class ExactWorldBuilderAuthority:
                 {
                     **request,
                     "effective_at": request["effective_at"].isoformat(),
+                }
+            ),
+            approved_at=request["effective_at"],
+        )
+
+    async def resolve_grant(self, **_request):
+        raise PermissionError("World AI builder strategy resolves no grants")
+
+
+_EFFECT_BY_APPROVAL = {
+    SOURCE_APPROVAL: "connect_sources",
+    CONCEPT_APPROVAL: "map_concepts",
+    WATCH_APPROVAL: "activate_watch",
+}
+
+
+class AuthorizedWorldBuilderEffectsAuthority:
+    """Interpret only the exact internal effects already authorized by Core.
+
+    This is not a second authority system. It binds the three approval-shaped
+    Builder seams to the single reviewed build receipt and refuses every other
+    receipt or effect. The fourth effect, ``create_first_brief``, is checked by
+    the executor before the journey starts and is proposal-only.
+    """
+
+    def __init__(
+        self,
+        *,
+        product_id: str,
+        actor_ref: str,
+        build_id: str,
+        request_digest: str,
+        approved_effects: tuple[str, ...],
+    ) -> None:
+        self.product_id = product_id
+        self.actor_ref = actor_ref
+        self.build_id = build_id
+        self.request_digest = request_digest
+        self.approved_effects = frozenset(approved_effects)
+
+    async def resolve_approval(self, **request) -> ResolvedApprovalReceiptV1:
+        effect = _EFFECT_BY_APPROVAL.get(request["receipt_ref"])
+        if (
+            effect is None
+            or effect not in self.approved_effects
+            or request["product_id"] != self.product_id
+            or request["actor_ref"] != self.actor_ref
+        ):
+            raise PermissionError("World AI builder effect is not covered by the authorized build")
+        return ResolvedApprovalReceiptV1(
+            receipt_ref=request["receipt_ref"],
+            product_id=self.product_id,
+            subject_ref=request["subject_ref"],
+            actor_ref=self.actor_ref,
+            receipt_hash=canonical_hash(
+                {
+                    "build_id": self.build_id,
+                    "request_digest": self.request_digest,
+                    "effect": effect,
+                    "subject_ref": request["subject_ref"],
                 }
             ),
             approved_at=request["effective_at"],
@@ -698,25 +756,38 @@ def _authorized_observations(*, session, source_profile, materials, admitted_at)
 async def run_world_ai_builder_journey(
     *,
     environment,
-    baseline,
-    current,
+    baseline=None,
+    current=None,
+    source_materials: tuple[WorldAISourceMaterial, ...] | None = None,
     started_at: datetime,
     plan: WorldAIBuilderPlan = DEFAULT_WORLD_AI_BUILDER_PLAN,
+    authority=None,
+    correlation_id: str = "correlation:world-ai-command-center-onboarding",
 ):
     """Run and reopen exact Connect -> Map -> Watch -> first Brief state."""
 
-    materials = (
-        _source_material("federal_register_ai_policy", "Federal Register AI policy record", baseline.observation),
-        _source_material("white_house_ai_policy", "White House AI policy release", current.observation),
-    )
-    authority = ExactWorldBuilderAuthority(approved=(SOURCE_APPROVAL, CONCEPT_APPROVAL, WATCH_APPROVAL))
+    if source_materials is None:
+        if baseline is None or current is None:
+            raise ValueError("recorded World AI source material is required")
+        materials = (
+            _source_material("federal_register_ai_policy", "Federal Register AI policy record", baseline.observation),
+            _source_material("white_house_ai_policy", "White House AI policy release", current.observation),
+        )
+    else:
+        if baseline is not None or current is not None:
+            raise ValueError("use either recorded admissions or explicit source material, never both")
+        materials = source_materials
+    if tuple(item.option_id for item in materials) != SUPPORTED_RECORDED_SOURCE_OPTION_IDS:
+        raise ValueError("recorded World AI source material crossed the exact reviewed source selection")
+    if authority is None:
+        authority = ExactWorldBuilderAuthority(approved=(SOURCE_APPROVAL, CONCEPT_APPROVAL, WATCH_APPROVAL))
     sessions = IntelligenceBuilderSessionService(store=environment.store)
     provider = WorldAIRecordedSourceProvider(materials)
     connection = ConnectionAgent(sessions=sessions, authority=authority, provider=provider)
     actor = environment.context.actor_ref
     started = await sessions.start(
         product_id=environment.context.product_id,
-        correlation_id="correlation:world-ai-command-center-onboarding",
+        correlation_id=correlation_id,
         goal_ref=plan.goal_ref,
         actor_ref=actor,
         occurred_at=started_at,
@@ -834,6 +905,8 @@ async def run_world_ai_builder_journey(
 __all__ = [
     "DEFAULT_WORLD_AI_BUILDER_PLAN",
     "SUPPORTED_RECORDED_SOURCE_OPTION_IDS",
+    "AuthorizedWorldBuilderEffectsAuthority",
     "WorldAIBuilderPlan",
+    "WorldAISourceMaterial",
     "run_world_ai_builder_journey",
 ]

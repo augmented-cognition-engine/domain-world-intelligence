@@ -13,19 +13,24 @@ turn proposed catalog sources into admitted evidence.
 Core still owns authentication, build authority, persistence primitives, and the
 stable HTTP request/result. The adapter consumes `AuthorizedIntelligenceBuild`
 through Core's public `ace.application.intelligence_build_execution` contract; it
-never imports `core.engine` internals. A trusted host supplies a `WorldAIRecordedContextProvider`
-that binds the already-admitted recorded evidence and a separate `observe_read`
-authority for the returned resource page.
+never imports `core.engine` internals. Core invokes the executor with
+`IntelligenceBuildHostServices`: a product-scoped durable record store and a
+Core-owned resource-page port with a separate `observe_read` authority. The
+adapter writes the reviewed Builder artifacts to that durable store and never
+manufactures a read grant or an in-memory-only result page.
 
 The distribution registers `WorldAIBuilderExecutor` only through the dedicated
 `ace.intelligence_builders` entry-point group. It declares the one exact
 `intelligence_onboarding_profile:world-ai-command-center` profile. Core discovers
 the executor without treating the inert Domain Pack as executable code. The
-application host still supplies the trusted recorded context; absent that host
-binding the executor fails closed before admitting evidence.
+adapter binds the exact recorded source identities and citations shipped by the
+World repository to the authenticated product and actor supplied by Core. A
+fresh executor and fresh resource service can reopen the same append-only
+Builder session from the host store. The recorded proof does not claim capture-
+time freshness, a live connector, external publication, or autonomous action.
 
 The temporary `ace-core>=0.8.2` lower bound permits candidate-wheel integration
 before Core assigns the release version; importing and discovering this adapter
-additionally requires the public build contract from Core PR #154 and the dedicated
-registry from Core PR #159. Tighten the lower bound to the released Core version
-before publishing this distribution.
+additionally requires the public Builder request from Core PR #154 and the
+durable executor/host-services registry from Core PR #159. Tighten the lower
+bound to the released Core version before publishing this distribution.

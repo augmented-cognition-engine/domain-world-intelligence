@@ -1,29 +1,58 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from collections import Counter
+from datetime import UTC, datetime, timedelta
 
 import pytest
-from ace.application.intelligence_build_execution import (
-    AuthorizedIntelligenceBuild,
-    IntelligenceBuildStartV1,
+from ace.application import (
+    IntelligenceBuilderResourceProjectionReader,
+    IntelligenceBuilderSessionService,
+    IntelligenceResourcePlaneService,
 )
-from ace.core import GovernedStateHeadPreconditionV1Alpha1
+from ace.application.briefing_agent_contracts import FirstBriefingPreviewV1
+from ace.application.intelligence_build_execution import (
+    REQUIRED_INTELLIGENCE_BUILD_EFFECTS,
+    AuthorizedIntelligenceBuild,
+    IntelligenceBuildHostServices,
+    IntelligenceBuildStartV1,
+    ProductScopedImmutableRecordStore,
+)
+from ace.core import AuthenticatedRuntimeContextV1Alpha1, GovernedStateHeadPreconditionV1Alpha1
 from ace.core.runtime_use import AuthorityUseReceiptV1Alpha1
-from ace.intelligence import IntelligenceResourcePageState
-from scripts.ai_command_center_live_acceptance import run_acceptance
+from ace.intelligence import (
+    IntelligenceResourceKind,
+    IntelligenceResourcePageState,
+    IntelligenceResourceQueryV1Alpha1,
+)
+from ace.testing import InMemoryImmutableRecordStore
 
 from ace_world_ai_builder import (
+    READ_KINDS,
+    RECORDED_JOURNEY_STARTED_AT,
     WORLD_AI_PROFILE_ID,
     WorldAIBuilderExecutor,
     WorldAIBuilderExecutorError,
-    WorldAIRecordedExecutionContext,
+    load_recorded_world_ai_source_materials,
     load_world_ai_onboarding_profile,
     plan_from_authorized_build,
 )
 
-STARTED_AT = datetime(2026, 8, 10, 20, 4, 35, tzinfo=UTC)
+STARTED_AT = datetime(2026, 8, 13, 20, 4, 35, tzinfo=UTC)
 BUILD_GRANT = "authority_grant:world-ai-build"
 READ_GRANT = "authority_grant:world-ai-read"
+PRODUCT = "product:world-ai-personal"
+ACTOR = "principal:world-ai-analyst"
+
+
+def _context() -> AuthenticatedRuntimeContextV1Alpha1:
+    return AuthenticatedRuntimeContextV1Alpha1(
+        product_id=PRODUCT,
+        actor_ref=ACTOR,
+        authentication_receipt_ref="task_authentication:world-ai-test",
+        authentication_receipt_digest="sha256:" + "8" * 64,
+        authenticated_at=STARTED_AT - timedelta(minutes=1),
+        expires_at=STARTED_AT + timedelta(hours=1),
+    )
 
 
 def _authority(
@@ -59,15 +88,18 @@ def _authority(
     )
 
 
-def _build(*, context, source_group_ids=("official_records",), cadence_id="weekly_brief"):
+def _build(*, source_group_ids=("official_records",), cadence_id="weekly_brief"):
+    context = _context()
     request = IntelligenceBuildStartV1(
         authority_grant_ref=BUILD_GRANT,
+        resource_authority_grant_ref=READ_GRANT,
         client_request_id="request:world-ai-builder-test",
         profile_id=WORLD_AI_PROFILE_ID,
         subject="Federal AI cybersecurity implementation",
         outcome_id="strategy_and_investment",
         source_group_ids=source_group_ids,
         cadence_id=cadence_id,
+        approved_effects=REQUIRED_INTELLIGENCE_BUILD_EFFECTS,
         requested_at=STARTED_AT,
     )
     build_id = "intelligence_build:world-ai-builder-test"
@@ -90,7 +122,11 @@ def _build(*, context, source_group_ids=("official_records",), cadence_id="weekl
 
 
 class ExactReadAuthority:
+    def __init__(self) -> None:
+        self.calls = []
+
     async def resolve_authority_use(self, **request):
+        self.calls.append(request)
         return _authority(
             context=request["context"],
             subject_ref=request["use_subject_ref"],
@@ -102,75 +138,176 @@ class ExactReadAuthority:
         )
 
 
-class RecordedContextProvider:
-    def __init__(self, *, state):
-        self.state = state
-        self.builds = []
+class DurableResourcePort:
+    def __init__(self, *, build, store) -> None:
+        self.build = build
+        self.store = store
+        self.authority = ExactReadAuthority()
 
-    async def prepare(self, build):
-        self.builds.append(build)
-        return WorldAIRecordedExecutionContext(
-            environment=self.state["environment"],
-            baseline=self.state["baseline"],
-            current=self.state["current"],
-            started_at=STARTED_AT,
-            resource_authority=ExactReadAuthority(),
-            resource_grant_ref=READ_GRANT,
+    async def query(
+        self,
+        *,
+        resource_kinds,
+        subject_refs,
+        as_of,
+        available_at,
+        evaluated_at,
+        page_size=200,
+    ):
+        query = IntelligenceResourceQueryV1Alpha1(
+            authenticated_context=self.build.authority_use.authenticated_context,
+            product_id=self.build.product_id,
+            authority_grant_ref=self.build.request.resource_authority_grant_ref,
+            resource_kinds=resource_kinds,
+            subject_refs=subject_refs,
+            as_of=as_of,
+            available_at=available_at,
+            page_size=page_size,
         )
+        return await IntelligenceResourcePlaneService(
+            reader=IntelligenceBuilderResourceProjectionReader(store=self.store, degrade_unsupported=False),
+            authority=self.authority,
+        ).query(query, evaluated_at=evaluated_at)
 
 
-async def test_executor_consumes_authorized_core_request_and_returns_exact_resource_page() -> None:
-    state = {}
-    await run_acceptance(state_sink=state)
-    build = _build(context=state["environment"].context)
-    provider = RecordedContextProvider(state=state)
-    executor = WorldAIBuilderExecutor(
-        contexts=provider,
-        onboarding_profile=load_world_ai_onboarding_profile(),
-    )
+def _host(*, build, backing):
+    records = ProductScopedImmutableRecordStore(product_id=build.product_id, store=backing)
+    port = DurableResourcePort(build=build, store=records)
+    return IntelligenceBuildHostServices(records=records, resources=port), port
 
-    page = await executor.start(build)
 
-    assert provider.builds == [build]
+async def test_executor_uses_durable_host_records_and_core_owned_resource_port() -> None:
+    build = _build()
+    backing = InMemoryImmutableRecordStore()
+    host, port = _host(build=build, backing=backing)
+    executor = WorldAIBuilderExecutor(onboarding_profile=load_world_ai_onboarding_profile())
+
+    page = await executor.start(build, host)
+
     assert page.product_id == build.product_id
     assert page.actor_ref == build.actor_ref
     assert page.state is IntelligenceResourcePageState.COMPLETE
     assert page.degraded_reason_refs == ()
     kinds = {item.reference.resource_kind.value for item in page.items}
-    assert {"source", "connection", "entity", "observation", "shift", "signal", "case", "brief"} <= kinds
+    assert kinds == {"builder_profile", "builder_session"}
     sessions = [item for item in page.items if item.reference.resource_kind.value == "builder_session"]
     assert [item.reference.revision for item in sessions] == list(range(1, 9))
-    assert page.authority_use.operation == "query_intelligence_resources"
-    assert page.authority_use.authority == "observe_read"
+    assert sessions[-1].title == "First briefing ready"
+    assert port.authority.calls[0]["operation"] == "query_intelligence_resources"
+    assert port.authority.calls[0]["authority"] == "observe_read"
+    assert port.authority.calls[0]["grant_ref"] == READ_GRANT
+    artifact_contracts = {
+        record.payload_contract for record in backing.records.values() if record.record_kind == "onboarding_artifact"
+    }
+    assert "ace.application.first-briefing-preview/v1alpha1" in artifact_contracts
+    brief_record = next(
+        record
+        for record in backing.records.values()
+        if record.payload_contract == "ace.application.first-briefing-preview/v1alpha1"
+    )
+    brief = FirstBriefingPreviewV1.model_validate(brief_record.payload)
+    assert Counter((item.source_ref, item.evidence_digest) for item in brief.citations) == Counter(
+        {
+            (
+                "source_snapshot:7b79e35507287aa63df2640bf121978e",
+                "sha256:688f1d0075b464f6b890254e85465be6fbeddf7c5898c1cc449b5b16fd4213ab",
+            ): 2,
+            (
+                "source_snapshot:4bf705b079706f02f492c250bd7de899",
+                "sha256:4e353594d4a0560046f13eae42ec43a867aeb23be8607f98ef493892f28fbfb9",
+            ): 2,
+        }
+    )
+    assert {record.product_id for record in backing.records.values()} == {build.product_id}
     plan = plan_from_authorized_build(build)
     assert plan.subject == "Federal AI cybersecurity implementation"
     assert plan.goal_ref == "goal:world-ai-strategy_and_investment-7777777777777777"
     assert plan.cadence.value == "weekly"
 
 
-async def test_executor_rejects_unimplemented_source_groups_before_preparing_context() -> None:
-    state = {}
-    await run_acceptance(state_sink=state)
-    build = _build(
-        context=state["environment"].context,
-        source_group_ids=("official_records", "open_ecosystem"),
+async def test_fresh_executor_and_resource_service_reopen_exact_durable_journey() -> None:
+    build = _build()
+    backing = InMemoryImmutableRecordStore()
+    first_host, _ = _host(build=build, backing=backing)
+    first_page = await WorldAIBuilderExecutor().start(build, first_host)
+    first_count = len(backing.records)
+
+    fresh_host, fresh_port = _host(build=build, backing=backing)
+    reopened_page = await WorldAIBuilderExecutor().start(build, fresh_host)
+    session_id = next(
+        item.reference.resource_id
+        for item in reopened_page.items
+        if item.reference.resource_kind.value == "builder_session" and item.reference.revision == 8
     )
-    provider = RecordedContextProvider(state=state)
-    executor = WorldAIBuilderExecutor(
-        contexts=provider,
-        onboarding_profile=load_world_ai_onboarding_profile(),
+    reopened = await IntelligenceBuilderSessionService(store=fresh_host.records).load_latest(
+        product_id=build.product_id,
+        session_id=session_id,
+        available_at=RECORDED_JOURNEY_STARTED_AT + timedelta(seconds=9),
     )
+
+    assert reopened is not None
+    assert reopened.sequence == 8
+    assert reopened.stage.value == "first_briefing_ready"
+    assert reopened_page == first_page
+    assert len(backing.records) == first_count
+    assert len(fresh_port.authority.calls) == 1
+
+
+async def test_executor_rejects_unimplemented_source_groups_before_any_write() -> None:
+    build = _build(source_group_ids=("official_records", "open_ecosystem"))
+    backing = InMemoryImmutableRecordStore()
+    host, port = _host(build=build, backing=backing)
 
     with pytest.raises(WorldAIBuilderExecutorError, match="supports only the reviewed official_records"):
-        await executor.start(build)
-    assert provider.builds == []
+        await WorldAIBuilderExecutor().start(build, host)
+    assert backing.records == {}
+    assert port.authority.calls == []
 
 
-async def test_discovered_executor_declares_exact_profile_and_fails_closed_without_host_context() -> None:
-    state = {}
-    await run_acceptance(state_sink=state)
+async def test_executor_rechecks_exact_effects_before_any_write() -> None:
+    build = _build()
+    narrowed = AuthorizedIntelligenceBuild(
+        build_id=build.build_id,
+        request_digest=build.request_digest,
+        product_id=build.product_id,
+        actor_ref=build.actor_ref,
+        request=build.request.model_copy(update={"approved_effects": ("connect_sources",)}),
+        authority_use=build.authority_use,
+    )
+    backing = InMemoryImmutableRecordStore()
+    host, port = _host(build=narrowed, backing=backing)
+
+    with pytest.raises(WorldAIBuilderExecutorError, match="exact bounded onboarding effects"):
+        await WorldAIBuilderExecutor().start(narrowed, host)
+    assert backing.records == {}
+    assert port.authority.calls == []
+
+
+def test_recorded_source_material_preserves_exact_live_acceptance_citations() -> None:
+    materials = load_recorded_world_ai_source_materials()
+
+    assert [(item.source_ref, item.evidence_digest) for item in materials] == [
+        (
+            "source_snapshot:7b79e35507287aa63df2640bf121978e",
+            "sha256:688f1d0075b464f6b890254e85465be6fbeddf7c5898c1cc449b5b16fd4213ab",
+        ),
+        (
+            "source_snapshot:4bf705b079706f02f492c250bd7de899",
+            "sha256:4e353594d4a0560046f13eae42ec43a867aeb23be8607f98ef493892f28fbfb9",
+        ),
+    ]
+    assert [item.development_stage for item in materials] == ["directive_issued", "implementation_reported"]
+    assert [item.source_lineage for item in materials] == [
+        "federal_register:2026-11415",
+        "white_house_release:gold_eagle_2026_07_14",
+    ]
+
+
+def test_discovered_executor_declares_exact_profile_without_fixture_injection() -> None:
     executor = WorldAIBuilderExecutor()
 
     assert executor.profile_id == WORLD_AI_PROFILE_ID
-    with pytest.raises(WorldAIBuilderExecutorError, match="trusted recorded-context provider"):
-        await executor.start(_build(context=state["environment"].context))
+    assert READ_KINDS[-2:] == (
+        IntelligenceResourceKind.BUILDER_PROFILE,
+        IntelligenceResourceKind.BUILDER_SESSION,
+    )
