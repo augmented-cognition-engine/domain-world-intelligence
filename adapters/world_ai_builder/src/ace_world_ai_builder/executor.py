@@ -15,9 +15,9 @@ from datetime import UTC, datetime, timedelta
 from importlib.metadata import distribution
 
 from ace.application import (
-    IntelligenceBuildRecordedSourcePort,
     IntelligenceBuilderPresentationService,
     IntelligenceBuilderSessionService,
+    IntelligenceBuildRecordedSourcePort,
     PreparedShiftSignalDerivationRequestV1Alpha1,
     RecordedSourceAdmission,
     RecordedSourceMaterialV1Alpha1,
@@ -32,10 +32,10 @@ from ace.application.intelligence_build_execution import (
 from ace.application.intelligence_builder_contracts import OnboardingArtifactKind, OnboardingStage
 from ace.core import AuthenticatedRuntimeContextV1Alpha1, ImmutableRecordStore, canonical_hash, canonical_json
 from ace.intelligence import (
+    EntitySnapshotV1Alpha1,
     IntelligenceOnboardingProfileV1Alpha1,
     IntelligenceResourceKind,
     IntelligenceResourceMode,
-    EntitySnapshotV1Alpha1,
     resource_reference,
 )
 

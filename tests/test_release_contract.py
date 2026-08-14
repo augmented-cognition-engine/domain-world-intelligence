@@ -1,4 +1,4 @@
-"""Release contract for the ACE World Intelligence 0.12.0 root distribution.
+"""Release contract for the ACE World Intelligence 0.13.0 root distribution.
 
 These assertions are the publishable-identity gate. They pin what a consumer of
 ``ace-domain-world-intelligence`` receives from PyPI: the exact version, the exact
@@ -33,15 +33,16 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT_PYPROJECT = REPO_ROOT / "pyproject.toml"
 ADAPTER_ROOT = REPO_ROOT / "adapters" / "federal_register_source"
 ADAPTER_PYPROJECT = ADAPTER_ROOT / "pyproject.toml"
+BUILDER_PYPROJECT = REPO_ROOT / "adapters" / "world_ai_builder" / "pyproject.toml"
 
 ROOT_DISTRIBUTION = "ace-domain-world-intelligence"
 ADAPTER_DISTRIBUTION = "ace-ext-world-federal-register-source"
 ADAPTER_IMPORT_PACKAGE = "ace_world_federal_register_source"
 
-EXPECTED_ROOT_VERSION = "0.12.0"
+EXPECTED_ROOT_VERSION = "0.13.0"
 EXPECTED_REQUIRES_PYTHON = ">=3.12,<3.13"
-EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.8.2,<0.9"
-EXPECTED_ACE_CORE_SPECIFIER = ">=0.8.2,<0.9"
+EXPECTED_ACE_CORE_REQUIREMENT = "ace-core>=0.8.2,<1.1"
+EXPECTED_ACE_CORE_SPECIFIER = ">=0.8.2,<1.1"
 
 DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence",
@@ -60,6 +61,7 @@ def _load_pyproject(path: Path) -> dict[str, Any]:
 
 ROOT_PROJECT = _load_pyproject(ROOT_PYPROJECT)
 ADAPTER_PROJECT = _load_pyproject(ADAPTER_PYPROJECT)
+BUILDER_PROJECT = _load_pyproject(BUILDER_PYPROJECT)
 
 
 def _root_runtime_requirements() -> list[Requirement]:
@@ -132,7 +134,7 @@ def test_root_requires_python_is_exactly_the_3_12_series() -> None:
     assert not specifier.contains(Version("3.13.0"))
 
 
-def test_root_depends_only_on_the_ace_core_0_8_compatibility_window() -> None:
+def test_root_depends_only_on_the_v1_compatible_ace_core_window() -> None:
     dependencies = ROOT_PROJECT["project"]["dependencies"]
 
     assert dependencies == [EXPECTED_ACE_CORE_REQUIREMENT]
@@ -144,9 +146,10 @@ def test_root_depends_only_on_the_ace_core_0_8_compatibility_window() -> None:
     assert requirement.url is None
     assert requirement.specifier == SpecifierSet(EXPECTED_ACE_CORE_SPECIFIER)
     assert requirement.specifier.contains(Version("0.8.2"))
-    assert requirement.specifier.contains(Version("0.8.9"))
+    assert requirement.specifier.contains(Version("0.8.3"))
+    assert requirement.specifier.contains(Version("1.0.0"))
     assert not requirement.specifier.contains(Version("0.8.1"))
-    assert not requirement.specifier.contains(Version("0.9.0"))
+    assert not requirement.specifier.contains(Version("1.1.0"))
 
 
 def test_federal_register_adapter_is_a_separate_distribution() -> None:
@@ -155,11 +158,11 @@ def test_federal_register_adapter_is_a_separate_distribution() -> None:
     assert ADAPTER_PYPROJECT.is_file()
     assert adapter["name"] == ADAPTER_DISTRIBUTION
     assert adapter["name"] != ROOT_DISTRIBUTION
-    assert adapter["version"] == "0.4.0"
+    assert adapter["version"] == "0.4.1"
     assert adapter["requires-python"] == EXPECTED_REQUIRES_PYTHON
     assert adapter["license"] == "Apache-2.0"
     assert adapter["readme"] == "README.md"
-    assert adapter["dependencies"] == ["ace-core>=0.8.1,<0.9"]
+    assert adapter["dependencies"] == ["ace-core>=0.8.3,<1.1"]
     assert adapter["urls"] == {
         "Repository": "https://github.com/augmented-cognition-engine/domain-world-intelligence",
         "Issues": "https://github.com/augmented-cognition-engine/domain-world-intelligence/issues",
@@ -188,11 +191,13 @@ def test_adapter_is_absent_from_the_root_runtime_dependency_closure() -> None:
         extra_names = {canonicalize_name(Requirement(entry).name) for entry in extra_requirements}
         assert canonicalize_name(ADAPTER_DISTRIBUTION) not in extra_names
 
-    # The adapter is referenced only by the local dev group and its uv path
-    # source. Dependency groups and tool.uv.sources are not published metadata,
-    # so neither reaches a PyPI consumer.
+    # Historical exact-receipt tests stay locked to their published Core line;
+    # current v1 executable conformance runs in a separate clean job. Their path
+    # declarations support explicit package-local work without making either
+    # executable artifact part of the inert root environment.
     dev_group = ROOT_PROJECT["dependency-groups"]["dev"]
-    assert ADAPTER_DISTRIBUTION in dev_group
+    assert ADAPTER_DISTRIBUTION not in dev_group
+    assert "ace-app-world-ai-builder" not in dev_group
     assert ROOT_PROJECT["tool"]["uv"]["sources"][ADAPTER_DISTRIBUTION] == {
         "path": "adapters/federal_register_source",
         "editable": True,
@@ -204,8 +209,11 @@ def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate
     publish = (REPO_ROOT / ".github" / "workflows" / "publish.yml").read_text(encoding="utf-8")
 
     assert 'ACE_CORE_VERSION: "0.8.2"' in ci
+    assert 'V1_ACE_CORE_VERSION: "1.0.0"' in ci
+    assert 'V1_REFERENCE_ADAPTER_VERSION: "0.4.1"' in ci
+    assert "077a6ab0f9a21902a2250a1af3482c6c3794be54db6d620de79f91ff576c7263" in ci
     assert 'REFERENCE_ADAPTER_RELEASE_VERSION: "0.8.1"' in ci
-    assert 'ROOT_VERSION: "0.12.0"' in ci
+    assert 'ROOT_VERSION: "0.13.0"' in ci
     assert "ACE_CORE_CANDIDATE_SHA" not in ci
     assert "91d86b042041eda97c11be16b34967f192752c9c298e35bfd1bb44aaa1c5fbf9" in ci
     assert "ace_reference_workspace_action-0.4.0-py3-none-any.whl" in ci
@@ -214,12 +222,21 @@ def test_release_workflows_pin_public_core_and_keep_adapter_publication_separate
     assert 'cmp "dist/${ROOT_SDIST}" "${reproducible}/${ROOT_SDIST}"' in ci
     assert "--refresh-package ace-core" in ci
 
-    assert "default: v0.12.0" in publish
+    assert "default: v0.13.0" in publish
     assert "packages-dir: dist" in publish
     assert "release-source-adapter:" in publish
-    assert "ace_ext_world_federal_register_source-0.4.0-py3-none-any.whl" in publish
+    assert "ace_ext_world_federal_register_source-0.4.1-py3-none-any.whl" in publish
     assert 'gh release upload "${TAG}" dist/source-adapter/*' in publish
+    assert "release-world-builder:" in publish
+    assert "ace_app_world_ai_builder-0.2.0-py3-none-any.whl" in publish
+    assert "ace_app_world_ai_builder-0.2.0.tar.gz" in publish
+    assert 'gh release upload "${TAG}" dist/world-builder/*' in publish
     assert 'python scripts/normalize_sdist.py "dist/${EXPECTED_SDIST}"' in publish
+
+    assert BUILDER_PROJECT["project"]["dependencies"] == [
+        "ace-core>=1.0,<1.1",
+        "ace-domain-world-intelligence>=0.13,<1",
+    ]
 
 
 def test_source_archive_normalizer_removes_build_time_metadata(tmp_path: Path) -> None:
@@ -229,7 +246,7 @@ def test_source_archive_normalizer_removes_build_time_metadata(tmp_path: Path) -
             gzip.GzipFile(filename=path.name, mode="wb", fileobj=raw, mtime=build_time) as compressed,
             tarfile.open(fileobj=compressed, mode="w", format=tarfile.PAX_FORMAT) as archive,
         ):
-            for name, payload in (("example/data.json", b"{}\n"), ("example/PKG-INFO", b"Version: 0.12.0\n")):
+            for name, payload in (("example/data.json", b"{}\n"), ("example/PKG-INFO", b"Version: 0.13.0\n")):
                 member = tarfile.TarInfo(name)
                 member.size = len(payload)
                 member.mtime = build_time

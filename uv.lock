@@ -3,31 +3,6 @@ revision = 3
 requires-python = "==3.12.*"
 
 [[package]]
-name = "ace-app-world-ai-builder"
-version = "0.1.0"
-source = { editable = "adapters/world_ai_builder" }
-dependencies = [
-    { name = "ace-core" },
-    { name = "ace-domain-world-intelligence" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "ace-core", specifier = ">=0.8.2,<1.1" },
-    { name = "ace-domain-world-intelligence", specifier = ">=0.12,<1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "build", specifier = ">=1.2" },
-    { name = "pytest", specifier = ">=8" },
-    { name = "pytest-asyncio", specifier = ">=0.24" },
-    { name = "ruff", specifier = ">=0.12" },
-    { name = "setuptools", specifier = ">=69" },
-    { name = "twine", specifier = ">=5" },
-]
-
-[[package]]
 name = "ace-core"
 version = "0.8.2"
 source = { registry = "https://pypi.org/simple" }
@@ -84,7 +59,7 @@ wheels = [
 
 [[package]]
 name = "ace-domain-world-intelligence"
-version = "0.12.0"
+version = "0.13.0"
 source = { editable = "." }
 dependencies = [
     { name = "ace-core" },
@@ -92,8 +67,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "ace-app-world-ai-builder" },
-    { name = "ace-ext-world-federal-register-source" },
     { name = "build" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -102,35 +75,15 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.8.2,<0.9" }]
+requires-dist = [{ name = "ace-core", specifier = ">=0.8.2,<1.1" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "ace-app-world-ai-builder", editable = "adapters/world_ai_builder" },
-    { name = "ace-ext-world-federal-register-source", editable = "adapters/federal_register_source" },
     { name = "build", specifier = ">=1.2" },
     { name = "pytest", specifier = ">=8" },
     { name = "pytest-asyncio", specifier = ">=0.24" },
     { name = "ruff", specifier = ">=0.12" },
     { name = "setuptools", specifier = ">=69" },
-]
-
-[[package]]
-name = "ace-ext-world-federal-register-source"
-version = "0.4.0"
-source = { editable = "adapters/federal_register_source" }
-dependencies = [
-    { name = "ace-core" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "ace-core", specifier = ">=0.8.1,<0.9" }]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=8" },
-    { name = "pytest-asyncio", specifier = ">=0.24" },
-    { name = "ruff", specifier = ">=0.12" },
 ]
 
 [[package]]

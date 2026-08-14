@@ -5,7 +5,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
-
 from ace.application import (
     REQUIRED_INTELLIGENCE_BUILD_EFFECTS,
     IntelligenceBuildPlanRequestV1Alpha2,
@@ -14,12 +13,13 @@ from ace.application import (
 )
 from ace.intelligence import IntelligenceOnboardingProfileV1Alpha1
 from ace.intelligence.packs import compile_pack_document
+
+import ace_world_ai_builder.planner as planner_module
 from ace_world_ai_builder import (
     WORLD_AI_OFFICIAL_RECORDS_PACK,
     WorldAIBuilderPlanner,
     WorldAIBuilderPlannerError,
 )
-import ace_world_ai_builder.planner as planner_module
 
 ROOT = Path(__file__).resolve().parents[3]
 PACK = ROOT / "domain_packs/world_intelligence_ai_official_records"

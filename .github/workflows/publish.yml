@@ -10,7 +10,7 @@ on:
         description: "Exact release tag to publish (must match the root project version)"
         required: true
         type: string
-        default: v0.12.0
+        default: v0.13.0
 
 permissions:
   contents: read
@@ -241,7 +241,7 @@ jobs:
           export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
           uv build --wheel --out-dir dist/source-adapter adapters/federal_register_source
           rm -f dist/source-adapter/.gitignore
-          expected="ace_ext_world_federal_register_source-0.4.0-py3-none-any.whl"
+          expected="ace_ext_world_federal_register_source-0.4.1-py3-none-any.whl"
           entries="$(find dist/source-adapter -maxdepth 1 -type f -printf '%f\n')"
           if [ "${entries}" != "${expected}" ]; then
             echo "::error::unexpected adapter artifacts: ${entries}"
@@ -255,4 +255,45 @@ jobs:
           TAG: ${{ needs.verify.outputs.tag }}
         run: >-
           gh release upload "${TAG}" dist/source-adapter/*
+          --repo "${GITHUB_REPOSITORY}" --clobber
+
+  release-world-builder:
+    name: attach the trusted World Builder
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ needs.verify.outputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Build and validate only the separate trusted Builder
+        run: |
+          set -euo pipefail
+          uv build --out-dir dist/world-builder adapters/world_ai_builder
+          rm -f dist/world-builder/.gitignore
+          wheel="ace_app_world_ai_builder-0.2.0-py3-none-any.whl"
+          sdist="ace_app_world_ai_builder-0.2.0.tar.gz"
+          entries="$(find dist/world-builder -maxdepth 1 -type f -printf '%f\n' | sort)"
+          expected="$(printf '%s\n%s\n' "${wheel}" "${sdist}" | sort)"
+          if [ "${entries}" != "${expected}" ]; then
+            echo "::error::unexpected World Builder artifacts: ${entries}"
+            exit 1
+          fi
+          uvx --from twine twine check --strict \
+            "dist/world-builder/${wheel}" "dist/world-builder/${sdist}"
+
+      - name: Attach the independently packaged Builder to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.verify.outputs.tag }}
+        run: >-
+          gh release upload "${TAG}" dist/world-builder/*
           --repo "${GITHUB_REPOSITORY}" --clobber

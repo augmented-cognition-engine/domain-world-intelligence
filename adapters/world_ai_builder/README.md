@@ -30,6 +30,6 @@ fresh executor and fresh resource service can reopen the same append-only
 Builder session from the host store. The recorded proof does not claim capture-
 time freshness, a live connector, external publication, or autonomous action.
 
-The `ace-core>=0.9` lower bound requires the public authority-neutral v1alpha3
+The `ace-core>=1.0,<1.1` boundary requires the stable ACE 1.0 authority-neutral v1alpha3
 planning/binding contract. Planning exposes exact reviewed recorded materials
 and requested requirements but does not resolve capabilities, grants, or approval.

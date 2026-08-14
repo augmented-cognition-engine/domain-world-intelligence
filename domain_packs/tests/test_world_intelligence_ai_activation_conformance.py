@@ -14,7 +14,7 @@ def _document(path: Path) -> dict:
 
 
 def _time(value: str) -> datetime:
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    return datetime.fromisoformat(value)
 
 
 def test_world_ai_pack_passes_the_fixed_activation_fixture_from_recorded_material() -> None:

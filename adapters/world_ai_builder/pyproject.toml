@@ -10,8 +10,8 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
 dependencies = [
-  "ace-core>=0.9,<1.1",
-  "ace-domain-world-intelligence>=0.12,<1",
+  "ace-core>=1.0,<1.1",
+  "ace-domain-world-intelligence>=0.13,<1",
 ]
 
 [project.urls]

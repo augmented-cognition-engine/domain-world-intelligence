@@ -159,9 +159,9 @@ def test_official_records_pack_is_an_internal_target_of_the_one_world_profile() 
     (official_records,) = [
         item for item in broad_profile["source_groups"] if item["source_group_id"] == "official_records"
     ]
-    assert [
-        item["source_group_id"] for item in broad_profile["source_groups"] if item["default_selected"]
-    ] == ["official_records"]
+    assert [item["source_group_id"] for item in broad_profile["source_groups"] if item["default_selected"]] == [
+        "official_records"
+    ]
     assert {
         "us_federal_register_ai_policy",
         "white_house_ai_policy",
