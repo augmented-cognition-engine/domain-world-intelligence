@@ -132,10 +132,7 @@ async def test_reviewed_ai_publication_profiles_emit_one_common_attributable_env
             "required source marker",
         ),
         (
-            {
-                "response_body": _body(OPENAI_GPT_56_PROFILE)[:-1]
-                + ',"publisher":"OpenAI"}'
-            },
+            {"response_body": _body(OPENAI_GPT_56_PROFILE)[:-1] + ',"publisher":"OpenAI"}'},
             "JSON object",
         ),
     ],

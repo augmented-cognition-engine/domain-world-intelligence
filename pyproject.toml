@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-domain-world-intelligence"
-version = "0.12.0"
+version = "0.13.0"
 description = "Inert ACE World Intelligence Domain Pack and conformance fixtures"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
-dependencies = ["ace-core>=0.8.2,<0.9"]
+dependencies = ["ace-core>=0.8.2,<1.1"]
 
 [project.urls]
 Homepage = "https://github.com/augmented-cognition-engine/domain-world-intelligence"
@@ -20,8 +20,6 @@ Roadmap = "https://github.com/augmented-cognition-engine/domain-world-intelligen
 
 [dependency-groups]
 dev = [
-  "ace-app-world-ai-builder",
-  "ace-ext-world-federal-register-source",
   "build>=1.2",
   "pytest>=8",
   "pytest-asyncio>=0.24",

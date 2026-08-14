@@ -31,8 +31,8 @@ from ace.intelligence import (
     ActivationRevisionReferenceV1Alpha1,
     CanonicalJsonValueV1Alpha1,
     EntitySnapshotV1Alpha1,
-    IntelligenceResourceMode,
     IntelligenceResourceKind,
+    IntelligenceResourceMode,
     IntelligenceResourcePageState,
     IntelligenceResourceQueryV1Alpha1,
 )

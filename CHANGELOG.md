@@ -8,6 +8,31 @@ Entries describe the Domain Pack distribution. The Federal Register connector,
 `ace-ext-world-federal-register-source`, is a separate distribution on its own version line and is
 noted here only where the boundary between them changes.
 
+## [0.13.0] — candidate
+
+### Added
+
+- Release the trusted World AI Builder planner and executor as a separately packaged 0.2.0
+  artifact attached to the exact World release tag.
+- Preserve the authority-neutral reviewed plan before Core authorization and reuse Core's recorded
+  admission, derivation, cited first-Brief, readiness, and resource-plane ports after approval.
+
+### Changed
+
+- Widen the inert root distribution to `ace-core>=0.8.2,<1.1`, preserving the exact public
+  historical-receipt baseline while also admitting ACE 1.0.
+- Publish the unchanged reviewed public-source adapter as 0.4.1 with the same Core 0.8.3 through
+  1.0 compatibility window; installation remains explicit and non-authorizing.
+- Bind the World Builder 0.2.0 to the current World 0.13 and Core 1.0 lines. Historical exact-receipt
+  conformance remains pinned to Core 0.8.2 while a separate v1 lane proves the current executable
+  Solution Bundle on public Core 1.0 without rewriting old receipts.
+
+### Boundaries
+
+- The root wheel remains JSON-only and does not install the Builder or source adapter transitively.
+- The Builder's recorded official-source proof claims no current network freshness and grants no
+  authority by installation.
+
 ## [0.12.0] — candidate
 
 ### Added

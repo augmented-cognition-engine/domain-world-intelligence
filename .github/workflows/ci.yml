@@ -17,21 +17,26 @@ env:
   # Pin every uv invocation to the only interpreter this project supports.
   UV_PYTHON: "3.12"
   ROOT_DISTRIBUTION: "ace-domain-world-intelligence"
-  ROOT_VERSION: "0.12.0"
+  ROOT_VERSION: "0.13.0"
   # Exact expected build outputs. Never matched with a glob: the point of the
   # release gate is that we know precisely which files were produced.
-  ROOT_WHEEL: "ace_domain_world_intelligence-0.12.0-py3-none-any.whl"
-  ROOT_SDIST: "ace_domain_world_intelligence-0.12.0.tar.gz"
+  ROOT_WHEEL: "ace_domain_world_intelligence-0.13.0-py3-none-any.whl"
+  ROOT_SDIST: "ace_domain_world_intelligence-0.13.0.tar.gz"
   ACE_CORE_VERSION: "0.8.2"
   REFERENCE_ADAPTER_RELEASE_VERSION: "0.8.1"
   REFERENCE_ADAPTER_VERSION: "0.4.0"
   REFERENCE_ADAPTER_WHEEL: "ace_reference_workspace_action-0.4.0-py3-none-any.whl"
   REFERENCE_ADAPTER_SHA256: "91d86b042041eda97c11be16b34967f192752c9c298e35bfd1bb44aaa1c5fbf9"
+  V1_ACE_CORE_VERSION: "1.0.0"
+  V1_REFERENCE_ADAPTER_RELEASE_VERSION: "1.0.0"
+  V1_REFERENCE_ADAPTER_VERSION: "0.4.1"
+  V1_REFERENCE_ADAPTER_WHEEL: "ace_reference_workspace_action-0.4.1-py3-none-any.whl"
+  V1_REFERENCE_ADAPTER_SHA256: "077a6ab0f9a21902a2250a1af3482c6c3794be54db6d620de79f91ff576c7263"
   RELEASE_CONTRACT_TEST: "tests/test_release_contract.py"
   ADAPTER_TEST_SUITE: "adapters/federal_register_source/tests"
   # Keep the repository's proof scripts and separately packaged connector ahead
   # of unrelated installed namespace packages during source-tree acceptance.
-  PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/adapters/federal_register_source/src"
+  PYTHONPATH: "${{ github.workspace }}:${{ github.workspace }}/adapters/federal_register_source/src:${{ github.workspace }}/adapters/world_ai_builder/src"
 
 jobs:
   release-readiness:
@@ -188,7 +193,7 @@ jobs:
           from packaging.utils import canonicalize_name
 
           wheel_path = Path("dist") / os.environ["ROOT_WHEEL"]
-          dist_info = "ace_domain_world_intelligence-0.12.0.dist-info/"
+          dist_info = "ace_domain_world_intelligence-0.13.0.dist-info/"
           adapter_import_package = "ace_world_federal_register_source"
           adapter_distribution = "ace-ext-world-federal-register-source"
 
@@ -300,14 +305,14 @@ jobs:
           assert len(requires_dist) == 1, requires_dist
           requirement = Requirement(requires_dist[0])
           assert canonicalize_name(requirement.name) == "ace-core"
-          assert requirement.specifier == SpecifierSet(">=0.8.2,<0.9"), requires_dist
+          assert requirement.specifier == SpecifierSet(">=0.8.2,<1.1"), requires_dist
           assert canonicalize_name(adapter_distribution) not in {
               canonicalize_name(Requirement(entry).name) for entry in requires_dist
           }
           print("inspected wheel:", wheel_path.name, "with", len(payload), "data resources")
           PY
 
-      - name: Prove the wheel installs against public ace-core 0.8.2 in an isolated environment
+      - name: Prove the wheel preserves the public ace-core 0.8.2 receipt baseline
         run: |
           set -euo pipefail
           ISOLATED="$(mktemp -d)"
@@ -365,3 +370,75 @@ jobs:
 
           print("isolated install verified against ace-core", ace_core_version)
           PY
+
+  v1-solution-bundle:
+    name: v1 solution bundle (public Core 1.0)
+    needs: release-readiness
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Download and verify the public Core 1.0 reference adapter
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            "https://github.com/augmented-cognition-engine/core/releases/download/v${V1_REFERENCE_ADAPTER_RELEASE_VERSION}/${V1_REFERENCE_ADAPTER_WHEEL}" \
+            --output "/tmp/${V1_REFERENCE_ADAPTER_WHEEL}"
+          printf '%s  %s\n' "${V1_REFERENCE_ADAPTER_SHA256}" "/tmp/${V1_REFERENCE_ADAPTER_WHEEL}" | sha256sum --check --strict
+
+      - name: Install the candidate World solution bundle on public Core 1.0
+        run: |
+          set -euo pipefail
+          uv venv --no-config --python 3.12 v1-venv
+          uv pip install --no-config --refresh-package ace-core \
+            --python v1-venv/bin/python \
+            "ace-core==${V1_ACE_CORE_VERSION}" \
+            . \
+            ./adapters/world_ai_builder \
+            ./adapters/federal_register_source \
+            "/tmp/${V1_REFERENCE_ADAPTER_WHEEL}" \
+            pytest pytest-asyncio build setuptools twine
+          v1-venv/bin/python -I - <<'PY'
+          import importlib.metadata as metadata
+
+          assert metadata.version("ace-core") == "1.0.0"
+          assert metadata.version("ace-domain-world-intelligence") == "0.13.0"
+          assert metadata.version("ace-app-world-ai-builder") == "0.2.0"
+          assert metadata.version("ace-ext-world-federal-register-source") == "0.4.1"
+          assert metadata.version("ace-reference-workspace-action") == "0.4.1"
+          PY
+
+      - name: Run the current executable World conformance lane
+        run: |
+          set -euo pipefail
+          v1-venv/bin/python -m pytest \
+            adapters/world_ai_builder/tests \
+            adapters/federal_register_source/tests \
+            domain_packs/tests/test_world_ai_builder_plan.py
+
+      - name: Build and validate the separately packaged executors
+        run: |
+          set -euo pipefail
+          rm -rf adapters/world_ai_builder/dist adapters/federal_register_source/dist
+          v1-venv/bin/python -m build adapters/world_ai_builder --outdir adapters/world_ai_builder/dist
+          v1-venv/bin/python -m build adapters/federal_register_source --outdir adapters/federal_register_source/dist
+          test -f adapters/world_ai_builder/dist/ace_app_world_ai_builder-0.2.0-py3-none-any.whl
+          test -f adapters/world_ai_builder/dist/ace_app_world_ai_builder-0.2.0.tar.gz
+          test -f adapters/federal_register_source/dist/ace_ext_world_federal_register_source-0.4.1-py3-none-any.whl
+          test -f adapters/federal_register_source/dist/ace_ext_world_federal_register_source-0.4.1.tar.gz
+          v1-venv/bin/python -m twine check --strict \
+            adapters/world_ai_builder/dist/ace_app_world_ai_builder-0.2.0-py3-none-any.whl \
+            adapters/world_ai_builder/dist/ace_app_world_ai_builder-0.2.0.tar.gz \
+            adapters/federal_register_source/dist/ace_ext_world_federal_register_source-0.4.1-py3-none-any.whl \
+            adapters/federal_register_source/dist/ace_ext_world_federal_register_source-0.4.1.tar.gz

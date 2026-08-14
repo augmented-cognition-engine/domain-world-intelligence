@@ -201,9 +201,7 @@ async def build_atrium_page(
     environment = state["environment"]
     await _admit_ai_policy_watch(environment)
     profile = IntelligenceOnboardingProfileV1Alpha1.model_validate_json(
-        (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/onboarding_profile.json").read_text(
-            encoding="utf-8"
-        )
+        (REPOSITORY_ROOT / "domain_packs/world_intelligence_ai/onboarding_profile.json").read_text(encoding="utf-8")
     )
     await IntelligenceBuilderPresentationService(store=environment.store).admit_profile(
         product_id=environment.context.product_id,

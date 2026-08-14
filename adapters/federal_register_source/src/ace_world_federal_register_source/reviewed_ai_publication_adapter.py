@@ -147,8 +147,7 @@ NIST_AGENT_SECURITY_PROFILE = ReviewedAIPublicationProfile(
         "regarding-security-considerations-ai"
     ),
     title=(
-        "Summary Analysis of Responses to the Request for Information Regarding Security "
-        "Considerations for AI Agents"
+        "Summary Analysis of Responses to the Request for Information Regarding Security Considerations for AI Agents"
     ),
     publication_date="2026-05-18",
     watch_area="safety_security_and_incidents",
@@ -273,9 +272,7 @@ class ReviewedAIPublicationSourceAdapter:
         request: SourceAdapterCaptureRequestV1Alpha1,
     ) -> CapturedSourceMaterialV1Alpha1:
         try:
-            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(
-                request.model_dump(mode="python")
-            )
+            validated = SourceAdapterCaptureRequestV1Alpha1.model_validate(request.model_dump(mode="python"))
         except (AttributeError, TypeError, ValueError) as exc:
             raise _fail("source-adapter request failed exact public-contract revalidation") from exc
         if validated.adapter_artifact != self.artifact_identity:
@@ -329,9 +326,7 @@ class ReviewedAIPublicationSourceAdapter:
             resolved_ip_addresses=resolved,
             dns_rebinding_protection_applied=True,
             captured_payload_json=payload_json,
-            captured_payload_digest=(
-                "sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
-            ),
+            captured_payload_digest=("sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest()),
             locator=REVIEWED_AI_PUBLICATION_LOCATOR,
             source_published_at=datetime.fromisoformat(self.profile.publication_date).replace(tzinfo=UTC),
             event_effective_at=None,
