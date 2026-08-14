@@ -1,0 +1,29 @@
+{
+  "contract": "ace.intelligence.domain-pack-golden-fixture/v1",
+  "fixture_id": "world_ai_command_center_activation",
+  "fixture_version": "0.2.0",
+  "observations": [
+    {
+      "case_id": "executive_order_to_reported_implementation",
+      "entity_type_id": "ai_policy_record",
+      "entity_ref": "entity:ai-policy/executive-order-14409",
+      "baseline_attributes_json": "{\"agency_name\":\"Executive Office of the President\",\"development_stage\":\"directive_issued\",\"document_number\":\"2026-11415\",\"document_title\":\"Promoting Advanced Artificial Intelligence Innovation and Security\",\"document_type\":\"Presidential Document\",\"executive_order_number\":\"14409\",\"federal_register_url\":\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\",\"initiative_name\":\"Executive Order 14409\",\"legal_status_notice\":\"FederalRegister.gov is not the official legal edition.\",\"linked_policy_ref\":\"executive_order:14409\",\"official_pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\",\"policy_status\":\"issued\",\"policy_topic\":\"artificial_intelligence\",\"publication_date\":\"2026-06-05\",\"source_lineage_id\":\"federal_register:2026-11415\",\"source_uri\":\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\",\"verification_reference\":\"The govinfo.gov PDF is the official-format verification reference.\"}",
+      "current_attributes_json": "{\"agency_name\":\"The White House\",\"development_stage\":\"implementation_reported\",\"document_number\":\"white-house-release-2026-07-14-gold-eagle\",\"document_title\":\"White House Launches Gold Eagle Initiative for Unprecedented Cybersecurity Vulnerability Coordination\",\"document_type\":\"Official Release\",\"executive_order_number\":\"14409\",\"federal_register_url\":\"https://www.federalregister.gov/documents/2026/06/05/2026-11415/promoting-advanced-artificial-intelligence-innovation-and-security\",\"initiative_name\":\"GOLD EAGLE\",\"legal_status_notice\":\"WhiteHouse.gov announces implementation; it is not the legal edition of Executive Order 14409.\",\"linked_policy_ref\":\"executive_order:14409\",\"official_pdf_url\":\"https://www.govinfo.gov/content/pkg/FR-2026-06-05/pdf/2026-11415.pdf\",\"policy_status\":\"implementation_reported\",\"policy_topic\":\"artificial_intelligence\",\"publication_date\":\"2026-07-14\",\"source_lineage_id\":\"white_house_release:gold_eagle_2026_07_14\",\"source_uri\":\"https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/\",\"verification_reference\":\"The release names Executive Order 14409; the govinfo PDF remains the official-format order reference.\"}",
+      "baseline_as_of": "2026-08-10T20:00:02Z",
+      "current_as_of": "2026-08-10T20:01:02Z",
+      "confidence": 1.0,
+      "expected": [
+        {
+          "detector_id": "ai_policy_implementation_progression",
+          "entity_ref": "entity:ai-policy/executive-order-14409",
+          "material": true,
+          "shift_type": "official_ai_policy_progression",
+          "signal_type": "official_ai_policy_development",
+          "routing_rule_ids": ["route_official_ai_policy_development"],
+          "persona_ids": ["ai_policy_researcher"],
+          "template_ids": ["ai_policy_reality_brief"]
+        }
+      ]
+    }
+  ]
+}

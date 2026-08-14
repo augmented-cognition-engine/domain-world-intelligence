@@ -234,6 +234,7 @@ jobs:
                   ai + "modules/personas.json",
                   ai + "modules/source_mapping.json",
                   ai + "modules/synthesis.json",
+                  ai + "conformance/activation_golden_fixture.json",
                   ai + "conformance/ai_command_center_live_input.json",
                   planetary + "manifest.json",
                   planetary + "modules/detection.json",
