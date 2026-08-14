@@ -51,6 +51,7 @@ SUPPORTED_RECORDED_SOURCE_GROUP_IDS = ("official_records",)
 READ_KINDS = (
     IntelligenceResourceKind.CONNECTION,
     IntelligenceResourceKind.SOURCE,
+    IntelligenceResourceKind.SOURCE_HEALTH,
     IntelligenceResourceKind.ENTITY,
     IntelligenceResourceKind.OBSERVATION,
     IntelligenceResourceKind.SIGNAL,
