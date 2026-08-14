@@ -417,7 +417,13 @@ async def build_environment() -> CommandCenterEnvironment:
         expected_head_revision_id=None,
         committed_at=_time(fixture["activation"]["committed_at"]),
     )
-    activation_head = activation_store.heads[("domain_activation", product_id, committed.revision.activation_id)]
+    activation_head = activation_store.heads[
+        (
+            committed.commit_receipt.state_kind,
+            committed.commit_receipt.product_id,
+            committed.commit_receipt.state_id,
+        )
+    ]
 
     heads: list[GovernedStateHeadV1] = []
     runtime_bindings: list[RuntimeBinding] = []
