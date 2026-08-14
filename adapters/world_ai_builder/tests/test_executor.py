@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from collections import Counter
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 
 import pytest
 from ace.application import (
@@ -16,10 +18,20 @@ from ace.application.intelligence_build_execution import (
     IntelligenceBuildHostServices,
     IntelligenceBuildStartV1,
     ProductScopedImmutableRecordStore,
+    RecordedSourceReferenceV1,
 )
-from ace.core import AuthenticatedRuntimeContextV1Alpha1, GovernedStateHeadPreconditionV1Alpha1
+from ace.core import (
+    AuthenticatedRuntimeContextV1Alpha1,
+    GovernedStateHeadPreconditionV1Alpha1,
+    ResolvedApprovalReceiptV1,
+    canonical_hash,
+)
 from ace.core.runtime_use import AuthorityUseReceiptV1Alpha1
 from ace.intelligence import (
+    ActivationRevisionReferenceV1Alpha1,
+    CanonicalJsonValueV1Alpha1,
+    EntitySnapshotV1Alpha1,
+    IntelligenceResourceMode,
     IntelligenceResourceKind,
     IntelligenceResourcePageState,
     IntelligenceResourceQueryV1Alpha1,
@@ -32,6 +44,7 @@ from ace_world_ai_builder import (
     WORLD_AI_PROFILE_ID,
     WorldAIBuilderExecutor,
     WorldAIBuilderExecutorError,
+    load_recorded_world_ai_admission_materials,
     load_recorded_world_ai_source_materials,
     load_world_ai_onboarding_profile,
     plan_from_authorized_build,
@@ -42,6 +55,24 @@ BUILD_GRANT = "authority_grant:world-ai-build"
 READ_GRANT = "authority_grant:world-ai-read"
 PRODUCT = "product:world-ai-personal"
 ACTOR = "principal:world-ai-analyst"
+ACTIVATION_KEY = "world_intelligence_ai_command_center"
+ACTIVATION_DIGEST = "sha256:" + "6" * 64
+ACTIVATION = ActivationRevisionReferenceV1Alpha1(
+    product_id=PRODUCT,
+    activation_key=ACTIVATION_KEY,
+    activation_id=f"domain_activation:{canonical_hash([PRODUCT, ACTIVATION_KEY])[:32]}",
+    revision=1,
+    revision_id=f"activation_revision:{ACTIVATION_DIGEST.removeprefix('sha256:')[:32]}",
+    revision_digest=ACTIVATION_DIGEST,
+)
+APPROVAL = ResolvedApprovalReceiptV1(
+    receipt_ref="approval_receipt:world-ai-personal",
+    product_id=PRODUCT,
+    subject_ref="activation_spec:world-ai-personal",
+    actor_ref=ACTOR,
+    receipt_hash="5" * 64,
+    approved_at=STARTED_AT - timedelta(minutes=2),
+)
 
 
 def _context() -> AuthenticatedRuntimeContextV1Alpha1:
@@ -88,16 +119,32 @@ def _authority(
     )
 
 
+def _recorded_source_refs():
+    port = CanonicalRecordedSourcePort(CanonicalReplayState())
+    materials = load_recorded_world_ai_admission_materials(port)
+    return tuple(
+        RecordedSourceReferenceV1(
+            source_group_id=item.source_group_id,
+            material_id=str(item.material_id),
+            material_digest=str(item.material_digest),
+        )
+        for item in materials
+    )
+
+
 def _build(*, source_group_ids=("official_records",), cadence_id="weekly_brief"):
     context = _context()
     request = IntelligenceBuildStartV1(
         authority_grant_ref=BUILD_GRANT,
         resource_authority_grant_ref=READ_GRANT,
+        activation_approval_receipt_ref=APPROVAL.receipt_ref,
+        activation_approval_subject_ref=APPROVAL.subject_ref,
         client_request_id="request:world-ai-builder-test",
         profile_id=WORLD_AI_PROFILE_ID,
         subject="Federal AI cybersecurity implementation",
         outcome_id="strategy_and_investment",
         source_group_ids=source_group_ids,
+        recorded_source_refs=_recorded_source_refs(),
         cadence_id=cadence_id,
         approved_effects=REQUIRED_INTELLIGENCE_BUILD_EFFECTS,
         requested_at=STARTED_AT,
@@ -118,6 +165,7 @@ def _build(*, source_group_ids=("official_records",), cadence_id="weekly_brief")
             authority="intelligence_build",
             grant_ref=BUILD_GRANT,
         ),
+        activation_approval=APPROVAL,
     )
 
 
@@ -170,16 +218,115 @@ class DurableResourcePort:
         ).query(query, evaluated_at=evaluated_at)
 
 
-def _host(*, build, backing):
+@dataclass
+class CanonicalReplayState:
+    admitted: tuple | None = None
+    derivation_request: object | None = None
+
+
+class CanonicalRecordedSourcePort:
+    def __init__(self, state: CanonicalReplayState, *, expected_refs=()) -> None:
+        self.state = state
+        self.expected_refs = tuple(expected_refs)
+        self.calls = 0
+
+    def bind_subject(self, *, subject_binding_id, entity_type_id, entity_ref):
+        from ace.intelligence import ResolvedSubjectBindingV1Alpha1
+
+        return ResolvedSubjectBindingV1Alpha1(
+            product_id=PRODUCT,
+            mode=IntelligenceResourceMode.PREPARED,
+            activation_revision=ACTIVATION,
+            subject_binding_id=subject_binding_id,
+            entity_type_id=entity_type_id,
+            entity_ref=entity_ref,
+        )
+
+    async def admit(self, materials):
+        self.calls += 1
+        actual_refs = tuple(
+            sorted(
+                (
+                    item.source_group_id,
+                    str(item.material_id),
+                    str(item.material_digest),
+                )
+                for item in materials
+            )
+        )
+        expected_refs = tuple(
+            (item.source_group_id, item.material_id, item.material_digest) for item in self.expected_refs
+        )
+        assert actual_refs == expected_refs
+        if self.state.admitted is None:
+            self.state.admitted = tuple(materials)
+        assert tuple(materials) == self.state.admitted
+        entities = tuple(
+            EntitySnapshotV1Alpha1(
+                product_id=PRODUCT,
+                mode=IntelligenceResourceMode.PREPARED,
+                activation_revision=ACTIVATION,
+                as_of=item.source_published_at,
+                entity_ref=item.subject_binding.entity_ref,
+                entity_type_ref=item.subject_binding.entity_type_id,
+                attributes=CanonicalJsonValueV1Alpha1(value_json=item.captured_payload_json),
+                projected_at=STARTED_AT,
+                confidence=1.0,
+            )
+            for item in materials
+        )
+        return SimpleNamespace(entity_snapshots=entities, replayed=self.calls > 1)
+
+
+class CanonicalPreparedDerivationPort:
+    def __init__(self, state: CanonicalReplayState) -> None:
+        self.state = state
+        self.calls = []
+
+    async def derive(self, request):
+        self.calls.append(request)
+        replayed = self.state.derivation_request is not None
+        if self.state.derivation_request is None:
+            self.state.derivation_request = request
+        assert request == self.state.derivation_request
+        return SimpleNamespace(material_shift=True, shift=object(), signal=object(), replayed=replayed)
+
+
+def _host(
+    *,
+    build,
+    backing,
+    canonical_state=None,
+    include_recorded_sources=True,
+    include_prepared_derivations=True,
+):
     records = ProductScopedImmutableRecordStore(product_id=build.product_id, store=backing)
     port = DurableResourcePort(build=build, store=records)
-    return IntelligenceBuildHostServices(records=records, resources=port), port
+    state = canonical_state or CanonicalReplayState()
+    recorded = (
+        CanonicalRecordedSourcePort(state, expected_refs=build.request.recorded_source_refs)
+        if include_recorded_sources
+        else None
+    )
+    derivations = CanonicalPreparedDerivationPort(state) if include_prepared_derivations else None
+    return (
+        IntelligenceBuildHostServices(
+            records=records,
+            resources=port,
+            activation_authority=port.authority,
+            recorded_sources=recorded,
+            prepared_derivations=derivations,
+        ),
+        port,
+        recorded,
+        derivations,
+    )
 
 
 async def test_executor_uses_durable_host_records_and_core_owned_resource_port() -> None:
     build = _build()
     backing = InMemoryImmutableRecordStore()
-    host, port = _host(build=build, backing=backing)
+    host, port, recorded, derivations = _host(build=build, backing=backing)
     executor = WorldAIBuilderExecutor(onboarding_profile=load_world_ai_onboarding_profile())
 
     page = await executor.start(build, host)
@@ -196,6 +343,10 @@ async def test_executor_uses_durable_host_records_and_core_owned_resource_port()
     assert port.authority.calls[0]["operation"] == "query_intelligence_resources"
     assert port.authority.calls[0]["authority"] == "observe_read"
     assert port.authority.calls[0]["grant_ref"] == READ_GRANT
+    assert recorded.calls == 1
+    assert len(derivations.calls) == 1
+    assert derivations.calls[0].detector_id == "ai_policy_implementation_progression"
+    assert derivations.calls[0].baseline_snapshot.as_of < derivations.calls[0].current_snapshot.as_of
     artifact_contracts = {
         record.payload_contract for record in backing.records.values() if record.record_kind == "onboarding_artifact"
     }
@@ -228,11 +379,16 @@ async def test_executor_uses_durable_host_records_and_core_owned_resource_port()
 async def test_fresh_executor_and_resource_service_reopen_exact_durable_journey() -> None:
     build = _build()
     backing = InMemoryImmutableRecordStore()
-    first_host, _ = _host(build=build, backing=backing)
+    canonical = CanonicalReplayState()
+    first_host, _, _, first_derivations = _host(build=build, backing=backing, canonical_state=canonical)
     first_page = await WorldAIBuilderExecutor().start(build, first_host)
     first_count = len(backing.records)
 
-    fresh_host, fresh_port = _host(build=build, backing=backing)
+    fresh_host, fresh_port, _, fresh_derivations = _host(
+        build=build,
+        backing=backing,
+        canonical_state=canonical,
+    )
     reopened_page = await WorldAIBuilderExecutor().start(build, fresh_host)
     session_id = next(
         item.reference.resource_id
@@ -251,12 +407,13 @@ async def test_fresh_executor_and_resource_service_reopen_exact_durable_journey(
     assert reopened_page == first_page
     assert len(backing.records) == first_count
     assert len(fresh_port.authority.calls) == 1
+    assert first_derivations.calls == fresh_derivations.calls
 
 
 async def test_executor_rejects_unimplemented_source_groups_before_any_write() -> None:
     build = _build(source_group_ids=("official_records", "open_ecosystem"))
     backing = InMemoryImmutableRecordStore()
-    host, port = _host(build=build, backing=backing)
+    host, port, _, _ = _host(build=build, backing=backing)
 
     with pytest.raises(WorldAIBuilderExecutorError, match="supports only the reviewed official_records"):
         await WorldAIBuilderExecutor().start(build, host)
@@ -273,14 +430,42 @@ async def test_executor_rechecks_exact_effects_before_any_write() -> None:
         actor_ref=build.actor_ref,
         request=build.request.model_copy(update={"approved_effects": ("connect_sources",)}),
         authority_use=build.authority_use,
+        activation_approval=build.activation_approval,
     )
     backing = InMemoryImmutableRecordStore()
-    host, port = _host(build=narrowed, backing=backing)
+    host, port, _, _ = _host(build=narrowed, backing=backing)
 
     with pytest.raises(WorldAIBuilderExecutorError, match="exact bounded onboarding effects"):
         await WorldAIBuilderExecutor().start(narrowed, host)
     assert backing.records == {}
     assert port.authority.calls == []
+
+
+@pytest.mark.parametrize(
+    ("include_recorded_sources", "include_prepared_derivations"),
+    ((False, True), (True, False), (False, False)),
+)
+async def test_executor_requires_both_canonical_ports_before_any_write(
+    include_recorded_sources: bool,
+    include_prepared_derivations: bool,
+) -> None:
+    build = _build()
+    backing = InMemoryImmutableRecordStore()
+    host, port, recorded, derivations = _host(
+        build=build,
+        backing=backing,
+        include_recorded_sources=include_recorded_sources,
+        include_prepared_derivations=include_prepared_derivations,
+    )
+
+    with pytest.raises(WorldAIBuilderExecutorError, match="requires Core recorded-source"):
+        await WorldAIBuilderExecutor().start(build, host)
+    assert backing.records == {}
+    assert port.authority.calls == []
+    if recorded is not None:
+        assert recorded.calls == 0
+    if derivations is not None:
+        assert derivations.calls == []
 
 
 def test_recorded_source_material_preserves_exact_live_acceptance_citations() -> None:
