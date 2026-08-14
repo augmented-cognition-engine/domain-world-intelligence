@@ -194,6 +194,7 @@ jobs:
 
           world = "domain_packs/world_intelligence/"
           ai = "domain_packs/world_intelligence_ai/"
+          ai_official = "domain_packs/world_intelligence_ai_official_records/"
           planetary = "domain_packs/world_intelligence_planetary_defense/"
           federal = "domain_packs/world_intelligence_federal_register/"
           monitor = "domain_packs/world_intelligence_federal_register_monitor/"
@@ -236,6 +237,14 @@ jobs:
                   ai + "modules/synthesis.json",
                   ai + "conformance/activation_golden_fixture.json",
                   ai + "conformance/ai_command_center_live_input.json",
+                  ai_official + "manifest.json",
+                  ai_official + "modules/detection.json",
+                  ai_official + "modules/ontology.json",
+                  ai_official + "modules/personas.json",
+                  ai_official + "modules/source_mapping.json",
+                  ai_official + "modules/synthesis.json",
+                  ai_official + "conformance/activation_golden_fixture.json",
+                  ai_official + "conformance/recorded_sources.json",
                   planetary + "manifest.json",
                   planetary + "modules/detection.json",
                   planetary + "modules/epistemic_status.json",
@@ -334,6 +343,10 @@ jobs:
           # World Domain Pack data resolves out of the installed wheel.
           for package, pack_id in (
               ("domain_packs.world_intelligence", "world_intelligence"),
+              (
+                  "domain_packs.world_intelligence_ai_official_records",
+                  "world_intelligence_ai_official_records",
+              ),
               ("domain_packs.world_intelligence_federal_register", "world_intelligence_federal_register"),
           ):
               resource = files(package).joinpath("manifest.json")

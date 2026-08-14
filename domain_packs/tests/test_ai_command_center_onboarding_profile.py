@@ -51,7 +51,16 @@ def test_ai_command_center_onboarding_profile_is_outcome_led_and_non_authorizing
     }
     assert all(set(group["source_ids"]) <= source_ids for group in profile["source_groups"])
     assert all(group["source_labels"] for group in profile["source_groups"])
-    assert all(group["default_selected"] for group in profile["source_groups"][:-1])
+    assert [
+        group["source_group_id"] for group in profile["source_groups"] if group["default_selected"]
+    ] == ["official_records"]
+    assert profile["source_groups"][0]["access_label"] == (
+        "Recorded demo pair available · other sources proposed"
+    )
+    assert all(
+        group["access_label"] == "Proposed · not connected in v1"
+        for group in profile["source_groups"][1:-1]
+    )
     assert profile["source_groups"][-1]["source_group_id"] == "private_organizational"
     assert profile["source_groups"][-1]["default_selected"] is False
     assert profile["source_groups"][-1]["access_label"] == "Private · permission required"

@@ -48,6 +48,7 @@ DOMAIN_PACK_DIRECTORIES = (
     REPO_ROOT / "domain_packs" / "world_intelligence_federal_register",
     REPO_ROOT / "domain_packs" / "world_intelligence_federal_register_monitor",
     REPO_ROOT / "domain_packs" / "world_intelligence_ai",
+    REPO_ROOT / "domain_packs" / "world_intelligence_ai_official_records",
     REPO_ROOT / "domain_packs" / "world_intelligence_planetary_defense",
 )
 
@@ -276,6 +277,7 @@ def test_root_distribution_mapping_stays_inert_and_data_only() -> None:
     assert set(package_data) == {
         "domain_packs.world_intelligence",
         "domain_packs.world_intelligence_ai",
+        "domain_packs.world_intelligence_ai_official_records",
         "domain_packs.world_intelligence_planetary_defense",
         "domain_packs.world_intelligence_federal_register",
         "domain_packs.world_intelligence_federal_register_monitor",
