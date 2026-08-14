@@ -23,11 +23,14 @@ def test_builder_executor_is_separate_from_the_inert_root_pack() -> None:
     root = _project(REPOSITORY_ROOT / "pyproject.toml")["project"]
 
     assert adapter["name"] == "ace-app-world-ai-builder"
-    assert adapter["version"] == "0.1.0"
+    assert adapter["version"] == "0.2.0"
     assert adapter["entry-points"] == {
         "ace.intelligence_builders": {
             "world_ai_command_center": "ace_world_ai_builder:WorldAIBuilderExecutor",
-        }
+        },
+        "ace.intelligence_build_planners": {
+            "world_ai_command_center": "ace_world_ai_builder:WorldAIBuilderPlanner",
+        },
     }
     assert {Requirement(item).name for item in adapter["dependencies"]} == {
         "ace-core",
@@ -38,8 +41,7 @@ def test_builder_executor_is_separate_from_the_inert_root_pack() -> None:
     assert "ace-app-world-ai-builder" not in root["dependencies"]
     assert (ADAPTER_ROOT / "src/ace_world_ai_builder/executor.py").is_file()
     assert "core.engine" not in "".join(
-        path.read_text(encoding="utf-8")
-        for path in (ADAPTER_ROOT / "src/ace_world_ai_builder").glob("*.py")
+        path.read_text(encoding="utf-8") for path in (ADAPTER_ROOT / "src/ace_world_ai_builder").glob("*.py")
     )
     for pack in (
         "world_intelligence",
@@ -73,12 +75,16 @@ def test_builder_executor_wheel_contains_only_the_trusted_adapter_package(tmp_pa
     assert "ace_world_ai_builder/__init__.py" in names
     assert "ace_world_ai_builder/executor.py" in names
     assert "ace_world_ai_builder/journey.py" in names
+    assert "ace_world_ai_builder/planner.py" in names
     assert not any(name.startswith("domain_packs/") for name in names)
     assert not any(name.startswith("scripts/") for name in names)
     entry_points_file = next(name for name in names if name.endswith(".dist-info/entry_points.txt"))
     with zipfile.ZipFile(wheel) as archive:
         entry_points_text = archive.read(entry_points_file).decode("utf-8")
     assert entry_points_text == (
+        "[ace.intelligence_build_planners]\n"
+        "world_ai_command_center = ace_world_ai_builder:WorldAIBuilderPlanner\n"
+        "\n"
         "[ace.intelligence_builders]\n"
         "world_ai_command_center = ace_world_ai_builder:WorldAIBuilderExecutor\n"
     )
@@ -93,3 +99,10 @@ def test_installed_entry_point_loads_exact_world_profile() -> None:
     ]
     executor = points[0].load()()
     assert executor.profile_id == "intelligence_onboarding_profile:world-ai-command-center"
+
+    planner_points = [entry for entry in dist.entry_points if entry.group == "ace.intelligence_build_planners"]
+    assert [(entry.name, entry.value) for entry in planner_points] == [
+        ("world_ai_command_center", "ace_world_ai_builder:WorldAIBuilderPlanner")
+    ]
+    planner = planner_points[0].load()()
+    assert planner.profile_id == "intelligence_onboarding_profile:world-ai-command-center"

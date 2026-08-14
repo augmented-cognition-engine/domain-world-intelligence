@@ -33,8 +33,21 @@ _EXECUTOR_EXPORTS = frozenset(
     }
 )
 
+_PLANNER_EXPORTS = frozenset(
+    {
+        "WORLD_AI_OFFICIAL_RECORDS_PACK",
+        "WORLD_AI_PLANNER_VERSION",
+        "WorldAIBuilderPlanner",
+        "WorldAIBuilderPlannerError",
+    }
+)
+
 
 def __getattr__(name: str):
+    if name in _PLANNER_EXPORTS:
+        value = getattr(import_module(".planner", __name__), name)
+        globals()[name] = value
+        return value
     if name not in _EXECUTOR_EXPORTS:
         raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
     value = getattr(import_module(".executor", __name__), name)
@@ -43,7 +56,7 @@ def __getattr__(name: str):
 
 
 def __dir__() -> list[str]:
-    return sorted(set(globals()) | _EXECUTOR_EXPORTS)
+    return sorted(set(globals()) | _EXECUTOR_EXPORTS | _PLANNER_EXPORTS)
 
 
 __all__ = [
@@ -53,10 +66,14 @@ __all__ = [
     "SUPPORTED_RECORDED_SOURCE_GROUP_IDS",
     "SUPPORTED_RECORDED_SOURCE_OPTION_IDS",
     "WORLD_AI_PROFILE_ID",
+    "WORLD_AI_OFFICIAL_RECORDS_PACK",
+    "WORLD_AI_PLANNER_VERSION",
     "AuthorizedWorldBuilderEffectsAuthority",
     "WorldAIBuilderEnvironment",
     "WorldAIBuilderExecutor",
     "WorldAIBuilderExecutorError",
+    "WorldAIBuilderPlanner",
+    "WorldAIBuilderPlannerError",
     "WorldAIBuilderPlan",
     "load_recorded_world_ai_admission_materials",
     "load_recorded_world_ai_source_materials",
