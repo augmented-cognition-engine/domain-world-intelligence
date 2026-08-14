@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from pathlib import Path
 
 from ace.testing.domain_pack import run_domain_pack_conformance
@@ -10,6 +11,10 @@ PACK_ROOT = Path(__file__).resolve().parents[1] / "world_intelligence_ai"
 
 def _document(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _time(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
 def test_world_ai_pack_passes_the_fixed_activation_fixture_from_recorded_material() -> None:
@@ -31,8 +36,21 @@ def test_world_ai_pack_passes_the_fixed_activation_fixture_from_recorded_materia
     assert current["source_uri"] == current_source["requested_uri"]
     assert "GOLD EAGLE" in current_source["response_body"]
     assert current["initiative_name"] == "GOLD EAGLE"
-    assert case["baseline_as_of"] == baseline_source["observed_at"]
-    assert case["current_as_of"] == current_source["observed_at"]
+
+    baseline_state_time = _time(case["baseline_as_of"])
+    current_state_time = _time(case["current_as_of"])
+    baseline_observed_at = _time(baseline_source["observed_at"])
+    current_observed_at = _time(current_source["observed_at"])
+    baseline_available_at = _time(baseline_source["rechecked_at"])
+    current_available_at = _time(current_source["rechecked_at"])
+
+    assert baseline_state_time == _time(f"{baseline['publication_date']}T00:00:00Z")
+    assert current_state_time == _time(f"{current['publication_date']}T00:00:00Z")
+    assert baseline_state_time < current_state_time
+    assert baseline_observed_at < current_observed_at
+    assert baseline_available_at < current_available_at
+    assert baseline_state_time < baseline_observed_at < baseline_available_at
+    assert current_state_time < current_observed_at < current_available_at
 
     resources = {item["path"]: (PACK_ROOT / item["path"]).read_bytes() for item in manifest["resources"]}
     receipt = run_domain_pack_conformance(
