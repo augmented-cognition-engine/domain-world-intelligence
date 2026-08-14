@@ -63,6 +63,11 @@ include-package-data = false
   "modules/*.json",
   "conformance/*.json",
 ]
+"domain_packs.world_intelligence_ai_official_records" = [
+  "*.json",
+  "modules/*.json",
+  "conformance/*.json",
+]
 "domain_packs.world_intelligence_planetary_defense" = [
   "*.json",
   "modules/*.json",

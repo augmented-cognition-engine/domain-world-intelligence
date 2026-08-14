@@ -137,7 +137,7 @@
       "evidence_role": "authoritative_record",
       "source_ids": ["us_federal_register_ai_policy", "white_house_ai_policy", "sec_edgar", "eu_ai_office", "nist_ai_rmf", "cisa_known_exploited_vulnerabilities"],
       "source_labels": ["Federal Register", "White House", "SEC EDGAR", "EU AI Office", "NIST", "CISA"],
-      "access_label": "Public · no credentials",
+      "access_label": "Recorded demo pair available · other sources proposed",
       "default_selected": true
     },
     {
@@ -147,8 +147,8 @@
       "evidence_role": "first_party_claim",
       "source_ids": ["openai_news", "openai_model_release_notes", "anthropic_news", "anthropic_model_docs", "google_deepmind_news", "google_deepmind_model_cards", "gemini_api_release_notes", "meta_ai_blog"],
       "source_labels": ["OpenAI", "Anthropic", "Google DeepMind", "Google AI", "Meta AI"],
-      "access_label": "Public · no credentials",
-      "default_selected": true
+      "access_label": "Proposed · not connected in v1",
+      "default_selected": false
     },
     {
       "source_group_id": "independent_evaluations",
@@ -157,8 +157,8 @@
       "evidence_role": "independent_measurement",
       "source_ids": ["stanford_helm", "lmsys_chatbot_arena", "metr_evaluations", "epoch_ai", "swe_bench"],
       "source_labels": ["Stanford HELM", "LM Arena", "METR", "Epoch AI", "SWE-bench"],
-      "access_label": "Public · reviewed datasets",
-      "default_selected": true
+      "access_label": "Proposed · not connected in v1",
+      "default_selected": false
     },
     {
       "source_group_id": "open_ecosystem",
@@ -167,8 +167,8 @@
       "evidence_role": "leading_indicator",
       "source_ids": ["arxiv_ai_research", "github_releases", "hugging_face_hub", "meta_llama_releases"],
       "source_labels": ["arXiv", "GitHub", "Hugging Face", "Meta Llama"],
-      "access_label": "Public · optional token",
-      "default_selected": true
+      "access_label": "Proposed · not connected in v1",
+      "default_selected": false
     },
     {
       "source_group_id": "economics_and_operations",
@@ -177,8 +177,8 @@
       "evidence_role": "operational_telemetry",
       "source_ids": ["openai_api_pricing", "anthropic_api_pricing", "google_gemini_api_pricing", "openai_status", "anthropic_status", "usaspending_awards", "nvidia_investor_relations", "nvidia_ai_infrastructure_news"],
       "source_labels": ["Provider pricing", "Platform status", "USAspending", "NVIDIA IR", "Infrastructure news"],
-      "access_label": "Public · mixed feeds",
-      "default_selected": true
+      "access_label": "Proposed · not connected in v1",
+      "default_selected": false
     },
     {
       "source_group_id": "private_organizational",

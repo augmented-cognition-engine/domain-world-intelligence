@@ -1,0 +1,66 @@
+{
+  "contract": "ace.intelligence.source-mapping/v1alpha1",
+  "module_id": "world_ai_official_records_source_mapping",
+  "mappings": [
+    {
+      "mapping_id": "ai_policy_record_snapshot",
+      "source_definition_ref": "source_definition:ai-policy-eo-14409",
+      "source_type_ref": "federal_register_ai_policy_document",
+      "capability_requirement_id": "ai_policy_federal_register_snapshot",
+      "authority_request_id": "read_ai_policy_federal_register_document",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_ai_policy_record",
+      "entity_type_id": "ai_policy_record",
+      "attribute_mappings": [
+        {"attribute_id": "document_title", "source_pointer": "/document_title", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "document_number", "source_pointer": "/document_number", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "executive_order_number", "source_pointer": "/executive_order_number", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "document_type", "source_pointer": "/document_type", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "agency_name", "source_pointer": "/agency_name", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "policy_topic", "source_pointer": "/policy_topic", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "policy_status", "source_pointer": "/policy_status", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "development_stage", "source_pointer": "/development_stage", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "linked_policy_ref", "source_pointer": "/linked_policy_ref", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "initiative_name", "source_pointer": "/initiative_name", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "federal_register_url", "source_pointer": "/federal_register_url", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "official_pdf_url", "source_pointer": "/official_pdf_url", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "legal_status_notice", "source_pointer": "/legal_status_notice", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "verification_reference", "source_pointer": "/verification_reference", "transform": "copy", "min_length": 1, "max_length": 256}
+      ],
+      "static_confidence": 1.0
+    },
+    {
+      "mapping_id": "ai_policy_implementation_snapshot",
+      "source_definition_ref": "source_definition:white-house-gold-eagle-2026-07-14",
+      "source_type_ref": "white_house_ai_policy_release",
+      "capability_requirement_id": "ai_policy_white_house_snapshot",
+      "authority_request_id": "read_ai_policy_white_house_release",
+      "allowed_uri_schemes": ["https"],
+      "subject_binding_id": "published_ai_policy_record",
+      "entity_type_id": "ai_policy_record",
+      "attribute_mappings": [
+        {"attribute_id": "document_title", "source_pointer": "/document_title", "transform": "copy", "min_length": 1, "max_length": 1000},
+        {"attribute_id": "document_number", "source_pointer": "/document_number", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "executive_order_number", "source_pointer": "/executive_order_number", "transform": "copy", "min_length": 1, "max_length": 32},
+        {"attribute_id": "document_type", "source_pointer": "/document_type", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "publication_date", "source_pointer": "/publication_date", "transform": "copy", "min_length": 10, "max_length": 10},
+        {"attribute_id": "agency_name", "source_pointer": "/agency_name", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "policy_topic", "source_pointer": "/policy_topic", "transform": "copy", "min_length": 1, "max_length": 128},
+        {"attribute_id": "policy_status", "source_pointer": "/policy_status", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "development_stage", "source_pointer": "/development_stage", "transform": "copy", "min_length": 1, "max_length": 64},
+        {"attribute_id": "source_lineage_id", "source_pointer": "/source_lineage_id", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "source_uri", "source_pointer": "/source_uri", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "linked_policy_ref", "source_pointer": "/linked_policy_ref", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "initiative_name", "source_pointer": "/initiative_name", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "federal_register_url", "source_pointer": "/federal_register_url", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "official_pdf_url", "source_pointer": "/official_pdf_url", "transform": "copy", "min_length": 9, "max_length": 2048},
+        {"attribute_id": "legal_status_notice", "source_pointer": "/legal_status_notice", "transform": "copy", "min_length": 1, "max_length": 256},
+        {"attribute_id": "verification_reference", "source_pointer": "/verification_reference", "transform": "copy", "min_length": 1, "max_length": 256}
+      ],
+      "static_confidence": 1.0
+    }
+  ]
+}
