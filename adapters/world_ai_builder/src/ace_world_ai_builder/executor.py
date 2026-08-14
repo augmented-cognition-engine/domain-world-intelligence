@@ -8,12 +8,20 @@ supported AI Command Center profile into World-owned recorded Builder inputs.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from importlib.metadata import distribution
 
-from ace.application import IntelligenceBuilderPresentationService, IntelligenceBuilderSessionService
+from ace.application import (
+    IntelligenceBuildRecordedSourcePort,
+    IntelligenceBuilderPresentationService,
+    IntelligenceBuilderSessionService,
+    PreparedShiftSignalDerivationRequestV1Alpha1,
+    RecordedSourceAdmission,
+    RecordedSourceMaterialV1Alpha1,
+)
 from ace.application.intelligence_agent_contracts import ProposedCadence
 from ace.application.intelligence_build_execution import (
     REQUIRED_INTELLIGENCE_BUILD_EFFECTS,
@@ -22,8 +30,14 @@ from ace.application.intelligence_build_execution import (
     IntelligenceBuildHostServices,
 )
 from ace.application.intelligence_builder_contracts import OnboardingArtifactKind, OnboardingStage
-from ace.core import AuthenticatedRuntimeContextV1Alpha1, ImmutableRecordStore, canonical_hash
-from ace.intelligence import IntelligenceOnboardingProfileV1Alpha1, IntelligenceResourceKind
+from ace.core import AuthenticatedRuntimeContextV1Alpha1, ImmutableRecordStore, canonical_hash, canonical_json
+from ace.intelligence import (
+    IntelligenceOnboardingProfileV1Alpha1,
+    IntelligenceResourceKind,
+    IntelligenceResourceMode,
+    EntitySnapshotV1Alpha1,
+    resource_reference,
+)
 
 from .journey import (
     AuthorizedWorldBuilderEffectsAuthority,
@@ -51,6 +65,11 @@ READ_KINDS = (
 
 RECORDED_JOURNEY_STARTED_AT = datetime(2026, 8, 10, 20, 4, 35, tzinfo=UTC)
 _RECORDED_SOURCE_FIXTURE_DIGEST = "cd01756995013fe1abae3077040fb8c6171109b74f9dec52c9adf3c338efe2e5"
+_RECORDED_CANONICAL_PAYLOADS_DIGEST = "af07cbab3886a0fdff56c44fe951ef3ce578ea60751ffd5b2fead4faef6b5c71"
+_POLICY_SUBJECT_BINDING_ID = "published_ai_policy_record"
+_POLICY_ENTITY_TYPE_ID = "ai_policy_record"
+_POLICY_ENTITY_REF = "entity:ai-policy/executive-order-14409"
+_POLICY_DETECTOR_ID = "ai_policy_implementation_progression"
 _RECORDED_SOURCE_IDENTITIES = (
     (
         "federal_register_ai_policy",
@@ -164,6 +183,94 @@ def load_recorded_world_ai_source_materials() -> tuple[WorldAISourceMaterial, ..
     return tuple(materials)
 
 
+def load_recorded_world_ai_admission_materials(
+    recorded_sources: IntelligenceBuildRecordedSourcePort,
+) -> tuple[RecordedSourceMaterialV1Alpha1, ...]:
+    """Bind the exact packaged policy pair for Core-owned recorded admission."""
+
+    live_fixture = json.loads(
+        _world_pack_file("conformance/ai_command_center_live_input.json").read_text(encoding="utf-8")
+    )
+    sources = live_fixture.get("sources")
+    if not isinstance(sources, list) or len(sources) < 2:
+        raise WorldAIBuilderExecutorError("recorded World AI fixture omitted its two required sources")
+    selected = sources[:2]
+    if canonical_hash(selected) != _RECORDED_SOURCE_FIXTURE_DIGEST:
+        raise WorldAIBuilderExecutorError("recorded World AI fixture changed without executor review")
+
+    activation_fixture = json.loads(
+        _world_pack_file("conformance/activation_golden_fixture.json").read_text(encoding="utf-8")
+    )
+    observations = activation_fixture.get("observations")
+    if not isinstance(observations, list) or len(observations) != 1:
+        raise WorldAIBuilderExecutorError("recorded World AI activation fixture changed shape")
+    case = observations[0]
+    try:
+        payloads = (
+            json.loads(case["baseline_attributes_json"]),
+            json.loads(case["current_attributes_json"]),
+        )
+        semantic_times = (_time(case["baseline_as_of"]), _time(case["current_as_of"]))
+    except (KeyError, TypeError, ValueError) as exc:
+        raise WorldAIBuilderExecutorError("recorded World AI canonical payloads failed exact review") from exc
+    if canonical_hash(payloads) != _RECORDED_CANONICAL_PAYLOADS_DIGEST:
+        raise WorldAIBuilderExecutorError("recorded World AI canonical payloads changed without executor review")
+
+    materials: list[RecordedSourceMaterialV1Alpha1] = []
+    for source, payload, semantic_time in zip(selected, payloads, semantic_times, strict=True):
+        payload_json = canonical_json(payload)
+        publication_date = payload.get("publication_date")
+        if publication_date != semantic_time.date().isoformat():
+            raise WorldAIBuilderExecutorError("recorded World AI semantic time crossed its publication date")
+        subject = recorded_sources.bind_subject(
+            subject_binding_id=_POLICY_SUBJECT_BINDING_ID,
+            entity_type_id=_POLICY_ENTITY_TYPE_ID,
+            entity_ref=_POLICY_ENTITY_REF,
+        )
+        materials.append(
+            RecordedSourceMaterialV1Alpha1(
+                source_group_id="official_records",
+                mapping_id=source["mapping_id"],
+                subject_binding=subject,
+                source_definition_ref=source["source_definition_ref"],
+                source_type_ref=source["source_type_ref"],
+                source_uri=source["requested_uri"],
+                captured_payload_json=payload_json,
+                captured_payload_digest="sha256:" + hashlib.sha256(payload_json.encode("utf-8")).hexdigest(),
+                source_published_at=semantic_time,
+                observed_at=_time(source["observed_at"]),
+                locator=source["locator"],
+            )
+        )
+    return tuple(materials)
+
+
+def _exact_policy_entities(
+    admission: RecordedSourceAdmission,
+    *,
+    product_id: str,
+) -> tuple[EntitySnapshotV1Alpha1, EntitySnapshotV1Alpha1]:
+    entities = tuple(admission.entity_snapshots)
+    if len(entities) != 2:
+        raise WorldAIBuilderExecutorError("recorded World AI admission did not return its exact Entity pair")
+    if any(
+        item.mode is not IntelligenceResourceMode.PREPARED
+        or item.product_id != product_id
+        or item.entity_ref != _POLICY_ENTITY_REF
+        or item.entity_type_ref != _POLICY_ENTITY_TYPE_ID
+        for item in entities
+    ):
+        raise WorldAIBuilderExecutorError("recorded World AI admission crossed its PREPARED policy subject")
+    ordered = tuple(sorted(entities, key=lambda item: (item.as_of, str(item.resource_id))))
+    if (
+        ordered[0].activation_revision != ordered[1].activation_revision
+        or ordered[0].as_of >= ordered[1].as_of
+        or ordered[0].resource_id == ordered[1].resource_id
+    ):
+        raise WorldAIBuilderExecutorError("recorded World AI Entity pair lost its semantic progression")
+    return ordered
+
+
 def plan_from_authorized_build(build: AuthorizedIntelligenceBuild) -> WorldAIBuilderPlan:
     """Translate one exact Core request without broadening its source claims."""
 
@@ -222,8 +329,28 @@ class WorldAIBuilderExecutor(IntelligenceBuildExecutor):
             raise WorldAIBuilderExecutorError("authorized build identity crossed its authenticated context")
         if context.expires_at <= RECORDED_JOURNEY_STARTED_AT + timedelta(seconds=9):
             raise WorldAIBuilderExecutorError("authenticated context expired before the recorded journey")
+        if host_services.recorded_sources is None or host_services.prepared_derivations is None:
+            raise WorldAIBuilderExecutorError(
+                "World AI Builder requires Core recorded-source and PREPARED-derivation host ports"
+            )
 
         materials = load_recorded_world_ai_source_materials()
+        admission_materials = load_recorded_world_ai_admission_materials(host_services.recorded_sources)
+        admission = await host_services.recorded_sources.admit(admission_materials)
+        baseline_entity, current_entity = _exact_policy_entities(admission, product_id=build.product_id)
+        derivation = await host_services.prepared_derivations.derive(
+            PreparedShiftSignalDerivationRequestV1Alpha1(
+                derivation_key=f"prepared_derivation:{build.build_id}",
+                detector_id=_POLICY_DETECTOR_ID,
+                baseline_snapshot=resource_reference(baseline_entity),
+                current_snapshot=resource_reference(current_entity),
+                evaluated_at=build.authority_use.evaluated_at,
+            )
+        )
+        if not derivation.material_shift or derivation.shift is None or derivation.signal is None:
+            raise WorldAIBuilderExecutorError(
+                "recorded World AI progression did not produce its declared Shift and Signal"
+            )
         profile = self.onboarding_profile or load_world_ai_onboarding_profile()
         environment = WorldAIBuilderEnvironment(context=context, store=host_services.records)
         await IntelligenceBuilderPresentationService(store=host_services.records).admit_profile(
@@ -273,8 +400,8 @@ class WorldAIBuilderExecutor(IntelligenceBuildExecutor):
         return await host_services.resources.query(
             resource_kinds=READ_KINDS,
             subject_refs=(),
-            as_of=available_at,
-            available_at=available_at,
+            as_of=evaluated_at,
+            available_at=evaluated_at,
             evaluated_at=evaluated_at,
             page_size=200,
         )
@@ -288,6 +415,7 @@ __all__ = [
     "WorldAIBuilderEnvironment",
     "WorldAIBuilderExecutor",
     "WorldAIBuilderExecutorError",
+    "load_recorded_world_ai_admission_materials",
     "load_recorded_world_ai_source_materials",
     "load_world_ai_onboarding_profile",
     "plan_from_authorized_build",
